@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Sprechübung",
+    "tagline": "Englisch-Sprechübung mit Fragen im TOEIC-Stil. Dies ist kein TOEIC-Test.",
+    "disclaimer": "TOEIC ist eine eingetragene Marke von ETS. Dieses Produkt wird von ETS weder unterstützt noch genehmigt.",
+    "chooseTest": "Übungstest",
+    "fullTest": "Gesamter Test",
+    "practice": "Üben",
+    "loading": "Tests werden geladen…",
+    "loadError": "Die Testliste konnte nicht geladen werden. Prüfe die Verbindung und versuche es erneut.",
+    "noTests": "Noch keine Übungstests vorhanden.",
+    "micNote": "Ein gesamter Test nutzt das Mikrofon. Die Zeit läuft ohne Pause durch.",
+    "questionCount": "{count} Fragen"
+  },
+  "practice": {
+    "title": "Üben",
+    "help": "Wähle eine einzelne Frage oder übe alle Fragen eines Teils. Du kannst so oft wiederholen, wie du möchtest.",
+    "part": "Diesen Teil üben",
+    "back": "Zum Start"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Einen Text vorlesen",
+      "directions": "Ein kurzer Text erscheint. Nutze die Vorbereitungszeit, um ihn still zu lesen, einschließlich Namen, Zahlen und Listen. Wenn der Ton ertönt, lies den Text deutlich vor. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich.",
+      "directionsOne": "Ein kurzer Text erscheint. Nutze die Vorbereitungszeit, um ihn still zu lesen, einschließlich Namen, Zahlen und Listen. Wenn der Ton ertönt, lies den Text deutlich vor. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich."
+    },
+    "describe_picture": {
+      "title": "Ein Bild beschreiben",
+      "directions": "Ein Bild erscheint. Nutze die Vorbereitungszeit, um Ort, Personen und ihre Handlungen zu beachten. Wenn der Ton ertönt, beschreibe das Bild genau. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich.",
+      "directionsOne": "Ein Bild erscheint. Nutze die Vorbereitungszeit, um Ort, Personen und ihre Handlungen zu beachten. Wenn der Ton ertönt, beschreibe das Bild genau. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich."
+    },
+    "respond_questions": {
+      "title": "Auf Fragen antworten",
+      "directions": "Du beantwortest drei Fragen zu einer alltäglichen Situation. Die Situation bleibt auf dem Bildschirm. Jede Frage hat ein paar Sekunden Vorbereitung und dann Zeit zum Sprechen. Beantworte die ersten Fragen direkt. Bei der letzten nenne Gründe. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich.",
+      "directionsOne": "Du beantwortest eine Frage zu einer alltäglichen Situation. Die Situation bleibt auf dem Bildschirm. Du hast ein paar Sekunden zur Vorbereitung und dann Zeit zum Sprechen. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich."
+    },
+    "info_questions": {
+      "title": "Mit einem Dokument antworten",
+      "directions": "Du hast Zeit, ein Dokument still zu lesen. Danach beantwortest du drei Fragen dazu. Das Dokument bleibt beim Antworten sichtbar. Wenn eine Frage eine Angabe enthält, die nicht zum Dokument passt, korrigiere sie. Bei der letzten Frage nenne mindestens zwei Punkte aus dem Dokument. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich.",
+      "directionsOne": "Du hast Zeit, ein Dokument still zu lesen. Danach beantwortest du eine Frage dazu. Das Dokument bleibt sichtbar. Wenn die Frage eine Angabe enthält, die nicht zum Dokument passt, korrigiere sie. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich."
+    },
+    "opinion": {
+      "title": "Eine Meinung äußern",
+      "directions": "Du liest eine Frage zu Arbeit, Lernen oder dem Alltag. Nutze die Vorbereitungszeit, um eine Seite zu wählen und Gründe und Beispiele zu überlegen. Wenn der Ton ertönt, erkläre deine Meinung klar. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich.",
+      "directionsOne": "Du liest eine Frage zu Arbeit, Lernen oder dem Alltag. Nutze die Vorbereitungszeit, um eine Seite zu wählen und Gründe und Beispiele zu überlegen. Wenn der Ton ertönt, erkläre deine Meinung klar. Die Aufnahme startet und stoppt von selbst. Pausieren ist nicht möglich."
+    }
+  },
+  "run": {
+    "prepare": "Vorbereiten",
+    "speak": "Sprechen",
+    "reading": "Dokument lesen",
+    "recording": "Aufnahme",
+    "noPause": "Keine Pause",
+    "auto": "Die Aufnahme startet und stoppt von selbst.",
+    "tone": "Das Sprechen beginnt, wenn der Ton ertönt.",
+    "readEnds": "Die Fragen beginnen, wenn der Ton ertönt.",
+    "qLabel": "Frage {n}",
+    "timeLine": "Frage {n}: {prep} Sekunden vorbereiten, {speak} Sekunden sprechen.",
+    "readTime": "Zeit zum Lesen des Dokuments: {n} Sekunden.",
+    "start": "Start",
+    "end": "Beenden",
+    "leaveTitle": "Diese Sitzung beenden?",
+    "leaveBody": "Der Timer stoppt. Bisherige Aufnahmen bleiben auf diesem Gerät.",
+    "leaveYes": "Sitzung beenden",
+    "leaveNo": "Weiter",
+    "micDenied": "Der Mikrofonzugriff wurde blockiert. Erlaube das Mikrofon in den Browsereinstellungen und versuche es erneut.",
+    "micMissing": "Kein Mikrofon verfügbar. Prüfe das Gerät und versuche es erneut.",
+    "noRecorder": "Dieser Browser kann kein Audio aufnehmen. Verwende eine aktuelle Version von Chrome, Safari, Edge oder Firefox.",
+    "insecure": "Zum Aufnehmen braucht die Seite eine sichere Verbindung. Öffne sie über https oder über einen lokalen Server auf localhost.",
+    "imageMissing": "Bild nicht verfügbar",
+    "pictureAlt": "Bild zu Frage {n}",
+    "scenario": "Situation",
+    "caller": "Anrufer"
+  },
+  "review": {
+    "title": "Rückblick",
+    "fullDone": "Du hast diesen gesamten Test beendet. Spiele unten jede Antwort ab.",
+    "practiceDone": "Die Übung ist gespeichert. Spiele deine Antworten ab oder versuche es erneut.",
+    "play": "Abspielen",
+    "stop": "Stopp",
+    "noAudio": "Keine Aufnahme",
+    "deviceScore": "Bewertung auf dem Gerät",
+    "serverScore": "Server-Bewertung",
+    "saved": "Auf diesem Gerät gespeichert",
+    "notSaved": "Konnte auf diesem Gerät nicht gespeichert werden. Du kannst die Antworten noch abspielen, bis du diese Seite verlässt.",
+    "home": "Zum Start",
+    "retry": "Nochmal",
+    "snippetPicture": "Bildbeschreibung"
+  },
+  "common": {
+    "language": "Sprache",
+    "retry": "Erneut versuchen",
+    "error": "Etwas ist schiefgelaufen."
+  },
+  "a11y": {
+    "skip": "Zum Inhalt springen",
+    "timer": "{phase}. Noch {n} Sekunden.",
+    "play": "Antwort auf Frage {n} abspielen",
+    "stop": "Wiedergabe von Frage {n} stoppen",
+    "progress": "Frage {index} von {total}"
+  }
+}

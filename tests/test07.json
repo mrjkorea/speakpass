@@ -1,0 +1,260 @@
+{
+  "id": "test07",
+  "version": 1,
+  "title": "Practice Test 7",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Birchrow Residences will open its model apartment for visits on Saturday, August 15, from 11 a.m. to 3 p.m. Each home includes a bright kitchen, a storage closet, and a balcony. One-bedroom rents start at $1,150 a month, and parking is optional. Naomi Park, the leasing agent, will be on site to answer questions and collect applications. Please bring a photo ID if you would like a tour.",
+      "sentences": [
+        "Birchrow Residences will open its model apartment for visits on Saturday, August 15, from 11 a.m. to 3 p.m.",
+        "Each home includes a bright kitchen, a storage closet, and a balcony.",
+        "One-bedroom rents start at $1,150 a month, and parking is optional.",
+        "Naomi Park, the leasing agent, will be on site to answer questions and collect applications.",
+        "Please bring a photo ID if you would like a tour."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "This afternoon traffic update is brought to you by Fathom Eyewear. Crews are inspecting the Old Mill Bridge, so the northbound lane is closed until 6 p.m. Drivers should use River Road, Station Avenue, and the east bypass. Delays of about 20 minutes are expected near the waterfront, but city buses are running on time. Please slow down and follow the posted signs.",
+      "sentences": [
+        "This afternoon traffic update is brought to you by Fathom Eyewear.",
+        "Crews are inspecting the Old Mill Bridge, so the northbound lane is closed until 6 p.m.",
+        "Drivers should use River Road, Station Avenue, and the east bypass.",
+        "Delays of about 20 minutes are expected near the waterfront, but city buses are running on time.",
+        "Please slow down and follow the posted signs."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test07_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a post office service counter with mail bins behind it. Number of people and appearance: Three adults. Clothing: A clerk wears a blue uniform. A customer wears a green coat. A man at a side table wears a white shirt. Actions: The clerk weighs a parcel. The customer holds a small box and a pen. The man fills out a form. Objects: A scale, a parcel, a pen, a form, and mail bins. Foreground: The clerk and the customer at the counter are closest to the camera. Background: The form table and a wall of mail bins sit behind them.",
+      "key_elements": [
+        "clerk in a blue uniform weighing a parcel",
+        "customer in a green coat holding a box",
+        "man filling out a form",
+        "mail bins along the back wall"
+      ],
+      "model_answer": "This picture shows a post office service counter. In the foreground, a clerk in a blue uniform is weighing a parcel for a customer in a green coat. The customer holds a small box and a pen. Behind them, a man in a white shirt fills out a form, and mail bins line the back wall."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test07_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an indoor swimming pool at a community center, with lane ropes and no logos. Number of people and appearance: Two adult swimmers, one teenager, and one lifeguard. Clothing: One swimmer wears a blue cap. Another swimmer wears a red cap. A teenager on the deck wears a dark swim shirt. The lifeguard wears a yellow shirt. Actions: Two adults swim laps in separate lanes. The teenager holds a kickboard. The lifeguard watches from a tall chair. Objects: Lane ropes, a kickboard, pool water, and a lifeguard chair. Foreground: The two swimmers are in the near lanes, close to the camera. Background: The lifeguard chair and the far wall of the pool hall are in the background.",
+      "key_elements": [
+        "two adults swimming laps",
+        "swimmer in a blue cap",
+        "teenager holding a kickboard",
+        "lifeguard in a yellow shirt"
+      ],
+      "model_answer": "This picture shows an indoor swimming pool at a community center. In the foreground, two adults are swimming laps, one in a blue cap and one in a red cap. A teenager stands on the deck holding a kickboard. A lifeguard in a yellow shirt sits on a tall chair in the background and watches the water."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask about animals in the home. You talk by phone about whether people should keep a pet.",
+      "question": "Do you have a pet now, or have you had one before?",
+      "model_answer": "I do not have a pet right now. I had a small dog as a child, and my parents did most of the daily care."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask about animals in the home. You talk by phone about whether people should keep a pet.",
+      "question": "What daily care do you think a pet needs? Why does that matter?",
+      "model_answer": "A pet needs food, clean water, exercise, and some company every single day. Skipping those basics for too many hours is unfair to the animal."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a friend calls to ask about animals in the home. You talk by phone about whether people should keep a pet.",
+      "question": "Would you recommend that a busy student keep a pet? Why or why not?",
+      "model_answer": "I would not recommend a pet to a busy student unless that student is home often and has saved money for food and a vet. A dog, for example, cannot spend the whole day alone in an empty room. During exams or trips home, someone reliable must be ready to help. Helping to care for a neighbor's pet might be a better way to start."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Studio Timetable — Moss Motion Studio",
+        "document_type": "studio timetable",
+        "rows": [
+          {
+            "label": "Week",
+            "value": "Week of September 7"
+          },
+          {
+            "label": "Monday",
+            "value": "7:00 a.m., Sunrise Stretch, Diego Alvarez, Studio 1"
+          },
+          {
+            "label": "Tuesday",
+            "value": "6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2"
+          },
+          {
+            "label": "Wednesday",
+            "value": "12:10 p.m., Desk Reset, Diego Alvarez, Studio 1"
+          },
+          {
+            "label": "Thursday",
+            "value": "6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2"
+          },
+          {
+            "label": "Friday",
+            "value": "7:30 a.m., Sunrise Stretch, Esme Fadiga, Studio 1"
+          },
+          {
+            "label": "Drop-in price",
+            "value": "$15"
+          },
+          {
+            "label": "Five-class card",
+            "value": "$60"
+          }
+        ],
+        "markdown": "# Studio Timetable — Moss Motion Studio\n\n- **Week:** Week of September 7\n- **Monday:** 7:00 a.m., Sunrise Stretch, Diego Alvarez, Studio 1\n- **Tuesday:** 6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2\n- **Wednesday:** 12:10 p.m., Desk Reset, Diego Alvarez, Studio 1\n- **Thursday:** 6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2\n- **Friday:** 7:30 a.m., Sunrise Stretch, Esme Fadiga, Studio 1\n- **Drop-in price:** $15\n- **Five-class card:** $60"
+      },
+      "caller_intro": "Hi, I'm Chloe Laurent. I saw your studio timetable and I'm trying to plan a visit.",
+      "question": "How much does one drop-in class cost?",
+      "answer_facts": [
+        "The drop-in price is $15."
+      ],
+      "model_answer": "A single drop-in class costs $15. If you plan to come more often, a five-class card is $60, which works out to $12 a class."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Studio Timetable — Moss Motion Studio",
+        "document_type": "studio timetable",
+        "rows": [
+          {
+            "label": "Week",
+            "value": "Week of September 7"
+          },
+          {
+            "label": "Monday",
+            "value": "7:00 a.m., Sunrise Stretch, Diego Alvarez, Studio 1"
+          },
+          {
+            "label": "Tuesday",
+            "value": "6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2"
+          },
+          {
+            "label": "Wednesday",
+            "value": "12:10 p.m., Desk Reset, Diego Alvarez, Studio 1"
+          },
+          {
+            "label": "Thursday",
+            "value": "6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2"
+          },
+          {
+            "label": "Friday",
+            "value": "7:30 a.m., Sunrise Stretch, Esme Fadiga, Studio 1"
+          },
+          {
+            "label": "Drop-in price",
+            "value": "$15"
+          },
+          {
+            "label": "Five-class card",
+            "value": "$60"
+          }
+        ],
+        "markdown": "# Studio Timetable — Moss Motion Studio\n\n- **Week:** Week of September 7\n- **Monday:** 7:00 a.m., Sunrise Stretch, Diego Alvarez, Studio 1\n- **Tuesday:** 6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2\n- **Wednesday:** 12:10 p.m., Desk Reset, Diego Alvarez, Studio 1\n- **Thursday:** 6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2\n- **Friday:** 7:30 a.m., Sunrise Stretch, Esme Fadiga, Studio 1\n- **Drop-in price:** $15\n- **Five-class card:** $60"
+      },
+      "caller_intro": "Hi, I'm Chloe Laurent. I saw your studio timetable and I'm trying to plan a visit.",
+      "question": "I heard Beginner Strength meets on Sunday. Is that right?",
+      "answer_facts": [
+        "Ravi Mehta teaches Beginner Strength on Tuesday and Thursday at 6:00 p.m."
+      ],
+      "model_answer": "No, Beginner Strength doesn't meet on Sunday. Ravi Mehta teaches it on Tuesday and Thursday evenings at 6:00 p.m., and both classes are in Studio 2.",
+      "caller_claim": "Beginner Strength meets on Sunday"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Studio Timetable — Moss Motion Studio",
+        "document_type": "studio timetable",
+        "rows": [
+          {
+            "label": "Week",
+            "value": "Week of September 7"
+          },
+          {
+            "label": "Monday",
+            "value": "7:00 a.m., Sunrise Stretch, Diego Alvarez, Studio 1"
+          },
+          {
+            "label": "Tuesday",
+            "value": "6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2"
+          },
+          {
+            "label": "Wednesday",
+            "value": "12:10 p.m., Desk Reset, Diego Alvarez, Studio 1"
+          },
+          {
+            "label": "Thursday",
+            "value": "6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2"
+          },
+          {
+            "label": "Friday",
+            "value": "7:30 a.m., Sunrise Stretch, Esme Fadiga, Studio 1"
+          },
+          {
+            "label": "Drop-in price",
+            "value": "$15"
+          },
+          {
+            "label": "Five-class card",
+            "value": "$60"
+          }
+        ],
+        "markdown": "# Studio Timetable — Moss Motion Studio\n\n- **Week:** Week of September 7\n- **Monday:** 7:00 a.m., Sunrise Stretch, Diego Alvarez, Studio 1\n- **Tuesday:** 6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2\n- **Wednesday:** 12:10 p.m., Desk Reset, Diego Alvarez, Studio 1\n- **Thursday:** 6:00 p.m., Beginner Strength, Ravi Mehta, Studio 2\n- **Friday:** 7:30 a.m., Sunrise Stretch, Esme Fadiga, Studio 1\n- **Drop-in price:** $15\n- **Five-class card:** $60"
+      },
+      "caller_intro": "Hi, I'm Chloe Laurent. I saw your studio timetable and I'm trying to plan a visit.",
+      "question": "What classes are offered on Monday and Wednesday, and who teaches them?",
+      "answer_facts": [
+        "Monday at 7:00 a.m. is Sunrise Stretch with Diego Alvarez in Studio 1.",
+        "Wednesday at 12:10 p.m. is Desk Reset with Diego Alvarez in Studio 1."
+      ],
+      "model_answer": "Diego Alvarez teaches both of those classes, and both are in Studio 1. On Monday at 7:00 a.m., there's Sunrise Stretch, an early-morning class. On Wednesday at 12:10 p.m., there's Desk Reset, a midday class. If you like Sunrise Stretch but can't make Monday, it's also offered on Friday at 7:30 a.m. with Esme Fadiga. A single drop-in class costs $15."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Do you think students should take a year off before starting university? Explain your view with reasons and one example.",
+      "model_answer": "I do not think every student should take a year off before university. A year with no plan can be expensive, and some students lose the study habits they built in high school, which makes the first semester harder. A year off is a good idea only when it has a clear purpose, such as working to save tuition, learning a language, or caring for a family member. A friend of mine spent a year coaching at a summer camp and then started university more sure of her major. Without a purpose like that, I would tell a student to begin on time and use the long breaks for work or travel instead. A planned year can help, but an empty year usually does not."
+    }
+  ]
+}

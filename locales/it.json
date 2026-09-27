@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Pratica orale",
+    "tagline": "Pratica di inglese parlato con domande in stile TOEIC. Questo non è un test TOEIC.",
+    "disclaimer": "TOEIC è un marchio registrato di ETS. Questo prodotto non è approvato né sostenuto da ETS.",
+    "chooseTest": "Prova di pratica",
+    "fullTest": "Prova completa",
+    "practice": "Pratica",
+    "loading": "Caricamento delle prove…",
+    "loadError": "Impossibile caricare l’elenco delle prove. Controlla la connessione e riprova.",
+    "noTests": "Non ci sono ancora prove di pratica.",
+    "micNote": "La prova completa usa il microfono. I timer proseguono senza pausa.",
+    "questionCount": "{count} domande"
+  },
+  "practice": {
+    "title": "Pratica",
+    "help": "Scegli una domanda oppure esercitati su tutte le domande di una parte. Puoi riprovare tutte le volte che vuoi.",
+    "part": "Esercitati su questa parte",
+    "back": "Torna all’inizio"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Leggi un testo ad alta voce",
+      "directions": "Apparirà un testo breve. Usa il tempo di preparazione per leggerlo in silenzio, compresi nomi, numeri e qualsiasi elenco. Quando senti il segnale, leggi il testo ad alta voce e con chiarezza. La registrazione inizia e si ferma da sola. Non si può mettere in pausa.",
+      "directionsOne": "Apparirà un testo breve. Usa il tempo di preparazione per leggerlo in silenzio, compresi nomi, numeri e qualsiasi elenco. Quando senti il segnale, leggi il testo ad alta voce e con chiarezza. La registrazione inizia e si ferma da sola. Non si può mettere in pausa."
+    },
+    "describe_picture": {
+      "title": "Descrivi un’immagine",
+      "directions": "Apparirà un’immagine. Usa il tempo di preparazione per notare il luogo, le persone e quello che stanno facendo. Quando senti il segnale, descrivi l’immagine nei dettagli. La registrazione inizia e si ferma da sola. Non si può mettere in pausa.",
+      "directionsOne": "Apparirà un’immagine. Usa il tempo di preparazione per notare il luogo, le persone e quello che stanno facendo. Quando senti il segnale, descrivi l’immagine nei dettagli. La registrazione inizia e si ferma da sola. Non si può mettere in pausa."
+    },
+    "respond_questions": {
+      "title": "Rispondi alle domande",
+      "directions": "Risponderai a tre domande su una situazione quotidiana. La situazione resta sullo schermo. Ogni domanda ha qualche secondo per prepararti e poi il tempo per parlare. Rispondi in modo diretto alle prime. Nell’ultima, dai delle ragioni. La registrazione inizia e si ferma da sola. Non si può mettere in pausa.",
+      "directionsOne": "Risponderai a una domanda su una situazione quotidiana. La situazione resta sullo schermo. Hai qualche secondo per prepararti e poi il tempo per parlare. La registrazione inizia e si ferma da sola. Non si può mettere in pausa."
+    },
+    "info_questions": {
+      "title": "Rispondi con un documento",
+      "directions": "Avrai tempo per studiare un documento in silenzio. Poi risponderai a tre domande su di esso. Il documento resta sullo schermo mentre rispondi. Se una domanda contiene un dettaglio che non corrisponde al documento, correggilo. Nell’ultima domanda cita almeno due elementi del documento. La registrazione inizia e si ferma da sola. Non si può mettere in pausa.",
+      "directionsOne": "Avrai tempo per studiare un documento in silenzio. Poi risponderai a una domanda su di esso. Il documento resta sullo schermo. Se la domanda contiene un dettaglio che non corrisponde al documento, correggilo. La registrazione inizia e si ferma da sola. Non si può mettere in pausa."
+    },
+    "opinion": {
+      "title": "Esprimi un’opinione",
+      "directions": "Leggerai una domanda su lavoro, studio o vita quotidiana. Usa il tempo di preparazione per scegliere una posizione e pensare a ragioni ed esempi. Quando senti il segnale, spiega chiaramente la tua opinione. La registrazione inizia e si ferma da sola. Non si può mettere in pausa.",
+      "directionsOne": "Leggerai una domanda su lavoro, studio o vita quotidiana. Usa il tempo di preparazione per scegliere una posizione e pensare a ragioni ed esempi. Quando senti il segnale, spiega chiaramente la tua opinione. La registrazione inizia e si ferma da sola. Non si può mettere in pausa."
+    }
+  },
+  "run": {
+    "prepare": "Prepara",
+    "speak": "Parla",
+    "reading": "Leggi il documento",
+    "recording": "Registrazione",
+    "noPause": "Senza pausa",
+    "auto": "La registrazione inizia e si ferma da sola.",
+    "tone": "Inizi a parlare quando senti il segnale.",
+    "readEnds": "Le domande iniziano quando senti il segnale.",
+    "qLabel": "Domanda {n}",
+    "timeLine": "Domanda {n}: {prep} secondi per prepararti, {speak} secondi per parlare.",
+    "readTime": "Tempo per leggere il documento: {n} secondi.",
+    "start": "Inizia",
+    "end": "Termina",
+    "leaveTitle": "Terminare questa sessione?",
+    "leaveBody": "Il timer si fermerà. Le risposte già registrate restano su questo dispositivo.",
+    "leaveYes": "Termina la sessione",
+    "leaveNo": "Continua",
+    "micDenied": "L’accesso al microfono è stato bloccato. Consenti il microfono nelle impostazioni del browser e riprova.",
+    "micMissing": "Nessun microfono disponibile. Controlla il dispositivo e riprova.",
+    "noRecorder": "Questo browser non può registrare l’audio. Usa una versione attuale di Chrome, Safari, Edge o Firefox.",
+    "insecure": "La registrazione richiede una pagina sicura. Aprila con https oppure con un server locale su localhost.",
+    "imageMissing": "Immagine non disponibile",
+    "pictureAlt": "Immagine della domanda {n}",
+    "scenario": "Situazione",
+    "caller": "Chi chiama"
+  },
+  "review": {
+    "title": "Riascolto",
+    "fullDone": "Hai completato questa prova. Ascolta ogni risposta qui sotto.",
+    "practiceDone": "La pratica è salvata. Ascolta le risposte oppure riprova.",
+    "play": "Riproduci",
+    "stop": "Ferma",
+    "noAudio": "Nessuna registrazione",
+    "deviceScore": "Punteggio sul dispositivo",
+    "serverScore": "Punteggio del server",
+    "saved": "Salvato su questo dispositivo",
+    "notSaved": "Impossibile salvare su questo dispositivo. Puoi ancora ascoltare le risposte finché resti su questa pagina.",
+    "home": "Torna all’inizio",
+    "retry": "Riprova",
+    "snippetPicture": "Descrizione dell’immagine"
+  },
+  "common": {
+    "language": "Lingua",
+    "retry": "Riprova",
+    "error": "Qualcosa è andato storto."
+  },
+  "a11y": {
+    "skip": "Vai al contenuto",
+    "timer": "{phase}. {n} secondi rimanenti.",
+    "play": "Riproduci la risposta alla domanda {n}",
+    "stop": "Ferma la riproduzione della domanda {n}",
+    "progress": "Domanda {index} di {total}"
+  }
+}

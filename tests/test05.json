@@ -1,0 +1,297 @@
+{
+  "id": "test05",
+  "version": 1,
+  "title": "Practice Test 5",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Welcome to Keystone Walking Tours. I am Elena Vasquez, and I will lead today's architecture walk through the old market district. We will stop at the clock tower, the river warehouse, and the glass arcade. The route is about 2 kilometers and takes 90 minutes. Please wear comfortable shoes and stay with the group until we return to this gate at 11:30 a.m.",
+      "sentences": [
+        "Welcome to Keystone Walking Tours.",
+        "I am Elena Vasquez, and I will lead today's architecture walk through the old market district.",
+        "We will stop at the clock tower, the river warehouse, and the glass arcade.",
+        "The route is about 2 kilometers and takes 90 minutes.",
+        "Please wear comfortable shoes and stay with the group until we return to this gate at 11:30 a.m."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Thank you for calling Parcel Nest. Our pickup counter is open from 8 a.m. to 7 p.m. every day. Press 1 to check a tracking number, and press 2 for questions about boxes, labels, and tape. Press 3 if a driver missed your address. Please have your 10-digit receipt code ready, and expect a wait of about 4 minutes.",
+      "sentences": [
+        "Thank you for calling Parcel Nest.",
+        "Our pickup counter is open from 8 a.m. to 7 p.m. every day.",
+        "Press 1 to check a tracking number, and press 2 for questions about boxes, labels, and tape.",
+        "Press 3 if a driver missed your address.",
+        "Please have your 10-digit receipt code ready, and expect a wait of about 4 minutes."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test05_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a weekend farmers market under white tents. Number of people and appearance: Four adults. Clothing: A vendor wears a plaid shirt. A shopper wears a denim jacket. Two more shoppers wear casual coats and carry cloth bags. Actions: The vendor hands over a bag of vegetables. The shopper pays. One of the other shoppers walks between the stalls with a cloth bag, and the other looks at loaves at a bread stall. Objects: Crates of tomatoes and greens, a paper bag, cloth bags, and a bread stall. Foreground: The vendor and the shopper stand at a vegetable table close to the camera. Background: White tents and more stalls line the market lane.",
+      "key_elements": [
+        "vendor in a plaid shirt handing over vegetables",
+        "shopper in a denim jacket",
+        "crates of tomatoes and greens",
+        "other shoppers walking between market stalls"
+      ],
+      "model_answer": "This picture shows a weekend farmers market under white tents. In the foreground, a vendor in a plaid shirt is handing a bag of vegetables to a shopper in a denim jacket. Crates of tomatoes and greens cover the table. Behind them, one shopper walks between the stalls with a cloth bag, and another stops at a bread stall."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test05_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an open workspace in a modern office, with shared desks and no company logos. Number of people and appearance: Four adults. Clothing: A woman wears a headset and a gray blouse. A coworker wears a blue shirt. Two people in the back wear dark sweaters. Actions: The woman points at a monitor while talking. The coworker takes notes. The other two type at computers. Objects: A monitor, papers, a water bottle, notebooks, and a tall indoor plant. Foreground: The woman with the headset and her coworker share a desk close to the camera. Background: More desks, a window, and the tall plant are visible behind them.",
+      "key_elements": [
+        "woman with a headset pointing at a monitor",
+        "coworker in a blue shirt taking notes",
+        "papers and a water bottle on the desk",
+        "two people working at computers in the background"
+      ],
+      "model_answer": "This picture shows an open workspace in a modern office. In the foreground, a woman with a headset is talking and pointing at a monitor while a coworker in a blue shirt takes notes. Papers and a water bottle sit on the shared desk. In the background, two more people work at computers near a window and a tall plant."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask about your shopping habits. You talk by phone about shopping online.",
+      "question": "How often do you buy things online, and what do you usually order?",
+      "model_answer": "I buy things online about twice a month. I mostly order books, train tickets, and household goods that are too heavy to carry home easily."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask about your shopping habits. You talk by phone about shopping online.",
+      "question": "What do you check before you pay for an online order? Why?",
+      "model_answer": "I check the total with shipping and the date I can still return the item. A low price is useless if I cannot send it back."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a friend calls to ask about your shopping habits. You talk by phone about shopping online.",
+      "question": "Some people want to see an item in a store before they buy it. Do you think that is necessary? Why or why not?",
+      "model_answer": "I do not think it is always necessary to see an item in a store first. For a familiar product, such as paper or a book, the description and a few reviews are enough. For shoes or a chair, I still want to check the size in person, because photos can mislead. So a store visit depends on the product, not on one rule for everything."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Supply Purchase Order — Quill Carton Supply",
+        "document_type": "supply purchase order",
+        "rows": [
+          {
+            "label": "Supplier",
+            "value": "Quill Carton Supply"
+          },
+          {
+            "label": "Customer",
+            "value": "Aster Bookkeeping"
+          },
+          {
+            "label": "Buyer contact",
+            "value": "Greta Holm"
+          },
+          {
+            "label": "Order date",
+            "value": "June 3"
+          },
+          {
+            "label": "Deliver by",
+            "value": "June 6"
+          },
+          {
+            "label": "Deliver to",
+            "value": "18 Cinder Street, Suite 200"
+          },
+          {
+            "label": "Copy paper",
+            "value": "10 boxes, $86"
+          },
+          {
+            "label": "Ballpoint pens",
+            "value": "4 packs, $22"
+          },
+          {
+            "label": "File folders",
+            "value": "6 boxes, $48"
+          },
+          {
+            "label": "Total",
+            "value": "$156, paid in full"
+          },
+          {
+            "label": "Delivery",
+            "value": "Included at no extra charge"
+          }
+        ],
+        "markdown": "# Supply Purchase Order — Quill Carton Supply\n\n- **Supplier:** Quill Carton Supply\n- **Customer:** Aster Bookkeeping\n- **Buyer contact:** Greta Holm\n- **Order date:** June 3\n- **Deliver by:** June 6\n- **Deliver to:** 18 Cinder Street, Suite 200\n- **Copy paper:** 10 boxes, $86\n- **Ballpoint pens:** 4 packs, $22\n- **File folders:** 6 boxes, $48\n- **Total:** $156, paid in full\n- **Delivery:** Included at no extra charge"
+      },
+      "caller_intro": "Hi, I'm Samuel Okoye from Aster Bookkeeping. I'm calling about a supply order we placed.",
+      "question": "What day should the order arrive?",
+      "answer_facts": [
+        "The order should be delivered by June 6."
+      ],
+      "model_answer": "The order should be delivered by June 6. It was placed on June 3 for Aster Bookkeeping, and delivery is already included at no extra charge."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Supply Purchase Order — Quill Carton Supply",
+        "document_type": "supply purchase order",
+        "rows": [
+          {
+            "label": "Supplier",
+            "value": "Quill Carton Supply"
+          },
+          {
+            "label": "Customer",
+            "value": "Aster Bookkeeping"
+          },
+          {
+            "label": "Buyer contact",
+            "value": "Greta Holm"
+          },
+          {
+            "label": "Order date",
+            "value": "June 3"
+          },
+          {
+            "label": "Deliver by",
+            "value": "June 6"
+          },
+          {
+            "label": "Deliver to",
+            "value": "18 Cinder Street, Suite 200"
+          },
+          {
+            "label": "Copy paper",
+            "value": "10 boxes, $86"
+          },
+          {
+            "label": "Ballpoint pens",
+            "value": "4 packs, $22"
+          },
+          {
+            "label": "File folders",
+            "value": "6 boxes, $48"
+          },
+          {
+            "label": "Total",
+            "value": "$156, paid in full"
+          },
+          {
+            "label": "Delivery",
+            "value": "Included at no extra charge"
+          }
+        ],
+        "markdown": "# Supply Purchase Order — Quill Carton Supply\n\n- **Supplier:** Quill Carton Supply\n- **Customer:** Aster Bookkeeping\n- **Buyer contact:** Greta Holm\n- **Order date:** June 3\n- **Deliver by:** June 6\n- **Deliver to:** 18 Cinder Street, Suite 200\n- **Copy paper:** 10 boxes, $86\n- **Ballpoint pens:** 4 packs, $22\n- **File folders:** 6 boxes, $48\n- **Total:** $156, paid in full\n- **Delivery:** Included at no extra charge"
+      },
+      "caller_intro": "Hi, I'm Samuel Okoye from Aster Bookkeeping. I'm calling about a supply order we placed.",
+      "question": "I believe the total was $256. Is that what you have?",
+      "answer_facts": [
+        "The total is $156, and it has been paid in full."
+      ],
+      "model_answer": "Actually, the total on this order isn't $256. It's $156, and it has already been paid in full, so there is no remaining balance to pay.",
+      "caller_claim": "the total was $256"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Supply Purchase Order — Quill Carton Supply",
+        "document_type": "supply purchase order",
+        "rows": [
+          {
+            "label": "Supplier",
+            "value": "Quill Carton Supply"
+          },
+          {
+            "label": "Customer",
+            "value": "Aster Bookkeeping"
+          },
+          {
+            "label": "Buyer contact",
+            "value": "Greta Holm"
+          },
+          {
+            "label": "Order date",
+            "value": "June 3"
+          },
+          {
+            "label": "Deliver by",
+            "value": "June 6"
+          },
+          {
+            "label": "Deliver to",
+            "value": "18 Cinder Street, Suite 200"
+          },
+          {
+            "label": "Copy paper",
+            "value": "10 boxes, $86"
+          },
+          {
+            "label": "Ballpoint pens",
+            "value": "4 packs, $22"
+          },
+          {
+            "label": "File folders",
+            "value": "6 boxes, $48"
+          },
+          {
+            "label": "Total",
+            "value": "$156, paid in full"
+          },
+          {
+            "label": "Delivery",
+            "value": "Included at no extra charge"
+          }
+        ],
+        "markdown": "# Supply Purchase Order — Quill Carton Supply\n\n- **Supplier:** Quill Carton Supply\n- **Customer:** Aster Bookkeeping\n- **Buyer contact:** Greta Holm\n- **Order date:** June 3\n- **Deliver by:** June 6\n- **Deliver to:** 18 Cinder Street, Suite 200\n- **Copy paper:** 10 boxes, $86\n- **Ballpoint pens:** 4 packs, $22\n- **File folders:** 6 boxes, $48\n- **Total:** $156, paid in full\n- **Delivery:** Included at no extra charge"
+      },
+      "caller_intro": "Hi, I'm Samuel Okoye from Aster Bookkeeping. I'm calling about a supply order we placed.",
+      "question": "What items are on the order, and how many of each did we request?",
+      "answer_facts": [
+        "The order includes 10 boxes of copy paper.",
+        "The order includes 4 packs of ballpoint pens.",
+        "The order includes 6 boxes of file folders."
+      ],
+      "model_answer": "The order includes three kinds of supplies. You requested 10 boxes of copy paper, 4 packs of ballpoint pens, and 6 boxes of file folders. The paper costs $86, the pens $22, and the folders $48, for a total of $156, which has already been paid. Everything should arrive at 18 Cinder Street, Suite 200, by June 6, and delivery is free."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Some people eat lunch at their desks. Do you think workers should take a real break away from their desks? Support your view with reasons and an example.",
+      "model_answer": "I think workers should take a real lunch break away from their desks. Staying at the desk usually means answering messages between bites, so the person never actually rests, and work done while eating is often careless. A short walk, or a meal in a staff room, gives the mind a clean break, and people come back able to concentrate. In my own week, the afternoons go better when I leave my screen for twenty minutes than when I eat over the keyboard. A team can still cover the phones by taking turns. The break is not wasted time. It is what makes the rest of the day productive, because a clear head in the afternoon is worth more than a few extra emails answered at lunch."
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "id": "test03",
+  "version": 1,
+  "title": "Practice Test 3",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Bright Path Tutoring is offering a free study skills workshop on Wednesday, May 13, from 4 p.m. to 5:30 p.m. Students can practice note-taking, time planning, and test review with a trained coach. The session is for middle school and high school learners, and parents may sit in. Seats are limited to 20. To reserve a place, call 555-0172 before Monday.",
+      "sentences": [
+        "Bright Path Tutoring is offering a free study skills workshop on Wednesday, May 13, from 4 p.m. to 5:30 p.m.",
+        "Students can practice note-taking, time planning, and test review with a trained coach.",
+        "The session is for middle school and high school learners, and parents may sit in.",
+        "Seats are limited to 20.",
+        "To reserve a place, call 555-0172 before Monday."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Attention, shoppers at Orchard Lane Market. From today through Sunday, you will find special prices on apples, rice, and yogurt. Look for the orange signs at the end of each aisle. If you spend $30 or more, you will receive a reusable cloth bag at checkout. Please see a clerk if you need help finding an item.",
+      "sentences": [
+        "Attention, shoppers at Orchard Lane Market.",
+        "From today through Sunday, you will find special prices on apples, rice, and yogurt.",
+        "Look for the orange signs at the end of each aisle.",
+        "If you spend $30 or more, you will receive a reusable cloth bag at checkout.",
+        "Please see a clerk if you need help finding an item."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test03_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a downtown crosswalk at a busy intersection in daylight. Number of people and appearance: Four adults. Clothing: A woman wears a beige coat. A man beside her wears a blue shirt. A delivery worker wears an orange vest. A driver is barely visible inside a stopped car. Actions: The woman pushes a stroller through the crosswalk. The man walks beside her. The delivery worker waits at the curb with a hand cart. Cars wait at the light. Objects: A stroller, a hand cart, a crosswalk, and stopped cars. Foreground: The woman, the stroller, and the man are crossing close to the camera. Background: Shop windows line the far side of the street behind the waiting cars.",
+      "key_elements": [
+        "woman in a beige coat pushing a stroller",
+        "man in a blue shirt walking beside her",
+        "delivery worker with a hand cart",
+        "cars stopped at the downtown crosswalk"
+      ],
+      "model_answer": "This picture shows a downtown crosswalk on a busy street. In the foreground, a woman in a beige coat is pushing a stroller through the crosswalk, and a man in a blue shirt walks beside her. A delivery worker with a hand cart waits at the curb. In the background, cars are stopped at the light, and shop windows line the street."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test03_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an adult pottery studio with pottery wheels, long work tables, and shelves. Number of people and appearance: Three adults. Clothing: A woman wears a clay-stained apron. A man wears a gray t-shirt. Another student wears a dark sweater with sleeves rolled up. Actions: The woman shapes a bowl on a wheel. The man sits at a work table beside her wheel and paints a cup. The third person washes their hands at a sink. Objects: A pottery wheel, wet clay, a cup, brushes, and shelves of unfinished pots. Foreground: The woman at the wheel and the man painting are closest to the camera. Background: Shelves of pots and the sink sit along the back wall.",
+      "key_elements": [
+        "woman shaping a bowl on a pottery wheel",
+        "man in a gray t-shirt painting a cup",
+        "shelves of unfinished pots",
+        "student washing hands at a sink"
+      ],
+      "model_answer": "This picture shows an adult pottery studio with long work tables. In the foreground, a woman in a clay-stained apron is shaping a bowl on a wheel. A man in a gray t-shirt sits beside her, painting a cup. Shelves of unfinished pots fill the background, and another student stands at a sink washing their hands."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a magazine writer is collecting stories about daily life in your country. You agreed to answer a few questions by phone about household budgets.",
+      "question": "How do you keep track of the money you spend each month?",
+      "model_answer": "I write my spending in a notes app once a day. At the end of the month, I sort those notes into food, transport, and other bills."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a magazine writer is collecting stories about daily life in your country. You agreed to answer a few questions by phone about household budgets.",
+      "question": "What is one expense you watch carefully, and why?",
+      "model_answer": "I watch food spending most carefully, because small snacks add up before I notice them. Packing lunch is how I keep that weekly amount steady."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a magazine writer is collecting stories about daily life in your country. You agreed to answer a few questions by phone about household budgets.",
+      "question": "Would you recommend that someone in a first job write a monthly budget? Why or why not?",
+      "model_answer": "Yes, I would recommend a written monthly budget to someone in a first job. A new salary can disappear on rent and meals before the person notices. A simple page with income at the top and three spending groups is enough to start. It also shows whether there is room to save a small amount. That habit is easier to build in the first month than after a year."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Professional Resume — Amira Hassan",
+        "document_type": "professional resume",
+        "rows": [
+          {
+            "label": "Name",
+            "value": "Amira Hassan"
+          },
+          {
+            "label": "Desired position",
+            "value": "Operations coordinator"
+          },
+          {
+            "label": "Location",
+            "value": "Elmford"
+          },
+          {
+            "label": "Phone",
+            "value": "555-0148"
+          },
+          {
+            "label": "Email",
+            "value": "amira.hassan@example.com"
+          },
+          {
+            "label": "Experience",
+            "value": "Office coordinator, Fieldnote Design, 2022 to present"
+          },
+          {
+            "label": "Earlier experience",
+            "value": "Shipping clerk, Keel Logistics, 2019 to 2022"
+          },
+          {
+            "label": "Education",
+            "value": "Elmford College, bachelor's degree in business, 2019"
+          },
+          {
+            "label": "Skills",
+            "value": "Spreadsheets, inventory tracking, and Spanish"
+          },
+          {
+            "label": "Reference",
+            "value": "Camille Durand, director, Fieldnote Design"
+          }
+        ],
+        "markdown": "# Professional Resume — Amira Hassan\n\n- **Name:** Amira Hassan\n- **Desired position:** Operations coordinator\n- **Location:** Elmford\n- **Phone:** 555-0148\n- **Email:** amira.hassan@example.com\n- **Experience:** Office coordinator, Fieldnote Design, 2022 to present\n- **Earlier experience:** Shipping clerk, Keel Logistics, 2019 to 2022\n- **Education:** Elmford College, bachelor's degree in business, 2019\n- **Skills:** Spreadsheets, inventory tracking, and Spanish\n- **Reference:** Camille Durand, director, Fieldnote Design"
+      },
+      "caller_intro": "Hi, I'm Owen Blake from Bramble Staffing. I'm reviewing a resume and hoped you could confirm a few points.",
+      "question": "What position is Amira Hassan seeking?",
+      "answer_facts": [
+        "Amira Hassan wants the position of operations coordinator."
+      ],
+      "model_answer": "Amira Hassan is seeking a position as an operations coordinator. Right now, she works as an office coordinator at Fieldnote Design, where she has been since 2022."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Professional Resume — Amira Hassan",
+        "document_type": "professional resume",
+        "rows": [
+          {
+            "label": "Name",
+            "value": "Amira Hassan"
+          },
+          {
+            "label": "Desired position",
+            "value": "Operations coordinator"
+          },
+          {
+            "label": "Location",
+            "value": "Elmford"
+          },
+          {
+            "label": "Phone",
+            "value": "555-0148"
+          },
+          {
+            "label": "Email",
+            "value": "amira.hassan@example.com"
+          },
+          {
+            "label": "Experience",
+            "value": "Office coordinator, Fieldnote Design, 2022 to present"
+          },
+          {
+            "label": "Earlier experience",
+            "value": "Shipping clerk, Keel Logistics, 2019 to 2022"
+          },
+          {
+            "label": "Education",
+            "value": "Elmford College, bachelor's degree in business, 2019"
+          },
+          {
+            "label": "Skills",
+            "value": "Spreadsheets, inventory tracking, and Spanish"
+          },
+          {
+            "label": "Reference",
+            "value": "Camille Durand, director, Fieldnote Design"
+          }
+        ],
+        "markdown": "# Professional Resume — Amira Hassan\n\n- **Name:** Amira Hassan\n- **Desired position:** Operations coordinator\n- **Location:** Elmford\n- **Phone:** 555-0148\n- **Email:** amira.hassan@example.com\n- **Experience:** Office coordinator, Fieldnote Design, 2022 to present\n- **Earlier experience:** Shipping clerk, Keel Logistics, 2019 to 2022\n- **Education:** Elmford College, bachelor's degree in business, 2019\n- **Skills:** Spreadsheets, inventory tracking, and Spanish\n- **Reference:** Camille Durand, director, Fieldnote Design"
+      },
+      "caller_intro": "Hi, I'm Owen Blake from Bramble Staffing. I'm reviewing a resume and hoped you could confirm a few points.",
+      "question": "My notes say she started at Keel Logistics in 2018. Is that correct?",
+      "answer_facts": [
+        "She was a shipping clerk at Keel Logistics from 2019 to 2022."
+      ],
+      "model_answer": "Actually, she started there in 2019, not 2018. She was a shipping clerk at Keel Logistics from 2019 to 2022, and after that she moved to Fieldnote Design.",
+      "caller_claim": "she started at Keel Logistics in 2018"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Professional Resume — Amira Hassan",
+        "document_type": "professional resume",
+        "rows": [
+          {
+            "label": "Name",
+            "value": "Amira Hassan"
+          },
+          {
+            "label": "Desired position",
+            "value": "Operations coordinator"
+          },
+          {
+            "label": "Location",
+            "value": "Elmford"
+          },
+          {
+            "label": "Phone",
+            "value": "555-0148"
+          },
+          {
+            "label": "Email",
+            "value": "amira.hassan@example.com"
+          },
+          {
+            "label": "Experience",
+            "value": "Office coordinator, Fieldnote Design, 2022 to present"
+          },
+          {
+            "label": "Earlier experience",
+            "value": "Shipping clerk, Keel Logistics, 2019 to 2022"
+          },
+          {
+            "label": "Education",
+            "value": "Elmford College, bachelor's degree in business, 2019"
+          },
+          {
+            "label": "Skills",
+            "value": "Spreadsheets, inventory tracking, and Spanish"
+          },
+          {
+            "label": "Reference",
+            "value": "Camille Durand, director, Fieldnote Design"
+          }
+        ],
+        "markdown": "# Professional Resume — Amira Hassan\n\n- **Name:** Amira Hassan\n- **Desired position:** Operations coordinator\n- **Location:** Elmford\n- **Phone:** 555-0148\n- **Email:** amira.hassan@example.com\n- **Experience:** Office coordinator, Fieldnote Design, 2022 to present\n- **Earlier experience:** Shipping clerk, Keel Logistics, 2019 to 2022\n- **Education:** Elmford College, bachelor's degree in business, 2019\n- **Skills:** Spreadsheets, inventory tracking, and Spanish\n- **Reference:** Camille Durand, director, Fieldnote Design"
+      },
+      "caller_intro": "Hi, I'm Owen Blake from Bramble Staffing. I'm reviewing a resume and hoped you could confirm a few points.",
+      "question": "Could you summarize her work history and name both companies?",
+      "answer_facts": [
+        "She has been an office coordinator at Fieldnote Design since 2022.",
+        "She was a shipping clerk at Keel Logistics from 2019 to 2022."
+      ],
+      "model_answer": "Amira Hassan has worked for two companies. Since 2022, she has been an office coordinator at Fieldnote Design, and she still works there. Before that, from 2019 to 2022, she was a shipping clerk at Keel Logistics. She also earned a bachelor's degree in business from Elmford College in 2019, and her reference is Camille Durand, a director at Fieldnote Design."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Should employers give workers one paid day each year to volunteer in the community? Say whether you agree, and support your view with reasons and an example.",
+      "model_answer": "I agree that employers should give workers one paid day each year to volunteer in the community. A paid day makes service possible for people who cannot afford to lose a day's wages, so the help does not fall only on those with spare money. It can also build real ties between a company and the town around it. For example, a staff team could spend the day planting trees in a schoolyard or sorting food at a neighborhood pantry. They would then understand local needs better than they would from a poster. The day should be optional and arranged with a trusted local group, but offering it is still a practical and fair way to support the wider community."
+    }
+  ]
+}

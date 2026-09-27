@@ -1,0 +1,262 @@
+{
+  "id": "test10",
+  "version": 1,
+  "title": "Practice Test 10",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Hem and Thread is ready to update your wardrobe for the new season. This week only, bring coats, trousers, and dresses for a fitting with tailor Gus Moretti. Simple hems are just $12, and most jobs are finished within 3 days. The shop is open from 10 a.m. to 6 p.m., Wednesday through Sunday. Walk-ins are welcome, or you may call 555-0166 to book a time.",
+      "sentences": [
+        "Hem and Thread is ready to update your wardrobe for the new season.",
+        "This week only, bring coats, trousers, and dresses for a fitting with tailor Gus Moretti.",
+        "Simple hems are just $12, and most jobs are finished within 3 days.",
+        "The shop is open from 10 a.m. to 6 p.m., Wednesday through Sunday.",
+        "Walk-ins are welcome, or you may call 555-0166 to book a time."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Bright Bin Depot will hold a free electronics drop-off on Saturday, July 11, from 9 a.m. to 2 p.m. You may bring phones, cables, and small kitchen appliances. Please remove the batteries, wipe personal data, and pack each item in a sturdy box. Staff will help unload your car in the east lane. The depot is at 400 Harlow Road, behind the sports field.",
+      "sentences": [
+        "Bright Bin Depot will hold a free electronics drop-off on Saturday, July 11, from 9 a.m. to 2 p.m.",
+        "You may bring phones, cables, and small kitchen appliances.",
+        "Please remove the batteries, wipe personal data, and pack each item in a sturdy box.",
+        "Staff will help unload your car in the east lane.",
+        "The depot is at 400 Harlow Road, behind the sports field."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test10_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a hair salon with large mirrors and no brand names on the bottles. Number of people and appearance: Three adults. Clothing: A stylist wears a black shirt. The client in the chair wears a gray cape. A waiting client wears a cream sweater. Actions: The stylist cuts hair with scissors and a comb. The seated client faces the mirror. The waiting client reads a magazine. Objects: Scissors, a comb, a gray cape, a magazine, and bottles of shampoo. Foreground: The stylist and the client in the cape are closest to the camera. Background: Mirrors, the shampoo shelf, and the waiting chair are behind them.",
+      "key_elements": [
+        "stylist in a black shirt cutting hair",
+        "client wearing a gray cape",
+        "scissors and a comb",
+        "waiting client reading a magazine"
+      ],
+      "model_answer": "This picture shows a hair salon with large mirrors. In the foreground, a stylist in a black shirt is cutting the hair of a client wearing a gray cape. The stylist holds scissors and a comb. Another client sits in the background reading a magazine, and bottles of shampoo line a shelf behind the stylist."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test10_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a meeting room during a presentation, with a blurred chart that has no readable words. Number of people and appearance: Four adults. Clothing: The speaker wears a dark jacket. One listener wears a red blouse. One wears a blue shirt. One wears a cream sweater. Actions: The speaker points at the screen. The three listeners take notes. Objects: A blurred chart, notebooks, water glasses, and a closed laptop. Foreground: The speaker and the screen are closest to the camera. Background: The listeners sit along a table, with a window behind them.",
+      "key_elements": [
+        "speaker in a dark jacket pointing at a chart",
+        "listener in a red blouse taking notes",
+        "listener in a blue shirt",
+        "notebooks and water glasses on the table"
+      ],
+      "model_answer": "This picture shows a meeting room during a presentation. In the foreground, a speaker in a dark jacket is pointing at a blurred chart on a screen. Three coworkers sit at the table with notebooks. One wears a red blouse, one a blue shirt, and one a cream sweater. Water glasses and a closed laptop sit on the table, and a window is behind them."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask about greenery in the home. You talk by phone about keeping indoor plants.",
+      "question": "Do you keep any indoor plants at home? If so, what kind?",
+      "model_answer": "Yes, I keep two indoor plants. One is a pothos on a shelf, and the other is a small herb pot in the kitchen window."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask about greenery in the home. You talk by phone about keeping indoor plants.",
+      "question": "What is the hardest part of caring for indoor plants, and why?",
+      "model_answer": "The hardest part is giving each plant the right amount of water. Too much rots the roots, and a dark corner makes that mistake worse."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a friend calls to ask about greenery in the home. You talk by phone about keeping indoor plants.",
+      "question": "Would you recommend indoor plants to someone who has never grown anything? Why or why not?",
+      "model_answer": "Yes, I would recommend one easy indoor plant to a complete beginner. A pothos forgives a missed week and does not need strong sun. I would tell the person to buy one plant, not five, and to touch the soil before adding water. One healthy plant is more encouraging than a shelf of brown leaves, and it teaches the basic habit without much risk."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Volunteer Shift Board — Tidepool Discovery Center",
+        "document_type": "volunteer shift board",
+        "rows": [
+          {
+            "label": "Date",
+            "value": "Saturday, August 8"
+          },
+          {
+            "label": "Coordinator",
+            "value": "Nadia Petrov"
+          },
+          {
+            "label": "9:00 a.m. to 11:00 a.m.",
+            "value": "Exhibit Hall, Elliot Grant and Yara Nasser"
+          },
+          {
+            "label": "11:00 a.m. to 1:00 p.m.",
+            "value": "Touch Tank, Yara Nasser"
+          },
+          {
+            "label": "1:00 p.m. to 3:00 p.m.",
+            "value": "Ticket Desk, Elliot Grant"
+          },
+          {
+            "label": "3:00 p.m. to 5:00 p.m.",
+            "value": "Exhibit Hall, Nadia Petrov"
+          },
+          {
+            "label": "Shoes",
+            "value": "Closed-toe shoes are required"
+          },
+          {
+            "label": "Lunch",
+            "value": "A lunch voucher at noon for anyone on a morning shift"
+          }
+        ],
+        "markdown": "# Volunteer Shift Board — Tidepool Discovery Center\n\n- **Date:** Saturday, August 8\n- **Coordinator:** Nadia Petrov\n- **9:00 a.m. to 11:00 a.m.:** Exhibit Hall, Elliot Grant and Yara Nasser\n- **11:00 a.m. to 1:00 p.m.:** Touch Tank, Yara Nasser\n- **1:00 p.m. to 3:00 p.m.:** Ticket Desk, Elliot Grant\n- **3:00 p.m. to 5:00 p.m.:** Exhibit Hall, Nadia Petrov\n- **Shoes:** Closed-toe shoes are required\n- **Lunch:** A lunch voucher at noon for anyone on a morning shift"
+      },
+      "caller_intro": "Hi, I'm Elliot Grant. I signed up to volunteer at the discovery center on Saturday, and I want to check my shifts.",
+      "question": "Who is the volunteer coordinator on Saturday?",
+      "answer_facts": [
+        "The volunteer coordinator is Nadia Petrov."
+      ],
+      "model_answer": "The volunteer coordinator on Saturday is Nadia Petrov. She'll also be working the last shift of the day herself, in the Exhibit Hall from 3:00 to 5:00 p.m."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Volunteer Shift Board — Tidepool Discovery Center",
+        "document_type": "volunteer shift board",
+        "rows": [
+          {
+            "label": "Date",
+            "value": "Saturday, August 8"
+          },
+          {
+            "label": "Coordinator",
+            "value": "Nadia Petrov"
+          },
+          {
+            "label": "9:00 a.m. to 11:00 a.m.",
+            "value": "Exhibit Hall, Elliot Grant and Yara Nasser"
+          },
+          {
+            "label": "11:00 a.m. to 1:00 p.m.",
+            "value": "Touch Tank, Yara Nasser"
+          },
+          {
+            "label": "1:00 p.m. to 3:00 p.m.",
+            "value": "Ticket Desk, Elliot Grant"
+          },
+          {
+            "label": "3:00 p.m. to 5:00 p.m.",
+            "value": "Exhibit Hall, Nadia Petrov"
+          },
+          {
+            "label": "Shoes",
+            "value": "Closed-toe shoes are required"
+          },
+          {
+            "label": "Lunch",
+            "value": "A lunch voucher at noon for anyone on a morning shift"
+          }
+        ],
+        "markdown": "# Volunteer Shift Board — Tidepool Discovery Center\n\n- **Date:** Saturday, August 8\n- **Coordinator:** Nadia Petrov\n- **9:00 a.m. to 11:00 a.m.:** Exhibit Hall, Elliot Grant and Yara Nasser\n- **11:00 a.m. to 1:00 p.m.:** Touch Tank, Yara Nasser\n- **1:00 p.m. to 3:00 p.m.:** Ticket Desk, Elliot Grant\n- **3:00 p.m. to 5:00 p.m.:** Exhibit Hall, Nadia Petrov\n- **Shoes:** Closed-toe shoes are required\n- **Lunch:** A lunch voucher at noon for anyone on a morning shift"
+      },
+      "caller_intro": "Hi, I'm Elliot Grant. I signed up to volunteer at the discovery center on Saturday, and I want to check my shifts.",
+      "question": "My ticket desk shift starts at 2:00, right?",
+      "answer_facts": [
+        "Elliot Grant has the ticket desk from 1:00 p.m. to 3:00 p.m."
+      ],
+      "model_answer": "Actually, your ticket desk shift starts at 1:00 p.m., not 2:00. It runs from 1:00 to 3:00 p.m., and it's the second of your two shifts that day.",
+      "caller_claim": "My ticket desk shift starts at 2:00"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Volunteer Shift Board — Tidepool Discovery Center",
+        "document_type": "volunteer shift board",
+        "rows": [
+          {
+            "label": "Date",
+            "value": "Saturday, August 8"
+          },
+          {
+            "label": "Coordinator",
+            "value": "Nadia Petrov"
+          },
+          {
+            "label": "9:00 a.m. to 11:00 a.m.",
+            "value": "Exhibit Hall, Elliot Grant and Yara Nasser"
+          },
+          {
+            "label": "11:00 a.m. to 1:00 p.m.",
+            "value": "Touch Tank, Yara Nasser"
+          },
+          {
+            "label": "1:00 p.m. to 3:00 p.m.",
+            "value": "Ticket Desk, Elliot Grant"
+          },
+          {
+            "label": "3:00 p.m. to 5:00 p.m.",
+            "value": "Exhibit Hall, Nadia Petrov"
+          },
+          {
+            "label": "Shoes",
+            "value": "Closed-toe shoes are required"
+          },
+          {
+            "label": "Lunch",
+            "value": "A lunch voucher at noon for anyone on a morning shift"
+          }
+        ],
+        "markdown": "# Volunteer Shift Board — Tidepool Discovery Center\n\n- **Date:** Saturday, August 8\n- **Coordinator:** Nadia Petrov\n- **9:00 a.m. to 11:00 a.m.:** Exhibit Hall, Elliot Grant and Yara Nasser\n- **11:00 a.m. to 1:00 p.m.:** Touch Tank, Yara Nasser\n- **1:00 p.m. to 3:00 p.m.:** Ticket Desk, Elliot Grant\n- **3:00 p.m. to 5:00 p.m.:** Exhibit Hall, Nadia Petrov\n- **Shoes:** Closed-toe shoes are required\n- **Lunch:** A lunch voucher at noon for anyone on a morning shift"
+      },
+      "caller_intro": "Hi, I'm Elliot Grant. I signed up to volunteer at the discovery center on Saturday, and I want to check my shifts.",
+      "question": "Could you tell me about all of my shifts and anything else I need to know?",
+      "answer_facts": [
+        "He works in the Exhibit Hall with Yara Nasser from 9:00 a.m. to 11:00 a.m.",
+        "He works the Ticket Desk from 1:00 p.m. to 3:00 p.m.",
+        "A lunch voucher is given at noon to anyone on a morning shift.",
+        "Closed-toe shoes are required."
+      ],
+      "model_answer": "You have two shifts on Saturday. From 9:00 to 11:00 a.m., you'll be in the Exhibit Hall with Yara Nasser. Then from 1:00 to 3:00 p.m., you'll work at the Ticket Desk. Since you're on a morning shift, you'll get a lunch voucher at noon. Please remember that closed-toe shoes are required, and Nadia Petrov is the coordinator if you have any questions."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Do you think schools should start the day later in the morning? Give reasons for your opinion.",
+      "model_answer": "I think schools should start the day later in the morning. Many teenagers are still half asleep at seven, so an early class often turns into rereading the same page instead of real learning. A start around eight-thirty would fit their sleep better, and students might arrive more alert and less likely to skip breakfast. Younger children can be different, so a later start matters most in middle school and high school. Schools would need to adjust buses and after-school clubs, and that takes planning. Even so, I would rather move the bell than keep asking tired students to learn when their minds are not ready. Alert students take part more in class discussions, and teachers spend less time repeating themselves."
+    }
+  ]
+}

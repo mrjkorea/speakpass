@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Speaking practice",
+    "tagline": "English speaking practice with TOEIC-style questions. This is not a TOEIC test.",
+    "disclaimer": "TOEIC is a registered trademark of ETS. This product is not endorsed or approved by ETS.",
+    "chooseTest": "Practice test",
+    "fullTest": "Full test",
+    "practice": "Practice",
+    "loading": "Loading tests…",
+    "loadError": "The test list could not be loaded. Check your connection and try again.",
+    "noTests": "No practice tests are available yet.",
+    "micNote": "A full test uses your microphone. Timers run straight through and cannot be paused.",
+    "questionCount": "{count} questions"
+  },
+  "practice": {
+    "title": "Practice",
+    "help": "Choose one question, or practice every question in a part. You can try again as many times as you want.",
+    "part": "Practice this part",
+    "back": "Back to start"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Read a text aloud",
+      "directions": "A short text will appear. Use the preparation time to read it silently, including names, numbers, and any list. When the tone sounds, read the text aloud in a clear voice. Recording starts and stops by itself. You cannot pause.",
+      "directionsOne": "A short text will appear. Use the preparation time to read it silently, including names, numbers, and any list. When the tone sounds, read the text aloud in a clear voice. Recording starts and stops by itself. You cannot pause."
+    },
+    "describe_picture": {
+      "title": "Describe a picture",
+      "directions": "A picture will appear. Use the preparation time to notice the place, the people, and what they are doing. When the tone sounds, describe the picture in detail. Recording starts and stops by itself. You cannot pause.",
+      "directionsOne": "A picture will appear. Use the preparation time to notice the place, the people, and what they are doing. When the tone sounds, describe the picture in detail. Recording starts and stops by itself. You cannot pause."
+    },
+    "respond_questions": {
+      "title": "Respond to questions",
+      "directions": "You will answer three questions about one everyday situation. The situation stays on the screen. Each question gives you a few seconds to prepare, then time to speak. Answer the first questions directly. On the last one, give reasons. Recording starts and stops by itself. You cannot pause.",
+      "directionsOne": "You will answer one question about an everyday situation. The situation stays on the screen. You get a few seconds to prepare, then time to speak. Recording starts and stops by itself. You cannot pause."
+    },
+    "info_questions": {
+      "title": "Answer using a document",
+      "directions": "You will have time to study a document quietly. Then you will answer three questions about it. The document stays on the screen while you answer. If a question includes a detail that does not match the document, correct it. On the last question, mention at least two items from the document. Recording starts and stops by itself. You cannot pause.",
+      "directionsOne": "You will have time to study a document quietly. Then you will answer one question about it. The document stays on the screen. If the question includes a detail that does not match the document, correct it. Recording starts and stops by itself. You cannot pause."
+    },
+    "opinion": {
+      "title": "Express an opinion",
+      "directions": "You will read one question about work, study, or daily life. Use the preparation time to choose a side and think of reasons and examples. When the tone sounds, explain your opinion clearly. Recording starts and stops by itself. You cannot pause.",
+      "directionsOne": "You will read one question about work, study, or daily life. Use the preparation time to choose a side and think of reasons and examples. When the tone sounds, explain your opinion clearly. Recording starts and stops by itself. You cannot pause."
+    }
+  },
+  "run": {
+    "prepare": "Prepare",
+    "speak": "Speak",
+    "reading": "Read the document",
+    "recording": "Recording",
+    "noPause": "No pause",
+    "auto": "Recording starts and stops by itself.",
+    "tone": "Speaking begins when the tone sounds.",
+    "readEnds": "The questions begin when the tone sounds.",
+    "qLabel": "Question {n}",
+    "timeLine": "Question {n}: prepare {prep} seconds, speak {speak} seconds.",
+    "readTime": "Time to read the document: {n} seconds.",
+    "start": "Start",
+    "end": "End",
+    "leaveTitle": "End this session?",
+    "leaveBody": "The timer will stop. Answers recorded so far are kept on this device.",
+    "leaveYes": "End session",
+    "leaveNo": "Keep going",
+    "micDenied": "Microphone access was blocked. Allow the microphone in your browser settings, then try again.",
+    "micMissing": "No microphone is available. Check the device and try again.",
+    "noRecorder": "This browser cannot record audio. Use a current version of Chrome, Safari, Edge, or Firefox.",
+    "insecure": "Recording needs a secure page. Open this app with https, or with a local server on localhost.",
+    "imageMissing": "Picture not available",
+    "pictureAlt": "Picture for question {n}",
+    "scenario": "Situation",
+    "caller": "Caller"
+  },
+  "review": {
+    "title": "Review",
+    "fullDone": "You finished this full test. Play each answer below.",
+    "practiceDone": "Practice is saved. Play your answers, or try again.",
+    "play": "Play",
+    "stop": "Stop",
+    "noAudio": "No recording",
+    "deviceScore": "On-device score",
+    "serverScore": "Server score",
+    "saved": "Saved on this device",
+    "notSaved": "Could not save on this device. You can still play the answers until you leave this page.",
+    "home": "Back to start",
+    "retry": "Try again",
+    "snippetPicture": "Picture description"
+  },
+  "common": {
+    "language": "Language",
+    "retry": "Try again",
+    "error": "Something went wrong."
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "timer": "{phase}. {n} seconds remaining.",
+    "play": "Play the answer to question {n}",
+    "stop": "Stop playing the answer to question {n}",
+    "progress": "Question {index} of {total}"
+  }
+}
