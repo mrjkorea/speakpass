@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Ćwiczenie mówienia",
+    "tagline": "Ćwiczenie mówienia po angielsku z pytaniami w stylu TOEIC. To nie jest egzamin TOEIC.",
+    "disclaimer": "TOEIC jest zastrzeżonym znakiem towarowym ETS. Ten produkt nie jest zatwierdzony ani popierany przez ETS.",
+    "chooseTest": "Test ćwiczebny",
+    "fullTest": "Pełny test",
+    "practice": "Ćwiczenie",
+    "loading": "Wczytywanie testów…",
+    "loadError": "Nie udało się wczytać listy testów. Sprawdź połączenie i spróbuj ponownie.",
+    "noTests": "Nie ma jeszcze testów ćwiczebnych.",
+    "micNote": "Pełny test używa mikrofonu. Czasomierze idą bez przerwy.",
+    "questionCount": "Liczba pytań: {count}"
+  },
+  "practice": {
+    "title": "Ćwiczenie",
+    "help": "Wybierz jedno pytanie albo poćwicz wszystkie pytania z części. Możesz powtarzać tyle razy, ile chcesz.",
+    "part": "Ćwicz tę część",
+    "back": "Wróć na start"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Przeczytaj tekst na głos",
+      "directions": "Pojawi się krótki tekst. W czasie przygotowania przeczytaj go po cichu, także imiona, liczby i listy. Gdy zabrzmi sygnał, przeczytaj tekst wyraźnie na głos. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać.",
+      "directionsOne": "Pojawi się krótki tekst. W czasie przygotowania przeczytaj go po cichu, także imiona, liczby i listy. Gdy zabrzmi sygnał, przeczytaj tekst wyraźnie na głos. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać."
+    },
+    "describe_picture": {
+      "title": "Opisz obrazek",
+      "directions": "Pojawi się obrazek. W czasie przygotowania zauważ miejsce, osoby i to, co robią. Gdy zabrzmi sygnał, opisz obrazek szczegółowo. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać.",
+      "directionsOne": "Pojawi się obrazek. W czasie przygotowania zauważ miejsce, osoby i to, co robią. Gdy zabrzmi sygnał, opisz obrazek szczegółowo. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać."
+    },
+    "respond_questions": {
+      "title": "Odpowiedz na pytania",
+      "directions": "Odpowiesz na trzy pytania o jedną codzienną sytuację. Sytuacja zostaje na ekranie. Każde pytanie ma kilka sekund na przygotowanie, a potem czas na mówienie. Na pierwsze pytania odpowiedz wprost. W ostatnim podaj powody. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać.",
+      "directionsOne": "Odpowiesz na jedno pytanie o codzienną sytuację. Sytuacja zostaje na ekranie. Masz kilka sekund na przygotowanie, a potem czas na mówienie. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać."
+    },
+    "info_questions": {
+      "title": "Odpowiedz na podstawie dokumentu",
+      "directions": "Będziesz mieć czas, aby w spokoju przeczytać dokument. Potem odpowiesz na trzy pytania o ten dokument. Dokument zostaje na ekranie, gdy odpowiadasz. Jeśli pytanie zawiera szczegół niezgodny z dokumentem, popraw go. W ostatnim pytaniu wymień co najmniej dwa elementy z dokumentu. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać.",
+      "directionsOne": "Będziesz mieć czas, aby w spokoju przeczytać dokument. Potem odpowiesz na jedno pytanie o ten dokument. Dokument zostaje na ekranie. Jeśli pytanie zawiera szczegół niezgodny z dokumentem, popraw go. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać."
+    },
+    "opinion": {
+      "title": "Wyraź opinię",
+      "directions": "Przeczytasz pytanie o pracę, naukę albo codzienne życie. W czasie przygotowania wybierz stanowisko i pomyśl o powodach oraz przykładach. Gdy zabrzmi sygnał, wyraźnie wyjaśnij swoją opinię. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać.",
+      "directionsOne": "Przeczytasz pytanie o pracę, naukę albo codzienne życie. W czasie przygotowania wybierz stanowisko i pomyśl o powodach oraz przykładach. Gdy zabrzmi sygnał, wyraźnie wyjaśnij swoją opinię. Nagranie zaczyna się i kończy samo. Nie można go wstrzymać."
+    }
+  },
+  "run": {
+    "prepare": "Przygotowanie",
+    "speak": "Mów",
+    "reading": "Czytaj dokument",
+    "recording": "Nagrywanie",
+    "noPause": "Bez pauzy",
+    "auto": "Nagranie zaczyna się i kończy samo.",
+    "tone": "Mówienie zaczyna się, gdy zabrzmi sygnał.",
+    "readEnds": "Pytania zaczynają się, gdy zabrzmi sygnał.",
+    "qLabel": "Pytanie {n}",
+    "timeLine": "Pytanie {n}: {prep} sekund przygotowania, {speak} sekund mówienia.",
+    "readTime": "Czas na przeczytanie dokumentu: {n} sekund.",
+    "start": "Start",
+    "end": "Zakończ",
+    "leaveTitle": "Zakończyć tę sesję?",
+    "leaveBody": "Czasomierz się zatrzyma. Dotychczasowe nagrania zostaną na tym urządzeniu.",
+    "leaveYes": "Zakończ sesję",
+    "leaveNo": "Kontynuuj",
+    "micDenied": "Dostęp do mikrofonu został zablokowany. Zezwól na mikrofon w ustawieniach przeglądarki i spróbuj ponownie.",
+    "micMissing": "Brak dostępnego mikrofonu. Sprawdź urządzenie i spróbuj ponownie.",
+    "noRecorder": "Ta przeglądarka nie może nagrywać dźwięku. Użyj aktualnej wersji Chrome, Safari, Edge albo Firefox.",
+    "insecure": "Nagrywanie wymaga bezpiecznej strony. Otwórz ją przez https albo przez lokalny serwer na localhost.",
+    "imageMissing": "Obrazek niedostępny",
+    "pictureAlt": "Obrazek do pytania {n}",
+    "scenario": "Sytuacja",
+    "caller": "Rozmówca"
+  },
+  "review": {
+    "title": "Odsłuch",
+    "fullDone": "Ukończono ten pełny test. Odtwórz każdą odpowiedź poniżej.",
+    "practiceDone": "Ćwiczenie zapisane. Odtwórz odpowiedzi albo spróbuj ponownie.",
+    "play": "Odtwórz",
+    "stop": "Zatrzymaj",
+    "noAudio": "Brak nagrania",
+    "deviceScore": "Ocena na urządzeniu",
+    "serverScore": "Ocena serwera",
+    "saved": "Zapisano na tym urządzeniu",
+    "notSaved": "Nie udało się zapisać na tym urządzeniu. Odpowiedzi można odtworzyć, dopóki nie opuścisz tej strony.",
+    "home": "Wróć na start",
+    "retry": "Spróbuj ponownie",
+    "snippetPicture": "Opis obrazka"
+  },
+  "common": {
+    "language": "Język",
+    "retry": "Spróbuj ponownie",
+    "error": "Coś poszło nie tak."
+  },
+  "a11y": {
+    "skip": "Przejdź do treści",
+    "timer": "{phase}. Zostało {n} sekund.",
+    "play": "Odtwórz odpowiedź na pytanie {n}",
+    "stop": "Zatrzymaj odtwarzanie pytania {n}",
+    "progress": "Pytanie {index} z {total}"
+  }
+}

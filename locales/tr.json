@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Konuşma alıştırması",
+    "tagline": "TOEIC tarzı sorularla İngilizce konuşma alıştırması. Bu bir TOEIC sınavı değildir.",
+    "disclaimer": "TOEIC, ETS’nin tescilli markasıdır. Bu ürün ETS tarafından onaylanmamış veya desteklenmemiştir.",
+    "chooseTest": "Alıştırma sınavı",
+    "fullTest": "Tam sınav",
+    "practice": "Alıştırma",
+    "loading": "Sınavlar yükleniyor…",
+    "loadError": "Sınav listesi yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.",
+    "noTests": "Henüz alıştırma sınavı yok.",
+    "micNote": "Tam sınav mikrofonu kullanır. Süreler ara vermeden akar.",
+    "questionCount": "{count} soru"
+  },
+  "practice": {
+    "title": "Alıştırma",
+    "help": "Tek bir soru seçin veya bir bölümdeki tüm soruları çalışın. İstediğiniz kadar yeniden deneyebilirsiniz.",
+    "part": "Bu bölümü çalış",
+    "back": "Başlangıca dön"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Bir metni sesli oku",
+      "directions": "Kısa bir metin görünecek. Hazırlık süresinde adlar, sayılar ve listeler dahil metni sessizce okuyun. Ses duyulunca metni açık bir sesle okuyun. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız.",
+      "directionsOne": "Kısa bir metin görünecek. Hazırlık süresinde adlar, sayılar ve listeler dahil metni sessizce okuyun. Ses duyulunca metni açık bir sesle okuyun. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız."
+    },
+    "describe_picture": {
+      "title": "Bir resmi anlat",
+      "directions": "Bir resim görünecek. Hazırlık süresinde yeri, insanları ve ne yaptıklarını fark edin. Ses duyulunca resmi ayrıntılı anlatın. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız.",
+      "directionsOne": "Bir resim görünecek. Hazırlık süresinde yeri, insanları ve ne yaptıklarını fark edin. Ses duyulunca resmi ayrıntılı anlatın. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız."
+    },
+    "respond_questions": {
+      "title": "Soruları yanıtla",
+      "directions": "Günlük bir durum hakkında üç soruyu yanıtlayacaksınız. Durum ekranda kalır. Her soruda birkaç saniye hazırlık, sonra konuşma süresi vardır. İlk sorulara doğrudan yanıt verin. Sonuncusunda gerekçe söyleyin. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız.",
+      "directionsOne": "Günlük bir durum hakkında bir soruyu yanıtlayacaksınız. Durum ekranda kalır. Birkaç saniye hazırlanır, sonra konuşursunuz. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız."
+    },
+    "info_questions": {
+      "title": "Belgeye göre yanıtla",
+      "directions": "Bir belgeyi sessizce incelemek için süreniz olacak. Sonra belge hakkında üç soruyu yanıtlarsınız. Yanıtlarken belge ekranda kalır. Bir soru belgede olmayan bir ayrıntı içeriyorsa düzeltin. Son soruda belgeden en az iki madde söyleyin. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız.",
+      "directionsOne": "Bir belgeyi sessizce incelemek için süreniz olacak. Sonra belge hakkında bir soruyu yanıtlarsınız. Belge ekranda kalır. Soru belgede olmayan bir ayrıntı içeriyorsa düzeltin. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız."
+    },
+    "opinion": {
+      "title": "Bir görüş belirt",
+      "directions": "İş, öğrenim veya günlük yaşam hakkında bir soru okuyacaksınız. Hazırlık süresinde bir taraf seçin, gerekçe ve örnek düşünün. Ses duyulunca görüşünüzü açıkça anlatın. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız.",
+      "directionsOne": "İş, öğrenim veya günlük yaşam hakkında bir soru okuyacaksınız. Hazırlık süresinde bir taraf seçin, gerekçe ve örnek düşünün. Ses duyulunca görüşünüzü açıkça anlatın. Kayıt kendiliğinden başlar ve biter. Duraklatamazsınız."
+    }
+  },
+  "run": {
+    "prepare": "Hazırlan",
+    "speak": "Konuş",
+    "reading": "Belgeyi oku",
+    "recording": "Kaydediliyor",
+    "noPause": "Duraklatma yok",
+    "auto": "Kayıt kendiliğinden başlar ve biter.",
+    "tone": "Ses duyulunca konuşma başlar.",
+    "readEnds": "Ses duyulunca sorular başlar.",
+    "qLabel": "Soru {n}",
+    "timeLine": "Soru {n}: {prep} saniye hazırlık, {speak} saniye konuşma.",
+    "readTime": "Belgeyi okuma süresi: {n} saniye.",
+    "start": "Başla",
+    "end": "Bitir",
+    "leaveTitle": "Bu oturum bitsin mi?",
+    "leaveBody": "Sayaç duracak. Şimdiye kadar kaydedilen yanıtlar bu cihazda kalır.",
+    "leaveYes": "Oturumu bitir",
+    "leaveNo": "Devam et",
+    "micDenied": "Mikrofon erişimi engellendi. Tarayıcı ayarlarından mikrofona izin verip yeniden deneyin.",
+    "micMissing": "Kullanılabilir mikrofon yok. Cihazı kontrol edip yeniden deneyin.",
+    "noRecorder": "Bu tarayıcı ses kaydedemiyor. Güncel bir Chrome, Safari, Edge veya Firefox kullanın.",
+    "insecure": "Kayıt için güvenli bir sayfa gerekir. Uygulamayı https ile veya localhost üzerindeki yerel bir sunucuyla açın.",
+    "imageMissing": "Resim yok",
+    "pictureAlt": "Soru {n} resmi",
+    "scenario": "Durum",
+    "caller": "Arayan"
+  },
+  "review": {
+    "title": "Gözden geçir",
+    "fullDone": "Bu tam sınavı bitirdiniz. Aşağıdaki her yanıtı dinleyin.",
+    "practiceDone": "Alıştırma kaydedildi. Yanıtlarınızı dinleyin veya yeniden deneyin.",
+    "play": "Oynat",
+    "stop": "Durdur",
+    "noAudio": "Kayıt yok",
+    "deviceScore": "Cihaz içi puan",
+    "serverScore": "Sunucu puanı",
+    "saved": "Bu cihaza kaydedildi",
+    "notSaved": "Bu cihaza kaydedilemedi. Sayfadan çıkana kadar yanıtları dinleyebilirsiniz.",
+    "home": "Başlangıca dön",
+    "retry": "Yeniden dene",
+    "snippetPicture": "Resim anlatımı"
+  },
+  "common": {
+    "language": "Dil",
+    "retry": "Yeniden dene",
+    "error": "Bir sorun oluştu."
+  },
+  "a11y": {
+    "skip": "İçeriğe geç",
+    "timer": "{phase}. {n} saniye kaldı.",
+    "play": "{n}. sorunun yanıtını oynat",
+    "stop": "{n}. sorunun oynatılmasını durdur",
+    "progress": "Soru {index} / {total}"
+  }
+}

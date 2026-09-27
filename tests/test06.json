@@ -1,0 +1,285 @@
+{
+  "id": "test06",
+  "version": 1,
+  "title": "Practice Test 6",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Welcome to the 7 p.m. sky show at Northstar Planetarium. Tonight we will tour the Moon, Mars, and the bright summer stars. The program lasts 45 minutes, and the dome will be dark, so please watch your step. Silence your phone, remain in your seat, and use a quiet voice if you must speak. The next show begins at 8:30 p.m.",
+      "sentences": [
+        "Welcome to the 7 p.m. sky show at Northstar Planetarium.",
+        "Tonight we will tour the Moon, Mars, and the bright summer stars.",
+        "The program lasts 45 minutes, and the dome will be dark, so please watch your step.",
+        "Silence your phone, remain in your seat, and use a quiet voice if you must speak.",
+        "The next show begins at 8:30 p.m."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Good evening, and welcome to Civic Lecture Hour. Our guest is Dr. Aisha Rahman, who studies how families can use less energy at home. She will explain simple changes to lighting, heating, and appliances that can lower a monthly bill. Her new guide, Saving Power Together, was released on March 3. When the talk ends, she will answer questions, so please welcome Dr. Rahman.",
+      "sentences": [
+        "Good evening, and welcome to Civic Lecture Hour.",
+        "Our guest is Dr. Aisha Rahman, who studies how families can use less energy at home.",
+        "She will explain simple changes to lighting, heating, and appliances that can lower a monthly bill.",
+        "Her new guide, Saving Power Together, was released on March 3.",
+        "When the talk ends, she will answer questions, so please welcome Dr. Rahman."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test06_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a neighborhood playground in the late afternoon. Number of people and appearance: Two children and four adults. Everyone is dressed for cool weather. Clothing: One child wears a red jacket. The child on the swing wears a green jacket. A nearby adult wears a gray coat. Another adult wears a blue jacket. Two adults on a bench wear sweaters. Actions: The child in red climbs a wooden frame. The adult in gray stands close and watches. The adult in blue pushes the child in green on a swing. The pair on the bench talk. Objects: A climbing frame, a swing, a bench, and a low fence. Foreground: The climbing child and the standing adult are closest to the camera. Background: The swing, the bench, and trees sit farther back on the playground.",
+      "key_elements": [
+        "child in a red jacket climbing",
+        "adult in a gray coat standing nearby",
+        "adult pushing a swing",
+        "two adults talking on a bench"
+      ],
+      "model_answer": "This picture shows a neighborhood playground on a cool afternoon. In the foreground, a child in a red jacket is climbing a wooden frame while an adult in a gray coat stands close by. Another adult is pushing a child on a swing. Two people sit on a bench in the background and talk together."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test06_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a laundromat with a row of washers and a folding table. Number of people and appearance: Three adults. Clothing: A man wears a black sweater. A woman wears a pink cardigan. Another customer wears a brown coat. Actions: The man folds towels. The woman loads a washer. The third person sits on a bench and reads a book. Objects: Towels, a laundry basket and a detergent bottle on the folding table, washers, and a book. Foreground: The man at the folding table is closest to the camera. Background: A row of machines and the seated reader fill the back of the laundromat.",
+      "key_elements": [
+        "man in a black sweater folding towels",
+        "woman in a pink cardigan loading a washer",
+        "laundry basket and a detergent bottle",
+        "customer reading on a bench"
+      ],
+      "model_answer": "This picture shows a laundromat with a row of machines. In the foreground, a man in a black sweater is folding towels on a table. A woman in a pink cardigan is loading clothes into a washer. A laundry basket and a detergent bottle sit on the table. In the background, another customer sits on a bench and reads a book."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a community music school is researching hobbies in your area. You agreed to take part in a telephone interview about learning a musical instrument.",
+      "question": "Which musical instrument would you most like to learn, and why?",
+      "model_answer": "I would most like to learn the piano. I already love the sound, and a digital piano fits in a small apartment much more easily than a drum set."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a community music school is researching hobbies in your area. You agreed to take part in a telephone interview about learning a musical instrument.",
+      "question": "Where can someone in your area take music lessons?",
+      "model_answer": "Most people in my area take lessons at a community music school. Others hire a private teacher who comes to their home once a week."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a community music school is researching hobbies in your area. You agreed to take part in a telephone interview about learning a musical instrument.",
+      "question": "What advice would you give an adult who wants to start learning an instrument, and why?",
+      "model_answer": "I would tell an adult to rent an instrument for one month and to book a weekly lesson, rather than only watching videos. A teacher can correct hand position early, before a bad habit settles in. I would also suggest practicing twenty minutes a day instead of two hours on Sunday. Short daily practice is easier to keep up, and it builds skill faster than one long session a week."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Seminar Agenda — Halcyon Service Academy",
+        "document_type": "seminar agenda",
+        "rows": [
+          {
+            "label": "Event",
+            "value": "Customer Service Basics"
+          },
+          {
+            "label": "Date",
+            "value": "Friday, October 9"
+          },
+          {
+            "label": "Place",
+            "value": "Room 12, Halcyon Service Academy"
+          },
+          {
+            "label": "Fee",
+            "value": "$70, workbook included"
+          },
+          {
+            "label": "9:00 a.m.",
+            "value": "Welcome and goals, Clara Bennett, program lead"
+          },
+          {
+            "label": "9:20 a.m.",
+            "value": "Listening to Customers, Victor Nguyen"
+          },
+          {
+            "label": "10:30 a.m.",
+            "value": "Break, 15 minutes"
+          },
+          {
+            "label": "10:45 a.m.",
+            "value": "Handling Complaints, Nora Beltran"
+          },
+          {
+            "label": "12:00 p.m.",
+            "value": "Lunch, not included in the fee"
+          },
+          {
+            "label": "1:00 p.m.",
+            "value": "Practice calls until 2:30 p.m., Room 14"
+          }
+        ],
+        "markdown": "# Seminar Agenda — Halcyon Service Academy\n\n- **Event:** Customer Service Basics\n- **Date:** Friday, October 9\n- **Place:** Room 12, Halcyon Service Academy\n- **Fee:** $70, workbook included\n- **9:00 a.m.:** Welcome and goals, Clara Bennett, program lead\n- **9:20 a.m.:** Listening to Customers, Victor Nguyen\n- **10:30 a.m.:** Break, 15 minutes\n- **10:45 a.m.:** Handling Complaints, Nora Beltran\n- **12:00 p.m.:** Lunch, not included in the fee\n- **1:00 p.m.:** Practice calls until 2:30 p.m., Room 14"
+      },
+      "caller_intro": "Hi, I'm Henryk Nowak. I signed up for your customer service seminar and need to confirm some details.",
+      "question": "What time does the seminar start?",
+      "answer_facts": [
+        "The seminar starts at 9:00 a.m."
+      ],
+      "model_answer": "The seminar starts at 9:00 a.m. on Friday, October 9, in Room 12. Clara Bennett, the program lead, will open the day with a welcome and an overview of the goals."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Seminar Agenda — Halcyon Service Academy",
+        "document_type": "seminar agenda",
+        "rows": [
+          {
+            "label": "Event",
+            "value": "Customer Service Basics"
+          },
+          {
+            "label": "Date",
+            "value": "Friday, October 9"
+          },
+          {
+            "label": "Place",
+            "value": "Room 12, Halcyon Service Academy"
+          },
+          {
+            "label": "Fee",
+            "value": "$70, workbook included"
+          },
+          {
+            "label": "9:00 a.m.",
+            "value": "Welcome and goals, Clara Bennett, program lead"
+          },
+          {
+            "label": "9:20 a.m.",
+            "value": "Listening to Customers, Victor Nguyen"
+          },
+          {
+            "label": "10:30 a.m.",
+            "value": "Break, 15 minutes"
+          },
+          {
+            "label": "10:45 a.m.",
+            "value": "Handling Complaints, Nora Beltran"
+          },
+          {
+            "label": "12:00 p.m.",
+            "value": "Lunch, not included in the fee"
+          },
+          {
+            "label": "1:00 p.m.",
+            "value": "Practice calls until 2:30 p.m., Room 14"
+          }
+        ],
+        "markdown": "# Seminar Agenda — Halcyon Service Academy\n\n- **Event:** Customer Service Basics\n- **Date:** Friday, October 9\n- **Place:** Room 12, Halcyon Service Academy\n- **Fee:** $70, workbook included\n- **9:00 a.m.:** Welcome and goals, Clara Bennett, program lead\n- **9:20 a.m.:** Listening to Customers, Victor Nguyen\n- **10:30 a.m.:** Break, 15 minutes\n- **10:45 a.m.:** Handling Complaints, Nora Beltran\n- **12:00 p.m.:** Lunch, not included in the fee\n- **1:00 p.m.:** Practice calls until 2:30 p.m., Room 14"
+      },
+      "caller_intro": "Hi, I'm Henryk Nowak. I signed up for your customer service seminar and need to confirm some details.",
+      "question": "I heard the fee is $90. Is that right?",
+      "answer_facts": [
+        "The fee is $70, and the workbook is included."
+      ],
+      "model_answer": "No, the fee is actually $70, not $90. That price includes the workbook, so you won't need to buy it separately. Lunch, however, is not included.",
+      "caller_claim": "the fee is $90"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Seminar Agenda — Halcyon Service Academy",
+        "document_type": "seminar agenda",
+        "rows": [
+          {
+            "label": "Event",
+            "value": "Customer Service Basics"
+          },
+          {
+            "label": "Date",
+            "value": "Friday, October 9"
+          },
+          {
+            "label": "Place",
+            "value": "Room 12, Halcyon Service Academy"
+          },
+          {
+            "label": "Fee",
+            "value": "$70, workbook included"
+          },
+          {
+            "label": "9:00 a.m.",
+            "value": "Welcome and goals, Clara Bennett, program lead"
+          },
+          {
+            "label": "9:20 a.m.",
+            "value": "Listening to Customers, Victor Nguyen"
+          },
+          {
+            "label": "10:30 a.m.",
+            "value": "Break, 15 minutes"
+          },
+          {
+            "label": "10:45 a.m.",
+            "value": "Handling Complaints, Nora Beltran"
+          },
+          {
+            "label": "12:00 p.m.",
+            "value": "Lunch, not included in the fee"
+          },
+          {
+            "label": "1:00 p.m.",
+            "value": "Practice calls until 2:30 p.m., Room 14"
+          }
+        ],
+        "markdown": "# Seminar Agenda — Halcyon Service Academy\n\n- **Event:** Customer Service Basics\n- **Date:** Friday, October 9\n- **Place:** Room 12, Halcyon Service Academy\n- **Fee:** $70, workbook included\n- **9:00 a.m.:** Welcome and goals, Clara Bennett, program lead\n- **9:20 a.m.:** Listening to Customers, Victor Nguyen\n- **10:30 a.m.:** Break, 15 minutes\n- **10:45 a.m.:** Handling Complaints, Nora Beltran\n- **12:00 p.m.:** Lunch, not included in the fee\n- **1:00 p.m.:** Practice calls until 2:30 p.m., Room 14"
+      },
+      "caller_intro": "Hi, I'm Henryk Nowak. I signed up for your customer service seminar and need to confirm some details.",
+      "question": "What sessions are scheduled in the morning, and who is leading them?",
+      "answer_facts": [
+        "Clara Bennett leads welcome and goals at 9:00 a.m.",
+        "Victor Nguyen leads Listening to Customers at 9:20 a.m.",
+        "Nora Beltran leads Handling Complaints at 10:45 a.m."
+      ],
+      "model_answer": "There are three sessions in the morning. Clara Bennett, the program lead, opens with welcome and goals at 9:00 a.m. At 9:20, Victor Nguyen leads Listening to Customers. After a fifteen-minute break at 10:30, Nora Beltran leads Handling Complaints at 10:45. Lunch follows at noon, but please note that it isn't included in the fee. Everything in the morning takes place in Room 12."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Some people spend extra money on trips and hobbies, while others prefer to save all of it. Which do you think is better, and why? Give a reason and a short example.",
+      "model_answer": "I would rather spend some extra money on experiences than save every spare dollar. A trip, a class, or a day out with friends can give you memories and skills that remain after the money is gone. Last year a weekend ceramics class cost more than I had planned, but I still use what I learned, and I met people I now see often. Saving still matters. Rent, an emergency fund, and basic bills should come first. Once those are covered, though, a planned amount for experiences is better than watching a balance grow and never using it. The point is a limit, not a ban on spending. I would choose that amount before the month begins so the fun never crowds out the bills."
+    }
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "id": "test09",
+  "version": 1,
+  "title": "Practice Test 9",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Saffron Kettle Cafe opens on Monday, September 14, at 7 a.m. Join owner Lila Ferrer for a free tasting of mint tea, oat porridge, and honey cake. We bake everything here, and breakfast is served until 11 a.m. The first 40 guests will receive a reusable cup. We are at 22 Fennel Street, across from the post office, so arrive early if you want a seat.",
+      "sentences": [
+        "Saffron Kettle Cafe opens on Monday, September 14, at 7 a.m.",
+        "Join owner Lila Ferrer for a free tasting of mint tea, oat porridge, and honey cake.",
+        "We bake everything here, and breakfast is served until 11 a.m.",
+        "The first 40 guests will receive a reusable cup.",
+        "We are at 22 Fennel Street, across from the post office, so arrive early if you want a seat."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Attention, tenants of the Granite Annex. Starting Friday, the blue, green, and yellow parking rows will be closed for 5 days. They will reopen on Wednesday morning, after the new paint has dried. If you drive in, please use the south lot or the spaces on Archer Street. We are sorry for the inconvenience.",
+      "sentences": [
+        "Attention, tenants of the Granite Annex.",
+        "Starting Friday, the blue, green, and yellow parking rows will be closed for 5 days.",
+        "They will reopen on Wednesday morning, after the new paint has dried.",
+        "If you drive in, please use the south lot or the spaces on Archer Street.",
+        "We are sorry for the inconvenience."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test09_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a small phone repair counter, with generic dark phones and no brand logos. Number of people and appearance: Three adults. Clothing: A technician wears a purple shirt. A customer wears a white blouse. A second worker wears a gray polo. Actions: The technician uses a tiny screwdriver on a phone. The customer watches. The second worker sorts chargers. Objects: A dark phone, a tiny screwdriver, a tray of small parts, and a box of plain chargers. Foreground: The technician and the customer are at the counter, close to the camera. Background: Shelves of plain phones and the second worker are in the background.",
+      "key_elements": [
+        "technician in a purple shirt repairing a phone",
+        "customer in a white blouse watching",
+        "tray of small parts",
+        "worker sorting chargers in the background"
+      ],
+      "model_answer": "This picture shows a small phone repair counter. In the foreground, a technician in a purple shirt is using a tiny screwdriver on a dark phone while a customer in a white blouse watches. A tray of small parts sits between them. In the background, shelves hold plain phones, and another worker sorts a box of chargers."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test09_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a neighborhood print shop with large printers and no readable logos. Number of people and appearance: Three adults. Clothing: A clerk wears a teal apron. A customer wears a brown sweater. Another employee wears a black t-shirt. Actions: The clerk hands over a stack of paper. The customer receives it. The employee loads paper into a second machine. A large printer runs on a low stand just behind the counter. Objects: A stack of paper, a large printer, and sample sheets with abstract shapes rather than words. Foreground: The clerk and the customer at the counter are closest to the camera. Background: The second printer and a wall of pinned sample sheets are behind them.",
+      "key_elements": [
+        "clerk in a teal apron handing over paper",
+        "customer in a brown sweater",
+        "large printer running behind the counter",
+        "employee loading a second machine"
+      ],
+      "model_answer": "This picture shows a neighborhood print shop. In the foreground, a clerk in a teal apron is handing a stack of paper to a customer in a brown sweater. A large printer is running just behind the counter. In the background, another employee loads paper into a second machine, and sample sheets hang on the wall."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a news magazine is researching media habits in your country. You agreed to take part in a telephone interview about the ways people get the news.",
+      "question": "How do you usually get the news, and how often do you check it?",
+      "model_answer": "I usually listen to a short radio news summary while I make breakfast. At night, I read one or two articles on my phone, so I check the news about twice a day."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a news magazine is researching media habits in your country. You agreed to take part in a telephone interview about the ways people get the news.",
+      "question": "Do you prefer short news updates or longer reports? Why?",
+      "model_answer": "I prefer short updates on an ordinary day. I choose a longer report only when the story will affect my work or my city directly."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a news magazine is researching media habits in your country. You agreed to take part in a telephone interview about the ways people get the news.",
+      "question": "Some people check the news many times a day. Do you think that is a good habit? Why or why not?",
+      "model_answer": "I do not think checking the news many times a day is a good habit. Headlines rarely change between morning and lunch, and constant checking adds worry without new facts. Twice a day keeps me informed and still able to finish my work. If something urgent happens, one alert is enough. Until then, I stay with the task in front of me."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Shuttle Itinerary — Cobalt Commuter",
+        "document_type": "shuttle itinerary",
+        "rows": [
+          {
+            "label": "Client",
+            "value": "Westmill Design Office"
+          },
+          {
+            "label": "Date",
+            "value": "Friday, January 23"
+          },
+          {
+            "label": "Driver",
+            "value": "Oscar Brennan"
+          },
+          {
+            "label": "Seats",
+            "value": "8"
+          },
+          {
+            "label": "Reserved space",
+            "value": "Sana Iqbal, wheelchair space"
+          },
+          {
+            "label": "Also riding",
+            "value": "Farid Mansouri"
+          },
+          {
+            "label": "7:40 a.m.",
+            "value": "Depart Riverside Stop"
+          },
+          {
+            "label": "7:55 a.m.",
+            "value": "Central Library Stop"
+          },
+          {
+            "label": "8:10 a.m.",
+            "value": "Arrive Westmill Design Office"
+          },
+          {
+            "label": "5:20 p.m.",
+            "value": "Depart Westmill Design Office"
+          },
+          {
+            "label": "5:35 p.m.",
+            "value": "Central Library Stop"
+          },
+          {
+            "label": "5:50 p.m.",
+            "value": "Arrive Riverside Stop"
+          }
+        ],
+        "markdown": "# Shuttle Itinerary — Cobalt Commuter\n\n- **Client:** Westmill Design Office\n- **Date:** Friday, January 23\n- **Driver:** Oscar Brennan\n- **Seats:** 8\n- **Reserved space:** Sana Iqbal, wheelchair space\n- **Also riding:** Farid Mansouri\n- **7:40 a.m.:** Depart Riverside Stop\n- **7:55 a.m.:** Central Library Stop\n- **8:10 a.m.:** Arrive Westmill Design Office\n- **5:20 p.m.:** Depart Westmill Design Office\n- **5:35 p.m.:** Central Library Stop\n- **5:50 p.m.:** Arrive Riverside Stop"
+      },
+      "caller_intro": "Hi, I'm Farid Mansouri from Westmill Design Office. I need information about Friday's shuttle.",
+      "question": "What time does the morning shuttle arrive at the office?",
+      "answer_facts": [
+        "The morning shuttle arrives at Westmill Design Office at 8:10 a.m."
+      ],
+      "model_answer": "The morning shuttle arrives at Westmill Design Office at 8:10 a.m. Oscar Brennan is the driver, and the shuttle has eight seats on that Friday."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Shuttle Itinerary — Cobalt Commuter",
+        "document_type": "shuttle itinerary",
+        "rows": [
+          {
+            "label": "Client",
+            "value": "Westmill Design Office"
+          },
+          {
+            "label": "Date",
+            "value": "Friday, January 23"
+          },
+          {
+            "label": "Driver",
+            "value": "Oscar Brennan"
+          },
+          {
+            "label": "Seats",
+            "value": "8"
+          },
+          {
+            "label": "Reserved space",
+            "value": "Sana Iqbal, wheelchair space"
+          },
+          {
+            "label": "Also riding",
+            "value": "Farid Mansouri"
+          },
+          {
+            "label": "7:40 a.m.",
+            "value": "Depart Riverside Stop"
+          },
+          {
+            "label": "7:55 a.m.",
+            "value": "Central Library Stop"
+          },
+          {
+            "label": "8:10 a.m.",
+            "value": "Arrive Westmill Design Office"
+          },
+          {
+            "label": "5:20 p.m.",
+            "value": "Depart Westmill Design Office"
+          },
+          {
+            "label": "5:35 p.m.",
+            "value": "Central Library Stop"
+          },
+          {
+            "label": "5:50 p.m.",
+            "value": "Arrive Riverside Stop"
+          }
+        ],
+        "markdown": "# Shuttle Itinerary — Cobalt Commuter\n\n- **Client:** Westmill Design Office\n- **Date:** Friday, January 23\n- **Driver:** Oscar Brennan\n- **Seats:** 8\n- **Reserved space:** Sana Iqbal, wheelchair space\n- **Also riding:** Farid Mansouri\n- **7:40 a.m.:** Depart Riverside Stop\n- **7:55 a.m.:** Central Library Stop\n- **8:10 a.m.:** Arrive Westmill Design Office\n- **5:20 p.m.:** Depart Westmill Design Office\n- **5:35 p.m.:** Central Library Stop\n- **5:50 p.m.:** Arrive Riverside Stop"
+      },
+      "caller_intro": "Hi, I'm Farid Mansouri from Westmill Design Office. I need information about Friday's shuttle.",
+      "question": "The evening shuttle leaves the office at 6:10, right?",
+      "answer_facts": [
+        "The evening shuttle leaves Westmill Design Office at 5:20 p.m."
+      ],
+      "model_answer": "No, it doesn't leave at 6:10. The evening shuttle leaves Westmill Design Office at 5:20 p.m., stops at the Central Library at 5:35, and arrives at Riverside at 5:50.",
+      "caller_claim": "leaves the office at 6:10"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Shuttle Itinerary — Cobalt Commuter",
+        "document_type": "shuttle itinerary",
+        "rows": [
+          {
+            "label": "Client",
+            "value": "Westmill Design Office"
+          },
+          {
+            "label": "Date",
+            "value": "Friday, January 23"
+          },
+          {
+            "label": "Driver",
+            "value": "Oscar Brennan"
+          },
+          {
+            "label": "Seats",
+            "value": "8"
+          },
+          {
+            "label": "Reserved space",
+            "value": "Sana Iqbal, wheelchair space"
+          },
+          {
+            "label": "Also riding",
+            "value": "Farid Mansouri"
+          },
+          {
+            "label": "7:40 a.m.",
+            "value": "Depart Riverside Stop"
+          },
+          {
+            "label": "7:55 a.m.",
+            "value": "Central Library Stop"
+          },
+          {
+            "label": "8:10 a.m.",
+            "value": "Arrive Westmill Design Office"
+          },
+          {
+            "label": "5:20 p.m.",
+            "value": "Depart Westmill Design Office"
+          },
+          {
+            "label": "5:35 p.m.",
+            "value": "Central Library Stop"
+          },
+          {
+            "label": "5:50 p.m.",
+            "value": "Arrive Riverside Stop"
+          }
+        ],
+        "markdown": "# Shuttle Itinerary — Cobalt Commuter\n\n- **Client:** Westmill Design Office\n- **Date:** Friday, January 23\n- **Driver:** Oscar Brennan\n- **Seats:** 8\n- **Reserved space:** Sana Iqbal, wheelchair space\n- **Also riding:** Farid Mansouri\n- **7:40 a.m.:** Depart Riverside Stop\n- **7:55 a.m.:** Central Library Stop\n- **8:10 a.m.:** Arrive Westmill Design Office\n- **5:20 p.m.:** Depart Westmill Design Office\n- **5:35 p.m.:** Central Library Stop\n- **5:50 p.m.:** Arrive Riverside Stop"
+      },
+      "caller_intro": "Hi, I'm Farid Mansouri from Westmill Design Office. I need information about Friday's shuttle.",
+      "question": "What are the morning stops, and what time does the shuttle reach each one?",
+      "answer_facts": [
+        "The shuttle departs Riverside Stop at 7:40 a.m.",
+        "The shuttle reaches Central Library Stop at 7:55 a.m.",
+        "The shuttle arrives at Westmill Design Office at 8:10 a.m."
+      ],
+      "model_answer": "The morning shuttle makes three timed stops. First, it departs Riverside Stop at 7:40 a.m. Then it reaches Central Library Stop at 7:55 a.m., and it arrives at Westmill Design Office at 8:10 a.m. So the whole ride takes thirty minutes. Oscar Brennan is driving the eight-seat shuttle that day, and you're already listed as a rider on Friday's itinerary."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Do you agree that every workplace should set aside a quiet place for focused work? Support your view with reasons and an example.",
+      "model_answer": "I agree that every workplace should set aside a quiet place for focused work. Open rooms help with quick teamwork, but they are a poor place to write, calculate, or learn a new task, because each nearby voice breaks your concentration. A small room, booked for an hour, lets someone finish that work and then rejoin the group. At my last job, people stayed late just to find silence, which was unfair to anyone expected at home. The room does not need to be fancy. It needs a door, a desk, and a rule that phones stay silent. That simple space would help people do better work in fewer hours, and it would cost a company very little compared with what it gives back."
+    }
+  ]
+}

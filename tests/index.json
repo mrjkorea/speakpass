@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "description": "Ten original TOEIC-style speaking practice tests. Not an official TOEIC exam and not endorsed by ETS.",
+  "tests": [
+    {
+      "id": "test01",
+      "title": "Practice Test 1",
+      "file": "test01.json",
+      "topics": {
+        "q1": "book exchange",
+        "q2": "schedule a repair",
+        "q3": "flower shop",
+        "q4": "airport check-in",
+        "q5_7": "cooking at home",
+        "q8_10": "hotel reservation",
+        "q11": "flexible work hours"
+      },
+      "names": [
+        "Luis Ortega",
+        "Priya Raman"
+      ],
+      "companies": [
+        "Maple Court Library",
+        "Pebble Wheel Cycles",
+        "Lindenrow Guest House"
+      ],
+      "document_type": "hotel reservation"
+    },
+    {
+      "id": "test02",
+      "title": "Practice Test 2",
+      "file": "test02.json",
+      "topics": {
+        "q1": "chess tournament",
+        "q2": "Harborline Ferries",
+        "q3": "hardware store",
+        "q4": "outdoor cafe",
+        "q5_7": "public transportation",
+        "q8_10": "clinic appointment list",
+        "q11": "study alone"
+      },
+      "names": [
+        "Emil Adeyemi",
+        "Sofia Lind",
+        "Kenji Watanabe",
+        "Helen Okada",
+        "Leila Haddad",
+        "Rita Solano"
+      ],
+      "companies": [
+        "Riverbend Community Radio",
+        "Harborline Ferries",
+        "Cedar Pediatric Clinic"
+      ],
+      "document_type": "clinic appointment list"
+    },
+    {
+      "id": "test03",
+      "title": "Practice Test 3",
+      "file": "test03.json",
+      "topics": {
+        "q1": "study skills workshop",
+        "q2": "Orchard Lane Market",
+        "q3": "downtown crosswalk",
+        "q4": "pottery studio",
+        "q5_7": "household budgets",
+        "q8_10": "professional resume",
+        "q11": "paid day"
+      },
+      "names": [
+        "Amira Hassan",
+        "Owen Blake",
+        "Camille Durand"
+      ],
+      "companies": [
+        "Bright Path Tutoring",
+        "Orchard Lane Market",
+        "Fieldnote Design",
+        "Keel Logistics",
+        "Elmford College",
+        "Bramble Staffing"
+      ],
+      "document_type": "professional resume"
+    },
+    {
+      "id": "test04",
+      "title": "Practice Test 4",
+      "file": "test04.json",
+      "topics": {
+        "q1": "Stonepier Transit",
+        "q2": "author evening",
+        "q3": "supermarket checkout",
+        "q4": "furniture showroom",
+        "q5_7": "visiting museums",
+        "q8_10": "enrollment roster",
+        "q11": "workplace mentor"
+      },
+      "names": [
+        "Noah Berg",
+        "Mei Lin",
+        "Andre Costa",
+        "Tomasz Witek",
+        "Hana Ito",
+        "Farah Diallo",
+        "Benito Cruz",
+        "Ingrid Solberg"
+      ],
+      "companies": [
+        "Stonepier Transit",
+        "Paper Lantern Books",
+        "Willowbend Community Center"
+      ],
+      "document_type": "enrollment roster"
+    },
+    {
+      "id": "test05",
+      "title": "Practice Test 5",
+      "file": "test05.json",
+      "topics": {
+        "q1": "architecture walk",
+        "q2": "Parcel Nest",
+        "q3": "farmers market",
+        "q4": "open workspace",
+        "q5_7": "shopping online",
+        "q8_10": "supply purchase order",
+        "q11": "lunch at their desks"
+      },
+      "names": [
+        "Elena Vasquez",
+        "Samuel Okoye",
+        "Greta Holm"
+      ],
+      "companies": [
+        "Keystone Walking Tours",
+        "Parcel Nest",
+        "Aster Bookkeeping",
+        "Quill Carton Supply"
+      ],
+      "document_type": "supply purchase order"
+    },
+    {
+      "id": "test06",
+      "title": "Practice Test 6",
+      "file": "test06.json",
+      "topics": {
+        "q1": "sky show",
+        "q2": "Civic Lecture Hour",
+        "q3": "neighborhood playground",
+        "q4": "laundromat",
+        "q5_7": "musical instrument",
+        "q8_10": "seminar agenda",
+        "q11": "extra money"
+      },
+      "names": [
+        "Aisha Rahman",
+        "Henryk Nowak",
+        "Clara Bennett",
+        "Victor Nguyen",
+        "Nora Beltran"
+      ],
+      "companies": [
+        "Northstar Planetarium",
+        "Civic Lecture Hour",
+        "Halcyon Service Academy"
+      ],
+      "document_type": "seminar agenda"
+    },
+    {
+      "id": "test07",
+      "title": "Practice Test 7",
+      "file": "test07.json",
+      "topics": {
+        "q1": "model apartment",
+        "q2": "Old Mill Bridge",
+        "q3": "post office",
+        "q4": "swimming pool",
+        "q5_7": "keep a pet",
+        "q8_10": "studio timetable",
+        "q11": "year off"
+      },
+      "names": [
+        "Naomi Park",
+        "Diego Alvarez",
+        "Ravi Mehta",
+        "Esme Fadiga",
+        "Chloe Laurent"
+      ],
+      "companies": [
+        "Birchrow Residences",
+        "Fathom Eyewear",
+        "Moss Motion Studio"
+      ],
+      "document_type": "studio timetable"
+    },
+    {
+      "id": "test08",
+      "title": "Practice Test 8",
+      "file": "test08.json",
+      "topics": {
+        "q1": "career fair",
+        "q2": "Redcedar Line",
+        "q3": "pharmacy counter",
+        "q4": "shoe repair",
+        "q5_7": "spend Saturday",
+        "q8_10": "rehearsal call sheet",
+        "q11": "face to face"
+      },
+      "names": [
+        "Hassan Farouk",
+        "Mina Choi",
+        "Jonas Bergstrom",
+        "Petra Nilsen"
+      ],
+      "companies": [
+        "Eastbank Workforce Desk",
+        "Redcedar Line",
+        "Marquee Stage Company"
+      ],
+      "document_type": "rehearsal call sheet"
+    },
+    {
+      "id": "test09",
+      "title": "Practice Test 9",
+      "file": "test09.json",
+      "topics": {
+        "q1": "Saffron Kettle",
+        "q2": "Granite Annex",
+        "q3": "phone repair",
+        "q4": "print shop",
+        "q5_7": "get the news",
+        "q8_10": "shuttle itinerary",
+        "q11": "focused work"
+      },
+      "names": [
+        "Lila Ferrer",
+        "Oscar Brennan",
+        "Sana Iqbal",
+        "Farid Mansouri"
+      ],
+      "companies": [
+        "Saffron Kettle Cafe",
+        "Granite Annex",
+        "Cobalt Commuter",
+        "Westmill Design Office"
+      ],
+      "document_type": "shuttle itinerary"
+    },
+    {
+      "id": "test10",
+      "title": "Practice Test 10",
+      "file": "test10.json",
+      "topics": {
+        "q1": "Hem and Thread",
+        "q2": "electronics drop-off",
+        "q3": "hair salon",
+        "q4": "meeting room",
+        "q5_7": "indoor plants",
+        "q8_10": "volunteer shift board",
+        "q11": "start the day later"
+      },
+      "names": [
+        "Gus Moretti",
+        "Nadia Petrov",
+        "Elliot Grant",
+        "Yara Nasser"
+      ],
+      "companies": [
+        "Hem and Thread",
+        "Bright Bin Depot",
+        "Tidepool Discovery Center"
+      ],
+      "document_type": "volunteer shift board"
+    }
+  ]
+}

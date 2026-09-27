@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Pratique orale",
+    "tagline": "Entraînement à l’expression orale en anglais avec des questions de style TOEIC. Ce n’est pas un test TOEIC.",
+    "disclaimer": "TOEIC est une marque déposée d’ETS. Ce produit n’est ni approuvé ni cautionné par ETS.",
+    "chooseTest": "Test d’entraînement",
+    "fullTest": "Test complet",
+    "practice": "Entraînement",
+    "loading": "Chargement des tests…",
+    "loadError": "La liste des tests n’a pas pu être chargée. Vérifiez la connexion et réessayez.",
+    "noTests": "Aucun test d’entraînement pour le moment.",
+    "micNote": "Un test complet utilise le microphone. Les minuteurs avancent sans pause.",
+    "questionCount": "{count} questions"
+  },
+  "practice": {
+    "title": "Entraînement",
+    "help": "Choisissez une question, ou entraînez-vous sur toutes les questions d’une partie. Vous pouvez recommencer autant de fois que vous voulez.",
+    "part": "S’entraîner sur cette partie",
+    "back": "Retour au début"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Lire un texte à voix haute",
+      "directions": "Un court texte va apparaître. Servez-vous du temps de préparation pour le lire en silence, y compris les noms, les nombres et toute liste. Quand le signal retentit, lisez le texte à voix haute et clairement. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause.",
+      "directionsOne": "Un court texte va apparaître. Servez-vous du temps de préparation pour le lire en silence, y compris les noms, les nombres et toute liste. Quand le signal retentit, lisez le texte à voix haute et clairement. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause."
+    },
+    "describe_picture": {
+      "title": "Décrire une image",
+      "directions": "Une image va apparaître. Servez-vous du temps de préparation pour remarquer le lieu, les personnes et ce qu’elles font. Quand le signal retentit, décrivez l’image en détail. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause.",
+      "directionsOne": "Une image va apparaître. Servez-vous du temps de préparation pour remarquer le lieu, les personnes et ce qu’elles font. Quand le signal retentit, décrivez l’image en détail. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause."
+    },
+    "respond_questions": {
+      "title": "Répondre à des questions",
+      "directions": "Vous répondrez à trois questions sur une situation du quotidien. La situation reste à l’écran. Chaque question laisse quelques secondes pour préparer, puis un temps pour parler. Répondez directement aux premières. Pour la dernière, donnez des raisons. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause.",
+      "directionsOne": "Vous répondrez à une question sur une situation du quotidien. La situation reste à l’écran. Vous avez quelques secondes pour préparer, puis un temps pour parler. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause."
+    },
+    "info_questions": {
+      "title": "Répondre avec un document",
+      "directions": "Vous aurez le temps d’étudier un document en silence. Ensuite, vous répondrez à trois questions à son sujet. Le document reste à l’écran pendant vos réponses. Si une question contient un détail qui ne correspond pas au document, corrigez-le. Pour la dernière question, mentionnez au moins deux éléments du document. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause.",
+      "directionsOne": "Vous aurez le temps d’étudier un document en silence. Ensuite, vous répondrez à une question à son sujet. Le document reste à l’écran. Si la question contient un détail qui ne correspond pas au document, corrigez-le. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause."
+    },
+    "opinion": {
+      "title": "Donner un avis",
+      "directions": "Vous lirez une question sur le travail, les études ou la vie quotidienne. Servez-vous du temps de préparation pour choisir un côté et penser à des raisons et des exemples. Quand le signal retentit, expliquez clairement votre avis. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause.",
+      "directionsOne": "Vous lirez une question sur le travail, les études ou la vie quotidienne. Servez-vous du temps de préparation pour choisir un côté et penser à des raisons et des exemples. Quand le signal retentit, expliquez clairement votre avis. L’enregistrement démarre et s’arrête tout seul. Vous ne pouvez pas le mettre en pause."
+    }
+  },
+  "run": {
+    "prepare": "Préparer",
+    "speak": "Parler",
+    "reading": "Lire le document",
+    "recording": "Enregistrement",
+    "noPause": "Sans pause",
+    "auto": "L’enregistrement démarre et s’arrête tout seul.",
+    "tone": "Vous commencez à parler quand le signal retentit.",
+    "readEnds": "Les questions commencent quand le signal retentit.",
+    "qLabel": "Question {n}",
+    "timeLine": "Question {n} : {prep} secondes pour préparer, {speak} secondes pour parler.",
+    "readTime": "Temps pour lire le document : {n} secondes.",
+    "start": "Commencer",
+    "end": "Terminer",
+    "leaveTitle": "Terminer cette session ?",
+    "leaveBody": "Le minuteur s’arrêtera. Les réponses déjà enregistrées restent sur cet appareil.",
+    "leaveYes": "Terminer la session",
+    "leaveNo": "Continuer",
+    "micDenied": "L’accès au microphone a été bloqué. Autorisez-le dans les réglages du navigateur, puis réessayez.",
+    "micMissing": "Aucun microphone n’est disponible. Vérifiez l’appareil et réessayez.",
+    "noRecorder": "Ce navigateur ne peut pas enregistrer l’audio. Utilisez une version récente de Chrome, Safari, Edge ou Firefox.",
+    "insecure": "L’enregistrement exige une page sécurisée. Ouvrez l’application en https, ou avec un serveur local sur localhost.",
+    "imageMissing": "Image indisponible",
+    "pictureAlt": "Image de la question {n}",
+    "scenario": "Situation",
+    "caller": "Correspondant"
+  },
+  "review": {
+    "title": "Réécoute",
+    "fullDone": "Vous avez terminé ce test complet. Écoutez chaque réponse ci-dessous.",
+    "practiceDone": "L’entraînement est enregistré. Écoutez vos réponses, ou recommencez.",
+    "play": "Écouter",
+    "stop": "Arrêter",
+    "noAudio": "Pas d’enregistrement",
+    "deviceScore": "Note sur l’appareil",
+    "serverScore": "Note du serveur",
+    "saved": "Enregistré sur cet appareil",
+    "notSaved": "Impossible d’enregistrer sur cet appareil. Vous pouvez encore écouter les réponses tant que vous restez sur cette page.",
+    "home": "Retour au début",
+    "retry": "Réessayer",
+    "snippetPicture": "Description de l’image"
+  },
+  "common": {
+    "language": "Langue",
+    "retry": "Réessayer",
+    "error": "Un problème est survenu."
+  },
+  "a11y": {
+    "skip": "Aller au contenu",
+    "timer": "{phase}. {n} secondes restantes.",
+    "play": "Écouter la réponse à la question {n}",
+    "stop": "Arrêter la lecture de la question {n}",
+    "progress": "Question {index} sur {total}"
+  }
+}

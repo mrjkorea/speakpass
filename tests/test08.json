@@ -1,0 +1,260 @@
+{
+  "id": "test08",
+  "version": 1,
+  "title": "Practice Test 8",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Welcome to the Eastbank Workforce Desk career fair. From 10 a.m. to 4 p.m. today, you can meet employers from hospitals, workshops, and design studios. Bring copies of your resume, a pen, and a list of questions you want to ask. Short coaching sessions are available at table 5 with Hassan Farouk. If you speak with five employers, stop by the exit desk for a free transit card.",
+      "sentences": [
+        "Welcome to the Eastbank Workforce Desk career fair.",
+        "From 10 a.m. to 4 p.m. today, you can meet employers from hospitals, workshops, and design studios.",
+        "Bring copies of your resume, a pen, and a list of questions you want to ask.",
+        "Short coaching sessions are available at table 5 with Hassan Farouk.",
+        "If you speak with five employers, stop by the exit desk for a free transit card."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "This is Redcedar Line train 18, now arriving at Brookhaven Station. Please let riders exit before you board, and hold the handrail as you step across the gap. The next stops are University Gate, Midtown Center, and Harbor Point. The doors will close in about 1 minute. Please stand clear of the doors and keep the aisle open for strollers.",
+      "sentences": [
+        "This is Redcedar Line train 18, now arriving at Brookhaven Station.",
+        "Please let riders exit before you board, and hold the handrail as you step across the gap.",
+        "The next stops are University Gate, Midtown Center, and Harbor Point.",
+        "The doors will close in about 1 minute.",
+        "Please stand clear of the doors and keep the aisle open for strollers."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test08_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a pharmacy counter in a bright shop, with plain unlabeled bottles and no brand names. Number of people and appearance: Three adults. Clothing: A pharmacist wears a white coat. A customer wears a black jacket. A waiting customer wears a tan sweater. Actions: The pharmacist hands over a small paper bag. The customer in black receives it. The other customer waits in line. Objects: A paper bag, plain bottles, a low display of soap, and a counter. Foreground: The pharmacist and the customer at the counter are closest to the camera. Background: Shelves of plain bottles and the soap display sit behind the counter.",
+      "key_elements": [
+        "pharmacist in a white coat handing over a bag",
+        "customer in a black jacket",
+        "plain bottles on the shelves",
+        "another customer waiting in line"
+      ],
+      "model_answer": "This picture shows a pharmacy counter in a bright shop. In the foreground, a pharmacist in a white coat is handing a small paper bag to a customer in a black jacket. Plain bottles stand on the shelves behind the counter. Another customer waits in line, and a low display of soap is visible in the background."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test08_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a shoe repair shop with a workbench and shelves of shoes. Number of people and appearance: Two adults. Clothing: The cobbler wears a brown apron. The customer wears a gray coat. Actions: The cobbler stitches a leather shoe. The customer waits at the counter with a pair of boots. Objects: A leather shoe, boots, spools of thread, and shelves of shoes. Foreground: The cobbler at the workbench is closest to the camera. Background: Shelves of shoes and a window fill the back of the shop.",
+      "key_elements": [
+        "cobbler in a brown apron stitching a shoe",
+        "customer in a gray coat with boots",
+        "spools of thread on the bench",
+        "shelves of shoes in the background"
+      ],
+      "model_answer": "This picture shows a shoe repair shop. In the foreground, a cobbler in a brown apron is stitching a leather shoe at a workbench. A customer in a gray coat stands at the counter with a pair of boots. Spools of thread sit beside the cobbler, and shelves of shoes fill the background near the window."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a weekend magazine wants a story about your city. You agreed to answer a few questions by phone about how people spend Saturday.",
+      "question": "What do you usually do on Saturday morning?",
+      "model_answer": "On Saturday morning I tidy my room, eat a late breakfast, and then walk to the market. I try not to schedule any appointments before noon."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a weekend magazine wants a story about your city. You agreed to answer a few questions by phone about how people spend Saturday.",
+      "question": "Do you prefer a busy Saturday or a quiet one? Why?",
+      "model_answer": "I prefer a quiet Saturday to a packed one. The workweek is already full of messages, so an empty morning helps me feel ready again."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a weekend magazine wants a story about your city. You agreed to answer a few questions by phone about how people spend Saturday.",
+      "question": "A friend says the weekend should be used only for rest. Do you agree? Why or why not?",
+      "model_answer": "I partly agree, but I would not use the whole weekend only for rest. One quiet morning is important, and I protect mine. The rest of Saturday can still hold friends, errands, or a class, because those activities belong in a good week too. Rest works best as a real break, not as two empty days that push every chore to Sunday night."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Rehearsal Call Sheet — Marquee Stage Company",
+        "document_type": "rehearsal call sheet",
+        "rows": [
+          {
+            "label": "Production",
+            "value": "Glass Orchard"
+          },
+          {
+            "label": "Date",
+            "value": "Thursday, November 12"
+          },
+          {
+            "label": "Director",
+            "value": "Mina Choi"
+          },
+          {
+            "label": "4:00 p.m.",
+            "value": "Warm-up, full cast, Main Hall"
+          },
+          {
+            "label": "4:30 p.m.",
+            "value": "Scene 2, Mina Choi with Jonas Bergstrom and Petra Nilsen, Main Hall"
+          },
+          {
+            "label": "6:00 p.m.",
+            "value": "Costume fitting, Petra Nilsen only, Wardrobe Room"
+          },
+          {
+            "label": "7:15 p.m.",
+            "value": "Sound cues, full cast, Main Hall"
+          },
+          {
+            "label": "Note",
+            "value": "Arrive 15 minutes early. No food in the Main Hall."
+          }
+        ],
+        "markdown": "# Rehearsal Call Sheet — Marquee Stage Company\n\n- **Production:** Glass Orchard\n- **Date:** Thursday, November 12\n- **Director:** Mina Choi\n- **4:00 p.m.:** Warm-up, full cast, Main Hall\n- **4:30 p.m.:** Scene 2, Mina Choi with Jonas Bergstrom and Petra Nilsen, Main Hall\n- **6:00 p.m.:** Costume fitting, Petra Nilsen only, Wardrobe Room\n- **7:15 p.m.:** Sound cues, full cast, Main Hall\n- **Note:** Arrive 15 minutes early. No food in the Main Hall."
+      },
+      "caller_intro": "Hi, I'm Petra Nilsen. I'm in the cast, and I want to check Thursday's rehearsal.",
+      "question": "What time does the warm-up start?",
+      "answer_facts": [
+        "The warm-up starts at 4:00 p.m. in the Main Hall."
+      ],
+      "model_answer": "The warm-up starts at 4:00 p.m. in the Main Hall, and it's for the full cast. The call sheet asks everyone to arrive 15 minutes early, so please be there by 3:45."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Rehearsal Call Sheet — Marquee Stage Company",
+        "document_type": "rehearsal call sheet",
+        "rows": [
+          {
+            "label": "Production",
+            "value": "Glass Orchard"
+          },
+          {
+            "label": "Date",
+            "value": "Thursday, November 12"
+          },
+          {
+            "label": "Director",
+            "value": "Mina Choi"
+          },
+          {
+            "label": "4:00 p.m.",
+            "value": "Warm-up, full cast, Main Hall"
+          },
+          {
+            "label": "4:30 p.m.",
+            "value": "Scene 2, Mina Choi with Jonas Bergstrom and Petra Nilsen, Main Hall"
+          },
+          {
+            "label": "6:00 p.m.",
+            "value": "Costume fitting, Petra Nilsen only, Wardrobe Room"
+          },
+          {
+            "label": "7:15 p.m.",
+            "value": "Sound cues, full cast, Main Hall"
+          },
+          {
+            "label": "Note",
+            "value": "Arrive 15 minutes early. No food in the Main Hall."
+          }
+        ],
+        "markdown": "# Rehearsal Call Sheet — Marquee Stage Company\n\n- **Production:** Glass Orchard\n- **Date:** Thursday, November 12\n- **Director:** Mina Choi\n- **4:00 p.m.:** Warm-up, full cast, Main Hall\n- **4:30 p.m.:** Scene 2, Mina Choi with Jonas Bergstrom and Petra Nilsen, Main Hall\n- **6:00 p.m.:** Costume fitting, Petra Nilsen only, Wardrobe Room\n- **7:15 p.m.:** Sound cues, full cast, Main Hall\n- **Note:** Arrive 15 minutes early. No food in the Main Hall."
+      },
+      "caller_intro": "Hi, I'm Petra Nilsen. I'm in the cast, and I want to check Thursday's rehearsal.",
+      "question": "I think my costume fitting is at 6:30. Is that right?",
+      "answer_facts": [
+        "Petra Nilsen's costume fitting is at 6:00 p.m. in the Wardrobe Room."
+      ],
+      "model_answer": "Actually, your costume fitting is at 6:00 p.m., not 6:30. It's in the Wardrobe Room, and you're the only cast member scheduled for a fitting on Thursday.",
+      "caller_claim": "my costume fitting is at 6:30"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Rehearsal Call Sheet — Marquee Stage Company",
+        "document_type": "rehearsal call sheet",
+        "rows": [
+          {
+            "label": "Production",
+            "value": "Glass Orchard"
+          },
+          {
+            "label": "Date",
+            "value": "Thursday, November 12"
+          },
+          {
+            "label": "Director",
+            "value": "Mina Choi"
+          },
+          {
+            "label": "4:00 p.m.",
+            "value": "Warm-up, full cast, Main Hall"
+          },
+          {
+            "label": "4:30 p.m.",
+            "value": "Scene 2, Mina Choi with Jonas Bergstrom and Petra Nilsen, Main Hall"
+          },
+          {
+            "label": "6:00 p.m.",
+            "value": "Costume fitting, Petra Nilsen only, Wardrobe Room"
+          },
+          {
+            "label": "7:15 p.m.",
+            "value": "Sound cues, full cast, Main Hall"
+          },
+          {
+            "label": "Note",
+            "value": "Arrive 15 minutes early. No food in the Main Hall."
+          }
+        ],
+        "markdown": "# Rehearsal Call Sheet — Marquee Stage Company\n\n- **Production:** Glass Orchard\n- **Date:** Thursday, November 12\n- **Director:** Mina Choi\n- **4:00 p.m.:** Warm-up, full cast, Main Hall\n- **4:30 p.m.:** Scene 2, Mina Choi with Jonas Bergstrom and Petra Nilsen, Main Hall\n- **6:00 p.m.:** Costume fitting, Petra Nilsen only, Wardrobe Room\n- **7:15 p.m.:** Sound cues, full cast, Main Hall\n- **Note:** Arrive 15 minutes early. No food in the Main Hall."
+      },
+      "caller_intro": "Hi, I'm Petra Nilsen. I'm in the cast, and I want to check Thursday's rehearsal.",
+      "question": "What is planned at 4:00 and at 4:30, and where does each one take place?",
+      "answer_facts": [
+        "The full cast has a warm-up at 4:00 p.m. in the Main Hall.",
+        "Scene 2 is at 4:30 p.m. in the Main Hall with Mina Choi, Jonas Bergstrom, and Petra Nilsen."
+      ],
+      "model_answer": "Both of those take place in the Main Hall. At 4:00 p.m., the full cast has a warm-up. Then at 4:30 p.m., you'll rehearse Scene 2 with Jonas Bergstrom, and the director, Mina Choi, will lead it. After that, your costume fitting is at 6:00 in the Wardrobe Room. Please remember that no food is allowed in the Main Hall."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "When a manager gives feedback, is it better to do it in writing or face to face? Choose one and give reasons for your opinion.",
+      "model_answer": "I think a manager should give feedback face to face rather than only in writing. Tone is easy to misread in a message, and a short note can sound colder than the manager intended, especially when the comment is about a mistake. In person, the employee can ask a question immediately, and the manager can show a better example. I would still follow the talk with a few brief written points, so both people remember what was agreed. The written record is useful, but it should support the conversation rather than replace it. A face-to-face talk is clearer and less likely to leave someone worrying for the rest of the day. Talking first and writing second keeps the feedback both kind and specific."
+    }
+  ]
+}

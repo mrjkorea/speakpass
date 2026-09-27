@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Latihan berbicara",
+    "tagline": "Latihan berbicara bahasa Inggris dengan soal bergaya TOEIC. Ini bukan tes TOEIC.",
+    "disclaimer": "TOEIC adalah merek dagang terdaftar dari ETS. Produk ini tidak didukung atau disetujui oleh ETS.",
+    "chooseTest": "Tes latihan",
+    "fullTest": "Tes lengkap",
+    "practice": "Latihan",
+    "loading": "Memuat tes…",
+    "loadError": "Daftar tes tidak dapat dimuat. Periksa koneksi Anda dan coba lagi.",
+    "noTests": "Belum ada tes latihan.",
+    "micNote": "Tes lengkap memakai mikrofon. Penghitung waktu berjalan terus dan tidak bisa dijeda.",
+    "questionCount": "{count} soal"
+  },
+  "practice": {
+    "title": "Latihan",
+    "help": "Pilih satu soal, atau latih semua soal dalam satu bagian. Anda bisa mengulang sesering yang Anda mau.",
+    "part": "Latih bagian ini",
+    "back": "Kembali ke awal"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Membaca teks dengan suara",
+      "directions": "Teks singkat akan muncul. Gunakan waktu persiapan untuk membacanya dalam hati, termasuk nama, angka, dan daftar. Saat nada berbunyi, bacalah teks dengan suara yang jelas. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda.",
+      "directionsOne": "Teks singkat akan muncul. Gunakan waktu persiapan untuk membacanya dalam hati, termasuk nama, angka, dan daftar. Saat nada berbunyi, bacalah teks dengan suara yang jelas. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda."
+    },
+    "describe_picture": {
+      "title": "Mendeskripsikan gambar",
+      "directions": "Sebuah gambar akan muncul. Gunakan waktu persiapan untuk memperhatikan tempat, orang, dan apa yang mereka lakukan. Saat nada berbunyi, deskripsikan gambar itu secara rinci. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda.",
+      "directionsOne": "Sebuah gambar akan muncul. Gunakan waktu persiapan untuk memperhatikan tempat, orang, dan apa yang mereka lakukan. Saat nada berbunyi, deskripsikan gambar itu secara rinci. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda."
+    },
+    "respond_questions": {
+      "title": "Menjawab pertanyaan",
+      "directions": "Anda akan menjawab tiga pertanyaan tentang satu situasi sehari-hari. Situasinya tetap di layar. Setiap pertanyaan punya beberapa detik untuk bersiap, lalu waktu untuk berbicara. Jawab pertanyaan pertama secara langsung. Pada yang terakhir, berikan alasan. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda.",
+      "directionsOne": "Anda akan menjawab satu pertanyaan tentang situasi sehari-hari. Situasinya tetap di layar. Anda punya beberapa detik untuk bersiap, lalu berbicara. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda."
+    },
+    "info_questions": {
+      "title": "Menjawab dengan dokumen",
+      "directions": "Anda punya waktu untuk mempelajari dokumen dengan tenang. Lalu Anda menjawab tiga pertanyaan tentang dokumen itu. Dokumen tetap di layar saat Anda menjawab. Jika pertanyaan memuat detail yang tidak sesuai dokumen, perbaiki. Pada pertanyaan terakhir, sebutkan sedikitnya dua hal dari dokumen. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda.",
+      "directionsOne": "Anda punya waktu untuk mempelajari dokumen dengan tenang. Lalu Anda menjawab satu pertanyaan tentang dokumen itu. Dokumen tetap di layar. Jika pertanyaan memuat detail yang tidak sesuai dokumen, perbaiki. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda."
+    },
+    "opinion": {
+      "title": "Menyampaikan pendapat",
+      "directions": "Anda akan membaca satu pertanyaan tentang pekerjaan, belajar, atau kehidupan sehari-hari. Gunakan waktu persiapan untuk memilih sikap serta memikirkan alasan dan contoh. Saat nada berbunyi, jelaskan pendapat Anda dengan jelas. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda.",
+      "directionsOne": "Anda akan membaca satu pertanyaan tentang pekerjaan, belajar, atau kehidupan sehari-hari. Gunakan waktu persiapan untuk memilih sikap serta memikirkan alasan dan contoh. Saat nada berbunyi, jelaskan pendapat Anda dengan jelas. Rekaman mulai dan berhenti sendiri. Tidak bisa dijeda."
+    }
+  },
+  "run": {
+    "prepare": "Persiapan",
+    "speak": "Berbicara",
+    "reading": "Baca dokumen",
+    "recording": "Merekam",
+    "noPause": "Tanpa jeda",
+    "auto": "Rekaman mulai dan berhenti sendiri.",
+    "tone": "Berbicara dimulai saat nada berbunyi.",
+    "readEnds": "Pertanyaan dimulai saat nada berbunyi.",
+    "qLabel": "Soal {n}",
+    "timeLine": "Soal {n}: persiapan {prep} detik, berbicara {speak} detik.",
+    "readTime": "Waktu membaca dokumen: {n} detik.",
+    "start": "Mulai",
+    "end": "Akhiri",
+    "leaveTitle": "Akhiri sesi ini?",
+    "leaveBody": "Penghitung waktu akan berhenti. Jawaban yang sudah direkam tetap ada di perangkat ini.",
+    "leaveYes": "Akhiri sesi",
+    "leaveNo": "Lanjutkan",
+    "micDenied": "Akses mikrofon diblokir. Izinkan mikrofon di pengaturan browser, lalu coba lagi.",
+    "micMissing": "Tidak ada mikrofon. Periksa perangkat dan coba lagi.",
+    "noRecorder": "Browser ini tidak bisa merekam audio. Gunakan versi terbaru Chrome, Safari, Edge, atau Firefox.",
+    "insecure": "Rekaman membutuhkan halaman yang aman. Buka dengan https, atau dengan server lokal di localhost.",
+    "imageMissing": "Gambar tidak tersedia",
+    "pictureAlt": "Gambar untuk soal {n}",
+    "scenario": "Situasi",
+    "caller": "Penelepon"
+  },
+  "review": {
+    "title": "Tinjauan",
+    "fullDone": "Anda menyelesaikan tes lengkap ini. Putar setiap jawaban di bawah.",
+    "practiceDone": "Latihan tersimpan. Putar jawaban Anda, atau coba lagi.",
+    "play": "Putar",
+    "stop": "Berhenti",
+    "noAudio": "Tidak ada rekaman",
+    "deviceScore": "Nilai di perangkat",
+    "serverScore": "Nilai server",
+    "saved": "Tersimpan di perangkat ini",
+    "notSaved": "Tidak dapat menyimpan di perangkat ini. Anda masih bisa memutar jawaban sampai meninggalkan halaman ini.",
+    "home": "Kembali ke awal",
+    "retry": "Coba lagi",
+    "snippetPicture": "Deskripsi gambar"
+  },
+  "common": {
+    "language": "Bahasa",
+    "retry": "Coba lagi",
+    "error": "Terjadi masalah."
+  },
+  "a11y": {
+    "skip": "Langsung ke isi",
+    "timer": "{phase}. {n} detik tersisa.",
+    "play": "Putar jawaban soal {n}",
+    "stop": "Hentikan jawaban soal {n}",
+    "progress": "Soal {index} dari {total}"
+  }
+}

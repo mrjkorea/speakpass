@@ -1,0 +1,236 @@
+{
+  "id": "test02",
+  "version": 1,
+  "title": "Practice Test 2",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Good morning from Riverbend Community Radio. This Saturday, Oakwhistle Park will host a free outdoor chess tournament for players of all ages. Registration opens at 8:30 a.m. beside the fountain. Bring a hat, a water bottle, and a folding chair if you plan to stay for the morning. Matches begin at 9 a.m., and beginners are welcome to use the extra boards.",
+      "sentences": [
+        "Good morning from Riverbend Community Radio.",
+        "This Saturday, Oakwhistle Park will host a free outdoor chess tournament for players of all ages.",
+        "Registration opens at 8:30 a.m. beside the fountain.",
+        "Bring a hat, a water bottle, and a folding chair if you plan to stay for the morning.",
+        "Matches begin at 9 a.m., and beginners are welcome to use the extra boards."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Attention, passengers on Harborline Ferries. The 7:15 a.m. boat from Pier 4 will depart about 25 minutes late because of a safety check. Please wait behind the yellow line, keep your ticket ready, and watch the gate for updates. The cafe on the pier is open if you would like coffee, tea, or juice. We expect to begin boarding at 7:30 a.m., and we thank you for your patience.",
+      "sentences": [
+        "Attention, passengers on Harborline Ferries.",
+        "The 7:15 a.m. boat from Pier 4 will depart about 25 minutes late because of a safety check.",
+        "Please wait behind the yellow line, keep your ticket ready, and watch the gate for updates.",
+        "The cafe on the pier is open if you would like coffee, tea, or juice.",
+        "We expect to begin boarding at 7:30 a.m., and we thank you for your patience."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test02_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: the aisle of a neighborhood hardware store. Number of people and appearance: Three adults. Clothing: An employee wears a gray vest over a dark shirt. A customer wears a brown jacket. Another shopper wears a green sweater. Actions: The employee points to a shelf of tools. The customer listens and holds a small bracket. The other shopper reaches for a box. Objects: Hand tools, a metal bracket, bins with blank labels, and a cardboard box. Foreground: The employee and the customer stand close to the camera beside the tool shelf. Background: The shopper in the green sweater stands farther down the aisle, reaching for a box on a high shelf, and tall racks of bins continue behind him.",
+      "key_elements": [
+        "employee in a gray vest pointing to tools",
+        "customer in a brown jacket holding a bracket",
+        "shopper reaching for a box",
+        "rows of bins in the aisle"
+      ],
+      "model_answer": "This picture shows the inside of a hardware store. In the foreground, an employee in a gray vest is pointing to a shelf of tools while a customer in a brown jacket listens and holds a metal bracket. Farther down the aisle, another shopper reaches for a box on a high shelf. Rows of bins fill the background."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test02_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an outdoor cafe on a sunny sidewalk serving coffee, tea, and pastries. Number of people and appearance: Three adults. Clothing: One guest wears a white shirt. The other guest wears a green sweater. The server wears a black apron. Actions: The two guests talk over cups of coffee. The guest in the white shirt writes in a notebook. The server carries a tray of pastries. Objects: Coffee cups, a notebook, a tray, pastries, and a small potted plant. Foreground: The two guests sit at a round table close to the camera. Background: More empty tables line the sidewalk, with a plant beside the cafe door.",
+      "key_elements": [
+        "two guests seated at an outdoor cafe table",
+        "coffee cups and a notebook on the table",
+        "server in a black apron carrying pastries",
+        "more tables in the background"
+      ],
+      "model_answer": "This picture shows an outdoor cafe on a sunny sidewalk. In the foreground, two people sit at a round table with coffee cups and a notebook. The one in the white shirt is writing in the notebook while they talk, and the other wears a green sweater. A server in a black apron carries a tray of pastries, and more tables line the sidewalk."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask how people get around in your city. The two of you talk by phone about public transportation.",
+      "question": "How do you usually travel to work or to school?",
+      "model_answer": "I take the bus to work five days a week. The stop is a short walk from my apartment, and the ride takes about twenty minutes."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a friend calls to ask how people get around in your city. The two of you talk by phone about public transportation.",
+      "question": "What do you like most about traveling that way? Why?",
+      "model_answer": "What I like most is that I don't have to drive in heavy traffic. I can read on the bus, and I don't have to pay for parking downtown."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a friend calls to ask how people get around in your city. The two of you talk by phone about public transportation.",
+      "question": "If a friend were visiting your city for a week without a car, would you recommend public transportation? Why or why not?",
+      "model_answer": "Yes, I would recommend public transportation for a week-long visit. Buses reach the main markets and the riverfront, and a weekly pass costs much less than taking taxis every day. I would tell my friend to avoid the morning rush hour and to check the route map before heading out. With those two simple steps, an unfamiliar city is much easier to get around."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Clinic Appointment List — Cedar Pediatric Clinic",
+        "document_type": "clinic appointment list",
+        "rows": [
+          {
+            "label": "Date",
+            "value": "Tuesday, May 12"
+          },
+          {
+            "label": "9:00 a.m.",
+            "value": "Sofia Lind, annual checkup, Dr. Helen Okada, Room 2"
+          },
+          {
+            "label": "9:40 a.m.",
+            "value": "Kenji Watanabe, vaccination, Dr. Helen Okada, Room 2"
+          },
+          {
+            "label": "10:30 a.m.",
+            "value": "Emil Adeyemi, ear recheck, Dr. Helen Okada, Room 4"
+          },
+          {
+            "label": "11:15 a.m.",
+            "value": "Leila Haddad, sports physical, Rita Solano, nurse, Room 3"
+          },
+          {
+            "label": "Arrival",
+            "value": "Please arrive 15 minutes early"
+          }
+        ],
+        "markdown": "# Clinic Appointment List — Cedar Pediatric Clinic\n\n- **Date:** Tuesday, May 12\n- **9:00 a.m.:** Sofia Lind, annual checkup, Dr. Helen Okada, Room 2\n- **9:40 a.m.:** Kenji Watanabe, vaccination, Dr. Helen Okada, Room 2\n- **10:30 a.m.:** Emil Adeyemi, ear recheck, Dr. Helen Okada, Room 4\n- **11:15 a.m.:** Leila Haddad, sports physical, Rita Solano, nurse, Room 3\n- **Arrival:** Please arrive 15 minutes early"
+      },
+      "caller_intro": "Hi, I'm Dr. Helen Okada. I'm on my way to the clinic, and I'd like to check my appointments for Tuesday.",
+      "question": "What time is my first appointment?",
+      "answer_facts": [
+        "The first appointment is at 9:00 a.m. with Sofia Lind."
+      ],
+      "model_answer": "Your first appointment is at 9:00 a.m. It's an annual checkup for Sofia Lind in Room 2, and patients are asked to arrive 15 minutes early."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Clinic Appointment List — Cedar Pediatric Clinic",
+        "document_type": "clinic appointment list",
+        "rows": [
+          {
+            "label": "Date",
+            "value": "Tuesday, May 12"
+          },
+          {
+            "label": "9:00 a.m.",
+            "value": "Sofia Lind, annual checkup, Dr. Helen Okada, Room 2"
+          },
+          {
+            "label": "9:40 a.m.",
+            "value": "Kenji Watanabe, vaccination, Dr. Helen Okada, Room 2"
+          },
+          {
+            "label": "10:30 a.m.",
+            "value": "Emil Adeyemi, ear recheck, Dr. Helen Okada, Room 4"
+          },
+          {
+            "label": "11:15 a.m.",
+            "value": "Leila Haddad, sports physical, Rita Solano, nurse, Room 3"
+          },
+          {
+            "label": "Arrival",
+            "value": "Please arrive 15 minutes early"
+          }
+        ],
+        "markdown": "# Clinic Appointment List — Cedar Pediatric Clinic\n\n- **Date:** Tuesday, May 12\n- **9:00 a.m.:** Sofia Lind, annual checkup, Dr. Helen Okada, Room 2\n- **9:40 a.m.:** Kenji Watanabe, vaccination, Dr. Helen Okada, Room 2\n- **10:30 a.m.:** Emil Adeyemi, ear recheck, Dr. Helen Okada, Room 4\n- **11:15 a.m.:** Leila Haddad, sports physical, Rita Solano, nurse, Room 3\n- **Arrival:** Please arrive 15 minutes early"
+      },
+      "caller_intro": "Hi, I'm Dr. Helen Okada. I'm on my way to the clinic, and I'd like to check my appointments for Tuesday.",
+      "question": "I think Emil Adeyemi's ear recheck is in Room 6. Is that right?",
+      "answer_facts": [
+        "Emil Adeyemi's ear recheck is at 10:30 a.m. in Room 4."
+      ],
+      "model_answer": "Actually, it isn't in Room 6. Emil Adeyemi's ear recheck is at 10:30 a.m. in Room 4. Your first two appointments are both in Room 2, so you'll change rooms for that one.",
+      "caller_claim": "Emil Adeyemi's ear recheck is in Room 6"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Clinic Appointment List — Cedar Pediatric Clinic",
+        "document_type": "clinic appointment list",
+        "rows": [
+          {
+            "label": "Date",
+            "value": "Tuesday, May 12"
+          },
+          {
+            "label": "9:00 a.m.",
+            "value": "Sofia Lind, annual checkup, Dr. Helen Okada, Room 2"
+          },
+          {
+            "label": "9:40 a.m.",
+            "value": "Kenji Watanabe, vaccination, Dr. Helen Okada, Room 2"
+          },
+          {
+            "label": "10:30 a.m.",
+            "value": "Emil Adeyemi, ear recheck, Dr. Helen Okada, Room 4"
+          },
+          {
+            "label": "11:15 a.m.",
+            "value": "Leila Haddad, sports physical, Rita Solano, nurse, Room 3"
+          },
+          {
+            "label": "Arrival",
+            "value": "Please arrive 15 minutes early"
+          }
+        ],
+        "markdown": "# Clinic Appointment List — Cedar Pediatric Clinic\n\n- **Date:** Tuesday, May 12\n- **9:00 a.m.:** Sofia Lind, annual checkup, Dr. Helen Okada, Room 2\n- **9:40 a.m.:** Kenji Watanabe, vaccination, Dr. Helen Okada, Room 2\n- **10:30 a.m.:** Emil Adeyemi, ear recheck, Dr. Helen Okada, Room 4\n- **11:15 a.m.:** Leila Haddad, sports physical, Rita Solano, nurse, Room 3\n- **Arrival:** Please arrive 15 minutes early"
+      },
+      "caller_intro": "Hi, I'm Dr. Helen Okada. I'm on my way to the clinic, and I'd like to check my appointments for Tuesday.",
+      "question": "After my first appointment, which patients am I seeing, and what is each visit for?",
+      "answer_facts": [
+        "Kenji Watanabe has a vaccination at 9:40 a.m. in Room 2.",
+        "Emil Adeyemi has an ear recheck at 10:30 a.m. in Room 4."
+      ],
+      "model_answer": "After your first appointment, you have two more patients. At 9:40 a.m., Kenji Watanabe is coming in for a vaccination in Room 2. Then at 10:30 a.m., Emil Adeyemi has an ear recheck in Room 4. The 11:15 sports physical for Leila Haddad is with Rita Solano, the nurse, so it isn't on your schedule. That makes 10:30 your last appointment."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "When you need to study, do you prefer to study alone or with a group? Explain your choice with reasons and a short example.",
+      "model_answer": "I prefer to study alone, especially when the material is new. When I am by myself, I can reread a hard sentence without asking other people to wait, and I remember more of what I put into my own words. Last term I tried a study group before a history test, and we spent much of the hour talking about the schedule instead of the chapter. A group is useful later, when I want someone to check whether my answers are clear. For the first pass, though, quiet time with my notes works better. That is why I would still choose to study alone, and I would invite classmates only after I have finished that first careful reading on my own."
+    }
+  ]
+}

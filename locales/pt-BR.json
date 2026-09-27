@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Prática de fala",
+    "tagline": "Prática de fala em inglês com perguntas no estilo TOEIC. Isto não é um teste TOEIC.",
+    "disclaimer": "TOEIC é uma marca registrada da ETS. Este produto não é endossado nem aprovado pela ETS.",
+    "chooseTest": "Teste de prática",
+    "fullTest": "Teste completo",
+    "practice": "Praticar",
+    "loading": "Carregando testes…",
+    "loadError": "Não foi possível carregar a lista de testes. Verifique a conexão e tente de novo.",
+    "noTests": "Ainda não há testes de prática.",
+    "micNote": "O teste completo usa o microfone. Os cronômetros seguem sem pausa.",
+    "questionCount": "{count} perguntas"
+  },
+  "practice": {
+    "title": "Praticar",
+    "help": "Escolha uma pergunta ou pratique todas as perguntas de uma parte. Você pode tentar de novo quantas vezes quiser.",
+    "part": "Praticar esta parte",
+    "back": "Voltar ao início"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Ler um texto em voz alta",
+      "directions": "Um texto curto vai aparecer. Use o tempo de preparação para lê-lo em silêncio, inclusive nomes, números e qualquer lista. Quando o sinal tocar, leia o texto em voz alta e com clareza. A gravação começa e para sozinha. Não é possível pausar.",
+      "directionsOne": "Um texto curto vai aparecer. Use o tempo de preparação para lê-lo em silêncio, inclusive nomes, números e qualquer lista. Quando o sinal tocar, leia o texto em voz alta e com clareza. A gravação começa e para sozinha. Não é possível pausar."
+    },
+    "describe_picture": {
+      "title": "Descrever uma imagem",
+      "directions": "Uma imagem vai aparecer. Use o tempo de preparação para notar o lugar, as pessoas e o que elas estão fazendo. Quando o sinal tocar, descreva a imagem em detalhe. A gravação começa e para sozinha. Não é possível pausar.",
+      "directionsOne": "Uma imagem vai aparecer. Use o tempo de preparação para notar o lugar, as pessoas e o que elas estão fazendo. Quando o sinal tocar, descreva a imagem em detalhe. A gravação começa e para sozinha. Não é possível pausar."
+    },
+    "respond_questions": {
+      "title": "Responder a perguntas",
+      "directions": "Você vai responder a três perguntas sobre uma situação do dia a dia. A situação permanece na tela. Cada pergunta tem alguns segundos para preparar e depois tempo para falar. Responda direto às primeiras. Na última, dê razões. A gravação começa e para sozinha. Não é possível pausar.",
+      "directionsOne": "Você vai responder a uma pergunta sobre uma situação do dia a dia. A situação permanece na tela. Você tem alguns segundos para preparar e depois tempo para falar. A gravação começa e para sozinha. Não é possível pausar."
+    },
+    "info_questions": {
+      "title": "Responder com um documento",
+      "directions": "Você terá tempo para estudar um documento em silêncio. Depois, responderá a três perguntas sobre ele. O documento continua na tela enquanto você responde. Se uma pergunta trouxer um detalhe que não combina com o documento, corrija. Na última, mencione pelo menos dois itens do documento. A gravação começa e para sozinha. Não é possível pausar.",
+      "directionsOne": "Você terá tempo para estudar um documento em silêncio. Depois, responderá a uma pergunta sobre ele. O documento continua na tela. Se a pergunta trouxer um detalhe que não combina com o documento, corrija. A gravação começa e para sozinha. Não é possível pausar."
+    },
+    "opinion": {
+      "title": "Dar uma opinião",
+      "directions": "Você vai ler uma pergunta sobre trabalho, estudo ou a vida diária. Use o tempo de preparação para escolher um lado e pensar em razões e exemplos. Quando o sinal tocar, explique sua opinião com clareza. A gravação começa e para sozinha. Não é possível pausar.",
+      "directionsOne": "Você vai ler uma pergunta sobre trabalho, estudo ou a vida diária. Use o tempo de preparação para escolher um lado e pensar em razões e exemplos. Quando o sinal tocar, explique sua opinião com clareza. A gravação começa e para sozinha. Não é possível pausar."
+    }
+  },
+  "run": {
+    "prepare": "Preparar",
+    "speak": "Falar",
+    "reading": "Ler o documento",
+    "recording": "Gravando",
+    "noPause": "Sem pausa",
+    "auto": "A gravação começa e para sozinha.",
+    "tone": "A fala começa quando o sinal toca.",
+    "readEnds": "As perguntas começam quando o sinal toca.",
+    "qLabel": "Pergunta {n}",
+    "timeLine": "Pergunta {n}: preparar {prep} segundos, falar {speak} segundos.",
+    "readTime": "Tempo para ler o documento: {n} segundos.",
+    "start": "Começar",
+    "end": "Encerrar",
+    "leaveTitle": "Encerrar esta sessão?",
+    "leaveBody": "O cronômetro vai parar. As respostas já gravadas ficam neste aparelho.",
+    "leaveYes": "Encerrar sessão",
+    "leaveNo": "Continuar",
+    "micDenied": "O acesso ao microfone foi bloqueado. Permita o microfone nas configurações do navegador e tente de novo.",
+    "micMissing": "Nenhum microfone disponível. Verifique o aparelho e tente de novo.",
+    "noRecorder": "Este navegador não consegue gravar áudio. Use uma versão atual do Chrome, Safari, Edge ou Firefox.",
+    "insecure": "A gravação precisa de uma página segura. Abra com https ou com um servidor local em localhost.",
+    "imageMissing": "Imagem indisponível",
+    "pictureAlt": "Imagem da pergunta {n}",
+    "scenario": "Situação",
+    "caller": "Quem liga"
+  },
+  "review": {
+    "title": "Revisão",
+    "fullDone": "Você terminou este teste completo. Reproduza cada resposta abaixo.",
+    "practiceDone": "A prática foi salva. Reproduza suas respostas ou tente de novo.",
+    "play": "Reproduzir",
+    "stop": "Parar",
+    "noAudio": "Sem gravação",
+    "deviceScore": "Nota no aparelho",
+    "serverScore": "Nota do servidor",
+    "saved": "Salvo neste aparelho",
+    "notSaved": "Não foi possível salvar neste aparelho. Você ainda pode reproduzir as respostas até sair desta página.",
+    "home": "Voltar ao início",
+    "retry": "Tentar de novo",
+    "snippetPicture": "Descrição da imagem"
+  },
+  "common": {
+    "language": "Idioma",
+    "retry": "Tentar de novo",
+    "error": "Algo deu errado."
+  },
+  "a11y": {
+    "skip": "Ir para o conteúdo",
+    "timer": "{phase}. {n} segundos restantes.",
+    "play": "Reproduzir a resposta da pergunta {n}",
+    "stop": "Parar a resposta da pergunta {n}",
+    "progress": "Pergunta {index} de {total}"
+  }
+}

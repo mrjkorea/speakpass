@@ -1,0 +1,260 @@
+{
+  "id": "test04",
+  "version": 1,
+  "title": "Practice Test 4",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "This is a service notice from Stonepier Transit. Beginning Monday, June 8, Route 12 will no longer stop at Oak Street. The new stops are Pine Avenue, Bell Court, and the hospital gate. Buses will still run every 15 minutes on weekdays, from 6 a.m. until 8 p.m. Please check the posted map at your stop before you travel.",
+      "sentences": [
+        "This is a service notice from Stonepier Transit.",
+        "Beginning Monday, June 8, Route 12 will no longer stop at Oak Street.",
+        "The new stops are Pine Avenue, Bell Court, and the hospital gate.",
+        "Buses will still run every 15 minutes on weekdays, from 6 a.m. until 8 p.m.",
+        "Please check the posted map at your stop before you travel."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Paper Lantern Books invites you to a free author evening on Friday, March 20, at 6:30 p.m. Noah Berg will read from his new novel, Street of Orange Windows, and answer questions afterward. Cookies, fruit, and tea will be served after the reading. The event is open to all ages, but seating is limited. Please call 555-0194 if you would like a seat held.",
+      "sentences": [
+        "Paper Lantern Books invites you to a free author evening on Friday, March 20, at 6:30 p.m.",
+        "Noah Berg will read from his new novel, Street of Orange Windows, and answer questions afterward.",
+        "Cookies, fruit, and tea will be served after the reading.",
+        "The event is open to all ages, but seating is limited.",
+        "Please call 555-0194 if you would like a seat held."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test04_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a supermarket checkout lane in the afternoon. Number of people and appearance: Three adults. Clothing: The cashier wears a red vest. The customer wears a striped shirt. The waiting shopper wears a denim jacket. Actions: The cashier scans groceries. The customer packs a cloth bag. The shopper waits with a basket. A loaf of bread and a carton of milk sit on the conveyor belt. Objects: A loaf of bread, a carton of milk, a cloth bag, a scanner, and a shopping basket. Foreground: The cashier and the customer are at the belt, close to the camera. Background: Another checkout lane and store shelves are visible behind the waiting shopper.",
+      "key_elements": [
+        "cashier in a red vest scanning items",
+        "customer in a striped shirt packing a bag",
+        "bread and milk on the belt",
+        "shopper waiting with a basket"
+      ],
+      "model_answer": "This picture shows a supermarket checkout in the afternoon. A cashier in a red vest is scanning items while a customer in a striped shirt packs a cloth bag. A loaf of bread and a carton of milk sit on the belt. In the background, another shopper waits with a basket near the next lane."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test04_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a furniture showroom with sofas, chairs, and lamps. Number of people and appearance: Three adults. Clothing: A salesperson wears a navy blazer. One customer wears a yellow dress. The other customer wears a gray sweater. Actions: The salesperson shows a fabric sample. Both customers look at a green sofa. Objects: A green sofa, a fabric sample, floor lamps, and a row of chairs. Foreground: The salesperson and the two customers stand beside the sofa. Background: Floor lamps and more chairs fill the bright rear of the showroom.",
+      "key_elements": [
+        "salesperson in a navy blazer showing fabric",
+        "customer in a yellow dress",
+        "customer in a gray sweater",
+        "green sofa in a furniture showroom"
+      ],
+      "model_answer": "This picture shows a furniture showroom with sofas and lamps. In the foreground, a salesperson in a navy blazer is showing a fabric sample to two customers. One customer wears a yellow dress, and the other wears a gray sweater. They are looking at a green sofa, while floor lamps and a row of chairs fill the background."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a marketing firm is researching how people spend their free time in your area. You agreed to take part in a telephone interview about visiting museums.",
+      "question": "How often do you visit a museum, and what kind do you like most?",
+      "model_answer": "I visit a museum about once a month, usually on a weekend. I like history museums most, especially when the exhibits show ordinary objects from daily life."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a marketing firm is researching how people spend their free time in your area. You agreed to take part in a telephone interview about visiting museums.",
+      "question": "Do you prefer going to a museum alone or with other people? Why?",
+      "model_answer": "I prefer going with one friend. We notice different details and can talk about them, but a large group usually moves too fast for me to enjoy the exhibits."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a marketing firm is researching how people spend their free time in your area. You agreed to take part in a telephone interview about visiting museums.",
+      "question": "If a visitor had only one afternoon, what kind of museum would you recommend, and why?",
+      "model_answer": "I would recommend a city history museum to a visitor with one afternoon. It gives a clear sense of the place, and the main rooms can usually be seen in about two hours. I would tell the visitor to start with the oldest displays and to use a free audio guide if one is offered. That plan is a better use of a short visit than rushing through every gallery."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Enrollment Roster — Willowbend Community Center",
+        "document_type": "enrollment roster",
+        "rows": [
+          {
+            "label": "Course",
+            "value": "Photography Basics, Section B"
+          },
+          {
+            "label": "Instructor",
+            "value": "Mei Lin"
+          },
+          {
+            "label": "Meetings",
+            "value": "Saturdays, 9:00 a.m. to 11:00 a.m."
+          },
+          {
+            "label": "Dates",
+            "value": "April 4 to May 23"
+          },
+          {
+            "label": "Room",
+            "value": "Room A"
+          },
+          {
+            "label": "Fee",
+            "value": "$90, materials included"
+          },
+          {
+            "label": "Enrolled",
+            "value": "Andre Costa; Tomasz Witek; Hana Ito; Farah Diallo; Benito Cruz"
+          },
+          {
+            "label": "Wait list",
+            "value": "Ingrid Solberg"
+          }
+        ],
+        "markdown": "# Enrollment Roster — Willowbend Community Center\n\n- **Course:** Photography Basics, Section B\n- **Instructor:** Mei Lin\n- **Meetings:** Saturdays, 9:00 a.m. to 11:00 a.m.\n- **Dates:** April 4 to May 23\n- **Room:** Room A\n- **Fee:** $90, materials included\n- **Enrolled:** Andre Costa; Tomasz Witek; Hana Ito; Farah Diallo; Benito Cruz\n- **Wait list:** Ingrid Solberg"
+      },
+      "caller_intro": "Hi, I'm Tomasz Witek. I registered for a class at the community center, and I have a few questions.",
+      "question": "Who is teaching the photography class?",
+      "answer_facts": [
+        "The instructor is Mei Lin."
+      ],
+      "model_answer": "The class is taught by Mei Lin. She teaches Photography Basics, Section B, which meets in Room A on Saturday mornings from 9:00 to 11:00."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Enrollment Roster — Willowbend Community Center",
+        "document_type": "enrollment roster",
+        "rows": [
+          {
+            "label": "Course",
+            "value": "Photography Basics, Section B"
+          },
+          {
+            "label": "Instructor",
+            "value": "Mei Lin"
+          },
+          {
+            "label": "Meetings",
+            "value": "Saturdays, 9:00 a.m. to 11:00 a.m."
+          },
+          {
+            "label": "Dates",
+            "value": "April 4 to May 23"
+          },
+          {
+            "label": "Room",
+            "value": "Room A"
+          },
+          {
+            "label": "Fee",
+            "value": "$90, materials included"
+          },
+          {
+            "label": "Enrolled",
+            "value": "Andre Costa; Tomasz Witek; Hana Ito; Farah Diallo; Benito Cruz"
+          },
+          {
+            "label": "Wait list",
+            "value": "Ingrid Solberg"
+          }
+        ],
+        "markdown": "# Enrollment Roster — Willowbend Community Center\n\n- **Course:** Photography Basics, Section B\n- **Instructor:** Mei Lin\n- **Meetings:** Saturdays, 9:00 a.m. to 11:00 a.m.\n- **Dates:** April 4 to May 23\n- **Room:** Room A\n- **Fee:** $90, materials included\n- **Enrolled:** Andre Costa; Tomasz Witek; Hana Ito; Farah Diallo; Benito Cruz\n- **Wait list:** Ingrid Solberg"
+      },
+      "caller_intro": "Hi, I'm Tomasz Witek. I registered for a class at the community center, and I have a few questions.",
+      "question": "The class meets on Sunday mornings, right?",
+      "answer_facts": [
+        "The meetings are on Saturdays from 9:00 a.m. to 11:00 a.m."
+      ],
+      "model_answer": "No, the class does not meet on Sunday mornings. It meets on Saturdays from 9:00 a.m. to 11:00 a.m., so please plan for that day instead.",
+      "caller_claim": "The class meets on Sunday mornings"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Enrollment Roster — Willowbend Community Center",
+        "document_type": "enrollment roster",
+        "rows": [
+          {
+            "label": "Course",
+            "value": "Photography Basics, Section B"
+          },
+          {
+            "label": "Instructor",
+            "value": "Mei Lin"
+          },
+          {
+            "label": "Meetings",
+            "value": "Saturdays, 9:00 a.m. to 11:00 a.m."
+          },
+          {
+            "label": "Dates",
+            "value": "April 4 to May 23"
+          },
+          {
+            "label": "Room",
+            "value": "Room A"
+          },
+          {
+            "label": "Fee",
+            "value": "$90, materials included"
+          },
+          {
+            "label": "Enrolled",
+            "value": "Andre Costa; Tomasz Witek; Hana Ito; Farah Diallo; Benito Cruz"
+          },
+          {
+            "label": "Wait list",
+            "value": "Ingrid Solberg"
+          }
+        ],
+        "markdown": "# Enrollment Roster — Willowbend Community Center\n\n- **Course:** Photography Basics, Section B\n- **Instructor:** Mei Lin\n- **Meetings:** Saturdays, 9:00 a.m. to 11:00 a.m.\n- **Dates:** April 4 to May 23\n- **Room:** Room A\n- **Fee:** $90, materials included\n- **Enrolled:** Andre Costa; Tomasz Witek; Hana Ito; Farah Diallo; Benito Cruz\n- **Wait list:** Ingrid Solberg"
+      },
+      "caller_intro": "Hi, I'm Tomasz Witek. I registered for a class at the community center, and I have a few questions.",
+      "question": "Could you tell me when the course starts and ends, and how much it costs?",
+      "answer_facts": [
+        "The course runs from April 4 to May 23.",
+        "The fee is $90, and materials are included."
+      ],
+      "model_answer": "You're enrolled in Photography Basics, Section B, at the Willowbend Community Center. The course starts on Saturday, April 4, and the last class is on Saturday, May 23. It meets every Saturday from 9:00 to 11:00 a.m. in Room A, and your instructor is Mei Lin. The fee is $90, and that price includes all the materials, so there is nothing extra to pay for supplies."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Do you think a new employee should have a workplace mentor? Give reasons for your opinion.",
+      "model_answer": "I think a new employee should have a workplace mentor. A handbook rarely explains how one particular office really works, such as which tasks can wait or how people prefer to share updates. A mentor can answer those small questions in the first month, when a new person is most likely to feel lost. I saw this in a summer job. The colleague who showed me the filing system and introduced me at lunch made the second week much easier than the first. A mentor should not replace the manager, and it should be someone the new person can talk to honestly. With that support, people become useful faster and are more likely to stay. Even a few weeks of that guidance can prevent early mistakes."
+    }
+  ]
+}

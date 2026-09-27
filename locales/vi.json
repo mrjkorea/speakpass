@@ -1,0 +1,103 @@
+{
+  "appName": "SpeakPass AI",
+  "home": {
+    "eyebrow": "Luyện nói",
+    "tagline": "Luyện nói tiếng Anh với câu hỏi theo dạng TOEIC. Đây không phải là bài thi TOEIC.",
+    "disclaimer": "TOEIC là thương hiệu đã đăng ký của ETS. Sản phẩm này không được ETS chứng nhận hay phê duyệt.",
+    "chooseTest": "Bài luyện tập",
+    "fullTest": "Bài đầy đủ",
+    "practice": "Luyện tập",
+    "loading": "Đang tải bài…",
+    "loadError": "Không tải được danh sách bài. Kiểm tra kết nối rồi thử lại.",
+    "noTests": "Chưa có bài luyện tập.",
+    "micNote": "Bài đầy đủ dùng micro. Đồng hồ chạy liên tục và không tạm dừng được.",
+    "questionCount": "{count} câu"
+  },
+  "practice": {
+    "title": "Luyện tập",
+    "help": "Chọn một câu, hoặc luyện mọi câu trong một phần. Bạn có thể làm lại bao nhiêu lần cũng được.",
+    "part": "Luyện phần này",
+    "back": "Về trang đầu"
+  },
+  "parts": {
+    "read_aloud": {
+      "title": "Đọc to một đoạn",
+      "directions": "Một đoạn ngắn sẽ hiện ra. Dùng thời gian chuẩn bị để đọc thầm, kể cả tên, số và danh sách. Khi có tiếng tín hiệu, hãy đọc to và rõ. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được.",
+      "directionsOne": "Một đoạn ngắn sẽ hiện ra. Dùng thời gian chuẩn bị để đọc thầm, kể cả tên, số và danh sách. Khi có tiếng tín hiệu, hãy đọc to và rõ. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được."
+    },
+    "describe_picture": {
+      "title": "Mô tả tranh",
+      "directions": "Một bức tranh sẽ hiện ra. Dùng thời gian chuẩn bị để chú ý nơi chốn, những người và việc họ đang làm. Khi có tiếng tín hiệu, hãy mô tả tranh chi tiết. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được.",
+      "directionsOne": "Một bức tranh sẽ hiện ra. Dùng thời gian chuẩn bị để chú ý nơi chốn, những người và việc họ đang làm. Khi có tiếng tín hiệu, hãy mô tả tranh chi tiết. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được."
+    },
+    "respond_questions": {
+      "title": "Trả lời câu hỏi",
+      "directions": "Bạn sẽ trả lời ba câu về một tình huống hằng ngày. Tình huống vẫn ở trên màn hình. Mỗi câu có vài giây chuẩn bị, rồi đến thời gian nói. Trả lời thẳng các câu đầu. Câu cuối hãy nêu lý do. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được.",
+      "directionsOne": "Bạn sẽ trả lời một câu về một tình huống hằng ngày. Tình huống vẫn ở trên màn hình. Bạn có vài giây chuẩn bị, rồi nói. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được."
+    },
+    "info_questions": {
+      "title": "Trả lời theo tài liệu",
+      "directions": "Bạn có thời gian đọc lặng một tài liệu. Sau đó bạn trả lời ba câu về tài liệu đó. Tài liệu vẫn hiện khi bạn trả lời. Nếu câu hỏi có chi tiết không khớp tài liệu, hãy sửa lại. Câu cuối hãy nêu ít nhất hai mục trong tài liệu. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được.",
+      "directionsOne": "Bạn có thời gian đọc lặng một tài liệu. Sau đó bạn trả lời một câu về tài liệu đó. Tài liệu vẫn hiện trên màn hình. Nếu câu hỏi có chi tiết không khớp tài liệu, hãy sửa lại. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được."
+    },
+    "opinion": {
+      "title": "Nêu ý kiến",
+      "directions": "Bạn sẽ đọc một câu về công việc, học tập hoặc đời sống hằng ngày. Dùng thời gian chuẩn bị để chọn một phía và nghĩ lý do cùng ví dụ. Khi có tiếng tín hiệu, hãy nói rõ ý kiến. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được.",
+      "directionsOne": "Bạn sẽ đọc một câu về công việc, học tập hoặc đời sống hằng ngày. Dùng thời gian chuẩn bị để chọn một phía và nghĩ lý do cùng ví dụ. Khi có tiếng tín hiệu, hãy nói rõ ý kiến. Ghi âm tự bắt đầu và tự dừng. Không tạm dừng được."
+    }
+  },
+  "run": {
+    "prepare": "Chuẩn bị",
+    "speak": "Nói",
+    "reading": "Đọc tài liệu",
+    "recording": "Đang ghi âm",
+    "noPause": "Không tạm dừng",
+    "auto": "Ghi âm tự bắt đầu và tự dừng.",
+    "tone": "Bạn bắt đầu nói khi có tiếng tín hiệu.",
+    "readEnds": "Câu hỏi bắt đầu khi có tiếng tín hiệu.",
+    "qLabel": "Câu {n}",
+    "timeLine": "Câu {n}: chuẩn bị {prep} giây, nói {speak} giây.",
+    "readTime": "Thời gian đọc tài liệu: {n} giây.",
+    "start": "Bắt đầu",
+    "end": "Kết thúc",
+    "leaveTitle": "Kết thúc phiên này?",
+    "leaveBody": "Đồng hồ sẽ dừng. Các câu đã ghi vẫn được giữ trên thiết bị này.",
+    "leaveYes": "Kết thúc phiên",
+    "leaveNo": "Làm tiếp",
+    "micDenied": "Quyền micro bị chặn. Hãy cho phép micro trong cài đặt trình duyệt rồi thử lại.",
+    "micMissing": "Không có micro. Kiểm tra thiết bị rồi thử lại.",
+    "noRecorder": "Trình duyệt này không ghi âm được. Hãy dùng bản hiện tại của Chrome, Safari, Edge hoặc Firefox.",
+    "insecure": "Ghi âm cần trang an toàn. Hãy mở bằng https, hoặc bằng máy chủ cục bộ trên localhost.",
+    "imageMissing": "Không có tranh",
+    "pictureAlt": "Tranh của câu {n}",
+    "scenario": "Tình huống",
+    "caller": "Người gọi"
+  },
+  "review": {
+    "title": "Xem lại",
+    "fullDone": "Bạn đã xong bài đầy đủ. Hãy phát từng câu trả lời bên dưới.",
+    "practiceDone": "Bài luyện đã được lưu. Phát câu trả lời hoặc làm lại.",
+    "play": "Phát",
+    "stop": "Dừng",
+    "noAudio": "Không có ghi âm",
+    "deviceScore": "Điểm trên thiết bị",
+    "serverScore": "Điểm trên máy chủ",
+    "saved": "Đã lưu trên thiết bị này",
+    "notSaved": "Không lưu được trên thiết bị này. Bạn vẫn có thể phát câu trả lời cho đến khi rời trang.",
+    "home": "Về trang đầu",
+    "retry": "Làm lại",
+    "snippetPicture": "Mô tả tranh"
+  },
+  "common": {
+    "language": "Ngôn ngữ",
+    "retry": "Thử lại",
+    "error": "Đã có lỗi."
+  },
+  "a11y": {
+    "skip": "Chuyển tới nội dung",
+    "timer": "{phase}. Còn {n} giây.",
+    "play": "Phát câu trả lời của câu {n}",
+    "stop": "Dừng phát câu trả lời của câu {n}",
+    "progress": "Câu {index} / {total}"
+  }
+}

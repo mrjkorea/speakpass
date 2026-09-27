@@ -1,0 +1,284 @@
+{
+  "id": "test01",
+  "version": 1,
+  "title": "Practice Test 1",
+  "questions": [
+    {
+      "q": 1,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "Maple Court Library will host a free book exchange on Saturday, April 18, at 10 a.m. Neighbors may bring novels, cookbooks, and travel guides they are ready to pass along. For each book you donate, you may choose up to three books to take home. Volunteers in the lobby will help you sort your donations. The exchange ends at 1 p.m., so please come early.",
+      "sentences": [
+        "Maple Court Library will host a free book exchange on Saturday, April 18, at 10 a.m.",
+        "Neighbors may bring novels, cookbooks, and travel guides they are ready to pass along.",
+        "For each book you donate, you may choose up to three books to take home.",
+        "Volunteers in the lobby will help you sort your donations.",
+        "The exchange ends at 1 p.m., so please come early."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 2,
+      "type": "read_aloud",
+      "prep_sec": 45,
+      "speak_sec": 45,
+      "text": "You have reached Pebble Wheel Cycles. The shop is open from 9 a.m. to 6 p.m., Tuesday through Sunday. To schedule a repair, please press 1. For prices on brakes, gears, and tires, press 2. If we are already working on your bicycle, press 3 and leave your name and phone number so a mechanic can call you back.",
+      "sentences": [
+        "You have reached Pebble Wheel Cycles.",
+        "The shop is open from 9 a.m. to 6 p.m., Tuesday through Sunday.",
+        "To schedule a repair, please press 1.",
+        "For prices on brakes, gears, and tires, press 2.",
+        "If we are already working on your bicycle, press 3 and leave your name and phone number so a mechanic can call you back."
+      ],
+      "phonemes_todo": true
+    },
+    {
+      "q": 3,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test01_q3.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a small neighborhood flower shop on a sunny day. Number of people and appearance: Four people: three adults of different ages and one teenager. Clothing: A clerk wears a green apron over a white shirt. An older customer wears a navy coat. A teenager wears a yellow hoodie. A second worker wears a green apron. Actions: The clerk wraps a bouquet. The customer waits with a wallet. The teenager browses buckets of flowers. The second worker carries greenery toward the door. Objects: Pink and white flowers, brown paper, a wooden counter, buckets of yellow and purple flowers, and a wallet. Foreground: The clerk and the customer stand at the counter, close to the camera. Background: Buckets line the wall, and an open glass door shows a bright sidewalk.",
+      "key_elements": [
+        "clerk in a green apron wrapping a bouquet",
+        "older customer in a navy coat holding a wallet",
+        "teenager in a yellow hoodie browsing flowers",
+        "worker carrying greenery near the open door"
+      ],
+      "model_answer": "This picture shows a small flower shop in daylight. In the foreground, a clerk in a green apron is wrapping a bouquet of pink and white flowers. An older customer in a navy coat stands at the counter holding a wallet. A teenager in a yellow hoodie looks through buckets of flowers, and another worker carries greenery near the open door."
+    },
+    {
+      "q": 4,
+      "type": "describe_picture",
+      "prep_sec": 45,
+      "speak_sec": 30,
+      "image": "images/test01_q4.jpg",
+      "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an airport check-in hall with a service counter and large windows. Number of people and appearance: Five adults. Clothing: A traveler wears a red jacket. The agent wears a light blue uniform. Two people on a bench wear casual jackets. A fifth traveler wears a gray jacket. Actions: The traveler hands over a passport. The agent looks at a computer. One seated person uses a phone, and the other holds a paper cup. A black rolling suitcase stands beside the traveler in red. The traveler in gray pulls a second suitcase toward the windows. Objects: A black rolling suitcase, a passport, a computer, a bench, and a paper cup. Foreground: The traveler and the agent are at the check-in counter. Background: A bench sits mid-hall, and daylight comes through windows that show an unmarked airplane tail.",
+      "key_elements": [
+        "traveler in a red jacket handing a passport",
+        "agent in a light blue uniform at a computer",
+        "black rolling suitcase beside the traveler",
+        "two people sitting on a bench"
+      ],
+      "model_answer": "This picture shows an airport check-in counter in a bright hall. A traveler in a red jacket is handing a passport to an agent in a light blue uniform. A black rolling suitcase stands beside the traveler. Two people sit on a bench nearby, one using a phone and one holding a paper cup, while another traveler pulls a suitcase toward the windows."
+    },
+    {
+      "q": 5,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a marketing firm is researching daily habits in your area. You agreed to take part in a telephone interview about cooking at home.",
+      "question": "How often do you cook at home, and what do you usually make?",
+      "model_answer": "I cook at home about five nights a week. I usually make rice bowls with vegetables and eggs because they are quick after a long day."
+    },
+    {
+      "q": 6,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "set_intro": "Imagine that a marketing firm is researching daily habits in your area. You agreed to take part in a telephone interview about cooking at home.",
+      "question": "Do you usually follow a recipe, or do you decide as you cook? Why?",
+      "model_answer": "I usually decide as I cook, because a strict recipe feels slow on a weeknight. I repeat a few combinations I already know, and that keeps dinner simple."
+    },
+    {
+      "q": 7,
+      "type": "respond_to_questions",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "set_intro": "Imagine that a marketing firm is researching daily habits in your area. You agreed to take part in a telephone interview about cooking at home.",
+      "question": "A friend wants to cook more meals at home but feels too busy. What would you recommend, and why?",
+      "model_answer": "I would tell my friend to start with three simple meals and repeat them. A short list removes decisions, and each dish gets faster every time you cook it. I would also suggest cutting vegetables on Sunday, so a weeknight only needs a pan and twenty minutes. That plan is easier to keep than a new complicated dish every evening."
+    },
+    {
+      "q": 8,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Hotel Reservation — Lindenrow Guest House",
+        "document_type": "hotel reservation",
+        "rows": [
+          {
+            "label": "Guest",
+            "value": "Luis Ortega"
+          },
+          {
+            "label": "Confirmation",
+            "value": "LG-4418"
+          },
+          {
+            "label": "Check-in",
+            "value": "March 14, 3:00 p.m."
+          },
+          {
+            "label": "Check-out",
+            "value": "March 17, 11:00 a.m."
+          },
+          {
+            "label": "Nights",
+            "value": "3"
+          },
+          {
+            "label": "Room",
+            "value": "Garden-view queen room, non-smoking"
+          },
+          {
+            "label": "Nightly rate",
+            "value": "$128"
+          },
+          {
+            "label": "Breakfast",
+            "value": "Included"
+          },
+          {
+            "label": "Request",
+            "value": "Extra pillow"
+          },
+          {
+            "label": "Front desk",
+            "value": "Priya Raman"
+          }
+        ],
+        "markdown": "# Hotel Reservation — Lindenrow Guest House\n\n- **Guest:** Luis Ortega\n- **Confirmation:** LG-4418\n- **Check-in:** March 14, 3:00 p.m.\n- **Check-out:** March 17, 11:00 a.m.\n- **Nights:** 3\n- **Room:** Garden-view queen room, non-smoking\n- **Nightly rate:** $128\n- **Breakfast:** Included\n- **Request:** Extra pillow\n- **Front desk:** Priya Raman"
+      },
+      "caller_intro": "Hi, I'm Luis Ortega. I have a reservation at your guest house, and I wanted to check a few details.",
+      "question": "What time can I check in?",
+      "answer_facts": [
+        "Check-in is at 3:00 p.m. on March 14."
+      ],
+      "model_answer": "Check-in is at 3:00 p.m. on March 14. When you arrive, please give the front desk your confirmation number, LG-4418. You're booked for three nights in a garden-view queen room."
+    },
+    {
+      "q": 9,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 15,
+      "read_sec": 45,
+      "document": {
+        "title": "Hotel Reservation — Lindenrow Guest House",
+        "document_type": "hotel reservation",
+        "rows": [
+          {
+            "label": "Guest",
+            "value": "Luis Ortega"
+          },
+          {
+            "label": "Confirmation",
+            "value": "LG-4418"
+          },
+          {
+            "label": "Check-in",
+            "value": "March 14, 3:00 p.m."
+          },
+          {
+            "label": "Check-out",
+            "value": "March 17, 11:00 a.m."
+          },
+          {
+            "label": "Nights",
+            "value": "3"
+          },
+          {
+            "label": "Room",
+            "value": "Garden-view queen room, non-smoking"
+          },
+          {
+            "label": "Nightly rate",
+            "value": "$128"
+          },
+          {
+            "label": "Breakfast",
+            "value": "Included"
+          },
+          {
+            "label": "Request",
+            "value": "Extra pillow"
+          },
+          {
+            "label": "Front desk",
+            "value": "Priya Raman"
+          }
+        ],
+        "markdown": "# Hotel Reservation — Lindenrow Guest House\n\n- **Guest:** Luis Ortega\n- **Confirmation:** LG-4418\n- **Check-in:** March 14, 3:00 p.m.\n- **Check-out:** March 17, 11:00 a.m.\n- **Nights:** 3\n- **Room:** Garden-view queen room, non-smoking\n- **Nightly rate:** $128\n- **Breakfast:** Included\n- **Request:** Extra pillow\n- **Front desk:** Priya Raman"
+      },
+      "caller_intro": "Hi, I'm Luis Ortega. I have a reservation at your guest house, and I wanted to check a few details.",
+      "question": "I think the nightly rate is $158. Is that right?",
+      "answer_facts": [
+        "The nightly rate is $128."
+      ],
+      "model_answer": "Actually, the nightly rate is $128, not $158. That is the rate printed on your reservation, and it applies to each of your three nights, with breakfast included.",
+      "caller_claim": "the nightly rate is $158"
+    },
+    {
+      "q": 10,
+      "type": "respond_with_information",
+      "prep_sec": 3,
+      "speak_sec": 30,
+      "read_sec": 45,
+      "document": {
+        "title": "Hotel Reservation — Lindenrow Guest House",
+        "document_type": "hotel reservation",
+        "rows": [
+          {
+            "label": "Guest",
+            "value": "Luis Ortega"
+          },
+          {
+            "label": "Confirmation",
+            "value": "LG-4418"
+          },
+          {
+            "label": "Check-in",
+            "value": "March 14, 3:00 p.m."
+          },
+          {
+            "label": "Check-out",
+            "value": "March 17, 11:00 a.m."
+          },
+          {
+            "label": "Nights",
+            "value": "3"
+          },
+          {
+            "label": "Room",
+            "value": "Garden-view queen room, non-smoking"
+          },
+          {
+            "label": "Nightly rate",
+            "value": "$128"
+          },
+          {
+            "label": "Breakfast",
+            "value": "Included"
+          },
+          {
+            "label": "Request",
+            "value": "Extra pillow"
+          },
+          {
+            "label": "Front desk",
+            "value": "Priya Raman"
+          }
+        ],
+        "markdown": "# Hotel Reservation — Lindenrow Guest House\n\n- **Guest:** Luis Ortega\n- **Confirmation:** LG-4418\n- **Check-in:** March 14, 3:00 p.m.\n- **Check-out:** March 17, 11:00 a.m.\n- **Nights:** 3\n- **Room:** Garden-view queen room, non-smoking\n- **Nightly rate:** $128\n- **Breakfast:** Included\n- **Request:** Extra pillow\n- **Front desk:** Priya Raman"
+      },
+      "caller_intro": "Hi, I'm Luis Ortega. I have a reservation at your guest house, and I wanted to check a few details.",
+      "question": "Can you tell me the dates of my stay and describe the room I booked?",
+      "answer_facts": [
+        "Check-in is March 14 and check-out is March 17.",
+        "The room is a garden-view queen room, non-smoking."
+      ],
+      "model_answer": "Your check-in is on March 14 at 3:00 p.m., and your check-out is on March 17 at 11:00 a.m., so that's three nights. You booked a garden-view queen room, and it's non-smoking. The nightly rate is $128, and breakfast is included. We've also noted your request for an extra pillow. Your confirmation number is LG-4418, in case the front desk asks for it."
+    },
+    {
+      "q": 11,
+      "type": "opinion",
+      "prep_sec": 45,
+      "speak_sec": 60,
+      "question": "Some companies let employees choose their start and finish times. Do you think flexible work hours are a good idea? Give reasons for your opinion.",
+      "model_answer": "I think flexible work hours are a good idea for most office teams. People do their best thinking at different times of day, so a choice of start time can raise the quality of the work. For example, an early riser might begin at seven and finish in the middle of the afternoon, while a colleague with a long bus ride might start after the rush and stay later. That kind of choice also helps parents and students handle duties outside the job without missing a deadline. The limit is that a team still needs shared time. If everyone is available from ten to three for meetings and quick questions, and if the manager judges results rather than the clock, flexibility helps both the workers and the company."
+    }
+  ]
+}
