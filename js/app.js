@@ -193,6 +193,13 @@ function startSession(selection) {
   state.session.begin();
 }
 
+function stopSpeak() {
+  if (!state.session || !state.view || state.view.phase !== 'speak') return;
+  const button = document.querySelector('[data-action="stop-speak"]');
+  if (button) button.disabled = true;
+  confirmEnd();
+}
+
 function onBegin() {
   if (state.arming || !state.session) return;
   state.micError = '';
@@ -296,6 +303,7 @@ function onClick(event) {
   } else if (action === 'practice-part') {
     startSession({ mode: 'practice', scope: 'part', part: button.dataset.part });
   } else if (action === 'begin') onBegin();
+  else if (action === 'stop-speak') stopSpeak();
   else if (action === 'ask-end') {
     state.dialog = true;
     render();
@@ -479,6 +487,9 @@ function timerBlock(view, hint, compact) {
   const rec = view.phase === 'speak'
     ? `<p class="rec"><span class="dot" aria-hidden="true"></span>${escapeHtml(t('run.recording'))}</p>`
     : '';
+  const stop = view.phase === 'speak'
+    ? `<button type="button" class="btn danger" data-action="stop-speak">${escapeHtml(t('review.stop'))}</button>`
+    : '';
   return `
     <div class="timer-wrap phase-${escapeHtml(view.phase)}${compact ? ' compact' : ''}">
       <div class="timer-face" role="timer" aria-label="${escapeHtml(t('a11y.timer', { phase: label, n: secs }))}">
@@ -493,6 +504,7 @@ function timerBlock(view, hint, compact) {
       </div>
       ${rec}
       <p class="hint">${escapeHtml(hint)}</p>
+      ${stop}
     </div>`;
 }
 
