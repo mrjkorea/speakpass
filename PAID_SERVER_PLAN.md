@@ -2,7 +2,15 @@
 
 This is a plan and a draft. Nothing here was deployed. No account was created. No money was spent.
 
-SpeakPass AI grades a full practice test on a Cloudflare Worker. The phone turns speech into text with Whistle and sends only that text. The Worker checks a Google Play pack, then grades questions 1 through 11. The student app saves the result with the shared MRJ sign-in. The screen keeps saying the grade is coming soon until you wire that last step yourself.
+SpeakPass AI grades a practice test on a Cloudflare Worker. The phone turns speech into text on the device and sends only that text. The Worker holds the grader key. The student app saves the result with the shared MRJ sign-in.
+
+For now the site is free for your own students on GitHub Pages. `PAYMENT_MODE` is `free` or `play`. The default is `free`. In free mode the Worker skips Google Play. It allows a mark only after the shared sign-in script accepts the student id and token. The check uses the existing `progress` action. There is no new sheet and no new column.
+
+Each student can get 3 marks per UTC day. The same student must wait 60 seconds between marks. The Worker allows 120 marks in total per UTC day. The count is one Workers KV record per day, written before the model is called. A missing store refuses the mark. Two requests at the same instant can both pass, so a day can go one past 120. The exact deploy commands are in `DEPLOY_STEPS.md`.
+
+Play purchase code stays in the Worker. Set `PAYMENT_MODE` to `play` and deploy again when packs go on sale. That path is the rest of this plan.
+
+The review screen has a Get AI marking button for questions 1 through 11. The address is `GRADE_WORKER_URL` in `js/config.js`. Until that address is set, the button says the marking service is not deployed and sends no request. `gradePaid` still returns `coming soon`.
 
 This practice is not a TOEIC test. TOEIC is a registered trademark of ETS. This product is not endorsed or approved by ETS.
 
@@ -187,11 +195,11 @@ Do these steps later. They were not done for this draft.
 8. Paste the whole JSON into the secret `PLAY_SERVICE_ACCOUNT`. Delete the JSON file from the computer.
 9. In Play Console, create one-time products with the ids in `worker/src/products.js`. Do not create subscriptions. Do not create consumable credits. Do not add a card form to the website.
 10. In the Android app, use Play Billing. On the purchase, set the obfuscated account id to the student id. Do not call consume. Send the product id, the purchase token, and the Whistle transcript to the Worker. Then call `savePaidResult` from `js/paid-mark.js`.
-11. On the site, load the shared sign-in the way `mrj-signin` documents, with `data-mrj-app="speakpass"`, and load `js/mrj-scores.js` before the app module. Do this when you are ready for real grades. Until then the screen stays on `coming soon`.
+11. The site already loads the shared sign-in with `data-mrj-app="speakpass"` and loads `js/mrj-scores.js` before the app module. After deploy, set `GRADE_WORKER_URL` in `js/config.js` to the Worker https address with no path. Until that line is set, the button says the service is not deployed. `gradePaid` still returns `coming soon`.
 12. Buy one license-test product from a test account. Grade one full test. Confirm the reply has `scoreMax` 41, the score sheet gained rows for program `speakpass`, and the pack load shows the same test. Confirm a canceled token is refused.
 
 Run the draft tests before you deploy. From `worker/`, run `node --test`. From the repo root, run `node scripts/check.mjs`.
 
 ## What this draft does not do
 
-It does not deploy the Worker. It does not create Cloudflare, Play, or a grader account. It does not buy credit. It does not change the sign-in script, the score columns, or `js/mrj-scores.js`. It does not turn on grading in the screen. `gradePaid` still returns `coming soon`.
+It does not deploy the Worker. It does not create Cloudflare, Play, or a grader account. It does not buy credit. It does not change the sign-in script, the score columns, or `js/mrj-scores.js`. The Get AI marking button is wired, and `GRADE_WORKER_URL` is empty, so the button does not call the Worker yet. `gradePaid` still returns `coming soon`.

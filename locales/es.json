@@ -86,7 +86,19 @@
     "notSaved": "No se pudo guardar en este dispositivo. Aún puedes reproducir las respuestas hasta que salgas de esta página.",
     "home": "Volver al inicio",
     "retry": "Intentar de nuevo",
-    "snippetPicture": "Descripción de la imagen"
+    "snippetPicture": "Descripción de la imagen",
+    "mark": "Obtener la nota de IA",
+    "marking": "Obteniendo la nota de IA…",
+    "notDeployed": "La corrección con IA aún no está disponible. El servicio de corrección no está publicado.",
+    "signIn": "Inicia sesión con tu ID de estudiante para obtener una nota de IA.",
+    "noTranscript": "Todavía no hay una transcripción para corregir.",
+    "marked": "Nota de IA guardada.",
+    "markFailed": "No se pudo guardar la nota de IA. Inténtalo de nuevo.",
+    "studentCap": "Ya usaste las notas de IA de hoy. Inténtalo mañana.",
+    "slowDown": "Espera un minuto y vuelve a pedir una nota de IA.",
+    "dailyCap": "La corrección con IA está llena por hoy. Inténtalo mañana.",
+    "signInAgain": "Vuelve a iniciar sesión y pide una nota de IA.",
+    "aiScore": "Nota de IA"
   },
   "common": {
     "language": "Idioma",

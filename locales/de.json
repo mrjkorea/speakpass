@@ -86,7 +86,19 @@
     "notSaved": "Konnte auf diesem Gerät nicht gespeichert werden. Du kannst die Antworten noch abspielen, bis du diese Seite verlässt.",
     "home": "Zum Start",
     "retry": "Nochmal",
-    "snippetPicture": "Bildbeschreibung"
+    "snippetPicture": "Bildbeschreibung",
+    "mark": "KI-Bewertung holen",
+    "marking": "KI-Bewertung wird geholt…",
+    "notDeployed": "Die KI-Bewertung ist noch nicht verfügbar. Der Bewertungsdienst ist nicht veröffentlicht.",
+    "signIn": "Melde dich mit deiner Schüler-ID an, um eine KI-Bewertung zu erhalten.",
+    "noTranscript": "Es gibt noch kein Transkript zum Bewerten.",
+    "marked": "KI-Bewertung gespeichert.",
+    "markFailed": "Die KI-Bewertung konnte nicht gespeichert werden. Versuche es erneut.",
+    "studentCap": "Du hast die KI-Bewertungen für heute aufgebraucht. Versuche es morgen erneut.",
+    "slowDown": "Warte eine Minute und bitte dann erneut um eine KI-Bewertung.",
+    "dailyCap": "Die KI-Bewertung ist für heute voll. Versuche es morgen erneut.",
+    "signInAgain": "Melde dich erneut an und bitte dann um eine KI-Bewertung.",
+    "aiScore": "KI-Bewertung"
   },
   "common": {
     "language": "Sprache",

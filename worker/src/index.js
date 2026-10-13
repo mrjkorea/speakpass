@@ -1,8 +1,11 @@
 import { getTest } from "./catalog.js";
+import { reserveGrade } from "./limits.js";
 import { gradeTranscripts } from "./model.js";
-import { clearTokenCache, verifyPurchase } from "./play.js";
+import { paymentMode } from "./mode.js";
+import { clearTokenCache, idKey, verifyPurchase } from "./play.js";
 import { buildMessages, normalizeAnswers } from "./prompt.js";
 import { applyModel, publicGrade } from "./score.js";
+import { verifySession } from "./session.js";
 
 const BODY_CAP = 100000;
 
@@ -29,6 +32,11 @@ function allowedOrigin(request, env) {
   return { ok: true, origin, allow: true };
 }
 
+function limitStore(env, deps) {
+  if (deps && deps.kv) return deps.kv;
+  return env && env.GRADE_LIMITS ? env.GRADE_LIMITS : null;
+}
+
 export async function handle(request, env, deps) {
   const fetchImpl = (deps && deps.fetch) || fetch;
   const nowSeconds = (deps && deps.now) || Math.floor(Date.now() / 1000);
@@ -52,7 +60,16 @@ export async function handle(request, env, deps) {
   if (request.method !== "POST") {
     return json(405, { ok: false, error: "method" }, gate.origin, gate.allow);
   }
-  if (!env || !env.GRADE_API_KEY || !env.PLAY_SERVICE_ACCOUNT || !env.PACKAGE_NAME) {
+
+  const mode = paymentMode(env);
+  const kv = limitStore(env, deps);
+  if (!env || !env.GRADE_API_KEY || !kv) {
+    return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
+  }
+  if (mode === "play" && (!env.PLAY_SERVICE_ACCOUNT || !env.PACKAGE_NAME)) {
+    return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
+  }
+  if (mode === "free" && !env.SIGNIN_ENDPOINT) {
     return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
   }
 
@@ -73,14 +90,35 @@ export async function handle(request, env, deps) {
     return json(400, { ok: false, error: "bad_request" }, gate.origin, gate.allow);
   }
 
-  let owned;
-  try {
-    owned = await verifyPurchase(env, body, fetchImpl, nowSeconds);
-  } catch {
-    return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
+  let studentId = "";
+  if (mode === "play") {
+    let owned;
+    try {
+      owned = await verifyPurchase(env, body, fetchImpl, nowSeconds);
+    } catch {
+      return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
+    }
+    if (!owned.ok) {
+      return json(403, { ok: false, error: "not_owned" }, gate.origin, gate.allow);
+    }
+    studentId = idKey(body.studentId) || idKey(body.purchaseToken).slice(0, 40);
+  } else {
+    let session;
+    try {
+      session = await verifySession(env, body, fetchImpl);
+    } catch {
+      return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
+    }
+    if (!session.ok) {
+      return json(401, { ok: false, error: "sign_in" }, gate.origin, gate.allow);
+    }
+    studentId = session.studentId;
   }
-  if (!owned.ok) {
-    return json(403, { ok: false, error: "not_owned" }, gate.origin, gate.allow);
+
+  const slot = await reserveGrade(kv, studentId, nowSeconds);
+  if (!slot.ok) {
+    const status = slot.error === "not_ready" ? 503 : 429;
+    return json(status, { ok: false, error: slot.error }, gate.origin, gate.allow);
   }
 
   const built = buildMessages(test, answers);

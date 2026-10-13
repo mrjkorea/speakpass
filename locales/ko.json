@@ -86,7 +86,19 @@
     "notSaved": "이 기기에 저장하지 못했습니다. 이 페이지를 떠나기 전에는 답을 재생할 수 있습니다.",
     "home": "처음으로",
     "retry": "다시 시도",
-    "snippetPicture": "그림 설명"
+    "snippetPicture": "그림 설명",
+    "mark": "AI 채점 받기",
+    "marking": "AI 점수를 받는 중…",
+    "notDeployed": "AI 채점을 아직 사용할 수 없습니다. 채점 서비스가 배포되지 않았습니다.",
+    "signIn": "AI 점수를 받으려면 학생 ID로 로그인하세요.",
+    "noTranscript": "채점할 받아쓰기가 아직 없습니다.",
+    "marked": "AI 점수가 저장되었습니다.",
+    "markFailed": "AI 점수를 저장하지 못했습니다. 다시 시도하세요.",
+    "studentCap": "오늘의 AI 채점을 모두 사용했습니다. 내일 다시 시도하세요.",
+    "slowDown": "1분 기다린 뒤 다시 AI 채점을 요청하세요.",
+    "dailyCap": "오늘 AI 채점이 가득 찼습니다. 내일 다시 시도하세요.",
+    "signInAgain": "다시 로그인한 뒤 AI 채점을 요청하세요.",
+    "aiScore": "AI 점수"
   },
   "common": {
     "language": "언어",

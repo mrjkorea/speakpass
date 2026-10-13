@@ -86,7 +86,19 @@
     "notSaved": "Tidak dapat menyimpan di perangkat ini. Anda masih bisa memutar jawaban sampai meninggalkan halaman ini.",
     "home": "Kembali ke awal",
     "retry": "Coba lagi",
-    "snippetPicture": "Deskripsi gambar"
+    "snippetPicture": "Deskripsi gambar",
+    "mark": "Dapatkan nilai AI",
+    "marking": "Mengambil nilai AI…",
+    "notDeployed": "Penilaian AI belum tersedia. Layanan penilaian belum dipasang.",
+    "signIn": "Masuk dengan ID siswa untuk mendapat nilai AI.",
+    "noTranscript": "Belum ada transkrip untuk dinilai.",
+    "marked": "Nilai AI tersimpan.",
+    "markFailed": "Nilai AI tidak dapat disimpan. Coba lagi.",
+    "studentCap": "Kamu sudah memakai nilai AI hari ini. Coba lagi besok.",
+    "slowDown": "Tunggu satu menit, lalu minta nilai AI lagi.",
+    "dailyCap": "Penilaian AI hari ini sudah penuh. Coba lagi besok.",
+    "signInAgain": "Masuk lagi, lalu minta nilai AI.",
+    "aiScore": "Nilai AI"
   },
   "common": {
     "language": "Bahasa",

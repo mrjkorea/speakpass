@@ -1,6 +1,12 @@
 /** Product name. This is the only app-name constant. */
 export const APP_NAME = 'SpeakPass AI';
 
+/**
+ * Address of the marking Worker. Leave this empty until it is deployed.
+ * After deploy, set the https address of the Worker, with no path on the end.
+ */
+export const GRADE_WORKER_URL = '';
+
 /** UI languages. Test content stays English. Arabic uses a right-to-left layout. */
 export const LANGS = [
   { id: 'en', label: 'English', dir: 'ltr' },

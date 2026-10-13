@@ -86,7 +86,19 @@
     "notSaved": "Bu cihaza kaydedilemedi. Sayfadan çıkana kadar yanıtları dinleyebilirsiniz.",
     "home": "Başlangıca dön",
     "retry": "Yeniden dene",
-    "snippetPicture": "Resim anlatımı"
+    "snippetPicture": "Resim anlatımı",
+    "mark": "Yapay zekâ notunu al",
+    "marking": "Yapay zekâ notu alınıyor…",
+    "notDeployed": "Yapay zekâ puanlama henüz kullanılamıyor. Puanlama hizmeti yayınlanmadı.",
+    "signIn": "Yapay zekâ notu almak için öğrenci kimliğinle giriş yap.",
+    "noTranscript": "Puanlanacak bir döküm henüz yok.",
+    "marked": "Yapay zekâ notu kaydedildi.",
+    "markFailed": "Yapay zekâ notu kaydedilemedi. Yeniden dene.",
+    "studentCap": "Bugünkü yapay zekâ notlarını kullandın. Yarın yeniden dene.",
+    "slowDown": "Bir dakika bekle, sonra yeniden yapay zekâ notu iste.",
+    "dailyCap": "Bugün yapay zekâ puanlaması doldu. Yarın yeniden dene.",
+    "signInAgain": "Yeniden giriş yap, sonra yapay zekâ notu iste.",
+    "aiScore": "Yapay zekâ notu"
   },
   "common": {
     "language": "Dil",

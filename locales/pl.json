@@ -86,7 +86,19 @@
     "notSaved": "Nie udało się zapisać na tym urządzeniu. Odpowiedzi można odtworzyć, dopóki nie opuścisz tej strony.",
     "home": "Wróć na start",
     "retry": "Spróbuj ponownie",
-    "snippetPicture": "Opis obrazka"
+    "snippetPicture": "Opis obrazka",
+    "mark": "Pobierz ocenę AI",
+    "marking": "Pobieranie oceny AI…",
+    "notDeployed": "Ocenianie AI nie jest jeszcze dostępne. Usługa oceniania nie jest wdrożona.",
+    "signIn": "Zaloguj się identyfikatorem ucznia, aby dostać ocenę AI.",
+    "noTranscript": "Nie ma jeszcze transkrypcji do oceny.",
+    "marked": "Ocena AI zapisana.",
+    "markFailed": "Nie udało się zapisać oceny AI. Spróbuj ponownie.",
+    "studentCap": "Wykorzystałeś dzisiejsze oceny AI. Spróbuj jutro.",
+    "slowDown": "Poczekaj minutę, a potem poproś o ocenę AI.",
+    "dailyCap": "Ocenianie AI jest na dziś pełne. Spróbuj jutro.",
+    "signInAgain": "Zaloguj się ponownie, a potem poproś o ocenę AI.",
+    "aiScore": "Ocena AI"
   },
   "common": {
     "language": "Język",

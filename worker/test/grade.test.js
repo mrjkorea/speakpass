@@ -2,6 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { getTest } from "../src/catalog.js";
 import { handle, clearTokenCache } from "../src/index.js";
+import { memoryKv } from "../src/limits.js";
 import { OUTPUT_CAP, gradeRequest } from "../src/model.js";
 import { buildMessages } from "../src/prompt.js";
 import { RUBRIC } from "../src/rubric.js";
@@ -9,6 +10,7 @@ import { purchaseDecision } from "../src/play.js";
 import { applyModel, maxFor, publicGrade } from "../src/score.js";
 
 const ENV = {
+  PAYMENT_MODE: "play",
   GRADE_API_KEY: "test-key",
   PLAY_SERVICE_ACCOUNT: JSON.stringify({
     client_email: "grade@example.iam.gserviceaccount.com",
@@ -139,7 +141,7 @@ describe("worker", () => {
         answers: [{ q: 11, transcript: "I think flexible hours help teams." }]
       })
     });
-    const response = await handle(request, env, { fetch: fetchImpl, now: 1_700_000_000 });
+    const response = await handle(request, env, { fetch: fetchImpl, now: 1_700_000_000, kv: memoryKv() });
     const payload = await response.json();
     assert.equal(response.status, 200);
     assert.equal(payload.scoreValue, 4);
@@ -194,7 +196,7 @@ describe("worker", () => {
         answers: [{ q: 5, transcript: "I cook at home." }]
       })
     });
-    const response = await handle(request, env, { fetch: fetchImpl, now: 1_700_000_000 });
+    const response = await handle(request, env, { fetch: fetchImpl, now: 1_700_000_000, kv: memoryKv() });
     assert.equal(response.status, 403);
     assert.equal(graded, false);
   });

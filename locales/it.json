@@ -86,7 +86,19 @@
     "notSaved": "Impossibile salvare su questo dispositivo. Puoi ancora ascoltare le risposte finché resti su questa pagina.",
     "home": "Torna all’inizio",
     "retry": "Riprova",
-    "snippetPicture": "Descrizione dell’immagine"
+    "snippetPicture": "Descrizione dell’immagine",
+    "mark": "Ottieni il voto IA",
+    "marking": "Recupero del voto IA…",
+    "notDeployed": "La correzione IA non è ancora disponibile. Il servizio di correzione non è pubblicato.",
+    "signIn": "Accedi con il tuo ID studente per ottenere un voto IA.",
+    "noTranscript": "Non c’è ancora una trascrizione da correggere.",
+    "marked": "Voto IA salvato.",
+    "markFailed": "Il voto IA non è stato salvato. Riprova.",
+    "studentCap": "Hai usato i voti IA di oggi. Riprova domani.",
+    "slowDown": "Aspetta un minuto, poi chiedi di nuovo un voto IA.",
+    "dailyCap": "La correzione IA è piena per oggi. Riprova domani.",
+    "signInAgain": "Accedi di nuovo, poi chiedi un voto IA.",
+    "aiScore": "Voto IA"
   },
   "common": {
     "language": "Lingua",

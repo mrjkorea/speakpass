@@ -86,7 +86,19 @@
     "notSaved": "Không lưu được trên thiết bị này. Bạn vẫn có thể phát câu trả lời cho đến khi rời trang.",
     "home": "Về trang đầu",
     "retry": "Làm lại",
-    "snippetPicture": "Mô tả tranh"
+    "snippetPicture": "Mô tả tranh",
+    "mark": "Lấy điểm AI",
+    "marking": "Đang lấy điểm AI…",
+    "notDeployed": "Chấm điểm AI chưa sẵn sàng. Dịch vụ chấm điểm chưa được triển khai.",
+    "signIn": "Đăng nhập bằng mã học viên để lấy điểm AI.",
+    "noTranscript": "Chưa có bản chép lời để chấm.",
+    "marked": "Đã lưu điểm AI.",
+    "markFailed": "Không lưu được điểm AI. Hãy thử lại.",
+    "studentCap": "Bạn đã dùng hết lượt chấm AI hôm nay. Hãy thử lại vào ngày mai.",
+    "slowDown": "Đợi một phút, rồi xin điểm AI lần nữa.",
+    "dailyCap": "Chấm điểm AI hôm nay đã đầy. Hãy thử lại vào ngày mai.",
+    "signInAgain": "Đăng nhập lại, rồi xin điểm AI.",
+    "aiScore": "Điểm AI"
   },
   "common": {
     "language": "Ngôn ngữ",

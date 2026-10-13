@@ -101,7 +101,7 @@ The microphone is requested in the tap on Start, which is what iOS Safari requir
 
 `js/grade.js` still returns `coming soon`. It does not upload audio.
 
-The paid grader is drafted in `worker/` and explained in `PAID_SERVER_PLAN.md`. It is not deployed. It grades questions 1 through 11 from an on-device transcript. The screen does not name the grader. Scores and saved progress use the shared sign-in files, with the same fields those files already have.
+The grader is drafted in `worker/` and explained in `PAID_SERVER_PLAN.md`. It is not deployed. It grades questions 1 through 11 from an on-device transcript. The review screen has a Get AI marking button. The address is `GRADE_WORKER_URL` in `js/config.js`. Until that address is set, the button says the marking service is not deployed. The screen does not name the grader. Scores and saved progress use the shared sign-in files, with the same fields those files already have. Deploy commands are in `DEPLOY_STEPS.md`.
 
 ## Install and offline
 

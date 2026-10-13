@@ -86,7 +86,19 @@
     "notSaved": "Could not save on this device. You can still play the answers until you leave this page.",
     "home": "Back to start",
     "retry": "Try again",
-    "snippetPicture": "Picture description"
+    "snippetPicture": "Picture description",
+    "mark": "Get AI marking",
+    "marking": "Getting the AI mark…",
+    "notDeployed": "AI marking is not available yet. The marking service is not deployed.",
+    "signIn": "Sign in with your student ID to get an AI mark.",
+    "noTranscript": "There is no transcript to mark yet.",
+    "marked": "AI mark saved.",
+    "markFailed": "The AI mark could not be saved. Try again.",
+    "studentCap": "You have used today's AI marks. Try again tomorrow.",
+    "slowDown": "Wait a minute, then ask for an AI mark again.",
+    "dailyCap": "AI marking is full for today. Try again tomorrow.",
+    "signInAgain": "Sign in again, then ask for an AI mark.",
+    "aiScore": "AI mark"
   },
   "common": {
     "language": "Language",

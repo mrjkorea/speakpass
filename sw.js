@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v3';
+const CACHE = 'app-shell-v4';
 
 const PRECACHE = [
   './index.html',
@@ -14,6 +14,9 @@ const PRECACHE = [
   './js/grade.js',
   './js/engine.js',
   './js/app.js',
+  './js/paid-mark.js',
+  './js/mark-client.js',
+  './js/mrj-scores.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-180.png',
