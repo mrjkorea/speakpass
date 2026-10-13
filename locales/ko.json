@@ -11,7 +11,12 @@
     "loadError": "시험 목록을 불러오지 못했습니다. 연결을 확인한 뒤 다시 시도하세요.",
     "noTests": "아직 사용할 수 있는 연습 시험이 없습니다.",
     "micNote": "전체 시험은 마이크를 사용합니다. 타이머는 멈추지 않고 이어집니다.",
-    "questionCount": "문제 {count}개"
+    "questionCount": "문제 {count}개",
+    "savedTitle": "저장된 진도",
+    "savedCount": "{done} / {total} 문제 저장됨",
+    "savedNone": "이 시험에 저장된 답이 아직 없습니다.",
+    "savedItem": "문제 {n}: {score}/{total}",
+    "savedDone": "문제 {n} 저장됨"
   },
   "practice": {
     "title": "연습",
@@ -61,7 +66,7 @@
     "start": "시작",
     "end": "종료",
     "leaveTitle": "이 세션을 끝낼까요?",
-    "leaveBody": "타이머가 멈춥니다. 지금까지 녹음한 답은 이 기기에 남습니다.",
+    "leaveBody": "타이머가 멈춥니다. 지금까지 녹음한 답은 계정에 저장됩니다.",
     "leaveYes": "세션 종료",
     "leaveNo": "계속하기",
     "micDenied": "마이크 사용이 차단되었습니다. 브라우저 설정에서 마이크를 허용한 뒤 다시 시도하세요.",
@@ -82,11 +87,12 @@
     "noAudio": "녹음 없음",
     "deviceScore": "기기 내 점수",
     "serverScore": "서버 점수",
-    "saved": "이 기기에 저장됨",
-    "notSaved": "이 기기에 저장하지 못했습니다. 이 페이지를 떠나기 전에는 답을 재생할 수 있습니다.",
+    "saved": "계정에 저장됨",
+    "notSaved": "계정에 저장하지 못했습니다. 이 페이지를 떠나기 전에는 답을 재생할 수 있습니다.",
     "home": "처음으로",
     "retry": "다시 시도",
-    "snippetPicture": "그림 설명"
+    "snippetPicture": "그림 설명",
+    "saving": "계정에 저장하는 중…"
   },
   "common": {
     "language": "언어",
@@ -99,5 +105,9 @@
     "play": "문제 {n}의 답 재생",
     "stop": "문제 {n}의 답 재생 정지",
     "progress": "문제 {index} / {total}"
+  },
+  "account": {
+    "loading": "저장된 진도를 불러오는 중…",
+    "error": "저장된 진도를 불러오지 못했습니다. 연결을 확인하고 다시 시도하세요."
   }
 }

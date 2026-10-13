@@ -11,7 +11,12 @@
     "loadError": "Sınav listesi yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.",
     "noTests": "Henüz alıştırma sınavı yok.",
     "micNote": "Tam sınav mikrofonu kullanır. Süreler ara vermeden akar.",
-    "questionCount": "{count} soru"
+    "questionCount": "{count} soru",
+    "savedTitle": "Kayıtlı ilerleme",
+    "savedCount": "{done} / {total} soru kaydedildi",
+    "savedNone": "Bu test için henüz kayıtlı yanıt yok.",
+    "savedItem": "Soru {n}: {score}/{total}",
+    "savedDone": "Soru {n} kaydedildi"
   },
   "practice": {
     "title": "Alıştırma",
@@ -61,7 +66,7 @@
     "start": "Başla",
     "end": "Bitir",
     "leaveTitle": "Bu oturum bitsin mi?",
-    "leaveBody": "Sayaç duracak. Şimdiye kadar kaydedilen yanıtlar bu cihazda kalır.",
+    "leaveBody": "Sayaç duracak. Şimdiye kadar kaydedilen yanıtlar hesabınıza kaydedilir.",
     "leaveYes": "Oturumu bitir",
     "leaveNo": "Devam et",
     "micDenied": "Mikrofon erişimi engellendi. Tarayıcı ayarlarından mikrofona izin verip yeniden deneyin.",
@@ -82,11 +87,12 @@
     "noAudio": "Kayıt yok",
     "deviceScore": "Cihaz içi puan",
     "serverScore": "Sunucu puanı",
-    "saved": "Bu cihaza kaydedildi",
-    "notSaved": "Bu cihaza kaydedilemedi. Sayfadan çıkana kadar yanıtları dinleyebilirsiniz.",
+    "saved": "Hesabınıza kaydedildi",
+    "notSaved": "Hesabınıza kaydedilemedi. Sayfadan çıkana kadar yanıtları dinleyebilirsiniz.",
     "home": "Başlangıca dön",
     "retry": "Yeniden dene",
-    "snippetPicture": "Resim anlatımı"
+    "snippetPicture": "Resim anlatımı",
+    "saving": "Hesabınıza kaydediliyor…"
   },
   "common": {
     "language": "Dil",
@@ -99,5 +105,9 @@
     "play": "{n}. sorunun yanıtını oynat",
     "stop": "{n}. sorunun oynatılmasını durdur",
     "progress": "Soru {index} / {total}"
+  },
+  "account": {
+    "loading": "Kayıtlı ilerlemeniz yükleniyor…",
+    "error": "Kayıtlı ilerlemeniz yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin."
   }
 }

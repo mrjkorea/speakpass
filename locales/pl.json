@@ -11,7 +11,12 @@
     "loadError": "Nie udało się wczytać listy testów. Sprawdź połączenie i spróbuj ponownie.",
     "noTests": "Nie ma jeszcze testów ćwiczebnych.",
     "micNote": "Pełny test używa mikrofonu. Czasomierze idą bez przerwy.",
-    "questionCount": "Liczba pytań: {count}"
+    "questionCount": "Liczba pytań: {count}",
+    "savedTitle": "Zapisane postępy",
+    "savedCount": "Zapisano {done} z {total} pytań",
+    "savedNone": "Brak zapisanych odpowiedzi dla tego testu.",
+    "savedItem": "Pytanie {n}: {score}/{total}",
+    "savedDone": "Zapisano pytanie {n}"
   },
   "practice": {
     "title": "Ćwiczenie",
@@ -61,7 +66,7 @@
     "start": "Start",
     "end": "Zakończ",
     "leaveTitle": "Zakończyć tę sesję?",
-    "leaveBody": "Czasomierz się zatrzyma. Dotychczasowe nagrania zostaną na tym urządzeniu.",
+    "leaveBody": "Czasomierz się zatrzyma. Dotychczasowe nagrania zostaną zapisane na Twoim koncie.",
     "leaveYes": "Zakończ sesję",
     "leaveNo": "Kontynuuj",
     "micDenied": "Dostęp do mikrofonu został zablokowany. Zezwól na mikrofon w ustawieniach przeglądarki i spróbuj ponownie.",
@@ -82,11 +87,12 @@
     "noAudio": "Brak nagrania",
     "deviceScore": "Ocena na urządzeniu",
     "serverScore": "Ocena serwera",
-    "saved": "Zapisano na tym urządzeniu",
-    "notSaved": "Nie udało się zapisać na tym urządzeniu. Odpowiedzi można odtworzyć, dopóki nie opuścisz tej strony.",
+    "saved": "Zapisano na Twoim koncie",
+    "notSaved": "Nie udało się zapisać na Twoim koncie. Odpowiedzi można odtworzyć, dopóki nie opuścisz tej strony.",
     "home": "Wróć na start",
     "retry": "Spróbuj ponownie",
-    "snippetPicture": "Opis obrazka"
+    "snippetPicture": "Opis obrazka",
+    "saving": "Zapisywanie na Twoim koncie…"
   },
   "common": {
     "language": "Język",
@@ -99,5 +105,9 @@
     "play": "Odtwórz odpowiedź na pytanie {n}",
     "stop": "Zatrzymaj odtwarzanie pytania {n}",
     "progress": "Pytanie {index} z {total}"
+  },
+  "account": {
+    "loading": "Wczytywanie zapisanych postępów…",
+    "error": "Nie udało się wczytać zapisanych postępów. Sprawdź połączenie i spróbuj ponownie."
   }
 }

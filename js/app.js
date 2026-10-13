@@ -1,11 +1,12 @@
+import { reportScoredItems, loadProgressPack, saveProgressPack, studentId } from './cloud.js';
 import { APP_NAME, LANGS } from './config.js';
-import { saveAttempt } from './db.js';
 import { activeStream, beginArm, hasStream, releaseMic } from './audio.js';
 import { createSession } from './engine.js';
 import { gradeFree, gradePaid } from './grade.js';
 import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
+import { applyAttempt, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
 
 const RING = 2 * Math.PI * 52;
 
@@ -15,7 +16,7 @@ const state = {
   en: null,
   catalog: [],
   testId: '',
-  screen: 'loading',
+  screen: 'account',
   error: '',
   selection: null,
   session: null,
@@ -24,7 +25,11 @@ const state = {
   arming: false,
   dialog: false,
   review: null,
-  playingQ: null
+  playingQ: null,
+  pack: emptyPack(),
+  packStatus: 'idle',
+  studentId: '',
+  sessionOwner: ''
 };
 
 let renderedScreen = '';
@@ -33,6 +38,10 @@ let lastSpoken = '';
 let presenting = false;
 let audioEl = null;
 let audioUrl = '';
+let hydrateSeq = 0;
+let reviewToken = 0;
+let packEpoch = 0;
+let saveChain = Promise.resolve();
 
 function t(key, vars) {
   const raw = lookup(state.dict, key) ?? lookup(state.en, key) ?? key;
@@ -111,6 +120,7 @@ function stopPlayback() {
 function goHome() {
   stopPlayback();
   releaseMic();
+  reviewToken += 1;
   state.session = null;
   state.view = null;
   state.dialog = false;
@@ -122,16 +132,20 @@ function goHome() {
   render();
 }
 
+function gradeByQuestion(attempt, grades) {
+  const map = {};
+  for (const ans of attempt.answers) {
+    map[ans.q] = ans.q <= 4 ? grades.free[ans.q] : grades.paid;
+  }
+  return map;
+}
+
 async function presentReview(attempt) {
   if (presenting) return;
   presenting = true;
   releaseMic();
-  let saved = true;
-  try {
-    await saveAttempt(attempt);
-  } catch (err) {
-    saved = false;
-  }
+  const token = ++reviewToken;
+  const owner = state.sessionOwner || studentId();
   const grades = { free: {}, paid: null };
   for (const ans of attempt.answers) {
     if (ans.q <= 4) grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
@@ -141,7 +155,7 @@ async function presentReview(attempt) {
   }
   state.review = {
     attempt,
-    saved,
+    saved: null,
     grades,
     selection: state.selection
   };
@@ -153,6 +167,46 @@ async function presentReview(attempt) {
   viewKey = '';
   presenting = false;
   render();
+
+  let saved = false;
+  let scored = [];
+  if (owner && state.packStatus === 'ready') {
+    const gradesMap = gradeByQuestion(attempt, grades);
+    const run = saveChain.then(async () => {
+      if (studentId() !== owner) return { saved: false, scored: [] };
+      const applied = applyAttempt(state.pack, attempt, gradesMap);
+      let ok = false;
+      try {
+        const res = await saveProgressPack(packJson(applied.pack));
+        ok = !!(res && res.ok);
+      } catch (err) {
+        ok = false;
+      }
+      if (studentId() !== owner) return { saved: false, scored: [] };
+      if (ok) {
+        state.pack = applied.pack;
+        packEpoch += 1;
+      }
+      return { saved: ok, scored: applied.scored };
+    }).catch(() => ({ saved: false, scored: [] }));
+    saveChain = run.then(() => {});
+    const result = await run;
+    saved = result.saved;
+    scored = result.scored;
+  }
+  if (token === reviewToken && state.review && state.review.attempt === attempt) {
+    state.review.saved = saved;
+    if (state.screen === 'review') render();
+  } else if (saved && (state.screen === 'home' || state.screen === 'practice')) {
+    render();
+  }
+  if (scored.length && owner === studentId()) {
+    reportScoredItems(scored, {
+      testTitle: attempt.testTitle,
+      testId: attempt.testId,
+      mode: attempt.mode
+    }).catch(() => {});
+  }
 }
 
 function handleView(view) {
@@ -171,9 +225,10 @@ function handleView(view) {
 
 function startSession(selection) {
   const test = currentTest();
-  if (!test) return;
+  if (!test || state.packStatus !== 'ready') return;
   stopPlayback();
   releaseMic();
+  state.sessionOwner = studentId();
   const plan = buildPlan(test, selection);
   if (!plan.some((step) => step.kind === 'question')) return;
   state.selection = selection;
@@ -314,6 +369,10 @@ function onClick(event) {
   else if (action === 'play') togglePlay(button.dataset.q);
   else if (action === 'retry' && state.review) startSession(state.review.selection);
   else if (action === 'reload') boot();
+  else if (action === 'reload-progress') {
+    const id = studentId() || state.studentId;
+    if (id) hydrate(id);
+  }
 }
 
 function onChange(event) {
@@ -406,11 +465,42 @@ function renderHome() {
       <select id="test-select" lang="en" dir="ltr">${options}</select>
     </label>
     <p class="count">${escapeHtml(t('home.questionCount', { count: test.questions.length }))}</p>
+    ${cloudHtml(test)}
     <p class="note">${escapeHtml(t('home.micNote'))}</p>
     <div class="dock actions">
       <button type="button" class="btn primary" data-action="full">${escapeHtml(t('home.fullTest'))}</button>
       <button type="button" class="btn secondary" data-action="practice">${escapeHtml(t('home.practice'))}</button>
     </div>
+  `);
+}
+
+function savedLabel(row, q) {
+  if (row.graded) return t('home.savedItem', { n: q, score: row.score, total: row.total });
+  return t('home.savedDone', { n: q });
+}
+
+function cloudHtml(test) {
+  const rows = questionsForTest(state.pack, test.id);
+  const count = t('home.savedCount', { done: rows.length, total: test.questions.length });
+  const body = rows.length
+    ? `<p>${escapeHtml(count)}</p><ul>${rows.map((row) => `<li data-saved-q="${row.q}">${escapeHtml(savedLabel(row, row.q))}</li>`).join('')}</ul>`
+    : `<p>${escapeHtml(t('home.savedNone'))}</p>`;
+  return `
+    <section class="cloud" id="saved-progress" aria-labelledby="saved-title">
+      <h2 id="saved-title">${escapeHtml(t('home.savedTitle'))}</h2>
+      ${body}
+    </section>`;
+}
+
+function renderAccount() {
+  const body = state.packStatus === 'error'
+    ? `<p class="alert" role="alert">${escapeHtml(t('account.error'))}</p>
+       <button type="button" class="btn primary" data-action="reload-progress">${escapeHtml(t('common.retry'))}</button>`
+    : `<p>${escapeHtml(t('account.loading'))}</p>`;
+  return shell(`
+    <h1>${escapeHtml(t('appName'))}</h1>
+    <div class="legal">${legalHtml()}</div>
+    ${body}
   `);
 }
 
@@ -425,9 +515,13 @@ function renderPractice() {
   }
   const cards = PART_ORDER.filter((id) => groups.has(id)).map((id) => {
     const questions = groups.get(id);
-    const buttons = questions.map((q) => `
-      <button type="button" class="btn secondary" data-action="practice-q" data-q="${q.q}">${escapeHtml(t('run.qLabel', { n: q.q }))}</button>
-    `).join('');
+    const buttons = questions.map((q) => {
+      const saved = savedQuestion(state.pack, test.id, q.q);
+      const label = saved ? savedLabel(saved, q.q) : t('run.qLabel', { n: q.q });
+      const cls = saved ? 'btn secondary is-saved' : 'btn secondary';
+      const mark = saved ? ' data-saved="1"' : '';
+      return `<button type="button" class="${cls}" data-action="practice-q" data-q="${q.q}"${mark}>${escapeHtml(label)}</button>`;
+    }).join('');
     return `
       <section class="part-card">
         <h2>${escapeHtml(t(`parts.${id}.title`))}</h2>
@@ -642,7 +736,7 @@ function renderReview() {
     <h1 id="step-title" tabindex="-1">${escapeHtml(t('review.title'))}</h1>
     <p class="test-name" lang="en" dir="ltr">${escapeHtml(attempt.testTitle || '')}</p>
     <p>${escapeHtml(lead)}</p>
-    <p class="saved">${escapeHtml(saved ? t('review.saved') : t('review.notSaved'))}</p>
+    <p class="saved">${escapeHtml(saved == null ? t('review.saving') : (saved ? t('review.saved') : t('review.notSaved')))}</p>
     <div class="answers">${cards}</div>
     <div class="dock actions">
       ${retry}
@@ -676,6 +770,7 @@ function viewForScreen() {
       </main>`;
   }
   if (state.screen === 'loading') return renderLoading();
+  if (state.screen === 'account') return renderAccount();
   if (state.screen === 'error') return renderError();
   if (state.screen === 'practice') return renderPractice();
   if (state.screen === 'session') return renderSession();
@@ -759,10 +854,85 @@ function registerServiceWorker() {
   register({ scope: './', updateViaCache: 'none' }).catch(() => register({ scope: './' }).catch(() => {}));
 }
 
+function showAfterCatalog() {
+  if (!state.catalog.length) {
+    state.screen = 'error';
+    state.error = 'empty';
+  } else if (state.packStatus === 'ready') {
+    state.screen = 'home';
+  } else {
+    state.screen = 'account';
+  }
+  render();
+}
+
+async function hydrate(id) {
+  const seq = ++hydrateSeq;
+  const switched = state.studentId !== id;
+  state.studentId = id;
+  if (switched) state.pack = emptyPack();
+  state.packStatus = 'loading';
+  if (state.screen !== 'session' && state.screen !== 'review') {
+    state.screen = 'account';
+    render();
+  }
+  try { await saveChain; } catch (err) { /* keep going */ }
+  if (seq !== hydrateSeq || studentId() !== id) return;
+  const epoch = packEpoch;
+  let res;
+  try {
+    res = await loadProgressPack();
+  } catch (err) {
+    res = { ok: false, error: 'network' };
+  }
+  if (seq !== hydrateSeq || studentId() !== id) return;
+  if (!res || !res.ok) {
+    state.packStatus = 'error';
+    if (state.screen !== 'session' && state.screen !== 'review') state.screen = 'account';
+    render();
+    return;
+  }
+  if (epoch === packEpoch) state.pack = parsePack(res.progress_json);
+  state.packStatus = 'ready';
+  if (state.catalog.length && state.screen !== 'session' && state.screen !== 'review') {
+    state.screen = 'home';
+  }
+  render();
+  const scores = globalThis.MRJ_SCORES;
+  if (scores && typeof scores.flush === 'function') scores.flush();
+}
+
+function onAuthReady(event) {
+  const detail = event && event.detail ? event.detail : {};
+  const id = String(detail.id != null ? detail.id : studentId()).trim();
+  if (!id) return;
+  if (id === state.studentId && state.packStatus === 'ready' && (state.screen === 'session' || state.screen === 'review')) {
+    return;
+  }
+  hydrate(id);
+}
+
+function onSignedOut(event) {
+  const button = event.target && event.target.closest && event.target.closest('.mrj-auth-signout');
+  if (!button) return;
+  hydrateSeq += 1;
+  reviewToken += 1;
+  state.studentId = '';
+  state.sessionOwner = '';
+  state.pack = emptyPack();
+  state.packStatus = 'idle';
+  state.review = null;
+  if (state.screen !== 'session') {
+    stopPlayback();
+    state.screen = 'account';
+    render();
+  }
+}
+
 async function boot() {
   state.lang = detectLang();
-  state.screen = 'loading';
   state.error = '';
+  if (state.packStatus !== 'ready') state.screen = 'account';
   try {
     await loadLanguage(state.lang);
   } catch (err) {
@@ -779,17 +949,18 @@ async function boot() {
   render();
   try {
     await loadCatalog();
-    state.screen = state.catalog.length ? 'home' : 'error';
-    if (!state.catalog.length) state.error = 'empty';
+    showAfterCatalog();
   } catch (err) {
     state.screen = 'error';
     state.error = 'load';
+    render();
   }
-  render();
   registerServiceWorker();
 }
 
 document.addEventListener('click', onClick);
+document.addEventListener('click', onSignedOut);
 document.addEventListener('change', onChange);
+document.addEventListener('mrj-auth-ready', onAuthReady);
 window.addEventListener('beforeunload', onLeave);
 boot();

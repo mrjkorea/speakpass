@@ -31,7 +31,7 @@ Twenty colour JPEGs were added under `images/`. Each file is a progressive RGB J
 | test10_q3.jpg | 87409 |
 | test10_q4.jpg | 88135 |
 
-The service worker precache includes these files, and its cache name is `app-shell-v4`.
+The service worker precache includes these files, and its cache name is `app-shell-v5`.
 
 On screen, the frame is 4:3, the same shape as the photographs, with `object-fit: contain`, so the whole picture stays visible on a phone and on a desktop. For picture questions the photo sits above a compact timer, so it remains on screen while the candidate is speaking.
 
