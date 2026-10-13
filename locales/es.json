@@ -11,7 +11,12 @@
     "loadError": "No se pudo cargar la lista de pruebas. Revisa tu conexión e inténtalo de nuevo.",
     "noTests": "Todavía no hay pruebas de práctica.",
     "micNote": "La prueba completa usa el micrófono. Los temporizadores siguen sin pausa.",
-    "questionCount": "{count} preguntas"
+    "questionCount": "{count} preguntas",
+    "savedTitle": "Progreso guardado",
+    "savedCount": "{done} de {total} preguntas guardadas",
+    "savedNone": "Todavía no hay respuestas guardadas para esta prueba.",
+    "savedItem": "Pregunta {n}: {score}/{total}",
+    "savedDone": "Pregunta {n} guardada"
   },
   "practice": {
     "title": "Práctica",
@@ -61,7 +66,7 @@
     "start": "Empezar",
     "end": "Terminar",
     "leaveTitle": "¿Terminar esta sesión?",
-    "leaveBody": "El temporizador se detendrá. Las respuestas ya grabadas se quedan en este dispositivo.",
+    "leaveBody": "El temporizador se detendrá. Las respuestas ya grabadas se guardan en tu cuenta.",
     "leaveYes": "Terminar sesión",
     "leaveNo": "Seguir",
     "micDenied": "Se bloqueó el micrófono. Permítelo en los ajustes del navegador e inténtalo de nuevo.",
@@ -82,11 +87,12 @@
     "noAudio": "Sin grabación",
     "deviceScore": "Puntuación en el dispositivo",
     "serverScore": "Puntuación del servidor",
-    "saved": "Guardado en este dispositivo",
-    "notSaved": "No se pudo guardar en este dispositivo. Aún puedes reproducir las respuestas hasta que salgas de esta página.",
+    "saved": "Guardado en tu cuenta",
+    "notSaved": "No se pudo guardar en tu cuenta. Aún puedes reproducir las respuestas hasta que salgas de esta página.",
     "home": "Volver al inicio",
     "retry": "Intentar de nuevo",
-    "snippetPicture": "Descripción de la imagen"
+    "snippetPicture": "Descripción de la imagen",
+    "saving": "Guardando en tu cuenta…"
   },
   "common": {
     "language": "Idioma",
@@ -99,5 +105,9 @@
     "play": "Reproducir la respuesta de la pregunta {n}",
     "stop": "Detener la respuesta de la pregunta {n}",
     "progress": "Pregunta {index} de {total}"
+  },
+  "account": {
+    "loading": "Cargando tu progreso guardado…",
+    "error": "No se pudo cargar tu progreso guardado. Revisa la conexión e inténtalo de nuevo."
   }
 }

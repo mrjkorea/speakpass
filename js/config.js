@@ -1,6 +1,9 @@
 /** Product name. This is the only app-name constant. */
 export const APP_NAME = 'SpeakPass AI';
 
+/** Shared MRJ account id. Packs and scores use this id. */
+export const APP_ID = 'speakpass';
+
 /** UI languages. Test content stays English. Arabic uses a right-to-left layout. */
 export const LANGS = [
   { id: 'en', label: 'English', dir: 'ltr' },

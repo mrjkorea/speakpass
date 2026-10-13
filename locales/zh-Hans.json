@@ -11,7 +11,12 @@
     "loadError": "无法加载测试列表。请检查网络后再试。",
     "noTests": "目前还没有练习测试。",
     "micNote": "完整测试会使用麦克风。计时开始后不能暂停。",
-    "questionCount": "{count} 道题"
+    "questionCount": "{count} 道题",
+    "savedTitle": "已保存的进度",
+    "savedCount": "已保存 {done} / {total} 题",
+    "savedNone": "这份练习还没有保存的答案。",
+    "savedItem": "第 {n} 题：{score}/{total}",
+    "savedDone": "第 {n} 题已保存"
   },
   "practice": {
     "title": "练习",
@@ -61,7 +66,7 @@
     "start": "开始",
     "end": "结束",
     "leaveTitle": "结束这次练习？",
-    "leaveBody": "计时会停止。已经录下的答案会留在这台设备上。",
+    "leaveBody": "计时会停止。已经录下的答案会保存到你的账户。",
     "leaveYes": "结束",
     "leaveNo": "继续",
     "micDenied": "麦克风权限被拒绝。请在浏览器设置中允许麦克风，然后重试。",
@@ -82,11 +87,12 @@
     "noAudio": "没有录音",
     "deviceScore": "设备端评分",
     "serverScore": "服务器评分",
-    "saved": "已保存在这台设备上",
-    "notSaved": "未能保存在这台设备上。离开此页之前仍可播放答案。",
+    "saved": "已保存到你的账户",
+    "notSaved": "未能保存到你的账户。离开此页之前仍可播放答案。",
     "home": "返回开始",
     "retry": "再试一次",
-    "snippetPicture": "图片描述"
+    "snippetPicture": "图片描述",
+    "saving": "正在保存到你的账户…"
   },
   "common": {
     "language": "语言",
@@ -99,5 +105,9 @@
     "play": "播放第 {n} 题的答案",
     "stop": "停止播放第 {n} 题的答案",
     "progress": "第 {index} 题，共 {total} 题"
+  },
+  "account": {
+    "loading": "正在加载已保存的进度…",
+    "error": "无法加载已保存的进度。请检查网络后重试。"
   }
 }

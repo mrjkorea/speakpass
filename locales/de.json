@@ -11,7 +11,12 @@
     "loadError": "Die Testliste konnte nicht geladen werden. Prüfe die Verbindung und versuche es erneut.",
     "noTests": "Noch keine Übungstests vorhanden.",
     "micNote": "Ein gesamter Test nutzt das Mikrofon. Die Zeit läuft ohne Pause durch.",
-    "questionCount": "{count} Fragen"
+    "questionCount": "{count} Fragen",
+    "savedTitle": "Gespeicherter Fortschritt",
+    "savedCount": "{done} von {total} Fragen gespeichert",
+    "savedNone": "Für diesen Test sind noch keine Antworten gespeichert.",
+    "savedItem": "Frage {n}: {score}/{total}",
+    "savedDone": "Frage {n} gespeichert"
   },
   "practice": {
     "title": "Üben",
@@ -61,7 +66,7 @@
     "start": "Start",
     "end": "Beenden",
     "leaveTitle": "Diese Sitzung beenden?",
-    "leaveBody": "Der Timer stoppt. Bisherige Aufnahmen bleiben auf diesem Gerät.",
+    "leaveBody": "Der Timer stoppt. Bisherige Aufnahmen werden in deinem Konto gespeichert.",
     "leaveYes": "Sitzung beenden",
     "leaveNo": "Weiter",
     "micDenied": "Der Mikrofonzugriff wurde blockiert. Erlaube das Mikrofon in den Browsereinstellungen und versuche es erneut.",
@@ -82,11 +87,12 @@
     "noAudio": "Keine Aufnahme",
     "deviceScore": "Bewertung auf dem Gerät",
     "serverScore": "Server-Bewertung",
-    "saved": "Auf diesem Gerät gespeichert",
-    "notSaved": "Konnte auf diesem Gerät nicht gespeichert werden. Du kannst die Antworten noch abspielen, bis du diese Seite verlässt.",
+    "saved": "In deinem Konto gespeichert",
+    "notSaved": "Konnte nicht in deinem Konto gespeichert werden. Du kannst die Antworten noch abspielen, bis du diese Seite verlässt.",
     "home": "Zum Start",
     "retry": "Nochmal",
-    "snippetPicture": "Bildbeschreibung"
+    "snippetPicture": "Bildbeschreibung",
+    "saving": "Wird in deinem Konto gespeichert…"
   },
   "common": {
     "language": "Sprache",
@@ -99,5 +105,9 @@
     "play": "Antwort auf Frage {n} abspielen",
     "stop": "Wiedergabe von Frage {n} stoppen",
     "progress": "Frage {index} von {total}"
+  },
+  "account": {
+    "loading": "Gespeicherter Fortschritt wird geladen…",
+    "error": "Dein gespeicherter Fortschritt konnte nicht geladen werden. Prüfe die Verbindung und versuche es erneut."
   }
 }

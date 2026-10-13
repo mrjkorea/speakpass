@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v3';
+const CACHE = 'app-shell-v4';
 
 const PRECACHE = [
   './index.html',
@@ -10,8 +10,10 @@ const PRECACHE = [
   './js/plan.js',
   './js/timer.js',
   './js/audio.js',
-  './js/db.js',
   './js/grade.js',
+  './js/progress.js',
+  './js/cloud.js',
+  './mrj-scores.js',
   './js/engine.js',
   './js/app.js',
   './icons/icon-192.png',
