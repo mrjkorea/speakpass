@@ -92,7 +92,12 @@
     "home": "Retour au début",
     "retry": "Réessayer",
     "snippetPicture": "Description de l’image",
-    "saving": "Enregistrement dans votre compte…"
+    "saving": "Enregistrement dans votre compte…",
+    "checking": "Vérification de la prononciation…",
+    "sayAgain": "Dis-le encore. Dis chaque mot clairement.",
+    "stars": "{n} sur 5",
+    "checkFailed": "La prononciation n’a pas pu être vérifiée sur cet appareil. Ta réponse est quand même enregistrée.",
+    "weak": "Mots à travailler"
   },
   "common": {
     "language": "Langue",

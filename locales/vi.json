@@ -92,7 +92,12 @@
     "home": "Về trang đầu",
     "retry": "Làm lại",
     "snippetPicture": "Mô tả tranh",
-    "saving": "Đang lưu vào tài khoản của bạn…"
+    "saving": "Đang lưu vào tài khoản của bạn…",
+    "checking": "Đang kiểm tra phát âm…",
+    "sayAgain": "Hãy nói lại. Hãy nói rõ từng từ.",
+    "stars": "{n} trên 5",
+    "checkFailed": "Không kiểm tra được phát âm trên thiết bị này. Câu trả lời vẫn được lưu.",
+    "weak": "Từ cần luyện"
   },
   "common": {
     "language": "Ngôn ngữ",

@@ -473,6 +473,41 @@ th { background: var(--cream-2); }
 
 .score { font-weight: 700; color: var(--ink); }
 
+.stars {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.7rem;
+}
+
+.score-name { font-weight: 700; }
+
+.star-row {
+  color: var(--gold);
+  font-size: 1.45rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.star-row .off { color: #c3b49a; }
+
+.marked-line {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.marked-line mark.weak {
+  background: #f6d3c6;
+  color: var(--speak);
+  font-weight: 700;
+  border-radius: 0.25rem;
+  padding: 0 0.12em;
+}
+
+.weak-list { margin: 0; color: var(--speak); font-weight: 700; }
+
+.checking { font-weight: 700; }
+
 .cloud {
   display: flex;
   flex-direction: column;

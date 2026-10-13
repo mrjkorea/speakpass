@@ -92,7 +92,12 @@
     "home": "Torna all’inizio",
     "retry": "Riprova",
     "snippetPicture": "Descrizione dell’immagine",
-    "saving": "Salvataggio nel tuo account…"
+    "saving": "Salvataggio nel tuo account…",
+    "checking": "Controllo della pronuncia…",
+    "sayAgain": "Dillo di nuovo. Di’ ogni parola chiaramente.",
+    "stars": "{n} su 5",
+    "checkFailed": "Non è stato possibile controllare la pronuncia su questo dispositivo. La risposta viene comunque salvata.",
+    "weak": "Parole da esercitare"
   },
   "common": {
     "language": "Lingua",

@@ -92,7 +92,12 @@
     "home": "Başlangıca dön",
     "retry": "Yeniden dene",
     "snippetPicture": "Resim anlatımı",
-    "saving": "Hesabınıza kaydediliyor…"
+    "saving": "Hesabınıza kaydediliyor…",
+    "checking": "Telaffuz kontrol ediliyor…",
+    "sayAgain": "Tekrar söyle. Her sözcüğü açık söyle.",
+    "stars": "5 üzerinden {n}",
+    "checkFailed": "Bu cihazda telaffuz kontrol edilemedi. Yanıtın yine de kaydedilir.",
+    "weak": "Çalışılacak sözcükler"
   },
   "common": {
     "language": "Dil",

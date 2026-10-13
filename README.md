@@ -4,7 +4,7 @@ English speaking practice with TOEIC-style questions. This is not a TOEIC test.
 
 TOEIC is a registered trademark of ETS. This product is not endorsed or approved by ETS.
 
-SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. Sign in with the shared classroom account. Progress loads from that account on every computer. It does not grade spoken answers yet.
+SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. Sign in with the shared classroom account. Progress loads from that account on every computer. Questions 1 and 2 (read a text aloud) get an on-device pronunciation score. The other questions are not scored yet.
 
 The app name is the constant `APP_NAME` in `js/config.js`. The manifest (`name` and `short_name`), the page title, and `appName` in every file under `locales/` must stay the same as that constant.
 
@@ -47,7 +47,8 @@ js/engine.js            Timers and the question sequence
 js/audio.js             Microphone, beeps, MediaRecorder
 js/progress.js          Cloud progress pack (no audio)
 js/cloud.js             Sign-in pack load/save and score posts
-js/grade.js             gradeFree and gradePaid stubs
+js/grade.js             Read-aloud score and later hooks
+js/pronounce/           Shared on-device pronunciation checker
 mrj-scores.js           Shared classroom score sheet poster
 js/plan.js              Turns a test file into steps
 js/i18n.js              Language detection and dictionaries
@@ -110,12 +111,11 @@ Test the cloud path only with ids that start with `zz_test_`.
 
 ## Grading
 
-`js/grade.js` only holds hooks:
+Questions 1 and 2 are scored on the device after the recording stops. The checker loads `model.int8.onnx`, its piece list, and the shared WebAssembly runtime from the pronunciation site, once, and keeps those files in the browser cache, so a later visit still scores with no network. A word passes at 60. If the heard words overlap the passage by less than half, the screen asks the student to say it again and the saved score is 0/5. Otherwise the average word score becomes 1–5 stars (90 and above is 5, 80 is 4, 70 is 3, 60 is 2, below 60 is 1) and words under 60 are highlighted.
 
-- `gradeFree(q, audio)` for questions 1–4, later an on-device score
-- `gradePaid(attempt)` for questions 5–11, later a server score
+The score is saved with the existing account pack and score sheet. The item id is still `<test>:<question number>`. A read-aloud score is `N/5`. Questions 3 and 4 still use `gradeFree`, which returns `coming soon` (saved as 1/1 when a recording exists). `gradePaid` for questions 5–11 is unchanged. Audio is not uploaded.
 
-Both return `coming soon`. They do not upload audio.
+Test cloud saves only with ids that start with `zz_test_`.
 
 ## Install and offline
 

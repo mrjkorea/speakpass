@@ -92,7 +92,12 @@
     "home": "처음으로",
     "retry": "다시 시도",
     "snippetPicture": "그림 설명",
-    "saving": "계정에 저장하는 중…"
+    "saving": "계정에 저장하는 중…",
+    "checking": "발음을 확인하는 중…",
+    "sayAgain": "다시 말해 주세요. 각 단어를 분명하게 말해 주세요.",
+    "stars": "5점 만점에 {n}점",
+    "checkFailed": "이 기기에서는 발음을 확인하지 못했습니다. 답은 그대로 저장됩니다.",
+    "weak": "연습할 단어"
   },
   "common": {
     "language": "언어",

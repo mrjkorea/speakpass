@@ -92,7 +92,12 @@
     "home": "Zum Start",
     "retry": "Nochmal",
     "snippetPicture": "Bildbeschreibung",
-    "saving": "Wird in deinem Konto gespeichert…"
+    "saving": "Wird in deinem Konto gespeichert…",
+    "checking": "Aussprache wird geprüft…",
+    "sayAgain": "Sag es noch einmal. Sprich jedes Wort deutlich.",
+    "stars": "{n} von 5",
+    "checkFailed": "Die Aussprache konnte auf diesem Gerät nicht geprüft werden. Deine Antwort wird trotzdem gespeichert.",
+    "weak": "Wörter zum Üben"
   },
   "common": {
     "language": "Sprache",

@@ -92,7 +92,12 @@
     "home": "返回开始",
     "retry": "再试一次",
     "snippetPicture": "图片描述",
-    "saving": "正在保存到你的账户…"
+    "saving": "正在保存到你的账户…",
+    "checking": "正在检查发音…",
+    "sayAgain": "请再说一遍。请把每个词说清楚。",
+    "stars": "5 分中的 {n} 分",
+    "checkFailed": "这台设备无法检查发音。你的答案仍会保存。",
+    "weak": "需要练习的词"
   },
   "common": {
     "language": "语言",

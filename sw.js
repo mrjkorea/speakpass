@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v5';
+const CACHE = 'app-shell-v6';
 
 const PRECACHE = [
   './index.html',
@@ -11,6 +11,19 @@ const PRECACHE = [
   './js/timer.js',
   './js/audio.js',
   './js/grade.js',
+  './js/pronounce/model-ref.js',
+  './js/pronounce/cache-get.js',
+  './js/pronounce/assets.js',
+  './js/pronounce/session.js',
+  './js/pronounce/pack.js',
+  './js/pronounce/words.js',
+  './js/pronounce/citrinet-encode.js',
+  './js/pronounce/nemo-fbank.js',
+  './js/pronounce/trial.js',
+  './js/pronounce/audio.js',
+  './js/pronounce/stars.js',
+  './js/pronounce/boot.js',
+  './js/pronounce/grade-worker.js',
   './js/progress.js',
   './js/cloud.js',
   './mrj-scores.js',
@@ -79,7 +92,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE && key !== 'mrj-citrinet-v1').map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
