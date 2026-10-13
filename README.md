@@ -4,7 +4,7 @@ English speaking practice with TOEIC-style questions. This is not a TOEIC test.
 
 TOEIC is a registered trademark of ETS. This product is not endorsed or approved by ETS.
 
-SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. It does not grade yet.
+SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. Sign in with the shared classroom account. Progress loads from that account on every computer. It does not grade spoken answers yet.
 
 The app name is the constant `APP_NAME` in `js/config.js`. The manifest (`name` and `short_name`), the page title, and `appName` in every file under `locales/` must stay the same as that constant.
 
@@ -28,8 +28,9 @@ The same files can be published on GitHub Pages (`.nojekyll` is included so ever
 
 - **Full test.** All 11 questions in order. Each part starts when you press Start. Preparation counts down, a tone plays, recording starts by itself, and recording stops when the speaking time ends.
 - **Practice.** One question, or every question in a part. You can try again from the review screen.
-- **Review.** Each answer is stored in IndexedDB on this device and can be played back.
+- **Review.** Each finished question is saved to the signed-in account. Playback of a recording stays on this page.
 - **Language.** The interface and the directions are available in 15 languages. The test itself stays in English. The language follows the browser the first time, and you can change it with the picker. Arabic uses a right-to-left layout.
+- **Sign in.** The name chip and My scores panel come from the shared sign-in script. The app id is `speakpass`. The full progress pack loads on sign-in. Passwords are never stored in this app.
 
 Questions 3 and 4 show a picture. If the image file is missing, a neutral placeholder appears. Questions 8–10 show a document for 45 seconds, then the questions. The document stays on screen.
 
@@ -44,8 +45,10 @@ js/config.js            APP_NAME and the language list
 js/app.js               Screens
 js/engine.js            Timers and the question sequence
 js/audio.js             Microphone, beeps, MediaRecorder
-js/db.js                IndexedDB attempts
+js/progress.js          Cloud progress pack (no audio)
+js/cloud.js             Sign-in pack load/save and score posts
 js/grade.js             gradeFree and gradePaid stubs
+mrj-scores.js           Shared classroom score sheet poster
 js/plan.js              Turns a test file into steps
 js/i18n.js              Language detection and dictionaries
 js/html.js              Escaping and document rendering
@@ -95,7 +98,15 @@ Directions are written in the locale files, not in the test. The app supplies th
 
 ## Recording
 
-The microphone is requested in the tap on Start, which is what iOS Safari requires. The recorder uses WebM when the browser supports it, and MP4 on Safari. Each answer’s audio blob is saved with the attempt in IndexedDB and played on the review screen.
+The microphone is requested in the tap on Start, which is what iOS Safari requires. The recorder uses WebM when the browser supports it, and MP4 on Safari. A recording plays on the review screen for this visit. The account stores the question, the score, and the attempt, not the audio.
+
+## Sign-in and progress
+
+Students use a different classroom computer each day. Nothing about progress is kept only on the device.
+
+On sign-in the app calls `loadPack('speakpass')` and shows that pack. After a session it calls `savePack` with the full pack. Each scored question also calls `noteScore` with item `<test>:<question number>`, and `MRJ_SCORES.post` with the plain student id (not an email address). Until a numeric grade exists, a finished recording is stored as 1/1 and a question with no recording as 0/1.
+
+Test the cloud path only with ids that start with `zz_test_`.
 
 ## Grading
 

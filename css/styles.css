@@ -466,6 +466,23 @@ th { background: var(--cream-2); }
 
 .score { font-weight: 700; color: var(--ink); }
 
+.cloud {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+}
+
+.cloud ul {
+  margin: 0;
+  padding-inline-start: 1.2rem;
+}
+
+.btn.is-saved { background: var(--cream-2); }
+
 .alert {
   border-color: var(--speak);
   color: var(--speak);

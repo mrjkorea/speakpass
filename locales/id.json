@@ -11,7 +11,12 @@
     "loadError": "Daftar tes tidak dapat dimuat. Periksa koneksi Anda dan coba lagi.",
     "noTests": "Belum ada tes latihan.",
     "micNote": "Tes lengkap memakai mikrofon. Penghitung waktu berjalan terus dan tidak bisa dijeda.",
-    "questionCount": "{count} soal"
+    "questionCount": "{count} soal",
+    "savedTitle": "Kemajuan tersimpan",
+    "savedCount": "{done} dari {total} soal tersimpan",
+    "savedNone": "Belum ada jawaban tersimpan untuk tes ini.",
+    "savedItem": "Soal {n}: {score}/{total}",
+    "savedDone": "Soal {n} tersimpan"
   },
   "practice": {
     "title": "Latihan",
@@ -61,7 +66,7 @@
     "start": "Mulai",
     "end": "Akhiri",
     "leaveTitle": "Akhiri sesi ini?",
-    "leaveBody": "Penghitung waktu akan berhenti. Jawaban yang sudah direkam tetap ada di perangkat ini.",
+    "leaveBody": "Penghitung waktu akan berhenti. Jawaban yang sudah direkam disimpan ke akun Anda.",
     "leaveYes": "Akhiri sesi",
     "leaveNo": "Lanjutkan",
     "micDenied": "Akses mikrofon diblokir. Izinkan mikrofon di pengaturan browser, lalu coba lagi.",
@@ -82,11 +87,12 @@
     "noAudio": "Tidak ada rekaman",
     "deviceScore": "Nilai di perangkat",
     "serverScore": "Nilai server",
-    "saved": "Tersimpan di perangkat ini",
-    "notSaved": "Tidak dapat menyimpan di perangkat ini. Anda masih bisa memutar jawaban sampai meninggalkan halaman ini.",
+    "saved": "Tersimpan di akun Anda",
+    "notSaved": "Tidak dapat menyimpan ke akun Anda. Anda masih bisa memutar jawaban sampai meninggalkan halaman ini.",
     "home": "Kembali ke awal",
     "retry": "Coba lagi",
-    "snippetPicture": "Deskripsi gambar"
+    "snippetPicture": "Deskripsi gambar",
+    "saving": "Menyimpan ke akun Anda…"
   },
   "common": {
     "language": "Bahasa",
@@ -99,5 +105,9 @@
     "play": "Putar jawaban soal {n}",
     "stop": "Hentikan jawaban soal {n}",
     "progress": "Soal {index} dari {total}"
+  },
+  "account": {
+    "loading": "Memuat kemajuan yang tersimpan…",
+    "error": "Kemajuan yang tersimpan tidak dapat dimuat. Periksa koneksi dan coba lagi."
   }
 }
