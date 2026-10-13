@@ -572,7 +572,7 @@ function directionsHtml(step) {
   `;
 }
 
-function timerBlock(view, hint, compact) {
+function timerBlock(view, hint, compact, extraClass = '') {
   const secs = secsLeft(view.remaining);
   const ratio = view.total > 0 ? Math.max(0, Math.min(1, view.remaining / view.total)) : 0;
   const offset = (RING * (1 - ratio)).toFixed(2);
@@ -585,7 +585,7 @@ function timerBlock(view, hint, compact) {
     ? `<button type="button" class="btn danger" data-action="stop-speak">${escapeHtml(t('review.stop'))}</button>`
     : '';
   return `
-    <div class="timer-wrap phase-${escapeHtml(view.phase)}${compact ? ' compact' : ''}">
+    <div class="timer-wrap phase-${escapeHtml(view.phase)}${compact ? ' compact' : ''}${extraClass ? ` ${extraClass}` : ''}">
       <div class="timer-face" role="timer" aria-label="${escapeHtml(t('a11y.timer', { phase: label, n: secs }))}">
         <svg class="ring-svg" viewBox="0 0 120 120" aria-hidden="true">
           <circle class="ring-track" cx="60" cy="60" r="52"></circle>
@@ -685,14 +685,18 @@ function renderSession() {
     `, { showEnd: true });
   }
   const q = step.question;
-  const compact = q.type === 'info_questions' || q.type === 'respond_questions';
+  const picture = q.type === 'describe_picture';
+  const compact = picture || q.type === 'info_questions' || q.type === 'respond_questions';
   const hint = view.phase === 'speak' ? t('run.auto') : (view.phase === 'prepare' ? t('run.tone') : '');
+  const body = questionBody(q);
+  const timer = timerBlock(view, hint, compact, picture ? 'beside-picture' : '');
   return shell(`
     ${progressHtml()}
     <h1 id="step-title" tabindex="-1">${escapeHtml(t('run.qLabel', { n: q.q }))}</h1>
     <p class="part-name">${escapeHtml(t(`parts.${q.type}.title`))}</p>
-    ${timerBlock(view, hint, compact)}
-    ${questionBody(q)}
+    ${picture ? body : ''}
+    ${timer}
+    ${picture ? '' : body}
     <p class="no-pause">${escapeHtml(t('run.noPause'))}</p>
   `, { showEnd: true });
 }

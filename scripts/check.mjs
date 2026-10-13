@@ -125,6 +125,47 @@ for (let n = 1; n <= 10; n += 1) {
   moved.questions[7].document = { ...moved.questions[7].document, read_sec: 45 };
   delete moved.questions[7].read_sec;
   if (readSeconds(moved.questions[7]) !== 45) throw new Error(`${id} read_sec`);
+  for (const q of test.questions) {
+    if (q.q !== 3 && q.q !== 4) continue;
+    if (typeof q.image !== 'string' || !/^images\/test\d{2}_q[34]\.jpg$/.test(q.image)) {
+      throw new Error(`${id} image path q${q.q}`);
+    }
+    if (q.image !== `images/${id}_q${q.q}.jpg`) throw new Error(`${id} image file q${q.q}`);
+    readFileSync(new URL(`../${q.image}`, import.meta.url));
+    const items = q.key_elements;
+    if (!Array.isArray(items) || items.length < 10) throw new Error(`${id} checklist q${q.q}`);
+    const ids = new Set();
+    let mainW = 0;
+    let detailN = 0;
+    const categories = ['place', 'people', 'clothing', 'action', 'object', 'position'];
+    for (const item of items) {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) throw new Error(`${id} item q${q.q}`);
+      if (typeof item.id !== 'string' || !item.id || ids.has(item.id)) throw new Error(`${id} id q${q.q}`);
+      ids.add(item.id);
+      if (item.role !== 'main' && item.role !== 'detail') throw new Error(`${id} role ${item.id}`);
+      if (item.role === 'main' && item.weight !== 2 && item.weight !== 3) throw new Error(`${id} weight ${item.id}`);
+      if (item.role === 'detail' && item.weight !== 1) throw new Error(`${id} weight ${item.id}`);
+      if (item.role === 'main') mainW += item.weight;
+      else detailN += 1;
+      if (!categories.includes(item.category)) throw new Error(`${id} category ${item.id}`);
+      if (typeof item.text !== 'string' || item.text.length < 8) throw new Error(`${id} text ${item.id}`);
+      if (!Array.isArray(item.accept) || item.accept.length < 3) throw new Error(`${id} accept ${item.id}`);
+      if (item.accept.some((phrase) => typeof phrase !== 'string' || !phrase.trim())) {
+        throw new Error(`${id} accept blank ${item.id}`);
+      }
+      const cons = item.contradict || [];
+      if (!Array.isArray(cons)) throw new Error(`${id} contradict ${item.id}`);
+      for (const entry of cons) {
+        if (!entry || typeof entry.text !== 'string' || !entry.text.trim()) throw new Error(`${id} contradict text`);
+        if (!Number.isInteger(entry.cap) || entry.cap < 0 || entry.cap > 5) throw new Error(`${id} cap ${item.id}`);
+        if (String(q.model_answer).toLowerCase().includes(entry.text.toLowerCase())) {
+          throw new Error(`${id} q${q.q} model matches contradiction: ${entry.text}`);
+        }
+      }
+    }
+    if (mainW < 12 || detailN < 4) throw new Error(`${id} balance q${q.q}`);
+    if (typeof q.model_answer !== 'string' || q.model_answer.length < 80) throw new Error(`${id} model q${q.q}`);
+  }
 }
 
 const html = renderDocument({

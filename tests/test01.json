@@ -41,10 +41,369 @@
       "image": "images/test01_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a small neighborhood flower shop on a sunny day. Number of people and appearance: Four people: three adults of different ages and one teenager. Clothing: A clerk wears a green apron over a white shirt. An older customer wears a navy coat. A teenager wears a yellow hoodie. A second worker wears a green apron. Actions: The clerk wraps a bouquet. The customer waits with a wallet. The teenager browses buckets of flowers. The second worker carries greenery toward the door. Objects: Pink and white flowers, brown paper, a wooden counter, buckets of yellow and purple flowers, and a wallet. Foreground: The clerk and the customer stand at the counter, close to the camera. Background: Buckets line the wall, and an open glass door shows a bright sidewalk.",
       "key_elements": [
-        "clerk in a green apron wrapping a bouquet",
-        "older customer in a navy coat holding a wallet",
-        "teenager in a yellow hoodie browsing flowers",
-        "worker carrying greenery near the open door"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is inside a flower shop.",
+          "accept": [
+            "flower shop",
+            "florist",
+            "flower store",
+            "inside a florist's shop",
+            "a shop selling flowers"
+          ],
+          "contradict": [
+            {
+              "text": "this is a hospital",
+              "cap": 1
+            },
+            {
+              "text": "this is an airport",
+              "cap": 1
+            },
+            {
+              "text": "this is a restaurant",
+              "cap": 1
+            },
+            {
+              "text": "the picture is only an empty street",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Four people are in the shop.",
+          "accept": [
+            "four people",
+            "4 people",
+            "four persons",
+            "a clerk, a customer, a teenager, and another worker"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "there are three people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            },
+            {
+              "text": "a large crowd",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "clerk_action",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A clerk behind the counter is wrapping a bouquet.",
+          "accept": [
+            "wrapping a bouquet",
+            "wrapping flowers",
+            "arranging a bouquet",
+            "the florist is wrapping flowers",
+            "preparing a bunch of flowers"
+          ],
+          "contradict": [
+            {
+              "text": "the clerk is sitting down",
+              "cap": 3
+            },
+            {
+              "text": "nobody is wrapping flowers",
+              "cap": 3
+            },
+            {
+              "text": "the clerk is eating",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "clerk_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The clerk wears a green apron over a white shirt.",
+          "accept": [
+            "green apron",
+            "apron is green",
+            "white shirt and a green apron",
+            "florist in green"
+          ],
+          "contradict": [
+            {
+              "text": "red apron",
+              "cap": 3
+            },
+            {
+              "text": "the clerk wears a blue uniform",
+              "cap": 3
+            },
+            {
+              "text": "the clerk is wearing a yellow hoodie",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "customer_action",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "An older customer stands at the counter holding a wallet.",
+          "accept": [
+            "older customer",
+            "elderly woman",
+            "senior customer holding a wallet",
+            "customer with a wallet",
+            "an older woman at the counter"
+          ],
+          "contradict": [
+            {
+              "text": "a child is paying",
+              "cap": 3
+            },
+            {
+              "text": "the customer is running",
+              "cap": 3
+            },
+            {
+              "text": "nobody is at the counter",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "customer_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The older customer wears a navy coat.",
+          "accept": [
+            "navy coat",
+            "dark blue coat",
+            "navy jacket",
+            "dark blue overcoat"
+          ],
+          "contradict": [
+            {
+              "text": "the customer wears a red coat",
+              "cap": 3
+            },
+            {
+              "text": "the customer is wearing a yellow hoodie",
+              "cap": 3
+            },
+            {
+              "text": "the customer wears a white shirt only",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "teen_action",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A teenager in a yellow hoodie looks through buckets of flowers.",
+          "accept": [
+            "yellow hoodie",
+            "yellow sweatshirt",
+            "teenager looking at flowers",
+            "young person browsing the flowers",
+            "a boy in yellow looking at flowers"
+          ],
+          "contradict": [
+            {
+              "text": "the person in yellow is an older woman",
+              "cap": 3
+            },
+            {
+              "text": "nobody is wearing yellow",
+              "cap": 3
+            },
+            {
+              "text": "the teenager is behind the counter wrapping flowers",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "worker_action",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A second worker in a green apron carries greenery toward the open door.",
+          "accept": [
+            "carrying greenery",
+            "carrying plants",
+            "another worker with foliage",
+            "carrying leafy stems",
+            "a second employee near the door"
+          ],
+          "contradict": [
+            {
+              "text": "the second worker is sitting",
+              "cap": 3
+            },
+            {
+              "text": "nobody is carrying plants",
+              "cap": 3
+            },
+            {
+              "text": "the worker near the door wears a red coat",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bouquet_colors",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The bouquet being wrapped is pink and white flowers in brown paper.",
+          "accept": [
+            "pink and white flowers",
+            "pink bouquet",
+            "white and pink blooms",
+            "wrapped in brown paper",
+            "kraft paper around the flowers"
+          ],
+          "contradict": [
+            {
+              "text": "the bouquet is entirely blue",
+              "cap": 3
+            },
+            {
+              "text": "there are no flowers in the bouquet",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "buckets",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Metal buckets hold yellow, purple, pink, and white flowers.",
+          "accept": [
+            "buckets of flowers",
+            "yellow flowers",
+            "purple flowers",
+            "metal buckets",
+            "galvanized buckets of blooms"
+          ],
+          "contradict": [
+            {
+              "text": "the shop has no flowers on display",
+              "cap": 2
+            },
+            {
+              "text": "the buckets are empty",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "counter",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A wooden counter stands in the foreground, with a sheet of brown paper on it.",
+          "accept": [
+            "wooden counter",
+            "wood counter",
+            "brown paper on the counter",
+            "a timber counter"
+          ],
+          "contradict": [
+            {
+              "text": "there is no counter",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "wallet",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The customer holds a small black wallet.",
+          "accept": [
+            "black wallet",
+            "holding a wallet",
+            "billfold",
+            "a dark wallet in her hands"
+          ],
+          "contradict": [
+            {
+              "text": "the customer is holding a suitcase",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "door",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "An open glass door on the right shows a bright sidewalk and the street.",
+          "accept": [
+            "open door",
+            "glass door",
+            "daylight through the door",
+            "sidewalk outside",
+            "the door is open to the street"
+          ],
+          "contradict": [
+            {
+              "text": "the shop has no door",
+              "cap": 3
+            },
+            {
+              "text": "it is nighttime outside",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The teenager is on the left, the clerk is behind the counter, the customer is in front of the counter, and the second worker is near the door in the background.",
+          "accept": [
+            "teenager on the left",
+            "clerk behind the counter",
+            "customer in front of the counter",
+            "worker near the door",
+            "the second employee is in the background"
+          ],
+          "contradict": [
+            {
+              "text": "everyone is sitting on the floor",
+              "cap": 2
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows a small flower shop in daylight. In the foreground, a clerk in a green apron is wrapping a bouquet of pink and white flowers. An older customer in a navy coat stands at the counter holding a wallet. A teenager in a yellow hoodie looks through buckets of flowers, and another worker carries greenery near the open door."
     },
@@ -56,10 +415,324 @@
       "image": "images/test01_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an airport check-in hall with a service counter and large windows. Number of people and appearance: Five adults. Clothing: A traveler wears a red jacket. The agent wears a light blue uniform. Two people on a bench wear casual jackets. A fifth traveler wears a gray jacket. Actions: The traveler hands over a passport. The agent looks at a computer. One seated person uses a phone, and the other holds a paper cup. A black rolling suitcase stands beside the traveler in red. The traveler in gray pulls a second suitcase toward the windows. Objects: A black rolling suitcase, a passport, a computer, a bench, and a paper cup. Foreground: The traveler and the agent are at the check-in counter. Background: A bench sits mid-hall, and daylight comes through windows that show an unmarked airplane tail.",
       "key_elements": [
-        "traveler in a red jacket handing a passport",
-        "agent in a light blue uniform at a computer",
-        "black rolling suitcase beside the traveler",
-        "two people sitting on a bench"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is an airport check-in hall.",
+          "accept": [
+            "airport",
+            "check-in counter",
+            "airport terminal",
+            "check-in hall",
+            "airline counter"
+          ],
+          "contradict": [
+            {
+              "text": "this is a hospital",
+              "cap": 1
+            },
+            {
+              "text": "this is a flower shop",
+              "cap": 1
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is a train platform only",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Five adults are visible.",
+          "accept": [
+            "five people",
+            "five adults",
+            "5 people",
+            "an agent, a traveler, two people on a bench, and another traveler"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "three people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "ten people",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "handoff",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A traveler hands a passport to an agent at the counter.",
+          "accept": [
+            "handing a passport",
+            "giving a passport",
+            "handing over a document",
+            "passing a passport to the agent",
+            "the agent takes the passport"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is at the counter",
+              "cap": 2
+            },
+            {
+              "text": "the traveler is sleeping",
+              "cap": 3
+            },
+            {
+              "text": "the agent is swimming",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "traveler_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The traveler at the counter wears a red jacket.",
+          "accept": [
+            "red jacket",
+            "red coat",
+            "traveler in red",
+            "a red hooded jacket"
+          ],
+          "contradict": [
+            {
+              "text": "the traveler wears a yellow jacket",
+              "cap": 3
+            },
+            {
+              "text": "the standing traveler is wearing a blue uniform",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "agent_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The agent wears a light blue uniform and stands behind the counter.",
+          "accept": [
+            "light blue uniform",
+            "blue uniform",
+            "agent in blue",
+            "pale blue shirt",
+            "the clerk wears light blue"
+          ],
+          "contradict": [
+            {
+              "text": "the agent wears a red jacket",
+              "cap": 3
+            },
+            {
+              "text": "the agent wears a green apron",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bench",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "Two people sit on a bench: one looks at a phone and the other holds a paper cup.",
+          "accept": [
+            "two people sitting",
+            "people on a bench",
+            "one is using a phone",
+            "one holds a cup",
+            "a woman on her phone and a man with a coffee cup"
+          ],
+          "contradict": [
+            {
+              "text": "the bench is empty",
+              "cap": 3
+            },
+            {
+              "text": "everyone is standing",
+              "cap": 3
+            },
+            {
+              "text": "the seated people are swimming",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "walker",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Another traveler in a gray jacket pulls a rolling suitcase toward the windows.",
+          "accept": [
+            "pulling a suitcase",
+            "walking with a suitcase",
+            "gray jacket",
+            "grey jacket",
+            "a man walking toward the windows"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is walking away",
+              "cap": 3
+            },
+            {
+              "text": "the walking man wears a red jacket",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "suitcase_front",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A black rolling suitcase stands beside the traveler in red.",
+          "accept": [
+            "black suitcase",
+            "rolling suitcase beside him",
+            "a black roller bag",
+            "luggage next to the traveler in red"
+          ],
+          "contradict": [
+            {
+              "text": "there is no luggage",
+              "cap": 3
+            },
+            {
+              "text": "the suitcase is bright pink",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "backpack",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The traveler in red also wears a black backpack.",
+          "accept": [
+            "black backpack",
+            "wearing a backpack",
+            "a rucksack",
+            "a black pack on his back"
+          ],
+          "contradict": [
+            {
+              "text": "he has no bag on his back",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "computer",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A computer monitor sits on the check-in counter.",
+          "accept": [
+            "computer",
+            "monitor",
+            "screen on the counter",
+            "a display at the desk"
+          ],
+          "contradict": [
+            {
+              "text": "there is no computer",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "Large windows fill the background, and an airplane tail is visible outside.",
+          "accept": [
+            "large windows",
+            "airplane outside",
+            "plane tail",
+            "daylight through the windows",
+            "you can see an aircraft"
+          ],
+          "contradict": [
+            {
+              "text": "there are no windows",
+              "cap": 3
+            },
+            {
+              "text": "it is a windowless basement",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The agent and the traveler in red are in the foreground at the counter, the bench is behind them, and the walking traveler is farther right.",
+          "accept": [
+            "at the counter in the foreground",
+            "the bench is behind them",
+            "the walking man is farther away",
+            "the agent is on the left behind the desk"
+          ],
+          "contradict": [
+            {
+              "text": "the airplane is inside the hall",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "cup_phone",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The seated woman uses a phone, and the seated man holds a white paper cup.",
+          "accept": [
+            "looking at a phone",
+            "using a mobile",
+            "white paper cup",
+            "holding a coffee cup",
+            "a disposable cup"
+          ],
+          "contradict": [
+            {
+              "text": "both seated people are asleep",
+              "cap": 3
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows an airport check-in counter in a bright hall. A traveler in a red jacket is handing a passport to an agent in a light blue uniform. A black rolling suitcase stands beside the traveler. Two people sit on a bench nearby, one using a phone and one holding a paper cup, while another traveler pulls a suitcase toward the windows."
     },

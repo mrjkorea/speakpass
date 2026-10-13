@@ -41,12 +41,321 @@
       "image": "images/test04_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a supermarket checkout lane in the afternoon. Number of people and appearance: Three adults. Clothing: The cashier wears a red vest. The customer wears a striped shirt. The waiting shopper wears a denim jacket. Actions: The cashier scans groceries. The customer packs a cloth bag. The shopper waits with a basket. A loaf of bread and a carton of milk sit on the conveyor belt. Objects: A loaf of bread, a carton of milk, a cloth bag, a scanner, and a shopping basket. Foreground: The cashier and the customer are at the belt, close to the camera. Background: Another checkout lane and store shelves are visible behind the waiting shopper.",
       "key_elements": [
-        "cashier in a red vest scanning items",
-        "customer in a striped shirt packing a bag",
-        "bread and milk on the belt",
-        "shopper waiting with a basket"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a supermarket checkout.",
+          "accept": [
+            "supermarket checkout",
+            "grocery checkout",
+            "a checkout lane",
+            "a grocery store till",
+            "the cashier's counter"
+          ],
+          "contradict": [
+            {
+              "text": "this is a flower shop",
+              "cap": 1
+            },
+            {
+              "text": "this is a post office",
+              "cap": 2
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 1
+            },
+            {
+              "text": "this is a hair salon",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are at the checkout.",
+          "accept": [
+            "three people",
+            "three adults",
+            "a cashier, a customer, and another shopper",
+            "3 people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "scan",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "The cashier holds a handheld scanner.",
+          "accept": [
+            "scanning",
+            "holding a scanner",
+            "barcode scanner",
+            "the cashier has a scanner",
+            "checking out groceries"
+          ],
+          "contradict": [
+            {
+              "text": "the cashier is sitting on the belt",
+              "cap": 3
+            },
+            {
+              "text": "nobody is working at the register",
+              "cap": 2
+            },
+            {
+              "text": "the cashier is swimming",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "cashier_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The cashier wears a red vest over a black shirt.",
+          "accept": [
+            "red vest",
+            "red waistcoat",
+            "a cashier in red",
+            "red vest over black"
+          ],
+          "contradict": [
+            {
+              "text": "the cashier wears a white coat",
+              "cap": 3
+            },
+            {
+              "text": "the cashier wears a denim jacket",
+              "cap": 3
+            },
+            {
+              "text": "the cashier wears a striped shirt",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "pack",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "The customer packs items into a cloth bag.",
+          "accept": [
+            "packing a bag",
+            "putting groceries in a bag",
+            "filling a cloth bag",
+            "packing a tote",
+            "a reusable bag"
+          ],
+          "contradict": [
+            {
+              "text": "the customer is not touching a bag",
+              "cap": 3
+            },
+            {
+              "text": "the bag is a plastic shopping basket",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "stripes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The customer wears a shirt with red, white, and blue stripes.",
+          "accept": [
+            "striped shirt",
+            "striped sweater",
+            "red white and blue stripes",
+            "a striped top"
+          ],
+          "contradict": [
+            {
+              "text": "the customer wears a solid red vest",
+              "cap": 3
+            },
+            {
+              "text": "the customer wears a denim jacket",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "groceries",
+          "role": "main",
+          "weight": 2,
+          "category": "object",
+          "text": "A loaf of bread and a carton of milk are on the conveyor belt.",
+          "accept": [
+            "loaf of bread",
+            "a carton of milk",
+            "bread and milk on the belt",
+            "milk carton",
+            "bread on the conveyor"
+          ],
+          "contradict": [
+            {
+              "text": "the belt is empty",
+              "cap": 3
+            },
+            {
+              "text": "there is only fruit and no bread",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "waiting",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Another shopper in a denim jacket waits with a shopping basket.",
+          "accept": [
+            "denim jacket",
+            "jean jacket",
+            "waiting with a basket",
+            "a shopper holding a basket",
+            "someone in line with a basket"
+          ],
+          "contradict": [
+            {
+              "text": "the person in denim is the cashier",
+              "cap": 3
+            },
+            {
+              "text": "nobody is waiting",
+              "cap": 3
+            },
+            {
+              "text": "he wears a red vest",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "greens",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A bag of leafy greens is also on the belt.",
+          "accept": [
+            "leafy greens",
+            "lettuce",
+            "a bag of salad",
+            "vegetables on the belt",
+            "greens next to the milk"
+          ],
+          "contradict": [
+            {
+              "text": "there is no food on the belt",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "basket",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The waiting shopper's basket is black and has items in it.",
+          "accept": [
+            "black shopping basket",
+            "a basket of groceries",
+            "a plastic basket",
+            "items in the basket"
+          ],
+          "contradict": [
+            {
+              "text": "he has no basket",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bag_color",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The cloth bag is a plain beige tote.",
+          "accept": [
+            "beige bag",
+            "natural cloth bag",
+            "a canvas tote",
+            "a light-colored reusable bag"
+          ],
+          "contradict": [
+            {
+              "text": "the bag is bright red",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "background",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "Store shelves and another checkout lane are visible behind the shoppers.",
+          "accept": [
+            "shelves in the background",
+            "another checkout",
+            "grocery aisles behind them",
+            "the second lane"
+          ],
+          "contradict": [
+            {
+              "text": "the background is a beach",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The cashier is on the left, the customer is at the belt, and the shopper with the basket stands behind her.",
+          "accept": [
+            "cashier on the left",
+            "customer at the belt",
+            "the shopper is behind the customer",
+            "in the foreground at the register"
+          ],
+          "contradict": [
+            {
+              "text": "the shopper with the basket is in front of the cashier",
+              "cap": 3
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows a supermarket checkout in the afternoon. A cashier in a red vest is scanning items while a customer in a striped shirt packs a cloth bag. A loaf of bread and a carton of milk sit on the belt. In the background, another shopper waits with a basket near the next lane."
+      "model_answer": "This picture shows a supermarket checkout. A cashier in a red vest is holding a scanner while a customer in a striped shirt packs a cloth bag. A loaf of bread and a carton of milk sit on the belt. Behind the customer, another shopper in a denim jacket waits with a shopping basket."
     },
     {
       "q": 4,
@@ -56,10 +365,286 @@
       "image": "images/test04_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a furniture showroom with sofas, chairs, and lamps. Number of people and appearance: Three adults. Clothing: A salesperson wears a navy blazer. One customer wears a yellow dress. The other customer wears a gray sweater. Actions: The salesperson shows a fabric sample. Both customers look at a green sofa. Objects: A green sofa, a fabric sample, floor lamps, and a row of chairs. Foreground: The salesperson and the two customers stand beside the sofa. Background: Floor lamps and more chairs fill the bright rear of the showroom.",
       "key_elements": [
-        "salesperson in a navy blazer showing fabric",
-        "customer in a yellow dress",
-        "customer in a gray sweater",
-        "green sofa in a furniture showroom"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a furniture showroom.",
+          "accept": [
+            "furniture showroom",
+            "furniture store",
+            "a sofa shop",
+            "a showroom with sofas and lamps",
+            "a furniture department"
+          ],
+          "contradict": [
+            {
+              "text": "this is a grocery store",
+              "cap": 1
+            },
+            {
+              "text": "this is a playground",
+              "cap": 1
+            },
+            {
+              "text": "this is a post office",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults stand beside a sofa.",
+          "accept": [
+            "three people",
+            "three adults",
+            "a salesperson and two customers",
+            "3 people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "sample",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A salesperson holds up a green fabric sample.",
+          "accept": [
+            "fabric sample",
+            "a swatch",
+            "showing a sample of cloth",
+            "holding up a green fabric square",
+            "a material sample"
+          ],
+          "contradict": [
+            {
+              "text": "she is holding a phone",
+              "cap": 3
+            },
+            {
+              "text": "nobody is showing a sample",
+              "cap": 3
+            },
+            {
+              "text": "the sample is a loaf of bread",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "blazer",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The salesperson wears a navy blazer over a white blouse.",
+          "accept": [
+            "navy blazer",
+            "dark blue jacket",
+            "navy blazer and a white blouse",
+            "a salesperson in a blue jacket"
+          ],
+          "contradict": [
+            {
+              "text": "the salesperson wears a yellow dress",
+              "cap": 3
+            },
+            {
+              "text": "the salesperson wears a gray sweater",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "sofa",
+          "role": "main",
+          "weight": 3,
+          "category": "object",
+          "text": "The group is looking at a large green sofa.",
+          "accept": [
+            "green sofa",
+            "a green couch",
+            "looking at the sofa",
+            "a green settee"
+          ],
+          "contradict": [
+            {
+              "text": "the sofa is red",
+              "cap": 3
+            },
+            {
+              "text": "there is no sofa",
+              "cap": 2
+            },
+            {
+              "text": "they are looking at a car",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "yellow",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "One customer wears a yellow dress and rests a hand on the sofa.",
+          "accept": [
+            "yellow dress",
+            "mustard dress",
+            "a woman in yellow",
+            "her hand is on the sofa",
+            "a gold-colored dress"
+          ],
+          "contradict": [
+            {
+              "text": "the woman wears a navy blazer",
+              "cap": 3
+            },
+            {
+              "text": "nobody is wearing yellow",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "gray_sweater",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The other customer wears a gray sweater and looks down at the sofa.",
+          "accept": [
+            "gray sweater",
+            "grey sweater",
+            "a man in gray",
+            "looking down at the sofa",
+            "hands in his pockets"
+          ],
+          "contradict": [
+            {
+              "text": "the man wears a yellow dress",
+              "cap": 3
+            },
+            {
+              "text": "he is wearing a navy blazer",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "swatch_color",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The fabric sample is green, like the sofa.",
+          "accept": [
+            "green swatch",
+            "a green sample",
+            "the fabric matches the sofa",
+            "a square of green cloth"
+          ],
+          "contradict": [
+            {
+              "text": "the sample is bright red",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "lamps",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Floor lamps with light shades stand in the background.",
+          "accept": [
+            "floor lamps",
+            "lamps in the background",
+            "tripod lamps",
+            "standing lamps"
+          ],
+          "contradict": [
+            {
+              "text": "there are no lamps",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "chairs",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A row of light-colored chairs lines the back of the showroom.",
+          "accept": [
+            "a row of chairs",
+            "dining chairs",
+            "chairs in the background",
+            "pale chairs"
+          ],
+          "contradict": [
+            {
+              "text": "there is no other furniture",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "Large windows make the rear of the showroom bright.",
+          "accept": [
+            "large windows",
+            "a bright showroom",
+            "daylight from the windows",
+            "windows behind them"
+          ],
+          "contradict": [
+            {
+              "text": "the room is windowless and dark",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The sofa fills the foreground, the salesperson stands on the left, the woman in yellow is in the middle, and the man is on the right.",
+          "accept": [
+            "sofa in the foreground",
+            "salesperson on the left",
+            "woman in the middle",
+            "man on the right"
+          ],
+          "contradict": [
+            {
+              "text": "all three people are sitting on the sofa",
+              "cap": 3
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows a furniture showroom with sofas and lamps. In the foreground, a salesperson in a navy blazer is showing a fabric sample to two customers. One customer wears a yellow dress, and the other wears a gray sweater. They are looking at a green sofa, while floor lamps and a row of chairs fill the background."
     },

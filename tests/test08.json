@@ -41,12 +41,270 @@
       "image": "images/test08_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a pharmacy counter in a bright shop, with plain unlabeled bottles and no brand names. Number of people and appearance: Three adults. Clothing: A pharmacist wears a white coat. A customer wears a black jacket. A waiting customer wears a tan sweater. Actions: The pharmacist hands over a small paper bag. The customer in black receives it. The other customer waits in line. Objects: A paper bag, plain bottles, a low display of soap, and a counter. Foreground: The pharmacist and the customer at the counter are closest to the camera. Background: Shelves of plain bottles and the soap display sit behind the counter.",
       "key_elements": [
-        "pharmacist in a white coat handing over a bag",
-        "customer in a black jacket",
-        "plain bottles on the shelves",
-        "another customer waiting in line"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a pharmacy counter.",
+          "accept": [
+            "pharmacy",
+            "chemist's",
+            "a drugstore counter",
+            "a pharmacy shop",
+            "a dispensary counter"
+          ],
+          "contradict": [
+            {
+              "text": "this is a post office",
+              "cap": 1
+            },
+            {
+              "text": "this is a hair salon",
+              "cap": 2
+            },
+            {
+              "text": "this is a hardware store",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are at the counter.",
+          "accept": [
+            "three people",
+            "three adults",
+            "a pharmacist and two customers",
+            "3 people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "handoff",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A pharmacist hands a small paper bag to a customer.",
+          "accept": [
+            "handing over a paper bag",
+            "giving the customer a bag",
+            "passing a small bag",
+            "both of them hold the bag"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is exchanging anything",
+              "cap": 3
+            },
+            {
+              "text": "the pharmacist is weighing a parcel",
+              "cap": 2
+            },
+            {
+              "text": "the bag is a bouquet",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "coat",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The pharmacist wears a white coat.",
+          "accept": [
+            "white coat",
+            "a lab coat",
+            "a pharmacist in white",
+            "a white jacket"
+          ],
+          "contradict": [
+            {
+              "text": "the pharmacist wears a black jacket",
+              "cap": 3
+            },
+            {
+              "text": "the pharmacist wears a tan sweater",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "black",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The customer receiving the bag wears a black jacket.",
+          "accept": [
+            "black jacket",
+            "a customer in black",
+            "a dark jacket",
+            "the man in a black coat"
+          ],
+          "contradict": [
+            {
+              "text": "the customer receiving the bag wears a white coat",
+              "cap": 3
+            },
+            {
+              "text": "he wears a tan sweater",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "waiting",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Another customer in a tan sweater stands beside them and waits.",
+          "accept": [
+            "tan sweater",
+            "camel sweater",
+            "a beige sweater",
+            "waiting beside them",
+            "another customer standing nearby"
+          ],
+          "contradict": [
+            {
+              "text": "the waiting customer wears a white coat",
+              "cap": 3
+            },
+            {
+              "text": "nobody else is waiting",
+              "cap": 3
+            },
+            {
+              "text": "she is behind a separate counter far away",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bottles",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Shelves behind the counter hold plain brown and white bottles.",
+          "accept": [
+            "bottles on the shelves",
+            "plain bottles",
+            "amber bottles",
+            "white bottles",
+            "rows of medicine bottles"
+          ],
+          "contradict": [
+            {
+              "text": "the shelves are empty",
+              "cap": 3
+            },
+            {
+              "text": "the shelves hold shoes",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "soap",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A low display of boxed soap sits behind the counter.",
+          "accept": [
+            "a display of soap",
+            "boxes of soap",
+            "a low soap rack",
+            "soap bars on a stand"
+          ],
+          "contradict": [
+            {
+              "text": "there is no soap display",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "bag",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The bag is a small brown paper bag.",
+          "accept": [
+            "a small paper bag",
+            "a brown paper bag",
+            "a little sack"
+          ],
+          "contradict": [
+            {
+              "text": "they are handing over a large suitcase",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "counter",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "They stand at a white counter.",
+          "accept": [
+            "a white counter",
+            "the pharmacy counter",
+            "a pale countertop"
+          ],
+          "contradict": [
+            {
+              "text": "there is no counter",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The pharmacist is on the left behind the counter, the customer in black is in the center, and the customer in the tan sweater is on the right.",
+          "accept": [
+            "pharmacist on the left",
+            "customer in the middle",
+            "the woman in tan is on the right",
+            "behind the counter"
+          ],
+          "contradict": [
+            {
+              "text": "the pharmacist is standing in the customer line",
+              "cap": 3
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows a pharmacy counter in a bright shop. In the foreground, a pharmacist in a white coat is handing a small paper bag to a customer in a black jacket. Plain bottles stand on the shelves behind the counter. Another customer waits in line, and a low display of soap is visible in the background."
+      "model_answer": "This picture shows a pharmacy counter in a bright shop. In the foreground, a pharmacist in a white coat is handing a small paper bag to a customer in a black jacket. Plain bottles stand on the shelves behind the counter. Another customer in a tan sweater stands beside them and waits, and a low display of soap is visible behind the counter."
     },
     {
       "q": 4,
@@ -56,12 +314,261 @@
       "image": "images/test08_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a shoe repair shop with a workbench and shelves of shoes. Number of people and appearance: Two adults. Clothing: The cobbler wears a brown apron. The customer wears a gray coat. Actions: The cobbler stitches a leather shoe. The customer waits at the counter with a pair of boots. Objects: A leather shoe, boots, spools of thread, and shelves of shoes. Foreground: The cobbler at the workbench is closest to the camera. Background: Shelves of shoes and a window fill the back of the shop.",
       "key_elements": [
-        "cobbler in a brown apron stitching a shoe",
-        "customer in a gray coat with boots",
-        "spools of thread on the bench",
-        "shelves of shoes in the background"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a shoe repair shop.",
+          "accept": [
+            "shoe repair shop",
+            "a cobbler's workshop",
+            "a shoe repair bench",
+            "a place where shoes are mended",
+            "a shoemaker's shop"
+          ],
+          "contradict": [
+            {
+              "text": "this is a hair salon",
+              "cap": 1
+            },
+            {
+              "text": "this is a pharmacy",
+              "cap": 1
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is a grocery store",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Two adults are in the shop.",
+          "accept": [
+            "two people",
+            "two adults",
+            "2 people",
+            "a cobbler and a customer"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "three people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 2
+            },
+            {
+              "text": "five people",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "stitch",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "The cobbler stitches a brown leather shoe with a needle and thread.",
+          "accept": [
+            "stitching a shoe",
+            "sewing a leather shoe",
+            "mending a shoe",
+            "a needle and thread in a shoe",
+            "repairing a brown shoe"
+          ],
+          "contradict": [
+            {
+              "text": "the cobbler is cutting hair",
+              "cap": 1
+            },
+            {
+              "text": "nobody is repairing a shoe",
+              "cap": 2
+            },
+            {
+              "text": "the shoe is on the customer's feet",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "apron",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The cobbler wears a brown apron over a dark sweater.",
+          "accept": [
+            "brown apron",
+            "a leather apron",
+            "an apron over a navy sweater",
+            "the cobbler wears brown"
+          ],
+          "contradict": [
+            {
+              "text": "the cobbler wears a gray coat",
+              "cap": 3
+            },
+            {
+              "text": "the cobbler wears a white coat",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "customer",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A customer in a gray coat holds up a pair of black boots.",
+          "accept": [
+            "gray coat",
+            "grey coat",
+            "holding a pair of boots",
+            "black boots",
+            "a customer showing boots"
+          ],
+          "contradict": [
+            {
+              "text": "the customer is stitching the shoe",
+              "cap": 3
+            },
+            {
+              "text": "the customer wears a brown apron",
+              "cap": 3
+            },
+            {
+              "text": "he is not holding anything",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "spools",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Spools of thread in several colors sit on the workbench.",
+          "accept": [
+            "spools of thread",
+            "reels of thread",
+            "thread on the bench",
+            "colored spools"
+          ],
+          "contradict": [
+            {
+              "text": "the bench has no thread",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "shoe",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The shoe being repaired is a brown leather lace-up shoe.",
+          "accept": [
+            "a brown leather shoe",
+            "an oxford shoe",
+            "a lace-up shoe on the bench"
+          ],
+          "contradict": [
+            {
+              "text": "he is repairing a red high-heel only",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "shelves",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Wooden shelves in the background are filled with shoes.",
+          "accept": [
+            "shelves of shoes",
+            "many shoes on shelves",
+            "shoes stored on racks",
+            "a wall of footwear"
+          ],
+          "contradict": [
+            {
+              "text": "there are no other shoes",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "A window on the right lets in daylight.",
+          "accept": [
+            "a window",
+            "daylight from the window",
+            "a window beside the customer"
+          ],
+          "contradict": [
+            {
+              "text": "the shop has no window",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The cobbler and the workbench are in the foreground, and the customer stands to the right.",
+          "accept": [
+            "cobbler in the foreground",
+            "the customer stands beside him",
+            "the customer is on the right",
+            "the bench is closest to the camera"
+          ],
+          "contradict": [
+            {
+              "text": "the customer is behind the shelves and hard to see",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "tool",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A small hand tool lies on the bench near the thread.",
+          "accept": [
+            "a tool on the bench",
+            "an awl",
+            "a hand tool beside the spools"
+          ],
+          "contradict": [
+            {
+              "text": "the workbench is empty",
+              "cap": 3
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows a shoe repair shop. In the foreground, a cobbler in a brown apron is stitching a leather shoe at a workbench. A customer in a gray coat stands at the counter with a pair of boots. Spools of thread sit beside the cobbler, and shelves of shoes fill the background near the window."
+      "model_answer": "This picture shows a shoe repair shop. In the foreground, a cobbler in a brown apron is stitching a leather shoe at a workbench. A customer in a gray coat stands beside him holding a pair of black boots. Spools of thread sit on the bench, and shelves of shoes fill the background near the window."
     },
     {
       "q": 5,

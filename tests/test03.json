@@ -41,10 +41,309 @@
       "image": "images/test03_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a downtown crosswalk at a busy intersection in daylight. Number of people and appearance: Four adults. Clothing: A woman wears a beige coat. A man beside her wears a blue shirt. A delivery worker wears an orange vest. A driver is barely visible inside a stopped car. Actions: The woman pushes a stroller through the crosswalk. The man walks beside her. The delivery worker waits at the curb with a hand cart. Cars wait at the light. Objects: A stroller, a hand cart, a crosswalk, and stopped cars. Foreground: The woman, the stroller, and the man are crossing close to the camera. Background: Shop windows line the far side of the street behind the waiting cars.",
       "key_elements": [
-        "woman in a beige coat pushing a stroller",
-        "man in a blue shirt walking beside her",
-        "delivery worker with a hand cart",
-        "cars stopped at the downtown crosswalk"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a downtown crosswalk on a city street.",
+          "accept": [
+            "crosswalk",
+            "pedestrian crossing",
+            "zebra crossing",
+            "downtown street",
+            "a city intersection"
+          ],
+          "contradict": [
+            {
+              "text": "this is indoors",
+              "cap": 1
+            },
+            {
+              "text": "this is a flower shop",
+              "cap": 1
+            },
+            {
+              "text": "this is a beach",
+              "cap": 1
+            },
+            {
+              "text": "this is an airport",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three people are on foot, and a driver is visible inside a stopped car.",
+          "accept": [
+            "three people crossing",
+            "a woman, a man, and a delivery worker",
+            "four people if you count the driver",
+            "people in the crosswalk",
+            "a driver in the car"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "the street is empty",
+              "cap": 1
+            },
+            {
+              "text": "ten pedestrians",
+              "cap": 2
+            },
+            {
+              "text": "nobody is crossing",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "stroller",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A woman pushes a stroller through the crosswalk.",
+          "accept": [
+            "pushing a stroller",
+            "pushing a pram",
+            "pushing a buggy",
+            "a woman with a stroller",
+            "wheeling a baby carriage"
+          ],
+          "contradict": [
+            {
+              "text": "nobody has a stroller",
+              "cap": 2
+            },
+            {
+              "text": "the stroller is empty on the sidewalk and nobody touches it",
+              "cap": 3
+            },
+            {
+              "text": "she is riding a bicycle",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "woman_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The woman wears a beige coat.",
+          "accept": [
+            "beige coat",
+            "tan coat",
+            "beige trench coat",
+            "a light brown coat"
+          ],
+          "contradict": [
+            {
+              "text": "the woman wears a red jacket",
+              "cap": 3
+            },
+            {
+              "text": "the woman wears an orange safety vest",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "man_walk",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A man in a blue shirt walks beside her.",
+          "accept": [
+            "man in a blue shirt",
+            "blue polo",
+            "walking beside her",
+            "a man in blue next to the stroller",
+            "walking with the woman"
+          ],
+          "contradict": [
+            {
+              "text": "the man in blue is driving the car",
+              "cap": 3
+            },
+            {
+              "text": "nobody is walking beside her",
+              "cap": 3
+            },
+            {
+              "text": "he wears an orange vest",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "worker",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A delivery worker in an orange vest waits at the curb beside a hand cart.",
+          "accept": [
+            "orange vest",
+            "high-visibility vest",
+            "safety vest",
+            "hand cart",
+            "a dolly",
+            "hand truck",
+            "waiting at the curb"
+          ],
+          "contradict": [
+            {
+              "text": "there is no delivery worker",
+              "cap": 3
+            },
+            {
+              "text": "the worker wears a beige coat",
+              "cap": 3
+            },
+            {
+              "text": "the worker is pushing the stroller",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "cars",
+          "role": "main",
+          "weight": 2,
+          "category": "object",
+          "text": "Cars are stopped at a red traffic light.",
+          "accept": [
+            "cars stopped",
+            "a red light",
+            "traffic light is red",
+            "vehicles waiting",
+            "stopped at the light"
+          ],
+          "contradict": [
+            {
+              "text": "the light is green",
+              "cap": 3
+            },
+            {
+              "text": "there are no cars",
+              "cap": 3
+            },
+            {
+              "text": "the street is a footpath with no vehicles",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "stroller_color",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The stroller is gray with a dark frame.",
+          "accept": [
+            "gray stroller",
+            "grey pram",
+            "a gray baby buggy",
+            "dark-framed stroller"
+          ],
+          "contradict": [
+            {
+              "text": "the stroller is bright red",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "cart",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The hand cart is an empty metal dolly.",
+          "accept": [
+            "empty hand truck",
+            "metal dolly",
+            "an upright cart",
+            "a two-wheeled trolley"
+          ],
+          "contradict": [
+            {
+              "text": "the cart is full of flowers",
+              "cap": 3
+            },
+            {
+              "text": "there is no cart",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "shops",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "Brick buildings with large shop windows line the far side of the street.",
+          "accept": [
+            "shop windows",
+            "storefronts",
+            "brick buildings",
+            "shops along the street"
+          ],
+          "contradict": [
+            {
+              "text": "the background is a forest",
+              "cap": 2
+            },
+            {
+              "text": "there are no buildings",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The woman and the stroller are in the foreground of the crosswalk, the man walks to her side, and the worker stands at the right edge of the crossing.",
+          "accept": [
+            "in the crosswalk",
+            "the worker is at the curb",
+            "the woman is in the foreground",
+            "the man is beside the stroller"
+          ],
+          "contradict": [
+            {
+              "text": "everyone is inside a shop",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "driver",
+          "role": "detail",
+          "weight": 1,
+          "category": "people",
+          "text": "A driver can be seen inside the silver car.",
+          "accept": [
+            "a driver in the car",
+            "someone sitting in the silver car",
+            "a person behind the wheel"
+          ],
+          "contradict": [
+            {
+              "text": "all the cars are empty",
+              "cap": 4
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows a downtown crosswalk on a busy street. In the foreground, a woman in a beige coat is pushing a stroller through the crosswalk, and a man in a blue shirt walks beside her. A delivery worker with a hand cart waits at the curb. In the background, cars are stopped at the light, and shop windows line the street."
     },
@@ -56,10 +355,277 @@
       "image": "images/test03_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an adult pottery studio with pottery wheels, long work tables, and shelves. Number of people and appearance: Three adults. Clothing: A woman wears a clay-stained apron. A man wears a gray t-shirt. Another student wears a dark sweater with sleeves rolled up. Actions: The woman shapes a bowl on a wheel. The man sits at a work table beside her wheel and paints a cup. The third person washes their hands at a sink. Objects: A pottery wheel, wet clay, a cup, brushes, and shelves of unfinished pots. Foreground: The woman at the wheel and the man painting are closest to the camera. Background: Shelves of pots and the sink sit along the back wall.",
       "key_elements": [
-        "woman shaping a bowl on a pottery wheel",
-        "man in a gray t-shirt painting a cup",
-        "shelves of unfinished pots",
-        "student washing hands at a sink"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a pottery studio.",
+          "accept": [
+            "pottery studio",
+            "ceramics studio",
+            "a pottery workshop",
+            "a clay studio",
+            "a place where people make pots"
+          ],
+          "contradict": [
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is a supermarket",
+              "cap": 1
+            },
+            {
+              "text": "this is an airport",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are working in the studio.",
+          "accept": [
+            "three people",
+            "three adults",
+            "3 people",
+            "a woman at the wheel, a man painting, and a person at the sink"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "wheel",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A woman shapes a bowl on a pottery wheel.",
+          "accept": [
+            "pottery wheel",
+            "shaping a bowl",
+            "throwing a bowl",
+            "making a bowl on the wheel",
+            "her hands are on a clay bowl"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is using a wheel",
+              "cap": 2
+            },
+            {
+              "text": "she is painting at the table",
+              "cap": 3
+            },
+            {
+              "text": "the wheel is empty",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "apron",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The woman wears a clay-stained apron over a dark long-sleeve shirt.",
+          "accept": [
+            "clay-stained apron",
+            "a dirty apron",
+            "beige apron",
+            "an apron covered in clay",
+            "dark sleeves under an apron"
+          ],
+          "contradict": [
+            {
+              "text": "she wears a business suit",
+              "cap": 3
+            },
+            {
+              "text": "she wears a yellow dress",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "painting",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A man in a gray t-shirt paints a cup at the work table.",
+          "accept": [
+            "gray t-shirt",
+            "grey t-shirt",
+            "painting a cup",
+            "painting a mug",
+            "decorating a striped cup with a brush"
+          ],
+          "contradict": [
+            {
+              "text": "the man in gray is at the sink",
+              "cap": 3
+            },
+            {
+              "text": "nobody is painting",
+              "cap": 3
+            },
+            {
+              "text": "he wears a dark sweater",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "sink",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A third person in a dark sweater washes up at the sink.",
+          "accept": [
+            "washing at the sink",
+            "at the sink",
+            "washing hands",
+            "a dark sweater by the faucet",
+            "someone rinsing at the sink"
+          ],
+          "contradict": [
+            {
+              "text": "the sink is unused",
+              "cap": 3
+            },
+            {
+              "text": "the person at the sink wears a gray t-shirt",
+              "cap": 3
+            },
+            {
+              "text": "nobody is in the background",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "shelves",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Wooden shelves along the back wall are filled with unfinished pots and bowls.",
+          "accept": [
+            "shelves of pots",
+            "unfinished pottery",
+            "unglazed bowls",
+            "rows of clay pots",
+            "shelves of ceramics"
+          ],
+          "contradict": [
+            {
+              "text": "the shelves are empty",
+              "cap": 3
+            },
+            {
+              "text": "there is no pottery in the room",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "cup",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The cup being painted has dark horizontal stripes.",
+          "accept": [
+            "striped cup",
+            "a cup with bands",
+            "painting stripes on a mug",
+            "a banded cup"
+          ],
+          "contradict": [
+            {
+              "text": "he is painting a shoe",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "brushes",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Brushes stand in a jar on the work table, and a small bowl of liquid sits nearby.",
+          "accept": [
+            "brushes in a jar",
+            "paintbrushes",
+            "a jar of brushes",
+            "a small bowl on the table"
+          ],
+          "contradict": [
+            {
+              "text": "there are no brushes",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The woman at the wheel and the man painting are in the foreground, and the sink is behind them.",
+          "accept": [
+            "in the foreground",
+            "the sink is in the background",
+            "she is on the left",
+            "the painter is on the right"
+          ],
+          "contradict": [
+            {
+              "text": "the person at the sink is closest to the camera",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "wheel_spin",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The pottery wheel under the bowl shows motion, so it is turning.",
+          "accept": [
+            "the wheel is spinning",
+            "a turning wheel",
+            "the wheel is in motion",
+            "a potter's wheel"
+          ],
+          "contradict": [
+            {
+              "text": "there is no pottery wheel",
+              "cap": 2
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows an adult pottery studio with long work tables. In the foreground, a woman in a clay-stained apron is shaping a bowl on a wheel. A man in a gray t-shirt sits beside her, painting a cup. Shelves of unfinished pots fill the background, and another student stands at a sink washing their hands."
     },
