@@ -99,12 +99,9 @@ The microphone is requested in the tap on Start, which is what iOS Safari requir
 
 ## Grading
 
-`js/grade.js` only holds hooks:
+`js/grade.js` still returns `coming soon`. It does not upload audio.
 
-- `gradeFree(q, audio)` for questions 1–4, later an on-device score
-- `gradePaid(attempt)` for questions 5–11, later a server score
-
-Both return `coming soon`. They do not upload audio.
+The paid grader is drafted in `worker/` and explained in `PAID_SERVER_PLAN.md`. It is not deployed. It grades questions 1 through 11 from an on-device transcript. The screen does not name the grader. Scores and saved progress use the shared sign-in files, with the same fields those files already have.
 
 ## Install and offline
 
