@@ -41,12 +41,297 @@
       "image": "images/test02_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: the aisle of a neighborhood hardware store. Number of people and appearance: Three adults. Clothing: An employee wears a gray vest over a dark shirt. A customer wears a brown jacket. Another shopper wears a green sweater. Actions: The employee points to a shelf of tools. The customer listens and holds a small bracket. The other shopper reaches for a box. Objects: Hand tools, a metal bracket, bins with blank labels, and a cardboard box. Foreground: The employee and the customer stand close to the camera beside the tool shelf. Background: The shopper in the green sweater stands farther down the aisle, reaching for a box on a high shelf, and tall racks of bins continue behind him.",
       "key_elements": [
-        "employee in a gray vest pointing to tools",
-        "customer in a brown jacket holding a bracket",
-        "shopper reaching for a box",
-        "rows of bins in the aisle"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a hardware-store aisle.",
+          "accept": [
+            "hardware store",
+            "hardware shop",
+            "tool aisle",
+            "a store that sells tools",
+            "home-improvement aisle"
+          ],
+          "contradict": [
+            {
+              "text": "this is a flower shop",
+              "cap": 1
+            },
+            {
+              "text": "this is a cafe",
+              "cap": 1
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are in the aisle.",
+          "accept": [
+            "three people",
+            "three adults",
+            "3 people",
+            "an employee, a customer, and another shopper"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "employee_action",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "An employee points to a rack of hanging hand tools.",
+          "accept": [
+            "pointing at the tools",
+            "pointing to a rack of tools",
+            "showing the hanging tools",
+            "the employee points at wrenches",
+            "gesturing toward the tools"
+          ],
+          "contradict": [
+            {
+              "text": "the employee is sitting",
+              "cap": 3
+            },
+            {
+              "text": "nobody is pointing",
+              "cap": 3
+            },
+            {
+              "text": "the employee is wrapping flowers",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "employee_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The employee wears a gray vest over a dark shirt.",
+          "accept": [
+            "gray vest",
+            "grey vest",
+            "a vest over a dark shirt",
+            "gray sleeveless jacket"
+          ],
+          "contradict": [
+            {
+              "text": "the employee wears a red vest",
+              "cap": 3
+            },
+            {
+              "text": "the employee wears a yellow hoodie",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "customer_action",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A customer holds a metal bracket and listens.",
+          "accept": [
+            "holding a metal bracket",
+            "holding a bracket",
+            "holding an angle brace",
+            "the customer holds a perforated metal piece",
+            "listening to the employee"
+          ],
+          "contradict": [
+            {
+              "text": "the customer is climbing a ladder",
+              "cap": 3
+            },
+            {
+              "text": "the customer's hands are empty",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "customer_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The customer wears a brown jacket.",
+          "accept": [
+            "brown jacket",
+            "brown coat",
+            "tan-brown jacket",
+            "the customer is wearing brown"
+          ],
+          "contradict": [
+            {
+              "text": "the customer wears a green sweater",
+              "cap": 3
+            },
+            {
+              "text": "the customer wears a red jacket",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "shopper_action",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Farther down the aisle, a shopper in a green sweater reaches for a box on a high shelf.",
+          "accept": [
+            "green sweater",
+            "reaching for a box",
+            "reaching up to a shelf",
+            "a shopper in green",
+            "someone taking a cardboard box"
+          ],
+          "contradict": [
+            {
+              "text": "the background shopper wears a gray vest",
+              "cap": 3
+            },
+            {
+              "text": "nobody else is in the aisle",
+              "cap": 3
+            },
+            {
+              "text": "the shopper is lying on the floor",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "bins",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Tall shelves hold orange bins and blue bins.",
+          "accept": [
+            "orange bins",
+            "blue bins",
+            "plastic storage bins",
+            "rows of bins",
+            "orange and blue containers"
+          ],
+          "contradict": [
+            {
+              "text": "the shelves are empty",
+              "cap": 3
+            },
+            {
+              "text": "there are only flowers on the shelves",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "tools",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Hand tools such as wrenches and pliers hang on the rack.",
+          "accept": [
+            "hanging tools",
+            "wrenches",
+            "pliers",
+            "hand tools on hooks",
+            "a tool rack"
+          ],
+          "contradict": [
+            {
+              "text": "there are no tools",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "box",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The background shopper reaches for a cardboard box.",
+          "accept": [
+            "cardboard box",
+            "a box on a high shelf",
+            "reaching for a carton"
+          ],
+          "contradict": [
+            {
+              "text": "she is reaching for a bouquet",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "aisle",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The employee and the customer stand close to the camera, and the shopper in green is farther down the aisle.",
+          "accept": [
+            "in the foreground",
+            "farther down the aisle",
+            "in the background",
+            "the two men are closer to the camera"
+          ],
+          "contradict": [
+            {
+              "text": "the shopper in green is in front of the other two",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "shelving",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Metal shelving lines both sides of the aisle.",
+          "accept": [
+            "metal shelves",
+            "shelving on both sides",
+            "tall racks",
+            "an aisle between shelves"
+          ],
+          "contradict": [
+            {
+              "text": "the room has no shelves",
+              "cap": 2
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows the inside of a hardware store. In the foreground, an employee in a gray vest is pointing to a shelf of tools while a customer in a brown jacket listens and holds a metal bracket. Farther down the aisle, another shopper reaches for a box on a high shelf. Rows of bins fill the background."
+      "model_answer": "This picture shows the inside of a hardware store. In the foreground, an employee in a gray vest is pointing to a rack of hanging tools while a customer in a brown jacket listens and holds a metal bracket. Farther down the aisle, a shopper in a green sweater reaches for a box on a high shelf. Rows of orange and blue bins fill the background."
     },
     {
       "q": 4,
@@ -56,12 +341,333 @@
       "image": "images/test02_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an outdoor cafe on a sunny sidewalk serving coffee, tea, and pastries. Number of people and appearance: Three adults. Clothing: One guest wears a white shirt. The other guest wears a green sweater. The server wears a black apron. Actions: The two guests talk over cups of coffee. The guest in the white shirt writes in a notebook. The server carries a tray of pastries. Objects: Coffee cups, a notebook, a tray, pastries, and a small potted plant. Foreground: The two guests sit at a round table close to the camera. Background: More empty tables line the sidewalk, with a plant beside the cafe door.",
       "key_elements": [
-        "two guests seated at an outdoor cafe table",
-        "coffee cups and a notebook on the table",
-        "server in a black apron carrying pastries",
-        "more tables in the background"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is an outdoor cafe on a sunny sidewalk.",
+          "accept": [
+            "outdoor cafe",
+            "sidewalk cafe",
+            "cafe terrace",
+            "pavement cafe",
+            "tables outside a coffee shop"
+          ],
+          "contradict": [
+            {
+              "text": "this is indoors only",
+              "cap": 2
+            },
+            {
+              "text": "this is a hardware store",
+              "cap": 1
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is an airport",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are visible.",
+          "accept": [
+            "three people",
+            "three adults",
+            "two guests and a server",
+            "3 people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "writing",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "The guest in the white shirt writes in an open notebook.",
+          "accept": [
+            "writing in a notebook",
+            "writing in a journal",
+            "taking notes",
+            "a man in a white shirt writing",
+            "pen in a notebook"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is writing",
+              "cap": 3
+            },
+            {
+              "text": "the man in white is asleep",
+              "cap": 3
+            },
+            {
+              "text": "he is reading a newspaper only",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "white_shirt",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "One seated guest wears a white shirt.",
+          "accept": [
+            "white shirt",
+            "white button-down",
+            "dressed in white",
+            "a man wearing white"
+          ],
+          "contradict": [
+            {
+              "text": "the person writing wears a red jacket",
+              "cap": 3
+            },
+            {
+              "text": "the writer wears a green sweater",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "green_sweater",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The other guest wears a green sweater and rests a hand near their chin.",
+          "accept": [
+            "green sweater",
+            "green jumper",
+            "hand on her chin",
+            "chin resting on her hand",
+            "a woman in green watching"
+          ],
+          "contradict": [
+            {
+              "text": "she wears a white shirt",
+              "cap": 3
+            },
+            {
+              "text": "nobody is wearing green",
+              "cap": 3
+            },
+            {
+              "text": "she is standing up",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "server",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A server in a black apron carries a tray of pastries.",
+          "accept": [
+            "black apron",
+            "carrying a tray",
+            "tray of pastries",
+            "waiter with croissants",
+            "server bringing pastries"
+          ],
+          "contradict": [
+            {
+              "text": "the server wears a white apron",
+              "cap": 3
+            },
+            {
+              "text": "the server is sitting at the table",
+              "cap": 3
+            },
+            {
+              "text": "there is no server",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "cups",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Two cups of coffee sit on saucers on the table.",
+          "accept": [
+            "two coffee cups",
+            "cups of coffee",
+            "two cups on saucers",
+            "coffee on the table"
+          ],
+          "contradict": [
+            {
+              "text": "the table has no drinks",
+              "cap": 3
+            },
+            {
+              "text": "there is only one cup",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "notebook",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "An open notebook lies on the round table.",
+          "accept": [
+            "open notebook",
+            "an open journal",
+            "notebook on the table",
+            "a book he is writing in"
+          ],
+          "contradict": [
+            {
+              "text": "there is no notebook",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "table",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The guests sit at a round table with a pale stone top.",
+          "accept": [
+            "round table",
+            "marble table",
+            "round cafe table",
+            "a circular table"
+          ],
+          "contradict": [
+            {
+              "text": "they are sitting on the ground",
+              "cap": 3
+            },
+            {
+              "text": "the table is square",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "pastries",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The tray holds several pastries that look like croissants.",
+          "accept": [
+            "pastries",
+            "croissants",
+            "baked goods on a tray",
+            "a tray of rolls"
+          ],
+          "contradict": [
+            {
+              "text": "the tray is empty",
+              "cap": 3
+            },
+            {
+              "text": "he is carrying drinks only",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "background",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "More empty tables line the sidewalk, and a potted plant stands beside the cafe door.",
+          "accept": [
+            "empty tables",
+            "more tables in the background",
+            "potted plant",
+            "a plant by the door",
+            "sidewalk seating"
+          ],
+          "contradict": [
+            {
+              "text": "there are no other tables",
+              "cap": 3
+            },
+            {
+              "text": "the scene is in a forest",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The two guests are in the foreground, and the server stands behind them.",
+          "accept": [
+            "guests in the foreground",
+            "the server is behind them",
+            "the waiter stands in the background",
+            "the couple is closer to the camera"
+          ],
+          "contradict": [
+            {
+              "text": "the server is seated between them",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "sun",
+          "role": "detail",
+          "weight": 1,
+          "category": "place",
+          "text": "Strong sunlight and shadows fall across the pavement.",
+          "accept": [
+            "sunny",
+            "sunlight",
+            "shadows on the sidewalk",
+            "bright daylight",
+            "a sunny day"
+          ],
+          "contradict": [
+            {
+              "text": "it is raining",
+              "cap": 3
+            },
+            {
+              "text": "it is nighttime",
+              "cap": 2
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows an outdoor cafe on a sunny sidewalk. In the foreground, two people sit at a round table with coffee cups and a notebook. The one in the white shirt is writing in the notebook while they talk, and the other wears a green sweater. A server in a black apron carries a tray of pastries, and more tables line the sidewalk."
+      "model_answer": "This picture shows an outdoor cafe on a sunny sidewalk. In the foreground, two people sit at a round table with coffee cups and an open notebook. The person in the white shirt is writing in the notebook, and the person in the green sweater sits across from them with a hand near their chin. A server in a black apron carries a tray of pastries, and more tables line the sidewalk."
     },
     {
       "q": 5,

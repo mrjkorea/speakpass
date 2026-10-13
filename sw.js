@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v3';
+const CACHE = 'app-shell-v4';
 
 const PRECACHE = [
   './index.html',
@@ -29,6 +29,26 @@ const PRECACHE = [
   './tests/test08.json',
   './tests/test09.json',
   './tests/test10.json',
+  './images/test01_q3.jpg',
+  './images/test01_q4.jpg',
+  './images/test02_q3.jpg',
+  './images/test02_q4.jpg',
+  './images/test03_q3.jpg',
+  './images/test03_q4.jpg',
+  './images/test04_q3.jpg',
+  './images/test04_q4.jpg',
+  './images/test05_q3.jpg',
+  './images/test05_q4.jpg',
+  './images/test06_q3.jpg',
+  './images/test06_q4.jpg',
+  './images/test07_q3.jpg',
+  './images/test07_q4.jpg',
+  './images/test08_q3.jpg',
+  './images/test08_q4.jpg',
+  './images/test09_q3.jpg',
+  './images/test09_q4.jpg',
+  './images/test10_q3.jpg',
+  './images/test10_q4.jpg',
   './locales/en.json',
   './locales/ko.json',
   './locales/zh-Hans.json',

@@ -79,7 +79,7 @@ node scripts/check.mjs
 | 11 | `opinion` | 45 s | 60 s |
 
 4. Questions 1–2 need `text`, `sentences`, and `"phonemes_todo": true`.
-5. Questions 3–4 need `image` (a path such as `images/test02_q3.jpg`, with no leading slash), `image_prompt`, `key_elements`, and `model_answer`. If that file is missing, the app shows a placeholder.
+5. Questions 3–4 need `image` (a path such as `images/test02_q3.jpg`, with no leading slash), `image_prompt`, `key_elements`, and `model_answer`. If that file is missing, the app shows a placeholder. `key_elements` is a weighted checklist of what the photograph actually shows. Each item has `id`, `role` (`main` or `detail`), `weight` (`main` is 2 or 3, `detail` is 1), `category` (`place`, `people`, `clothing`, `action`, `object`, or `position`), `text`, and `accept` (synonyms and alternative phrasings). Optional `contradict` entries are wrong claims, each with `text` and `cap` from 0 to 5. A matched contradiction caps the 0–5 score; the lowest cap wins. Omissions do not count as contradictions. See `CHECKLIST_REPORT.md`.
 6. Questions 5–7 share the same `set_intro`. It can be repeated on each question, or only on the first; the others inherit it. Each has `question` and `model_answer`.
 7. Questions 8–10 share the same `document` and `caller_intro`. Either may be repeated on each question or only on the first. Put `"read_sec": 45` on the question or on the document. `rows` may be a table (the first row is the header) or a list of `{ "label", "value" }` objects. `markdown` may use headings, paragraphs, bullet lists, `**bold**`, and tables. Each question has `question`, `answer_facts`, and `model_answer`.
 8. Question 11 needs `question` and `model_answer`.

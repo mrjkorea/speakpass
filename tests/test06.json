@@ -41,12 +41,322 @@
       "image": "images/test06_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a neighborhood playground in the late afternoon. Number of people and appearance: Two children and four adults. Everyone is dressed for cool weather. Clothing: One child wears a red jacket. The child on the swing wears a green jacket. A nearby adult wears a gray coat. Another adult wears a blue jacket. Two adults on a bench wear sweaters. Actions: The child in red climbs a wooden frame. The adult in gray stands close and watches. The adult in blue pushes the child in green on a swing. The pair on the bench talk. Objects: A climbing frame, a swing, a bench, and a low fence. Foreground: The climbing child and the standing adult are closest to the camera. Background: The swing, the bench, and trees sit farther back on the playground.",
       "key_elements": [
-        "child in a red jacket climbing",
-        "adult in a gray coat standing nearby",
-        "adult pushing a swing",
-        "two adults talking on a bench"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a neighborhood playground.",
+          "accept": [
+            "playground",
+            "a park playground",
+            "a play area",
+            "swings and a climbing frame",
+            "a park with play equipment"
+          ],
+          "contradict": [
+            {
+              "text": "this is indoors",
+              "cap": 1
+            },
+            {
+              "text": "this is an office",
+              "cap": 1
+            },
+            {
+              "text": "this is a supermarket",
+              "cap": 1
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Two children and four adults are at the playground.",
+          "accept": [
+            "six people",
+            "two children and four adults",
+            "6 people",
+            "two kids and four grown-ups"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "three people",
+              "cap": 3
+            },
+            {
+              "text": "only adults and no children",
+              "cap": 2
+            },
+            {
+              "text": "five children",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "climb",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A child in a red jacket climbs a wooden frame.",
+          "accept": [
+            "child in a red jacket",
+            "climbing a wooden frame",
+            "climbing a ladder",
+            "a child in red on the climbing frame",
+            "a red coat on the wooden structure"
+          ],
+          "contradict": [
+            {
+              "text": "the child in red is on the swing",
+              "cap": 3
+            },
+            {
+              "text": "nobody is climbing",
+              "cap": 3
+            },
+            {
+              "text": "the climber wears green",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "watch",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "An adult in a gray coat stands close to the climbing child and watches.",
+          "accept": [
+            "gray coat",
+            "grey coat",
+            "standing nearby and watching",
+            "an adult watching the climber",
+            "a woman in a gray coat"
+          ],
+          "contradict": [
+            {
+              "text": "the adult in gray is on the swing",
+              "cap": 3
+            },
+            {
+              "text": "nobody is watching the child",
+              "cap": 3
+            },
+            {
+              "text": "she wears a red jacket",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "swing",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A child in a green jacket sits on a swing while an adult in a blue jacket stands beside the swing.",
+          "accept": [
+            "child on a swing",
+            "green jacket on the swing",
+            "an adult in a blue jacket by the swing",
+            "standing next to the swing",
+            "holding the swing chains",
+            "pushing the swing"
+          ],
+          "contradict": [
+            {
+              "text": "the swing is empty",
+              "cap": 3
+            },
+            {
+              "text": "the child on the swing wears red",
+              "cap": 3
+            },
+            {
+              "text": "the adult by the swing wears a gray coat",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bench",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Two adults sit on a bench and face each other as if talking.",
+          "accept": [
+            "two people on a bench",
+            "sitting on a bench",
+            "talking on a bench",
+            "a couple on a park bench",
+            "two adults seated together"
+          ],
+          "contradict": [
+            {
+              "text": "the bench is empty",
+              "cap": 3
+            },
+            {
+              "text": "four people are on the bench",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bench_clothes",
+          "role": "detail",
+          "weight": 1,
+          "category": "clothing",
+          "text": "The person on the left of the bench wears a cream sweater, and the person on the right wears a green sweater.",
+          "accept": [
+            "cream sweater",
+            "white sweater on the bench",
+            "green sweater",
+            "a light sweater and a green sweater"
+          ],
+          "contradict": [
+            {
+              "text": "both people on the bench wear red jackets",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "frame",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The climbing structure is a wooden A-frame ladder.",
+          "accept": [
+            "wooden climbing frame",
+            "a wooden ladder",
+            "log climbing frame",
+            "a timber play structure"
+          ],
+          "contradict": [
+            {
+              "text": "the climbing frame is metal",
+              "cap": 4
+            },
+            {
+              "text": "there is no climbing equipment",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "swing_set",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The swing hangs from metal chains on a wooden frame.",
+          "accept": [
+            "a swing with chains",
+            "swing set",
+            "chains on the swing"
+          ],
+          "contradict": [
+            {
+              "text": "there is no swing",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "fence_trees",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "A low fence, grass, and bare trees are behind the play area.",
+          "accept": [
+            "a fence",
+            "bare trees",
+            "trees in the background",
+            "a park fence",
+            "grass behind them"
+          ],
+          "contradict": [
+            {
+              "text": "the background is a city office",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "ground",
+          "role": "detail",
+          "weight": 1,
+          "category": "place",
+          "text": "The ground under the equipment is covered with wood chips.",
+          "accept": [
+            "wood chips",
+            "mulch",
+            "bark on the ground",
+            "a soft play surface"
+          ],
+          "contradict": [
+            {
+              "text": "they are standing in a swimming pool",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The climbing child and the adult in gray are in the left foreground, the swing is on the right, and the bench is in the middle background.",
+          "accept": [
+            "climber in the foreground",
+            "the swing is on the right",
+            "the bench is farther back",
+            "the gray coat is next to the climbing frame"
+          ],
+          "contradict": [
+            {
+              "text": "the bench is in the foreground and the children are far away",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "cool",
+          "role": "detail",
+          "weight": 1,
+          "category": "clothing",
+          "text": "Jackets and sweaters, plus bare trees, show cool weather.",
+          "accept": [
+            "cool weather",
+            "dressed warmly",
+            "wearing coats",
+            "a chilly day",
+            "jackets because it is cold"
+          ],
+          "contradict": [
+            {
+              "text": "everyone is wearing swimsuits",
+              "cap": 2
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows a neighborhood playground on a cool afternoon. In the foreground, a child in a red jacket is climbing a wooden frame while an adult in a gray coat stands close by. Another adult is pushing a child on a swing. Two people sit on a bench in the background and talk together."
+      "model_answer": "This picture shows a neighborhood playground. In the foreground, a child in a red jacket is climbing a wooden frame while an adult in a gray coat stands close by. Another adult in a blue jacket stands beside a swing where a child in a green jacket is sitting. Two people sit on a bench in the background and talk together."
     },
     {
       "q": 4,
@@ -56,10 +366,269 @@
       "image": "images/test06_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a laundromat with a row of washers and a folding table. Number of people and appearance: Three adults. Clothing: A man wears a black sweater. A woman wears a pink cardigan. Another customer wears a brown coat. Actions: The man folds towels. The woman loads a washer. The third person sits on a bench and reads a book. Objects: Towels, a laundry basket and a detergent bottle on the folding table, washers, and a book. Foreground: The man at the folding table is closest to the camera. Background: A row of machines and the seated reader fill the back of the laundromat.",
       "key_elements": [
-        "man in a black sweater folding towels",
-        "woman in a pink cardigan loading a washer",
-        "laundry basket and a detergent bottle",
-        "customer reading on a bench"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a laundromat.",
+          "accept": [
+            "laundromat",
+            "laundry",
+            "a coin laundry",
+            "a room full of washing machines",
+            "a launderette"
+          ],
+          "contradict": [
+            {
+              "text": "this is a kitchen at home only",
+              "cap": 2
+            },
+            {
+              "text": "this is a post office",
+              "cap": 1
+            },
+            {
+              "text": "this is a playground",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are in the laundromat.",
+          "accept": [
+            "three people",
+            "three adults",
+            "3 people",
+            "a man folding, a woman at a washer, and a woman reading"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "fold",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A man in a black sweater folds white towels.",
+          "accept": [
+            "folding towels",
+            "folding laundry",
+            "black sweater",
+            "a man folding white towels",
+            "stacking towels"
+          ],
+          "contradict": [
+            {
+              "text": "the man is reading",
+              "cap": 3
+            },
+            {
+              "text": "nobody is folding",
+              "cap": 3
+            },
+            {
+              "text": "he wears a pink cardigan",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "load",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A woman in a pink cardigan loads clothes into a washing machine.",
+          "accept": [
+            "pink cardigan",
+            "loading a washer",
+            "putting clothes in the machine",
+            "a woman in pink at the washer",
+            "loading laundry"
+          ],
+          "contradict": [
+            {
+              "text": "she is folding towels",
+              "cap": 3
+            },
+            {
+              "text": "the washer is closed and unused",
+              "cap": 3
+            },
+            {
+              "text": "she wears a black sweater",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "read",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Another customer in a brown coat sits on a bench and reads a book.",
+          "accept": [
+            "reading a book",
+            "brown coat",
+            "sitting and reading",
+            "a woman in a brown coat with a book",
+            "reading on a bench"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is reading",
+              "cap": 3
+            },
+            {
+              "text": "the reader wears pink",
+              "cap": 3
+            },
+            {
+              "text": "she is standing at a machine",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "basket",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A plastic laundry basket sits on the folding table.",
+          "accept": [
+            "laundry basket",
+            "a plastic basket",
+            "a clothes basket on the table",
+            "an empty-looking basket"
+          ],
+          "contradict": [
+            {
+              "text": "there is no basket",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "detergent",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A white detergent bottle stands on the table.",
+          "accept": [
+            "detergent bottle",
+            "a bottle of laundry soap",
+            "a white bottle on the table",
+            "detergent"
+          ],
+          "contradict": [
+            {
+              "text": "there is no bottle",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "machines",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A row of gray front-loading washing machines lines the wall.",
+          "accept": [
+            "washing machines",
+            "a row of washers",
+            "front-loading machines",
+            "gray laundry machines"
+          ],
+          "contradict": [
+            {
+              "text": "there are no machines",
+              "cap": 2
+            },
+            {
+              "text": "the machines are ovens",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "open_door",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The door of one washer is open, and light-colored clothes are going in.",
+          "accept": [
+            "the washer door is open",
+            "putting light clothes into the drum",
+            "an open washing machine"
+          ],
+          "contradict": [
+            {
+              "text": "every machine door is shut",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "towels",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The towels being folded are white.",
+          "accept": [
+            "white towels",
+            "a stack of white towels",
+            "folding white linen"
+          ],
+          "contradict": [
+            {
+              "text": "the towels are black",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The man at the folding table is in the foreground, the woman in pink is to the right, and the reader sits farther back on the left.",
+          "accept": [
+            "man in the foreground",
+            "the woman in pink is beside the machines",
+            "the reader is in the background",
+            "the bench is at the back left"
+          ],
+          "contradict": [
+            {
+              "text": "the reader is in the foreground and the man is far away",
+              "cap": 3
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows a laundromat with a row of machines. In the foreground, a man in a black sweater is folding towels on a table. A woman in a pink cardigan is loading clothes into a washer. A laundry basket and a detergent bottle sit on the table. In the background, another customer sits on a bench and reads a book."
     },
