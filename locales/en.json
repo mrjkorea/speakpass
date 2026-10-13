@@ -92,7 +92,12 @@
     "home": "Back to start",
     "retry": "Try again",
     "snippetPicture": "Picture description",
-    "saving": "Saving to your account…"
+    "saving": "Saving to your account…",
+    "checking": "Checking pronunciation…",
+    "sayAgain": "Say it again. Say each word clearly.",
+    "stars": "{n} out of 5",
+    "checkFailed": "Pronunciation could not be checked on this device. Your answer is still saved.",
+    "weak": "Words to practice"
   },
   "common": {
     "language": "Language",

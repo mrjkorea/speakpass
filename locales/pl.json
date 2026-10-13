@@ -92,7 +92,12 @@
     "home": "Wróć na start",
     "retry": "Spróbuj ponownie",
     "snippetPicture": "Opis obrazka",
-    "saving": "Zapisywanie na Twoim koncie…"
+    "saving": "Zapisywanie na Twoim koncie…",
+    "checking": "Sprawdzanie wymowy…",
+    "sayAgain": "Powiedz jeszcze raz. Wymów każde słowo wyraźnie.",
+    "stars": "{n} z 5",
+    "checkFailed": "Na tym urządzeniu nie udało się sprawdzić wymowy. Odpowiedź i tak zostanie zapisana.",
+    "weak": "Słowa do ćwiczenia"
   },
   "common": {
     "language": "Język",

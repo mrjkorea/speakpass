@@ -2,7 +2,7 @@ import { reportScoredItems, loadProgressPack, saveProgressPack, studentId } from
 import { APP_NAME, LANGS } from './config.js';
 import { activeStream, beginArm, hasStream, releaseMic } from './audio.js';
 import { createSession } from './engine.js';
-import { gradeFree, gradePaid } from './grade.js';
+import { gradeFree, gradePaid, gradeReadAloud, warmChecker } from './grade.js';
 import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
@@ -140,15 +140,26 @@ function gradeByQuestion(attempt, grades) {
   return map;
 }
 
+function isReadAloudScore(ans) {
+  return !!ans && (ans.q === 1 || ans.q === 2) && ans.type === 'read_aloud';
+}
+
 async function presentReview(attempt) {
   if (presenting) return;
   presenting = true;
   releaseMic();
   const token = ++reviewToken;
   const owner = state.sessionOwner || studentId();
-  const grades = { free: {}, paid: null };
+  const grades = { free: {}, paid: null, read: {} };
+  const test = state.catalog.find((item) => item.id === attempt.testId);
   for (const ans of attempt.answers) {
-    if (ans.q <= 4) grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
+    if (isReadAloudScore(ans)) {
+      const hasAudio = !!(ans.blob && ans.blob.size);
+      grades.read[ans.q] = { status: hasAudio ? 'checking' : 'empty' };
+      grades.free[ans.q] = hasAudio ? null : 'coming soon';
+    } else if (ans.q <= 4) {
+      grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
+    }
   }
   if (attempt.answers.some((ans) => ans.q >= 5)) {
     grades.paid = await gradePaid(attempt);
@@ -167,6 +178,20 @@ async function presentReview(attempt) {
   viewKey = '';
   presenting = false;
   render();
+
+  for (const ans of attempt.answers) {
+    if (!isReadAloudScore(ans) || !(ans.blob && ans.blob.size)) continue;
+    const source = test && test.questions.find((item) => item.q === ans.q);
+    const detail = await gradeReadAloud((source && source.text) || '', ans.blob);
+    grades.free[ans.q] = detail.save || 'coming soon';
+    grades.read[ans.q] = detail;
+    if (token === reviewToken && state.review && state.review.attempt === attempt && state.screen === 'review') {
+      render();
+    }
+  }
+  for (const ans of attempt.answers) {
+    if (ans.q <= 4 && grades.free[ans.q] == null) grades.free[ans.q] = 'coming soon';
+  }
 
   let saved = false;
   let scored = [];
@@ -701,6 +726,47 @@ function renderSession() {
   `, { showEnd: true });
 }
 
+function starMarks(n) {
+  let html = '';
+  for (let i = 1; i <= 5; i += 1) {
+    html += `<span class="${i <= n ? 'on' : 'off'}">${i <= n ? '★' : '☆'}</span>`;
+  }
+  return html;
+}
+
+function readAloudScoreHtml(detail) {
+  const name = t('review.deviceScore');
+  if (!detail || detail.status === 'checking') {
+    return `<p class="score checking" role="status">${escapeHtml(name)}: ${escapeHtml(t('review.checking'))}</p>`;
+  }
+  if (detail.status === 'again') {
+    return `<p class="alert" role="status">${escapeHtml(t('review.sayAgain'))}</p>`;
+  }
+  if (detail.status === 'failed') {
+    return `<p class="score">${escapeHtml(t('review.checkFailed'))}</p>`;
+  }
+  if (detail.status !== 'scored') return '';
+  const n = detail.stars;
+  const label = t('review.stars', { n });
+  const words = (detail.words || []).map((word) => (
+    word.weak
+      ? `<mark class="weak">${escapeHtml(word.word)}</mark>`
+      : `<span>${escapeHtml(word.word)}</span>`
+  )).join(' ');
+  const weak = (detail.words || []).filter((word) => word.weak).map((word) => word.word);
+  const weakLine = weak.length
+    ? `<p class="weak-list">${escapeHtml(t('review.weak'))}: ${escapeHtml(weak.join(', '))}</p>`
+    : '';
+  return `
+    <p class="score stars" role="img" aria-label="${escapeHtml(label)}">
+      <span class="score-name">${escapeHtml(name)}</span>
+      <span class="star-row" aria-hidden="true">${starMarks(n)}</span>
+      <span>${n}/5</span>
+    </p>
+    <p class="marked-line" lang="en" dir="ltr">${words}</p>
+    ${weakLine}`;
+}
+
 function renderReview() {
   const { attempt, saved, grades } = state.review;
   const test = state.catalog.find((item) => item.id === attempt.testId);
@@ -708,6 +774,7 @@ function renderReview() {
   const cards = attempt.answers.map((ans) => {
     const source = test && test.questions.find((item) => item.q === ans.q);
     const picture = ans.type === 'describe_picture';
+    const readDetail = isReadAloudScore(ans) ? (grades.read && grades.read[ans.q]) : null;
     const snippet = picture
       ? t('review.snippetPicture')
       : (ans.type === 'read_aloud' ? (source && source.text) || '' : (source && source.question) || '');
@@ -720,13 +787,17 @@ function renderReview() {
       : t('a11y.play', { n: ans.q });
     const scoreValue = ans.q <= 4 ? (grades.free[ans.q] || '') : (grades.paid || '');
     const scoreName = ans.q <= 4 ? t('review.deviceScore') : t('review.serverScore');
+    const showSnippet = !readDetail || readDetail.status !== 'scored';
+    const scoreBlock = readDetail
+      ? readAloudScoreHtml(readDetail)
+      : `<p class="score">${escapeHtml(scoreName)}: ${escapeHtml(String(scoreValue))}</p>`;
     return `
       <article class="answer-card">
         <h2>${escapeHtml(t('run.qLabel', { n: ans.q }))}</h2>
         <p class="part-name">${escapeHtml(t(`parts.${ans.type}.title`))}</p>
-        <p class="snippet"${lang}>${escapeHtml(snippet)}</p>
+        ${showSnippet ? `<p class="snippet"${lang}>${escapeHtml(snippet)}</p>` : ''}
         <button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" ${hasAudio ? '' : 'disabled'} aria-label="${escapeHtml(playLabel)}">${escapeHtml(playText)}</button>
-        <p class="score">${escapeHtml(scoreName)}: ${escapeHtml(scoreValue)}</p>
+        ${scoreBlock}
       </article>`;
   }).join('');
   const retry = attempt.mode === 'practice'
@@ -956,6 +1027,34 @@ async function boot() {
     render();
   }
   registerServiceWorker();
+  exposeBench();
+  warmChecker();
+}
+
+function exposeBench() {
+  try {
+    if (new URLSearchParams(location.search).get('bench') !== '1') return;
+  } catch (err) {
+    return;
+  }
+  globalThis.__speakpassBench = (blob, text) => gradeReadAloud(text, blob);
+  globalThis.__speakpassPreview = (detail) => {
+    const test = currentTest();
+    state.review = {
+      attempt: {
+        testId: test ? test.id : '',
+        testTitle: test ? test.title : '',
+        mode: 'practice',
+        answers: [{ q: 1, type: 'read_aloud', blob: new Blob(['x']), mimeType: 'audio/wav' }]
+      },
+      saved: false,
+      grades: { free: { 1: detail && detail.save }, paid: null, read: { 1: detail } },
+      selection: { mode: 'practice', scope: 'question', q: 1 }
+    };
+    state.screen = 'review';
+    state.session = null;
+    render();
+  };
 }
 
 document.addEventListener('click', onClick);

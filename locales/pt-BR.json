@@ -92,7 +92,12 @@
     "home": "Voltar ao início",
     "retry": "Tentar de novo",
     "snippetPicture": "Descrição da imagem",
-    "saving": "Salvando na sua conta…"
+    "saving": "Salvando na sua conta…",
+    "checking": "Verificando a pronúncia…",
+    "sayAgain": "Diga de novo. Diga cada palavra com clareza.",
+    "stars": "{n} de 5",
+    "checkFailed": "Não foi possível verificar a pronúncia neste aparelho. Sua resposta ainda é salva.",
+    "weak": "Palavras para praticar"
   },
   "common": {
     "language": "Idioma",

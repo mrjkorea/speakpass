@@ -92,7 +92,12 @@
     "home": "Kembali ke awal",
     "retry": "Coba lagi",
     "snippetPicture": "Deskripsi gambar",
-    "saving": "Menyimpan ke akun Anda…"
+    "saving": "Menyimpan ke akun Anda…",
+    "checking": "Memeriksa pelafalan…",
+    "sayAgain": "Ucapkan lagi. Ucapkan setiap kata dengan jelas.",
+    "stars": "{n} dari 5",
+    "checkFailed": "Pelafalan tidak dapat diperiksa di perangkat ini. Jawaban Anda tetap disimpan.",
+    "weak": "Kata untuk dilatih"
   },
   "common": {
     "language": "Bahasa",
