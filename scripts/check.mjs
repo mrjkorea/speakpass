@@ -1,9 +1,8 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { APP_NAME, LANGS } from '../js/config.js';
 import { gradeFree, gradePaid } from '../js/grade.js';
-import { MODEL_FILE, MODEL_ORIGIN, modelUrls } from '../js/pronounce/model-ref.js';
-import { doorFromTranscript, DOOR_OVERLAP } from '../js/pronounce/trial.js';
-import { PASS_AT, starsFromPct } from '../js/pronounce/stars.js';
+import { MANIFEST_FILE, MODEL_ORIGIN, SHARED_URL, modelUrls } from '../js/pronounce/model-ref.js';
+import { PASS_AT, THRESHOLDS, bandFor, starsFromPct } from '../js/pronounce/stars.js';
 import { markdownLite, renderDocument } from '../js/html.js';
 import { matchLang } from '../js/i18n.js';
 import { buildPlan, readSeconds } from '../js/plan.js';
@@ -189,28 +188,19 @@ if (await gradeFree(3, null) !== 'coming soon') throw new Error('gradeFree q3');
 if (await gradePaid({ id: 'x' }) !== 'coming soon') throw new Error('gradePaid');
 
 if (PASS_AT !== 60) throw new Error('pass at 60');
-if (DOOR_OVERLAP !== 0.5) throw new Error('door overlap');
+if (THRESHOLDS.green !== 75 || THRESHOLDS.yellow !== 50) throw new Error('thresholds 75/50');
+if (bandFor(75) !== 'green' || bandFor(74) !== 'yellow' || bandFor(50) !== 'yellow' || bandFor(49) !== 'red') throw new Error('bands');
 if (starsFromPct(100) !== 5 || starsFromPct(90) !== 5) throw new Error('5 stars');
 if (starsFromPct(89.9) !== 4 || starsFromPct(80) !== 4) throw new Error('4 stars');
 if (starsFromPct(79.9) !== 3 || starsFromPct(70) !== 3) throw new Error('3 stars');
 if (starsFromPct(69.9) !== 2 || starsFromPct(60) !== 2) throw new Error('2 stars');
 if (starsFromPct(59.9) !== 1 || starsFromPct(0) !== 1) throw new Error('1 star');
 
-const loud = new Float32Array(1600);
-loud.fill(0.05);
-const said = doorFromTranscript(loud, 'It is here.', 'it is here');
-if (!said.ok || said.overlap < 0.5) throw new Error('door should open');
-const missed = doorFromTranscript(loud, 'It is here.', 'what time is the train');
-if (missed.ok || !(missed.overlap < 0.5)) throw new Error('door should close');
-const quiet = new Float32Array(1600);
-if (doorFromTranscript(quiet, 'It is here.', 'it is here').ok) throw new Error('silence door');
-const half = doorFromTranscript(loud, 'one two three four', 'one two nope nope');
-if (!half.ok || half.overlap !== 0.5) throw new Error('half overlap');
-
-if (MODEL_FILE !== 'models/citrinet/model.int8.onnx') throw new Error('model file');
+if (MANIFEST_FILE !== 'models/hubert/manifest.json') throw new Error('model manifest');
 if (!MODEL_ORIGIN.startsWith('https://mrjkorea.github.io/pronounce/')) throw new Error('shared model');
+if (SHARED_URL !== 'https://mrjkorea.github.io/pronounce/src/shared.js') throw new Error('shared engine');
 const urls = modelUrls();
-if (!urls.model.endsWith(MODEL_FILE) || !urls.pieces.endsWith('sp_pieces.json')) throw new Error('model urls');
+if (!urls.manifest.endsWith(MANIFEST_FILE)) throw new Error('model urls');
 
 const banned = ['openai', 'nvidia', 'anthropic', 'whisper', 'wav2vec', 'citrinet', 'chatgpt', 'claude', 'gemini', 'onnx', 'espeak', 'whistle'];
 for (const lang of LANGS) {

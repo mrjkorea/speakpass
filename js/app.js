@@ -750,8 +750,8 @@ function readAloudScoreHtml(detail) {
   const label = t('review.stars', { n });
   const words = (detail.words || []).map((word) => (
     word.weak
-      ? `<mark class="weak">${escapeHtml(word.word)}</mark>`
-      : `<span>${escapeHtml(word.word)}</span>`
+      ? `<mark class="weak band-red">${escapeHtml(word.word)}</mark>`
+      : `<span class="band-${word.band === 'yellow' ? 'yellow' : 'green'}">${escapeHtml(word.word)}</span>`
   )).join(' ');
   const weak = (detail.words || []).filter((word) => word.weak).map((word) => word.word);
   const weakLine = weak.length

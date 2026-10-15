@@ -504,6 +504,9 @@ th { background: var(--cream-2); }
   padding: 0 0.12em;
 }
 
+.marked-line .band-green { background: #d4f5e2; border-radius: 0.25rem; padding: 0 0.12em; }
+.marked-line .band-yellow { background: #fff1b8; border-radius: 0.25rem; padding: 0 0.12em; }
+
 .weak-list { margin: 0; color: var(--speak); font-weight: 700; }
 
 .checking { font-weight: 700; }
