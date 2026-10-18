@@ -5,7 +5,7 @@ export const APP_NAME = 'SpeakPass AI';
  * Address of the marking Worker. Leave this empty until it is deployed.
  * After deploy, set the https address of the Worker, with no path on the end.
  */
-export const GRADE_WORKER_URL = '';
+export const GRADE_WORKER_URL = 'https://speakpass-grade.mrjenglish.workers.dev';
 
 /** UI languages. Test content stays English. Arabic uses a right-to-left layout. */
 export const LANGS = [
