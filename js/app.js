@@ -799,20 +799,21 @@ function readAloudScoreHtml(detail) {
   if (detail.status !== 'scored') return '';
   const n = detail.stars;
   const label = t('review.stars', { n });
-  const words = (detail.words || []).map((word) => (
-    word.weak
-      ? `<mark class="weak band-red">${escapeHtml(word.word)}</mark>`
-      : `<span class="band-${word.band === 'yellow' ? 'yellow' : 'green'}">${escapeHtml(word.word)}</span>`
-  )).join(' ');
+  const lineBand = detail.band === 'yellow' || detail.band === 'red' ? detail.band : 'green';
+  const words = (detail.words || []).map((word) => {
+    const band = word.band === 'yellow' || word.band === 'red' ? word.band : 'green';
+    if (band === 'red') return `<mark class="weak band-red">${escapeHtml(word.word)}</mark>`;
+    return `<span class="band-${band}">${escapeHtml(word.word)}</span>`;
+  }).join(' ');
   const weak = (detail.words || []).filter((word) => word.weak).map((word) => word.word);
   const weakLine = weak.length
     ? `<p class="weak-list">${escapeHtml(t('review.weak'))}: ${escapeHtml(weak.join(', '))}</p>`
     : '';
   return `
-    <p class="score stars" role="img" aria-label="${escapeHtml(label)}">
+    <p class="score stars line-${lineBand}" role="img" aria-label="${escapeHtml(label)}">
       <span class="score-name">${escapeHtml(name)}</span>
       <span class="star-row" aria-hidden="true">${starMarks(n)}</span>
-      <span>${n}/5</span>
+      <span class="line-band band-${lineBand}">${n}/5</span>
     </p>
     <p class="marked-line" lang="en" dir="ltr">${words}</p>
     ${weakLine}`;

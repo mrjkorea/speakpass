@@ -1,7 +1,9 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { APP_NAME, LANGS } from '../js/config.js';
 import { gradeFree, gradePaid } from '../js/grade.js';
-import { MANIFEST_FILE, MODEL_ORIGIN, SHARED_URL, modelUrls } from '../js/pronounce/model-ref.js';
+import { existsSync } from 'node:fs';
+import { MANIFEST_FILE, MODEL_CACHE, MODEL_FILE, MODEL_ORIGIN, SHARED_URL, modelUrls } from '../js/pronounce/model-ref.js';
+import { packGrade } from '../js/pronounce/pack.js';
 import { PASS_AT, THRESHOLDS, bandFor, starsFromPct } from '../js/pronounce/stars.js';
 import { markdownLite, renderDocument } from '../js/html.js';
 import { matchLang } from '../js/i18n.js';
@@ -197,10 +199,63 @@ if (starsFromPct(69.9) !== 2 || starsFromPct(60) !== 2) throw new Error('2 stars
 if (starsFromPct(59.9) !== 1 || starsFromPct(0) !== 1) throw new Error('1 star');
 
 if (MANIFEST_FILE !== 'models/hubert/manifest.json') throw new Error('model manifest');
+if (MODEL_FILE !== 'hubert-base-phoneme-en-int8.onnx') throw new Error('model file');
+if (MODEL_CACHE !== 'mrj-hubert-phoneme-en-int8-v1') throw new Error('model cache');
 if (!MODEL_ORIGIN.startsWith('https://mrjkorea.github.io/pronounce/')) throw new Error('shared model');
 if (SHARED_URL !== 'https://mrjkorea.github.io/pronounce/src/shared.js') throw new Error('shared engine');
 const urls = modelUrls();
 if (!urls.manifest.endsWith(MANIFEST_FILE)) throw new Error('model urls');
+
+const again = packGrade({
+  result: { doorFail: true, acousticFail: true, scorePct: 0 },
+  door: { ok: false, reason: 'silence' }
+}, 4, { loadMs: 9, modelBytes: 10, modelFile: MODEL_FILE });
+if (again.status !== 'again' || again.save !== '0/5' || again.stars !== 0) throw new Error('say again');
+const wrong = packGrade({
+  result: { acousticFail: true, doorFail: true, scorePct: 0, words: [{ word: 'Hello', score: 10, band: 'red' }] },
+  door: { ok: false }
+}, 5, { modelFile: MODEL_FILE });
+if (wrong.status !== 'again' || wrong.words.length !== 0) throw new Error('wrong passage');
+const scored = packGrade({
+  result: {
+    doorFail: false,
+    scorePct: 82,
+    pass: true,
+    band: 'green',
+    words: [
+      { word: 'Maple', score: 90, band: 'green' },
+      { word: 'Court', score: 62, band: 'yellow' },
+      { word: 'Library', score: 40, band: 'red' }
+    ]
+  },
+  door: { ok: true }
+}, 20, { modelFile: MODEL_FILE, modelBytes: 121951866 });
+if (scored.save !== '4/5' || scored.stars !== 4 || scored.pass !== true) throw new Error('stars on line');
+if (scored.words[0].band !== 'green' || scored.words[1].band !== 'yellow' || scored.words[2].band !== 'red') throw new Error('word colours');
+if (!scored.words[2].weak || scored.words[1].weak) throw new Error('red is the weak colour');
+const low = packGrade({
+  result: { scorePct: 55, pass: false, band: 'yellow', words: [{ word: 'A', score: 55, band: 'yellow' }] },
+  door: { ok: true }
+}, 1, {});
+if (low.stars !== 1 || low.save !== '1/5' || low.pass !== false || low.words[0].band !== 'yellow') throw new Error('under 60');
+
+const removed = [
+  'js/pronounce/audio.js',
+  'js/pronounce/assets.js',
+  'js/pronounce/cache-get.js',
+  'js/pronounce/citrinet-encode.js',
+  'js/pronounce/grade-worker.js',
+  'js/pronounce/nemo-fbank.js',
+  'js/pronounce/session.js',
+  'js/pronounce/trial.js',
+  'js/pronounce/words.js'
+];
+for (const rel of removed) {
+  if (existsSync(new URL(`../${rel}`, import.meta.url))) throw new Error(`still present ${rel}`);
+}
+const sw = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
+if (!sw.includes(MODEL_CACHE)) throw new Error('service worker drops the shared model cache');
+if (sw.includes('pronounce/audio.js')) throw new Error('service worker still caches the local resampler');
 
 const banned = ['openai', 'nvidia', 'anthropic', 'whisper', 'wav2vec', 'citrinet', 'chatgpt', 'claude', 'gemini', 'onnx', 'espeak', 'whistle'];
 for (const lang of LANGS) {

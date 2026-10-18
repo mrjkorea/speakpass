@@ -496,16 +496,32 @@ th { background: var(--cream-2); }
   line-height: 1.75;
 }
 
-.marked-line mark.weak {
-  background: #f6d3c6;
-  color: var(--speak);
+.marked-line mark.weak,
+.marked-line .band-red {
+  background: rgba(255, 107, 122, 0.28);
+  color: #a32018;
   font-weight: 700;
   border-radius: 0.25rem;
   padding: 0 0.12em;
 }
 
-.marked-line .band-green { background: #d4f5e2; border-radius: 0.25rem; padding: 0 0.12em; }
-.marked-line .band-yellow { background: #fff1b8; border-radius: 0.25rem; padding: 0 0.12em; }
+.marked-line .band-green {
+  background: rgba(61, 220, 151, 0.35);
+  color: #146c43;
+  border-radius: 0.25rem;
+  padding: 0 0.12em;
+}
+
+.marked-line .band-yellow {
+  background: rgba(255, 193, 7, 0.35);
+  color: #8a5a12;
+  border-radius: 0.25rem;
+  padding: 0 0.12em;
+}
+
+.line-band.band-green { color: #146c43; }
+.line-band.band-yellow { color: #8a5a12; }
+.line-band.band-red { color: #a32018; }
 
 .weak-list { margin: 0; color: var(--speak); font-weight: 700; }
 

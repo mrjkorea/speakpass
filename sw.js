@@ -1,4 +1,6 @@
-const CACHE = 'app-shell-v8';
+const CACHE = 'app-shell-v9';
+// Same cache the shared pronunciation loader uses. One copy for every MRJ app.
+const SHARED_MODEL_CACHE = 'mrj-hubert-phoneme-en-int8-v1';
 
 const PRECACHE = [
   './index.html',
@@ -13,7 +15,6 @@ const PRECACHE = [
   './js/grade.js',
   './js/pronounce/model-ref.js',
   './js/pronounce/pack.js',
-  './js/pronounce/audio.js',
   './js/pronounce/stars.js',
   './js/pronounce/boot.js',
   './js/progress.js',
@@ -86,7 +87,9 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys
+        .filter((key) => key !== CACHE && key !== SHARED_MODEL_CACHE)
+        .map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
