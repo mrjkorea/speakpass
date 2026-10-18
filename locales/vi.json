@@ -11,7 +11,12 @@
     "loadError": "Không tải được danh sách bài. Kiểm tra kết nối rồi thử lại.",
     "noTests": "Chưa có bài luyện tập.",
     "micNote": "Bài đầy đủ dùng micro. Đồng hồ chạy liên tục và không tạm dừng được.",
-    "questionCount": "{count} câu"
+    "questionCount": "{count} câu",
+    "savedTitle": "Tiến độ đã lưu",
+    "savedCount": "Đã lưu {done}/{total} câu",
+    "savedNone": "Bài này chưa có câu trả lời đã lưu.",
+    "savedItem": "Câu {n}: {score}/{total}",
+    "savedDone": "Đã lưu câu {n}"
   },
   "practice": {
     "title": "Luyện tập",
@@ -61,7 +66,7 @@
     "start": "Bắt đầu",
     "end": "Kết thúc",
     "leaveTitle": "Kết thúc phiên này?",
-    "leaveBody": "Đồng hồ sẽ dừng. Các câu đã ghi vẫn được giữ trên thiết bị này.",
+    "leaveBody": "Đồng hồ sẽ dừng. Các câu đã ghi được lưu vào tài khoản của bạn.",
     "leaveYes": "Kết thúc phiên",
     "leaveNo": "Làm tiếp",
     "micDenied": "Quyền micro bị chặn. Hãy cho phép micro trong cài đặt trình duyệt rồi thử lại.",
@@ -82,8 +87,8 @@
     "noAudio": "Không có ghi âm",
     "deviceScore": "Điểm trên thiết bị",
     "serverScore": "Điểm trên máy chủ",
-    "saved": "Đã lưu trên thiết bị này",
-    "notSaved": "Không lưu được trên thiết bị này. Bạn vẫn có thể phát câu trả lời cho đến khi rời trang.",
+    "saved": "Đã lưu vào tài khoản của bạn",
+    "notSaved": "Không lưu được vào tài khoản. Bạn vẫn có thể phát câu trả lời cho đến khi rời trang.",
     "home": "Về trang đầu",
     "retry": "Làm lại",
     "snippetPicture": "Mô tả tranh",
@@ -98,7 +103,13 @@
     "slowDown": "Đợi một phút, rồi xin điểm AI lần nữa.",
     "dailyCap": "Chấm điểm AI hôm nay đã đầy. Hãy thử lại vào ngày mai.",
     "signInAgain": "Đăng nhập lại, rồi xin điểm AI.",
-    "aiScore": "Điểm AI"
+    "aiScore": "Điểm AI",
+    "saving": "Đang lưu vào tài khoản của bạn…",
+    "checking": "Đang kiểm tra phát âm…",
+    "sayAgain": "Hãy nói lại. Hãy nói rõ từng từ.",
+    "stars": "{n} trên 5",
+    "checkFailed": "Không kiểm tra được phát âm trên thiết bị này. Câu trả lời vẫn được lưu.",
+    "weak": "Từ cần luyện"
   },
   "common": {
     "language": "Ngôn ngữ",
@@ -111,5 +122,9 @@
     "play": "Phát câu trả lời của câu {n}",
     "stop": "Dừng phát câu trả lời của câu {n}",
     "progress": "Câu {index} / {total}"
+  },
+  "account": {
+    "loading": "Đang tải tiến độ đã lưu…",
+    "error": "Không tải được tiến độ đã lưu. Kiểm tra kết nối và thử lại."
   }
 }

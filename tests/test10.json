@@ -41,10 +41,266 @@
       "image": "images/test10_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a hair salon with large mirrors and no brand names on the bottles. Number of people and appearance: Three adults. Clothing: A stylist wears a black shirt. The client in the chair wears a gray cape. A waiting client wears a cream sweater. Actions: The stylist cuts hair with scissors and a comb. The seated client faces the mirror. The waiting client reads a magazine. Objects: Scissors, a comb, a gray cape, a magazine, and bottles of shampoo. Foreground: The stylist and the client in the cape are closest to the camera. Background: Mirrors, the shampoo shelf, and the waiting chair are behind them.",
       "key_elements": [
-        "stylist in a black shirt cutting hair",
-        "client wearing a gray cape",
-        "scissors and a comb",
-        "waiting client reading a magazine"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a hair salon.",
+          "accept": [
+            "hair salon",
+            "a barbershop",
+            "a hairdresser's",
+            "a salon with mirrors",
+            "someone cutting hair"
+          ],
+          "contradict": [
+            {
+              "text": "this is a pharmacy",
+              "cap": 1
+            },
+            {
+              "text": "this is a meeting room",
+              "cap": 2
+            },
+            {
+              "text": "this is a post office",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three people are in the salon. The mirror reflects the stylist and the seated client; those reflections are not extra people.",
+          "accept": [
+            "three people",
+            "three adults",
+            "a stylist, a client, and a waiting customer",
+            "3 people",
+            "the mirror shows the same people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            },
+            {
+              "text": "four separate people besides the reflection",
+              "cap": 3
+            },
+            {
+              "text": "the salon is empty",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "cut",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A stylist cuts a client's hair with scissors and a comb.",
+          "accept": [
+            "cutting hair",
+            "using scissors and a comb",
+            "trimming hair",
+            "a haircut",
+            "scissors in one hand and a comb in the other"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is cutting hair",
+              "cap": 2
+            },
+            {
+              "text": "the stylist is reading a magazine",
+              "cap": 3
+            },
+            {
+              "text": "she is using a hair dryer only",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "black_shirt",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The stylist wears a black shirt.",
+          "accept": [
+            "black shirt",
+            "dressed in black",
+            "the stylist in black",
+            "a black top"
+          ],
+          "contradict": [
+            {
+              "text": "the stylist wears a cream sweater",
+              "cap": 3
+            },
+            {
+              "text": "the stylist wears a gray cape",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "cape",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The seated client wears a gray cape.",
+          "accept": [
+            "gray cape",
+            "grey salon cape",
+            "a cutting cape",
+            "the client is draped in gray"
+          ],
+          "contradict": [
+            {
+              "text": "the client wears a black shirt",
+              "cap": 3
+            },
+            {
+              "text": "the client is not wearing a cape",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "waiting",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A waiting client in a cream sweater sits and reads a magazine.",
+          "accept": [
+            "reading a magazine",
+            "a cream sweater",
+            "an off-white sweater",
+            "waiting and reading",
+            "a woman in a light sweater with a magazine"
+          ],
+          "contradict": [
+            {
+              "text": "the waiting client is cutting hair",
+              "cap": 3
+            },
+            {
+              "text": "nobody is waiting",
+              "cap": 3
+            },
+            {
+              "text": "she wears a black shirt",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "mirror",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A large mirror behind the client reflects the haircut.",
+          "accept": [
+            "a large mirror",
+            "the mirror reflects them",
+            "a salon mirror",
+            "you can see their reflection"
+          ],
+          "contradict": [
+            {
+              "text": "there is no mirror",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bottles",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "White pump bottles line a shelf.",
+          "accept": [
+            "bottles on a shelf",
+            "shampoo bottles",
+            "white pump bottles",
+            "hair-product bottles"
+          ],
+          "contradict": [
+            {
+              "text": "there are no bottles",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "chairs",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The client sits in a black salon chair, and another black chair is empty nearby.",
+          "accept": [
+            "a salon chair",
+            "black chairs",
+            "the client is seated",
+            "an empty chair"
+          ],
+          "contradict": [
+            {
+              "text": "everyone is standing",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The stylist and the caped client are in the foreground, and the waiting client sits farther left in the background.",
+          "accept": [
+            "in the foreground",
+            "the waiting client is in the background",
+            "the reader is on the left",
+            "the stylist stands behind the client"
+          ],
+          "contradict": [
+            {
+              "text": "the waiting client is the person whose hair is being cut",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "hair",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The seated client has dark curly hair.",
+          "accept": [
+            "curly hair",
+            "dark curly hair",
+            "the stylist is cutting curls"
+          ],
+          "contradict": [
+            {
+              "text": "the client is bald",
+              "cap": 3
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows a hair salon with large mirrors. In the foreground, a stylist in a black shirt is cutting the hair of a client wearing a gray cape. The stylist holds scissors and a comb. Another client sits in the background reading a magazine, and bottles of shampoo line a shelf behind the stylist."
     },
@@ -56,12 +312,327 @@
       "image": "images/test10_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a meeting room during a presentation, with a blurred chart that has no readable words. Number of people and appearance: Four adults. Clothing: The speaker wears a dark jacket. One listener wears a red blouse. One wears a blue shirt. One wears a cream sweater. Actions: The speaker points at the screen. The three listeners take notes. Objects: A blurred chart, notebooks, water glasses, and a closed laptop. Foreground: The speaker and the screen are closest to the camera. Background: The listeners sit along a table, with a window behind them.",
       "key_elements": [
-        "speaker in a dark jacket pointing at a chart",
-        "listener in a red blouse taking notes",
-        "listener in a blue shirt",
-        "notebooks and water glasses on the table"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a meeting room during a presentation.",
+          "accept": [
+            "meeting room",
+            "a conference room",
+            "a presentation",
+            "a business meeting",
+            "people around a conference table"
+          ],
+          "contradict": [
+            {
+              "text": "this is a hair salon",
+              "cap": 1
+            },
+            {
+              "text": "this is a playground",
+              "cap": 1
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is a supermarket",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Four adults are in the room: one speaker and three listeners.",
+          "accept": [
+            "four people",
+            "four adults",
+            "a speaker and three listeners",
+            "4 people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "three people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "point",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "The speaker points at a bar chart on a screen.",
+          "accept": [
+            "pointing at a chart",
+            "pointing at the screen",
+            "a bar chart",
+            "pointing at a graph",
+            "presenting a chart"
+          ],
+          "contradict": [
+            {
+              "text": "the screen is blank",
+              "cap": 3
+            },
+            {
+              "text": "the chart is a pie chart",
+              "cap": 3
+            },
+            {
+              "text": "nobody is pointing",
+              "cap": 3
+            },
+            {
+              "text": "the chart is too blurred to see any bars",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "speaker_clothes",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The speaker wears a dark jacket.",
+          "accept": [
+            "dark jacket",
+            "a navy jacket",
+            "a dark zip jacket",
+            "the presenter in a dark top"
+          ],
+          "contradict": [
+            {
+              "text": "the speaker wears a red blouse",
+              "cap": 3
+            },
+            {
+              "text": "the speaker wears a cream sweater",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "notes",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "The three listeners write in notebooks.",
+          "accept": [
+            "taking notes",
+            "writing in notebooks",
+            "all three are writing",
+            "they have pens and notebooks",
+            "jotting notes during the talk"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is writing",
+              "cap": 2
+            },
+            {
+              "text": "the listeners are standing",
+              "cap": 3
+            },
+            {
+              "text": "only the speaker is writing",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "red",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "One listener wears a red blouse.",
+          "accept": [
+            "red blouse",
+            "a red shirt",
+            "a woman in red",
+            "a red top"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is wearing red",
+              "cap": 3
+            },
+            {
+              "text": "the person in red is the speaker",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "blue",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "One listener wears a blue shirt.",
+          "accept": [
+            "blue shirt",
+            "a man in blue",
+            "a blue button-down",
+            "the listener in blue"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is wearing blue",
+              "cap": 3
+            },
+            {
+              "text": "the man in blue is standing and pointing",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "cream",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "One listener wears a cream sweater.",
+          "accept": [
+            "cream sweater",
+            "an off-white sweater",
+            "a white sweater",
+            "a light-colored sweater"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is wearing a light sweater",
+              "cap": 3
+            },
+            {
+              "text": "the person in cream is the speaker",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bars",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The chart has vertical bars in blue, purple, red, yellow, and green, with no readable words.",
+          "accept": [
+            "colored bars",
+            "a bar graph",
+            "blue purple red yellow and green bars",
+            "a column chart",
+            "bars and no readable text"
+          ],
+          "contradict": [
+            {
+              "text": "the screen shows a photograph of a beach",
+              "cap": 2
+            },
+            {
+              "text": "the screen is turned off",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "table_objects",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Open notebooks, pens, water glasses, and a closed laptop are on the wooden table.",
+          "accept": [
+            "notebooks",
+            "water glasses",
+            "a closed laptop",
+            "glasses of water",
+            "a shut laptop on the table"
+          ],
+          "contradict": [
+            {
+              "text": "the table is empty",
+              "cap": 3
+            },
+            {
+              "text": "the laptop is open and being used as the screen",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "A window with trees outside, and a beige curtain, is on the left.",
+          "accept": [
+            "a window",
+            "trees outside",
+            "a curtain",
+            "daylight from the window"
+          ],
+          "contradict": [
+            {
+              "text": "there is no window",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The three listeners sit closer to the camera along the table, and the speaker stands farther right beside the screen.",
+          "accept": [
+            "listeners closer to the camera",
+            "the speaker stands by the screen",
+            "the speaker is on the right",
+            "the audience is seated in the foreground"
+          ],
+          "contradict": [
+            {
+              "text": "the speaker is seated in the foreground and the listeners are standing",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "chairs",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Black office chairs surround the table.",
+          "accept": [
+            "black chairs",
+            "office chairs",
+            "chair backs in the foreground"
+          ],
+          "contradict": [
+            {
+              "text": "they are sitting on the floor",
+              "cap": 3
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows a meeting room during a presentation. In the foreground, a speaker in a dark jacket is pointing at a blurred chart on a screen. Three coworkers sit at the table with notebooks. One wears a red blouse, one a blue shirt, and one a cream sweater. Water glasses and a closed laptop sit on the table, and a window is behind them."
+      "model_answer": "This picture shows a meeting room during a presentation. A speaker in a dark jacket stands beside a screen and points at a bar chart. Three coworkers sit closer to the camera, writing in notebooks. One wears a red blouse, one a blue shirt, and one a cream sweater. Water glasses and a closed laptop sit on the table, and a window is behind them."
     },
     {
       "q": 5,

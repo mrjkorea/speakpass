@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v4';
+const CACHE = 'app-shell-v8';
 
 const PRECACHE = [
   './index.html',
@@ -10,13 +10,19 @@ const PRECACHE = [
   './js/plan.js',
   './js/timer.js',
   './js/audio.js',
-  './js/db.js',
   './js/grade.js',
+  './js/pronounce/model-ref.js',
+  './js/pronounce/pack.js',
+  './js/pronounce/audio.js',
+  './js/pronounce/stars.js',
+  './js/pronounce/boot.js',
+  './js/progress.js',
+  './js/cloud.js',
+  './mrj-scores.js',
   './js/engine.js',
   './js/app.js',
   './js/paid-mark.js',
   './js/mark-client.js',
-  './js/mrj-scores.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-180.png',
@@ -32,6 +38,26 @@ const PRECACHE = [
   './tests/test08.json',
   './tests/test09.json',
   './tests/test10.json',
+  './images/test01_q3.jpg',
+  './images/test01_q4.jpg',
+  './images/test02_q3.jpg',
+  './images/test02_q4.jpg',
+  './images/test03_q3.jpg',
+  './images/test03_q4.jpg',
+  './images/test04_q3.jpg',
+  './images/test04_q4.jpg',
+  './images/test05_q3.jpg',
+  './images/test05_q4.jpg',
+  './images/test06_q3.jpg',
+  './images/test06_q4.jpg',
+  './images/test07_q3.jpg',
+  './images/test07_q4.jpg',
+  './images/test08_q3.jpg',
+  './images/test08_q4.jpg',
+  './images/test09_q3.jpg',
+  './images/test09_q4.jpg',
+  './images/test10_q3.jpg',
+  './images/test10_q4.jpg',
   './locales/en.json',
   './locales/ko.json',
   './locales/zh-Hans.json',
@@ -70,6 +96,8 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  // The shared pronunciation model is cached by the pronounce checker itself; don't store a second copy.
+  if (url.pathname.startsWith('/pronounce/models/')) return;
 
   event.respondWith((async () => {
     try {

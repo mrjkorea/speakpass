@@ -4,7 +4,7 @@ English speaking practice with TOEIC-style questions. This is not a TOEIC test.
 
 TOEIC is a registered trademark of ETS. This product is not endorsed or approved by ETS.
 
-SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. It does not grade yet.
+SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. Sign in with the shared classroom account. Progress loads from that account on every computer. Questions 1 and 2 (read a text aloud) get an on-device pronunciation score. The other questions are not scored yet.
 
 The app name is the constant `APP_NAME` in `js/config.js`. The manifest (`name` and `short_name`), the page title, and `appName` in every file under `locales/` must stay the same as that constant.
 
@@ -28,8 +28,9 @@ The same files can be published on GitHub Pages (`.nojekyll` is included so ever
 
 - **Full test.** All 11 questions in order. Each part starts when you press Start. Preparation counts down, a tone plays, recording starts by itself, and recording stops when the speaking time ends.
 - **Practice.** One question, or every question in a part. You can try again from the review screen.
-- **Review.** Each answer is stored in IndexedDB on this device and can be played back.
+- **Review.** Each finished question is saved to the signed-in account. Playback of a recording stays on this page.
 - **Language.** The interface and the directions are available in 15 languages. The test itself stays in English. The language follows the browser the first time, and you can change it with the picker. Arabic uses a right-to-left layout.
+- **Sign in.** The name chip and My scores panel come from the shared sign-in script. The app id is `speakpass`. The full progress pack loads on sign-in. Passwords are never stored in this app.
 
 Questions 3 and 4 show a picture. If the image file is missing, a neutral placeholder appears. Questions 8–10 show a document for 45 seconds, then the questions. The document stays on screen.
 
@@ -44,8 +45,11 @@ js/config.js            APP_NAME and the language list
 js/app.js               Screens
 js/engine.js            Timers and the question sequence
 js/audio.js             Microphone, beeps, MediaRecorder
-js/db.js                IndexedDB attempts
-js/grade.js             gradeFree and gradePaid stubs
+js/progress.js          Cloud progress pack (no audio)
+js/cloud.js             Sign-in pack load/save and score posts
+js/grade.js             Read-aloud score and later hooks
+js/pronounce/           Shared on-device pronunciation checker
+mrj-scores.js           Shared classroom score sheet poster
 js/plan.js              Turns a test file into steps
 js/i18n.js              Language detection and dictionaries
 js/html.js              Escaping and document rendering
@@ -79,7 +83,7 @@ node scripts/check.mjs
 | 11 | `opinion` | 45 s | 60 s |
 
 4. Questions 1–2 need `text`, `sentences`, and `"phonemes_todo": true`.
-5. Questions 3–4 need `image` (a path such as `images/test02_q3.jpg`, with no leading slash), `image_prompt`, `key_elements`, and `model_answer`. If that file is missing, the app shows a placeholder.
+5. Questions 3–4 need `image` (a path such as `images/test02_q3.jpg`, with no leading slash), `image_prompt`, `key_elements`, and `model_answer`. If that file is missing, the app shows a placeholder. `key_elements` is a weighted checklist of what the photograph actually shows. Each item has `id`, `role` (`main` or `detail`), `weight` (`main` is 2 or 3, `detail` is 1), `category` (`place`, `people`, `clothing`, `action`, `object`, or `position`), `text`, and `accept` (synonyms and alternative phrasings). Optional `contradict` entries are wrong claims, each with `text` and `cap` from 0 to 5. A matched contradiction caps the 0–5 score; the lowest cap wins. Omissions do not count as contradictions. See `CHECKLIST_REPORT.md`.
 6. Questions 5–7 share the same `set_intro`. It can be repeated on each question, or only on the first; the others inherit it. Each has `question` and `model_answer`.
 7. Questions 8–10 share the same `document` and `caller_intro`. Either may be repeated on each question or only on the first. Put `"read_sec": 45` on the question or on the document. `rows` may be a table (the first row is the header) or a list of `{ "label", "value" }` objects. `markdown` may use headings, paragraphs, bullet lists, `**bold**`, and tables. Each question has `question`, `answer_facts`, and `model_answer`.
 8. Question 11 needs `question` and `model_answer`.
@@ -95,13 +99,25 @@ Directions are written in the locale files, not in the test. The app supplies th
 
 ## Recording
 
-The microphone is requested in the tap on Start, which is what iOS Safari requires. The recorder uses WebM when the browser supports it, and MP4 on Safari. Each answer’s audio blob is saved with the attempt in IndexedDB and played on the review screen.
+The microphone is requested in the tap on Start, which is what iOS Safari requires. The recorder uses WebM when the browser supports it, and MP4 on Safari. A recording plays on the review screen for this visit. The account stores the question, the score, and the attempt, not the audio.
+
+## Sign-in and progress
+
+Students use a different classroom computer each day. Nothing about progress is kept only on the device.
+
+On sign-in the app calls `loadPack('speakpass')` and shows that pack. After a session it calls `savePack` with the full pack. Each scored question also calls `noteScore` with item `<test>:<question number>`, and `MRJ_SCORES.post` with the plain student id (not an email address). Until a numeric grade exists, a finished recording is stored as 1/1 and a question with no recording as 0/1.
+
+Test the cloud path only with ids that start with `zz_test_`.
 
 ## Grading
 
-`js/grade.js` still returns `coming soon`. It does not upload audio.
+Questions 1 and 2 are scored on the device after the recording stops. The checker loads `model.int8.onnx`, its piece list, and the shared WebAssembly runtime from the pronunciation site, once, and keeps those files in the browser cache, so a later visit still scores with no network. A word passes at 60. If the heard words overlap the passage by less than half, the screen asks the student to say it again and the saved score is 0/5. Otherwise the average word score becomes 1–5 stars (90 and above is 5, 80 is 4, 70 is 3, 60 is 2, below 60 is 1) and words under 60 are highlighted.
 
-The grader is drafted in `worker/` and explained in `PAID_SERVER_PLAN.md`. It is not deployed. It grades questions 1 through 11 from an on-device transcript. The review screen has a Get AI marking button. The address is `GRADE_WORKER_URL` in `js/config.js`. Until that address is set, the button says the marking service is not deployed. The screen does not name the grader. Scores and saved progress use the shared sign-in files, with the same fields those files already have. Deploy commands are in `DEPLOY_STEPS.md`.
+The score is saved with the existing account pack and score sheet. The item id is still `<test>:<question number>`. A read-aloud score is `N/5`. Questions 3 and 4 still use `gradeFree`, which returns `coming soon` (saved as 1/1 when a recording exists). `gradePaid` for questions 5–11 is unchanged. Audio is not uploaded.
+
+Test cloud saves only with ids that start with `zz_test_`.
+
+The review screen also has a Get AI marking button for questions 5 through 11. It sends the on-device transcript to the marking Worker at `GRADE_WORKER_URL` in `js/config.js` (deployed on Cloudflare Workers in free mode). Audio is not uploaded. Deploy commands are in `DEPLOY_STEPS.md`.
 
 ## Install and offline
 

@@ -11,7 +11,12 @@
     "loadError": "Sınav listesi yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.",
     "noTests": "Henüz alıştırma sınavı yok.",
     "micNote": "Tam sınav mikrofonu kullanır. Süreler ara vermeden akar.",
-    "questionCount": "{count} soru"
+    "questionCount": "{count} soru",
+    "savedTitle": "Kayıtlı ilerleme",
+    "savedCount": "{done} / {total} soru kaydedildi",
+    "savedNone": "Bu test için henüz kayıtlı yanıt yok.",
+    "savedItem": "Soru {n}: {score}/{total}",
+    "savedDone": "Soru {n} kaydedildi"
   },
   "practice": {
     "title": "Alıştırma",
@@ -61,7 +66,7 @@
     "start": "Başla",
     "end": "Bitir",
     "leaveTitle": "Bu oturum bitsin mi?",
-    "leaveBody": "Sayaç duracak. Şimdiye kadar kaydedilen yanıtlar bu cihazda kalır.",
+    "leaveBody": "Sayaç duracak. Şimdiye kadar kaydedilen yanıtlar hesabınıza kaydedilir.",
     "leaveYes": "Oturumu bitir",
     "leaveNo": "Devam et",
     "micDenied": "Mikrofon erişimi engellendi. Tarayıcı ayarlarından mikrofona izin verip yeniden deneyin.",
@@ -82,8 +87,8 @@
     "noAudio": "Kayıt yok",
     "deviceScore": "Cihaz içi puan",
     "serverScore": "Sunucu puanı",
-    "saved": "Bu cihaza kaydedildi",
-    "notSaved": "Bu cihaza kaydedilemedi. Sayfadan çıkana kadar yanıtları dinleyebilirsiniz.",
+    "saved": "Hesabınıza kaydedildi",
+    "notSaved": "Hesabınıza kaydedilemedi. Sayfadan çıkana kadar yanıtları dinleyebilirsiniz.",
     "home": "Başlangıca dön",
     "retry": "Yeniden dene",
     "snippetPicture": "Resim anlatımı",
@@ -98,7 +103,13 @@
     "slowDown": "Bir dakika bekle, sonra yeniden yapay zekâ notu iste.",
     "dailyCap": "Bugün yapay zekâ puanlaması doldu. Yarın yeniden dene.",
     "signInAgain": "Yeniden giriş yap, sonra yapay zekâ notu iste.",
-    "aiScore": "Yapay zekâ notu"
+    "aiScore": "Yapay zekâ notu",
+    "saving": "Hesabınıza kaydediliyor…",
+    "checking": "Telaffuz kontrol ediliyor…",
+    "sayAgain": "Tekrar söyle. Her sözcüğü açık söyle.",
+    "stars": "5 üzerinden {n}",
+    "checkFailed": "Bu cihazda telaffuz kontrol edilemedi. Yanıtın yine de kaydedilir.",
+    "weak": "Çalışılacak sözcükler"
   },
   "common": {
     "language": "Dil",
@@ -111,5 +122,9 @@
     "play": "{n}. sorunun yanıtını oynat",
     "stop": "{n}. sorunun oynatılmasını durdur",
     "progress": "Soru {index} / {total}"
+  },
+  "account": {
+    "loading": "Kayıtlı ilerlemeniz yükleniyor…",
+    "error": "Kayıtlı ilerlemeniz yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin."
   }
 }

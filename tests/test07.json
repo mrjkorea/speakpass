@@ -41,10 +41,252 @@
       "image": "images/test07_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a post office service counter with mail bins behind it. Number of people and appearance: Three adults. Clothing: A clerk wears a blue uniform. A customer wears a green coat. A man at a side table wears a white shirt. Actions: The clerk weighs a parcel. The customer holds a small box and a pen. The man fills out a form. Objects: A scale, a parcel, a pen, a form, and mail bins. Foreground: The clerk and the customer at the counter are closest to the camera. Background: The form table and a wall of mail bins sit behind them.",
       "key_elements": [
-        "clerk in a blue uniform weighing a parcel",
-        "customer in a green coat holding a box",
-        "man filling out a form",
-        "mail bins along the back wall"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a post office service counter.",
+          "accept": [
+            "post office",
+            "mail counter",
+            "a parcel counter",
+            "a mailing service desk",
+            "a post-office counter"
+          ],
+          "contradict": [
+            {
+              "text": "this is a pharmacy",
+              "cap": 1
+            },
+            {
+              "text": "this is a hair salon",
+              "cap": 1
+            },
+            {
+              "text": "this is a playground",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are in the post office.",
+          "accept": [
+            "three people",
+            "three adults",
+            "3 people",
+            "a clerk, a customer, and a man writing"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "weigh",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A clerk in a blue uniform weighs a parcel on a scale.",
+          "accept": [
+            "weighing a parcel",
+            "weighing a package",
+            "a parcel on a scale",
+            "blue uniform",
+            "the clerk puts a box on the scale"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is weighing anything",
+              "cap": 3
+            },
+            {
+              "text": "the clerk wears a green coat",
+              "cap": 3
+            },
+            {
+              "text": "the scale is not being used",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "customer",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A customer in a green coat holds a small box and a pen.",
+          "accept": [
+            "green coat",
+            "olive coat",
+            "holding a small box",
+            "holding a pen",
+            "a customer with a box and a pen"
+          ],
+          "contradict": [
+            {
+              "text": "the customer wears a blue uniform",
+              "cap": 3
+            },
+            {
+              "text": "the customer's hands are empty",
+              "cap": 3
+            },
+            {
+              "text": "she is filling out the form at the back table",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "form",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A man in a white shirt sits at a side table and fills out a form.",
+          "accept": [
+            "filling out a form",
+            "writing on a form",
+            "white shirt",
+            "a man writing at a table",
+            "completing paperwork"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is writing",
+              "cap": 3
+            },
+            {
+              "text": "the man in white is weighing the parcel",
+              "cap": 3
+            },
+            {
+              "text": "he wears a green coat",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "scale",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The scale is a gray digital platform scale on the counter.",
+          "accept": [
+            "a scale",
+            "a digital scale",
+            "a platform scale",
+            "the package is on the scale"
+          ],
+          "contradict": [
+            {
+              "text": "there is no scale",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "parcel",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The parcel on the scale is a rectangular box wrapped in brown paper.",
+          "accept": [
+            "a wrapped parcel",
+            "a brown paper package",
+            "a taped box",
+            "a cardboard parcel"
+          ],
+          "contradict": [
+            {
+              "text": "the parcel is a bouquet of flowers",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "small_box",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The customer's box is smaller than the parcel on the scale.",
+          "accept": [
+            "a small box",
+            "a small cardboard box",
+            "she holds a little package"
+          ],
+          "contradict": [
+            {
+              "text": "she is holding the large parcel that is on the scale",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bins",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A wall of mail bins, or pigeonholes, fills the background.",
+          "accept": [
+            "mail bins",
+            "pigeonholes",
+            "mail slots",
+            "a wall of cubbies",
+            "sorting slots"
+          ],
+          "contradict": [
+            {
+              "text": "the back wall is a window onto a street",
+              "cap": 3
+            },
+            {
+              "text": "there are no mail slots",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The clerk and the customer are at the foreground counter, and the man writing is farther back at a side table.",
+          "accept": [
+            "at the counter in the foreground",
+            "the writer is in the background",
+            "a side table behind them",
+            "the clerk is on the left"
+          ],
+          "contradict": [
+            {
+              "text": "the man in the white shirt is in front of the counter",
+              "cap": 3
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows a post office service counter. In the foreground, a clerk in a blue uniform is weighing a parcel for a customer in a green coat. The customer holds a small box and a pen. Behind them, a man in a white shirt fills out a form, and mail bins line the back wall."
     },
@@ -56,12 +298,282 @@
       "image": "images/test07_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an indoor swimming pool at a community center, with lane ropes and no logos. Number of people and appearance: Two adult swimmers, one teenager, and one lifeguard. Clothing: One swimmer wears a blue cap. Another swimmer wears a red cap. A teenager on the deck wears a dark swim shirt. The lifeguard wears a yellow shirt. Actions: Two adults swim laps in separate lanes. The teenager holds a kickboard. The lifeguard watches from a tall chair. Objects: Lane ropes, a kickboard, pool water, and a lifeguard chair. Foreground: The two swimmers are in the near lanes, close to the camera. Background: The lifeguard chair and the far wall of the pool hall are in the background.",
       "key_elements": [
-        "two adults swimming laps",
-        "swimmer in a blue cap",
-        "teenager holding a kickboard",
-        "lifeguard in a yellow shirt"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is an indoor swimming pool.",
+          "accept": [
+            "indoor swimming pool",
+            "a swimming pool",
+            "a pool with lanes",
+            "an indoor pool",
+            "a natatorium"
+          ],
+          "contradict": [
+            {
+              "text": "this is a beach",
+              "cap": 2
+            },
+            {
+              "text": "this is outdoors only",
+              "cap": 2
+            },
+            {
+              "text": "this is a gym with no pool",
+              "cap": 2
+            },
+            {
+              "text": "this is a post office",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Four people are visible: two swimmers, a teenager, and a lifeguard.",
+          "accept": [
+            "four people",
+            "two swimmers and two people on the deck",
+            "4 people",
+            "two adults swimming, a teenager, and a lifeguard"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "three people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            },
+            {
+              "text": "the pool is empty",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "blue_cap",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "One swimmer wears a blue cap and goggles and swims in a lane.",
+          "accept": [
+            "blue swim cap",
+            "a swimmer in a blue cap",
+            "swimming laps",
+            "goggles",
+            "a swimmer doing the crawl"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is in the water",
+              "cap": 2
+            },
+            {
+              "text": "the blue cap is on the lifeguard",
+              "cap": 3
+            },
+            {
+              "text": "the swimmer in blue is standing on the deck",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "red_cap",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "The other swimmer wears a red cap and goggles in the next lane.",
+          "accept": [
+            "red swim cap",
+            "a swimmer in a red cap",
+            "swimming in the next lane",
+            "a red cap and goggles"
+          ],
+          "contradict": [
+            {
+              "text": "both swimmers wear blue caps",
+              "cap": 3
+            },
+            {
+              "text": "there is only one swimmer",
+              "cap": 3
+            },
+            {
+              "text": "the red cap is on the teenager",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "kickboard",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A teenager in a dark swim shirt stands on the deck holding a blue kickboard.",
+          "accept": [
+            "holding a kickboard",
+            "a blue kickboard",
+            "a teenager on the deck",
+            "a dark swim shirt",
+            "a young person standing by the pool"
+          ],
+          "contradict": [
+            {
+              "text": "the teenager is swimming",
+              "cap": 3
+            },
+            {
+              "text": "nobody is holding a kickboard",
+              "cap": 3
+            },
+            {
+              "text": "the kickboard is red",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "lifeguard",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A lifeguard in a yellow shirt sits on a tall chair and watches the pool.",
+          "accept": [
+            "lifeguard",
+            "yellow shirt",
+            "a tall lifeguard chair",
+            "sitting on a high chair",
+            "watching the swimmers"
+          ],
+          "contradict": [
+            {
+              "text": "there is no lifeguard",
+              "cap": 3
+            },
+            {
+              "text": "the lifeguard wears a red cap and is swimming",
+              "cap": 3
+            },
+            {
+              "text": "the lifeguard wears blue",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "lanes",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Lane ropes divide the pool; the floats are blue and white or red and white.",
+          "accept": [
+            "lane ropes",
+            "lane lines",
+            "ropes between the lanes",
+            "red and white lane markers",
+            "blue and white floats"
+          ],
+          "contradict": [
+            {
+              "text": "there are no lane ropes",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "barefoot",
+          "role": "detail",
+          "weight": 1,
+          "category": "clothing",
+          "text": "The teenager is barefoot and wears black shorts with a navy long-sleeve swim shirt.",
+          "accept": [
+            "barefoot",
+            "black shorts",
+            "a navy swim shirt",
+            "a dark rash guard"
+          ],
+          "contradict": [
+            {
+              "text": "the teenager is wearing a business suit",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "chair",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The lifeguard chair is white and raised above the deck.",
+          "accept": [
+            "a white lifeguard chair",
+            "a tall white chair",
+            "an elevated chair",
+            "a high seat"
+          ],
+          "contradict": [
+            {
+              "text": "the lifeguard is sitting on the pool edge",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "room",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "Tiled walls, windows, and benches are at the far side of the pool hall.",
+          "accept": [
+            "tiled walls",
+            "windows behind the pool",
+            "benches",
+            "an indoor pool hall"
+          ],
+          "contradict": [
+            {
+              "text": "the pool is in a forest",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The two swimmers are in the foreground water, the teenager stands on the left side of the deck, and the lifeguard is on the right in the background.",
+          "accept": [
+            "swimmers in the foreground",
+            "the teenager is on the deck",
+            "the lifeguard is in the background",
+            "the blue cap is on the left"
+          ],
+          "contradict": [
+            {
+              "text": "the lifeguard is in the water in the foreground",
+              "cap": 3
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows an indoor swimming pool at a community center. In the foreground, two adults are swimming laps, one in a blue cap and one in a red cap. A teenager stands on the deck holding a kickboard. A lifeguard in a yellow shirt sits on a tall chair in the background and watches the water."
+      "model_answer": "This picture shows an indoor swimming pool. In the foreground, two adults are swimming laps, one in a blue cap and one in a red cap. A teenager stands on the deck holding a kickboard. A lifeguard in a yellow shirt sits on a tall chair in the background and watches the water."
     },
     {
       "q": 5,

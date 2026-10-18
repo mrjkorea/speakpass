@@ -11,7 +11,12 @@
     "loadError": "Não foi possível carregar a lista de testes. Verifique a conexão e tente de novo.",
     "noTests": "Ainda não há testes de prática.",
     "micNote": "O teste completo usa o microfone. Os cronômetros seguem sem pausa.",
-    "questionCount": "{count} perguntas"
+    "questionCount": "{count} perguntas",
+    "savedTitle": "Progresso salvo",
+    "savedCount": "{done} de {total} perguntas salvas",
+    "savedNone": "Ainda não há respostas salvas para este teste.",
+    "savedItem": "Pergunta {n}: {score}/{total}",
+    "savedDone": "Pergunta {n} salva"
   },
   "practice": {
     "title": "Praticar",
@@ -61,7 +66,7 @@
     "start": "Começar",
     "end": "Encerrar",
     "leaveTitle": "Encerrar esta sessão?",
-    "leaveBody": "O cronômetro vai parar. As respostas já gravadas ficam neste aparelho.",
+    "leaveBody": "O cronômetro vai parar. As respostas já gravadas são salvas na sua conta.",
     "leaveYes": "Encerrar sessão",
     "leaveNo": "Continuar",
     "micDenied": "O acesso ao microfone foi bloqueado. Permita o microfone nas configurações do navegador e tente de novo.",
@@ -82,8 +87,8 @@
     "noAudio": "Sem gravação",
     "deviceScore": "Nota no aparelho",
     "serverScore": "Nota do servidor",
-    "saved": "Salvo neste aparelho",
-    "notSaved": "Não foi possível salvar neste aparelho. Você ainda pode reproduzir as respostas até sair desta página.",
+    "saved": "Salvo na sua conta",
+    "notSaved": "Não foi possível salvar na sua conta. Você ainda pode reproduzir as respostas até sair desta página.",
     "home": "Voltar ao início",
     "retry": "Tentar de novo",
     "snippetPicture": "Descrição da imagem",
@@ -98,7 +103,13 @@
     "slowDown": "Espere um minuto e peça a nota da IA de novo.",
     "dailyCap": "A correção por IA está cheia hoje. Tente amanhã.",
     "signInAgain": "Entre de novo e peça uma nota da IA.",
-    "aiScore": "Nota da IA"
+    "aiScore": "Nota da IA",
+    "saving": "Salvando na sua conta…",
+    "checking": "Verificando a pronúncia…",
+    "sayAgain": "Diga de novo. Diga cada palavra com clareza.",
+    "stars": "{n} de 5",
+    "checkFailed": "Não foi possível verificar a pronúncia neste aparelho. Sua resposta ainda é salva.",
+    "weak": "Palavras para praticar"
   },
   "common": {
     "language": "Idioma",
@@ -111,5 +122,9 @@
     "play": "Reproduzir a resposta da pergunta {n}",
     "stop": "Parar a resposta da pergunta {n}",
     "progress": "Pergunta {index} de {total}"
+  },
+  "account": {
+    "loading": "Carregando seu progresso salvo…",
+    "error": "Não foi possível carregar seu progresso salvo. Verifique a conexão e tente de novo."
   }
 }

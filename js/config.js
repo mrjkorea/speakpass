@@ -7,6 +7,9 @@ export const APP_NAME = 'SpeakPass AI';
  */
 export const GRADE_WORKER_URL = 'https://speakpass-grade.mrjenglish.workers.dev';
 
+/** Shared MRJ account id. Packs and scores use this id. */
+export const APP_ID = 'speakpass';
+
 /** UI languages. Test content stays English. Arabic uses a right-to-left layout. */
 export const LANGS = [
   { id: 'en', label: 'English', dir: 'ltr' },

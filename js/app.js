@@ -1,12 +1,13 @@
+import { reportScoredItems, loadProgressPack, saveProgressPack, studentId } from './cloud.js';
 import { APP_NAME, LANGS } from './config.js';
 import { requestAiMark, workerUrl } from './mark-client.js';
-import { saveAttempt } from './db.js';
 import { activeStream, beginArm, hasStream, releaseMic } from './audio.js';
 import { createSession } from './engine.js';
-import { gradeFree, gradePaid } from './grade.js';
+import { gradeFree, gradePaid, gradeReadAloud, warmChecker } from './grade.js';
 import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
+import { applyAttempt, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
 
 const RING = 2 * Math.PI * 52;
 
@@ -16,7 +17,7 @@ const state = {
   en: null,
   catalog: [],
   testId: '',
-  screen: 'loading',
+  screen: 'account',
   error: '',
   selection: null,
   session: null,
@@ -25,7 +26,11 @@ const state = {
   arming: false,
   dialog: false,
   review: null,
-  playingQ: null
+  playingQ: null,
+  pack: emptyPack(),
+  packStatus: 'idle',
+  studentId: '',
+  sessionOwner: ''
 };
 
 let renderedScreen = '';
@@ -34,6 +39,10 @@ let lastSpoken = '';
 let presenting = false;
 let audioEl = null;
 let audioUrl = '';
+let hydrateSeq = 0;
+let reviewToken = 0;
+let packEpoch = 0;
+let saveChain = Promise.resolve();
 
 function t(key, vars) {
   const raw = lookup(state.dict, key) ?? lookup(state.en, key) ?? key;
@@ -112,6 +121,7 @@ function stopPlayback() {
 function goHome() {
   stopPlayback();
   releaseMic();
+  reviewToken += 1;
   state.session = null;
   state.view = null;
   state.dialog = false;
@@ -123,26 +133,41 @@ function goHome() {
   render();
 }
 
+function gradeByQuestion(attempt, grades) {
+  const map = {};
+  for (const ans of attempt.answers) {
+    map[ans.q] = ans.q <= 4 ? grades.free[ans.q] : grades.paid;
+  }
+  return map;
+}
+
+function isReadAloudScore(ans) {
+  return !!ans && (ans.q === 1 || ans.q === 2) && ans.type === 'read_aloud';
+}
+
 async function presentReview(attempt) {
   if (presenting) return;
   presenting = true;
   releaseMic();
-  let saved = true;
-  try {
-    await saveAttempt(attempt);
-  } catch (err) {
-    saved = false;
-  }
-  const grades = { free: {}, paid: null };
+  const token = ++reviewToken;
+  const owner = state.sessionOwner || studentId();
+  const grades = { free: {}, paid: null, read: {} };
+  const test = state.catalog.find((item) => item.id === attempt.testId);
   for (const ans of attempt.answers) {
-    if (ans.q <= 4) grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
+    if (isReadAloudScore(ans)) {
+      const hasAudio = !!(ans.blob && ans.blob.size);
+      grades.read[ans.q] = { status: hasAudio ? 'checking' : 'empty' };
+      grades.free[ans.q] = hasAudio ? null : 'coming soon';
+    } else if (ans.q <= 4) {
+      grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
+    }
   }
   if (attempt.answers.some((ans) => ans.q >= 5)) {
     grades.paid = await gradePaid(attempt);
   }
   state.review = {
     attempt,
-    saved,
+    saved: null,
     grades,
     selection: state.selection,
     marks: {},
@@ -157,6 +182,60 @@ async function presentReview(attempt) {
   viewKey = '';
   presenting = false;
   render();
+
+  for (const ans of attempt.answers) {
+    if (!isReadAloudScore(ans) || !(ans.blob && ans.blob.size)) continue;
+    const source = test && test.questions.find((item) => item.q === ans.q);
+    const detail = await gradeReadAloud((source && source.text) || '', ans.blob);
+    grades.free[ans.q] = detail.save || 'coming soon';
+    grades.read[ans.q] = detail;
+    if (token === reviewToken && state.review && state.review.attempt === attempt && state.screen === 'review') {
+      render();
+    }
+  }
+  for (const ans of attempt.answers) {
+    if (ans.q <= 4 && grades.free[ans.q] == null) grades.free[ans.q] = 'coming soon';
+  }
+
+  let saved = false;
+  let scored = [];
+  if (owner && state.packStatus === 'ready') {
+    const gradesMap = gradeByQuestion(attempt, grades);
+    const run = saveChain.then(async () => {
+      if (studentId() !== owner) return { saved: false, scored: [] };
+      const applied = applyAttempt(state.pack, attempt, gradesMap);
+      let ok = false;
+      try {
+        const res = await saveProgressPack(packJson(applied.pack));
+        ok = !!(res && res.ok);
+      } catch (err) {
+        ok = false;
+      }
+      if (studentId() !== owner) return { saved: false, scored: [] };
+      if (ok) {
+        state.pack = applied.pack;
+        packEpoch += 1;
+      }
+      return { saved: ok, scored: applied.scored };
+    }).catch(() => ({ saved: false, scored: [] }));
+    saveChain = run.then(() => {});
+    const result = await run;
+    saved = result.saved;
+    scored = result.scored;
+  }
+  if (token === reviewToken && state.review && state.review.attempt === attempt) {
+    state.review.saved = saved;
+    if (state.screen === 'review') render();
+  } else if (saved && (state.screen === 'home' || state.screen === 'practice')) {
+    render();
+  }
+  if (scored.length && owner === studentId()) {
+    reportScoredItems(scored, {
+      testTitle: attempt.testTitle,
+      testId: attempt.testId,
+      mode: attempt.mode
+    }).catch(() => {});
+  }
 }
 
 function handleView(view) {
@@ -175,9 +254,10 @@ function handleView(view) {
 
 function startSession(selection) {
   const test = currentTest();
-  if (!test) return;
+  if (!test || state.packStatus !== 'ready') return;
   stopPlayback();
   releaseMic();
+  state.sessionOwner = studentId();
   const plan = buildPlan(test, selection);
   if (!plan.some((step) => step.kind === 'question')) return;
   state.selection = selection;
@@ -319,6 +399,10 @@ function onClick(event) {
   else if (action === 'retry' && state.review) startSession(state.review.selection);
   else if (action === 'mark') askForMark();
   else if (action === 'reload') boot();
+  else if (action === 'reload-progress') {
+    const id = studentId() || state.studentId;
+    if (id) hydrate(id);
+  }
 }
 
 function markMessage(error) {
@@ -457,11 +541,42 @@ function renderHome() {
       <select id="test-select" lang="en" dir="ltr">${options}</select>
     </label>
     <p class="count">${escapeHtml(t('home.questionCount', { count: test.questions.length }))}</p>
+    ${cloudHtml(test)}
     <p class="note">${escapeHtml(t('home.micNote'))}</p>
     <div class="dock actions">
       <button type="button" class="btn primary" data-action="full">${escapeHtml(t('home.fullTest'))}</button>
       <button type="button" class="btn secondary" data-action="practice">${escapeHtml(t('home.practice'))}</button>
     </div>
+  `);
+}
+
+function savedLabel(row, q) {
+  if (row.graded) return t('home.savedItem', { n: q, score: row.score, total: row.total });
+  return t('home.savedDone', { n: q });
+}
+
+function cloudHtml(test) {
+  const rows = questionsForTest(state.pack, test.id);
+  const count = t('home.savedCount', { done: rows.length, total: test.questions.length });
+  const body = rows.length
+    ? `<p>${escapeHtml(count)}</p><ul>${rows.map((row) => `<li data-saved-q="${row.q}">${escapeHtml(savedLabel(row, row.q))}</li>`).join('')}</ul>`
+    : `<p>${escapeHtml(t('home.savedNone'))}</p>`;
+  return `
+    <section class="cloud" id="saved-progress" aria-labelledby="saved-title">
+      <h2 id="saved-title">${escapeHtml(t('home.savedTitle'))}</h2>
+      ${body}
+    </section>`;
+}
+
+function renderAccount() {
+  const body = state.packStatus === 'error'
+    ? `<p class="alert" role="alert">${escapeHtml(t('account.error'))}</p>
+       <button type="button" class="btn primary" data-action="reload-progress">${escapeHtml(t('common.retry'))}</button>`
+    : `<p>${escapeHtml(t('account.loading'))}</p>`;
+  return shell(`
+    <h1>${escapeHtml(t('appName'))}</h1>
+    <div class="legal">${legalHtml()}</div>
+    ${body}
   `);
 }
 
@@ -476,9 +591,13 @@ function renderPractice() {
   }
   const cards = PART_ORDER.filter((id) => groups.has(id)).map((id) => {
     const questions = groups.get(id);
-    const buttons = questions.map((q) => `
-      <button type="button" class="btn secondary" data-action="practice-q" data-q="${q.q}">${escapeHtml(t('run.qLabel', { n: q.q }))}</button>
-    `).join('');
+    const buttons = questions.map((q) => {
+      const saved = savedQuestion(state.pack, test.id, q.q);
+      const label = saved ? savedLabel(saved, q.q) : t('run.qLabel', { n: q.q });
+      const cls = saved ? 'btn secondary is-saved' : 'btn secondary';
+      const mark = saved ? ' data-saved="1"' : '';
+      return `<button type="button" class="${cls}" data-action="practice-q" data-q="${q.q}"${mark}>${escapeHtml(label)}</button>`;
+    }).join('');
     return `
       <section class="part-card">
         <h2>${escapeHtml(t(`parts.${id}.title`))}</h2>
@@ -529,7 +648,7 @@ function directionsHtml(step) {
   `;
 }
 
-function timerBlock(view, hint, compact) {
+function timerBlock(view, hint, compact, extraClass = '') {
   const secs = secsLeft(view.remaining);
   const ratio = view.total > 0 ? Math.max(0, Math.min(1, view.remaining / view.total)) : 0;
   const offset = (RING * (1 - ratio)).toFixed(2);
@@ -542,7 +661,7 @@ function timerBlock(view, hint, compact) {
     ? `<button type="button" class="btn danger" data-action="stop-speak">${escapeHtml(t('review.stop'))}</button>`
     : '';
   return `
-    <div class="timer-wrap phase-${escapeHtml(view.phase)}${compact ? ' compact' : ''}">
+    <div class="timer-wrap phase-${escapeHtml(view.phase)}${compact ? ' compact' : ''}${extraClass ? ` ${extraClass}` : ''}">
       <div class="timer-face" role="timer" aria-label="${escapeHtml(t('a11y.timer', { phase: label, n: secs }))}">
         <svg class="ring-svg" viewBox="0 0 120 120" aria-hidden="true">
           <circle class="ring-track" cx="60" cy="60" r="52"></circle>
@@ -642,16 +761,61 @@ function renderSession() {
     `, { showEnd: true });
   }
   const q = step.question;
-  const compact = q.type === 'info_questions' || q.type === 'respond_questions';
+  const picture = q.type === 'describe_picture';
+  const compact = picture || q.type === 'info_questions' || q.type === 'respond_questions';
   const hint = view.phase === 'speak' ? t('run.auto') : (view.phase === 'prepare' ? t('run.tone') : '');
+  const body = questionBody(q);
+  const timer = timerBlock(view, hint, compact, picture ? 'beside-picture' : '');
   return shell(`
     ${progressHtml()}
     <h1 id="step-title" tabindex="-1">${escapeHtml(t('run.qLabel', { n: q.q }))}</h1>
     <p class="part-name">${escapeHtml(t(`parts.${q.type}.title`))}</p>
-    ${timerBlock(view, hint, compact)}
-    ${questionBody(q)}
+    ${picture ? body : ''}
+    ${timer}
+    ${picture ? '' : body}
     <p class="no-pause">${escapeHtml(t('run.noPause'))}</p>
   `, { showEnd: true });
+}
+
+function starMarks(n) {
+  let html = '';
+  for (let i = 1; i <= 5; i += 1) {
+    html += `<span class="${i <= n ? 'on' : 'off'}">${i <= n ? '★' : '☆'}</span>`;
+  }
+  return html;
+}
+
+function readAloudScoreHtml(detail) {
+  const name = t('review.deviceScore');
+  if (!detail || detail.status === 'checking') {
+    return `<p class="score checking" role="status">${escapeHtml(name)}: ${escapeHtml(t('review.checking'))}</p>`;
+  }
+  if (detail.status === 'again') {
+    return `<p class="alert" role="status">${escapeHtml(t('review.sayAgain'))}</p>`;
+  }
+  if (detail.status === 'failed') {
+    return `<p class="score">${escapeHtml(t('review.checkFailed'))}</p>`;
+  }
+  if (detail.status !== 'scored') return '';
+  const n = detail.stars;
+  const label = t('review.stars', { n });
+  const words = (detail.words || []).map((word) => (
+    word.weak
+      ? `<mark class="weak band-red">${escapeHtml(word.word)}</mark>`
+      : `<span class="band-${word.band === 'yellow' ? 'yellow' : 'green'}">${escapeHtml(word.word)}</span>`
+  )).join(' ');
+  const weak = (detail.words || []).filter((word) => word.weak).map((word) => word.word);
+  const weakLine = weak.length
+    ? `<p class="weak-list">${escapeHtml(t('review.weak'))}: ${escapeHtml(weak.join(', '))}</p>`
+    : '';
+  return `
+    <p class="score stars" role="img" aria-label="${escapeHtml(label)}">
+      <span class="score-name">${escapeHtml(name)}</span>
+      <span class="star-row" aria-hidden="true">${starMarks(n)}</span>
+      <span>${n}/5</span>
+    </p>
+    <p class="marked-line" lang="en" dir="ltr">${words}</p>
+    ${weakLine}`;
 }
 
 function renderReview() {
@@ -661,6 +825,7 @@ function renderReview() {
   const cards = attempt.answers.map((ans) => {
     const source = test && test.questions.find((item) => item.q === ans.q);
     const picture = ans.type === 'describe_picture';
+    const readDetail = isReadAloudScore(ans) ? (grades.read && grades.read[ans.q]) : null;
     const snippet = picture
       ? t('review.snippetPicture')
       : (ans.type === 'read_aloud' ? (source && source.text) || '' : (source && source.question) || '');
@@ -681,13 +846,17 @@ function renderReview() {
     const comment = ai && ai.comment
       ? `<p class="note">${escapeHtml(ai.comment)}</p>`
       : '';
+    const showSnippet = !readDetail || readDetail.status !== 'scored';
+    const scoreBlock = readDetail
+      ? readAloudScoreHtml(readDetail)
+      : `<p class="score">${escapeHtml(scoreName)}: ${escapeHtml(String(scoreValue))}</p>`;
     return `
       <article class="answer-card">
         <h2>${escapeHtml(t('run.qLabel', { n: ans.q }))}</h2>
         <p class="part-name">${escapeHtml(t(`parts.${ans.type}.title`))}</p>
-        <p class="snippet"${lang}>${escapeHtml(snippet)}</p>
+        ${showSnippet ? `<p class="snippet"${lang}>${escapeHtml(snippet)}</p>` : ''}
         <button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" ${hasAudio ? '' : 'disabled'} aria-label="${escapeHtml(playLabel)}">${escapeHtml(playText)}</button>
-        <p class="score">${escapeHtml(scoreName)}: ${escapeHtml(scoreValue)}</p>
+        ${scoreBlock}
         ${comment}
       </article>`;
   }).join('');
@@ -705,7 +874,7 @@ function renderReview() {
     <h1 id="step-title" tabindex="-1">${escapeHtml(t('review.title'))}</h1>
     <p class="test-name" lang="en" dir="ltr">${escapeHtml(attempt.testTitle || '')}</p>
     <p>${escapeHtml(lead)}</p>
-    <p class="saved">${escapeHtml(saved ? t('review.saved') : t('review.notSaved'))}</p>
+    <p class="saved">${escapeHtml(saved == null ? t('review.saving') : (saved ? t('review.saved') : t('review.notSaved')))}</p>
     <div class="answers">${cards}</div>
     ${note}
     <div class="dock actions">
@@ -741,6 +910,7 @@ function viewForScreen() {
       </main>`;
   }
   if (state.screen === 'loading') return renderLoading();
+  if (state.screen === 'account') return renderAccount();
   if (state.screen === 'error') return renderError();
   if (state.screen === 'practice') return renderPractice();
   if (state.screen === 'session') return renderSession();
@@ -824,10 +994,85 @@ function registerServiceWorker() {
   register({ scope: './', updateViaCache: 'none' }).catch(() => register({ scope: './' }).catch(() => {}));
 }
 
+function showAfterCatalog() {
+  if (!state.catalog.length) {
+    state.screen = 'error';
+    state.error = 'empty';
+  } else if (state.packStatus === 'ready') {
+    state.screen = 'home';
+  } else {
+    state.screen = 'account';
+  }
+  render();
+}
+
+async function hydrate(id) {
+  const seq = ++hydrateSeq;
+  const switched = state.studentId !== id;
+  state.studentId = id;
+  if (switched) state.pack = emptyPack();
+  state.packStatus = 'loading';
+  if (state.screen !== 'session' && state.screen !== 'review') {
+    state.screen = 'account';
+    render();
+  }
+  try { await saveChain; } catch (err) { /* keep going */ }
+  if (seq !== hydrateSeq || studentId() !== id) return;
+  const epoch = packEpoch;
+  let res;
+  try {
+    res = await loadProgressPack();
+  } catch (err) {
+    res = { ok: false, error: 'network' };
+  }
+  if (seq !== hydrateSeq || studentId() !== id) return;
+  if (!res || !res.ok) {
+    state.packStatus = 'error';
+    if (state.screen !== 'session' && state.screen !== 'review') state.screen = 'account';
+    render();
+    return;
+  }
+  if (epoch === packEpoch) state.pack = parsePack(res.progress_json);
+  state.packStatus = 'ready';
+  if (state.catalog.length && state.screen !== 'session' && state.screen !== 'review') {
+    state.screen = 'home';
+  }
+  render();
+  const scores = globalThis.MRJ_SCORES;
+  if (scores && typeof scores.flush === 'function') scores.flush();
+}
+
+function onAuthReady(event) {
+  const detail = event && event.detail ? event.detail : {};
+  const id = String(detail.id != null ? detail.id : studentId()).trim();
+  if (!id) return;
+  if (id === state.studentId && state.packStatus === 'ready' && (state.screen === 'session' || state.screen === 'review')) {
+    return;
+  }
+  hydrate(id);
+}
+
+function onSignedOut(event) {
+  const button = event.target && event.target.closest && event.target.closest('.mrj-auth-signout');
+  if (!button) return;
+  hydrateSeq += 1;
+  reviewToken += 1;
+  state.studentId = '';
+  state.sessionOwner = '';
+  state.pack = emptyPack();
+  state.packStatus = 'idle';
+  state.review = null;
+  if (state.screen !== 'session') {
+    stopPlayback();
+    state.screen = 'account';
+    render();
+  }
+}
+
 async function boot() {
   state.lang = detectLang();
-  state.screen = 'loading';
   state.error = '';
+  if (state.packStatus !== 'ready') state.screen = 'account';
   try {
     await loadLanguage(state.lang);
   } catch (err) {
@@ -844,17 +1089,46 @@ async function boot() {
   render();
   try {
     await loadCatalog();
-    state.screen = state.catalog.length ? 'home' : 'error';
-    if (!state.catalog.length) state.error = 'empty';
+    showAfterCatalog();
   } catch (err) {
     state.screen = 'error';
     state.error = 'load';
+    render();
   }
-  render();
   registerServiceWorker();
+  exposeBench();
+  warmChecker();
+}
+
+function exposeBench() {
+  try {
+    if (new URLSearchParams(location.search).get('bench') !== '1') return;
+  } catch (err) {
+    return;
+  }
+  globalThis.__speakpassBench = (blob, text) => gradeReadAloud(text, blob);
+  globalThis.__speakpassPreview = (detail) => {
+    const test = currentTest();
+    state.review = {
+      attempt: {
+        testId: test ? test.id : '',
+        testTitle: test ? test.title : '',
+        mode: 'practice',
+        answers: [{ q: 1, type: 'read_aloud', blob: new Blob(['x']), mimeType: 'audio/wav' }]
+      },
+      saved: false,
+      grades: { free: { 1: detail && detail.save }, paid: null, read: { 1: detail } },
+      selection: { mode: 'practice', scope: 'question', q: 1 }
+    };
+    state.screen = 'review';
+    state.session = null;
+    render();
+  };
 }
 
 document.addEventListener('click', onClick);
+document.addEventListener('click', onSignedOut);
 document.addEventListener('change', onChange);
+document.addEventListener('mrj-auth-ready', onAuthReady);
 window.addEventListener('beforeunload', onLeave);
 boot();

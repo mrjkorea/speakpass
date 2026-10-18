@@ -41,12 +41,297 @@
       "image": "images/test05_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a weekend farmers market under white tents. Number of people and appearance: Four adults. Clothing: A vendor wears a plaid shirt. A shopper wears a denim jacket. Two more shoppers wear casual coats and carry cloth bags. Actions: The vendor hands over a bag of vegetables. The shopper pays. One of the other shoppers walks between the stalls with a cloth bag, and the other looks at loaves at a bread stall. Objects: Crates of tomatoes and greens, a paper bag, cloth bags, and a bread stall. Foreground: The vendor and the shopper stand at a vegetable table close to the camera. Background: White tents and more stalls line the market lane.",
       "key_elements": [
-        "vendor in a plaid shirt handing over vegetables",
-        "shopper in a denim jacket",
-        "crates of tomatoes and greens",
-        "other shoppers walking between market stalls"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is an outdoor farmers market under white tents.",
+          "accept": [
+            "farmers market",
+            "outdoor market",
+            "market stalls",
+            "white tents",
+            "a produce market under canopies"
+          ],
+          "contradict": [
+            {
+              "text": "this is indoors",
+              "cap": 2
+            },
+            {
+              "text": "this is a supermarket checkout",
+              "cap": 2
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is an office",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Four adults are visible.",
+          "accept": [
+            "four people",
+            "four adults",
+            "4 people",
+            "a vendor, a shopper, a woman walking away, and a person at the bread stall"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "three people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "handoff",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A vendor hands a brown paper bag to a shopper.",
+          "accept": [
+            "handing a paper bag",
+            "passing a bag",
+            "giving the customer a bag",
+            "both of them hold a paper bag",
+            "the vendor hands over a bag"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is exchanging a bag",
+              "cap": 3
+            },
+            {
+              "text": "they are shaking hands only",
+              "cap": 3
+            },
+            {
+              "text": "the bag is a suitcase",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "plaid",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The vendor wears a red plaid shirt.",
+          "accept": [
+            "plaid shirt",
+            "checked shirt",
+            "red plaid",
+            "a flannel shirt",
+            "the vendor wears plaid"
+          ],
+          "contradict": [
+            {
+              "text": "the vendor wears a denim jacket",
+              "cap": 3
+            },
+            {
+              "text": "the vendor wears a beige coat",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "denim",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The shopper receiving the bag wears a denim jacket.",
+          "accept": [
+            "denim jacket",
+            "jean jacket",
+            "a shopper in denim",
+            "blue denim jacket"
+          ],
+          "contradict": [
+            {
+              "text": "the shopper wears a plaid shirt",
+              "cap": 3
+            },
+            {
+              "text": "the shopper wears a dark coat at the bread table",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "produce",
+          "role": "main",
+          "weight": 2,
+          "category": "object",
+          "text": "Wooden crates of red tomatoes and leafy greens cover the table.",
+          "accept": [
+            "crates of tomatoes",
+            "red tomatoes",
+            "leafy greens",
+            "kale",
+            "vegetables in wooden crates"
+          ],
+          "contradict": [
+            {
+              "text": "the table is empty",
+              "cap": 2
+            },
+            {
+              "text": "the stall sells only bread",
+              "cap": 3
+            },
+            {
+              "text": "there are no tomatoes",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "background_shoppers",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "One shopper walks away with a cloth bag, and another looks at bread.",
+          "accept": [
+            "walking away with a bag",
+            "a cloth tote",
+            "looking at bread",
+            "a bread stall",
+            "someone at the loaves"
+          ],
+          "contradict": [
+            {
+              "text": "the background is empty",
+              "cap": 3
+            },
+            {
+              "text": "both background people are sitting",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bag",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The bag being handed over is a plain brown paper bag.",
+          "accept": [
+            "brown paper bag",
+            "a paper sack",
+            "kraft paper bag"
+          ],
+          "contradict": [
+            {
+              "text": "they are handing over a clear glass bottle",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "beige_coat",
+          "role": "detail",
+          "weight": 1,
+          "category": "clothing",
+          "text": "The shopper walking away wears a beige coat and carries a white cloth bag.",
+          "accept": [
+            "beige coat",
+            "tan coat",
+            "a white tote",
+            "a canvas bag on her shoulder",
+            "walking away in a light coat"
+          ],
+          "contradict": [
+            {
+              "text": "the walking shopper wears a red plaid shirt",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "bread",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Round loaves of bread sit on a wooden table at the next stall.",
+          "accept": [
+            "loaves of bread",
+            "a bread stall",
+            "bread on a table",
+            "round loaves"
+          ],
+          "contradict": [
+            {
+              "text": "there is no bread",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "tents",
+          "role": "detail",
+          "weight": 1,
+          "category": "place",
+          "text": "White canopy tents cover the market lane.",
+          "accept": [
+            "white tents",
+            "white canopies",
+            "market umbrellas",
+            "tents overhead"
+          ],
+          "contradict": [
+            {
+              "text": "there is no cover overhead",
+              "cap": 3
+            },
+            {
+              "text": "the tents are black",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The vendor and the denim-jacket shopper are in the foreground, the walking shopper is in the middle distance, and the bread stall is on the right.",
+          "accept": [
+            "in the foreground",
+            "the bread stall is to the right",
+            "someone walking away in the background",
+            "the produce table is closest"
+          ],
+          "contradict": [
+            {
+              "text": "the bread is in the foreground and the tomatoes are far away",
+              "cap": 3
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows a weekend farmers market under white tents. In the foreground, a vendor in a plaid shirt is handing a bag of vegetables to a shopper in a denim jacket. Crates of tomatoes and greens cover the table. Behind them, one shopper walks between the stalls with a cloth bag, and another stops at a bread stall."
+      "model_answer": "This picture shows a farmers market under white tents. In the foreground, a vendor in a plaid shirt is handing a paper bag to a shopper in a denim jacket. Crates of tomatoes and greens cover the table. Behind them, one shopper in a beige coat walks away with a cloth bag, and another person looks at loaves at a bread stall."
     },
     {
       "q": 4,
@@ -56,10 +341,272 @@
       "image": "images/test05_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: an open workspace in a modern office, with shared desks and no company logos. Number of people and appearance: Four adults. Clothing: A woman wears a headset and a gray blouse. A coworker wears a blue shirt. Two people in the back wear dark sweaters. Actions: The woman points at a monitor while talking. The coworker takes notes. The other two type at computers. Objects: A monitor, papers, a water bottle, notebooks, and a tall indoor plant. Foreground: The woman with the headset and her coworker share a desk close to the camera. Background: More desks, a window, and the tall plant are visible behind them.",
       "key_elements": [
-        "woman with a headset pointing at a monitor",
-        "coworker in a blue shirt taking notes",
-        "papers and a water bottle on the desk",
-        "two people working at computers in the background"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is an open office with shared desks.",
+          "accept": [
+            "open office",
+            "an office",
+            "a shared workspace",
+            "an open-plan office",
+            "people working at desks"
+          ],
+          "contradict": [
+            {
+              "text": "this is a playground",
+              "cap": 1
+            },
+            {
+              "text": "this is a market",
+              "cap": 1
+            },
+            {
+              "text": "this is a swimming pool",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Four adults are working.",
+          "accept": [
+            "four people",
+            "four adults",
+            "4 people",
+            "two people at the front desk and two in the background"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 2
+            },
+            {
+              "text": "three people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "point",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A woman with a headset points at a computer monitor while speaking.",
+          "accept": [
+            "pointing at a monitor",
+            "pointing at the screen",
+            "wearing a headset",
+            "talking and pointing",
+            "a woman with a headphone microphone"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is pointing",
+              "cap": 3
+            },
+            {
+              "text": "she is asleep",
+              "cap": 3
+            },
+            {
+              "text": "she has no headset",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "gray_blouse",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The woman with the headset wears a gray blouse.",
+          "accept": [
+            "gray blouse",
+            "grey shirt",
+            "a gray top",
+            "she is dressed in gray"
+          ],
+          "contradict": [
+            {
+              "text": "she wears a blue shirt",
+              "cap": 3
+            },
+            {
+              "text": "she wears a red blouse",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "notes",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A coworker in a blue shirt writes notes in a notebook.",
+          "accept": [
+            "taking notes",
+            "writing in a notebook",
+            "blue shirt",
+            "a man writing with a pen",
+            "jotting notes"
+          ],
+          "contradict": [
+            {
+              "text": "the man in blue is pointing at the screen",
+              "cap": 3
+            },
+            {
+              "text": "nobody is writing",
+              "cap": 3
+            },
+            {
+              "text": "he wears a gray blouse",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "background_work",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Two more people in dark sweaters type at computers in the background.",
+          "accept": [
+            "two people in the background",
+            "typing at computers",
+            "working at their desks",
+            "dark sweaters",
+            "colleagues at monitors behind them"
+          ],
+          "contradict": [
+            {
+              "text": "the background is empty",
+              "cap": 3
+            },
+            {
+              "text": "the people in back are standing on chairs",
+              "cap": 3
+            },
+            {
+              "text": "only one person is in the background",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "desk_objects",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Papers, a clear water bottle, and notebooks sit on the foreground desk.",
+          "accept": [
+            "papers on the desk",
+            "a water bottle",
+            "notebooks",
+            "documents on the table",
+            "a bottle of water"
+          ],
+          "contradict": [
+            {
+              "text": "the desk is completely empty",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "plant",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A tall leafy plant stands near the window.",
+          "accept": [
+            "a tall plant",
+            "an indoor plant",
+            "a large green plant",
+            "a houseplant by the window"
+          ],
+          "contradict": [
+            {
+              "text": "there is no plant",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "window",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "Windows behind the desks let in daylight.",
+          "accept": [
+            "a window",
+            "daylight",
+            "windows in the background",
+            "natural light"
+          ],
+          "contradict": [
+            {
+              "text": "there are no windows",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The woman with the headset and the man in blue share the foreground desk, and the other two workers sit farther back.",
+          "accept": [
+            "in the foreground",
+            "they share a desk",
+            "the other two are in the background",
+            "closer to the camera"
+          ],
+          "contradict": [
+            {
+              "text": "all four people sit at one desk",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "chairs",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "They sit in black office chairs at light wood desks.",
+          "accept": [
+            "office chairs",
+            "black chairs",
+            "wooden desks",
+            "light-colored desks"
+          ],
+          "contradict": [
+            {
+              "text": "they are sitting on the floor",
+              "cap": 3
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows an open workspace in a modern office. In the foreground, a woman with a headset is talking and pointing at a monitor while a coworker in a blue shirt takes notes. Papers and a water bottle sit on the shared desk. In the background, two more people work at computers near a window and a tall plant."
     },

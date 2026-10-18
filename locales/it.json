@@ -11,7 +11,12 @@
     "loadError": "Impossibile caricare l’elenco delle prove. Controlla la connessione e riprova.",
     "noTests": "Non ci sono ancora prove di pratica.",
     "micNote": "La prova completa usa il microfono. I timer proseguono senza pausa.",
-    "questionCount": "{count} domande"
+    "questionCount": "{count} domande",
+    "savedTitle": "Progressi salvati",
+    "savedCount": "{done} di {total} domande salvate",
+    "savedNone": "Non ci sono ancora risposte salvate per questo test.",
+    "savedItem": "Domanda {n}: {score}/{total}",
+    "savedDone": "Domanda {n} salvata"
   },
   "practice": {
     "title": "Pratica",
@@ -61,7 +66,7 @@
     "start": "Inizia",
     "end": "Termina",
     "leaveTitle": "Terminare questa sessione?",
-    "leaveBody": "Il timer si fermerà. Le risposte già registrate restano su questo dispositivo.",
+    "leaveBody": "Il timer si fermerà. Le risposte già registrate vengono salvate nel tuo account.",
     "leaveYes": "Termina la sessione",
     "leaveNo": "Continua",
     "micDenied": "L’accesso al microfono è stato bloccato. Consenti il microfono nelle impostazioni del browser e riprova.",
@@ -82,8 +87,8 @@
     "noAudio": "Nessuna registrazione",
     "deviceScore": "Punteggio sul dispositivo",
     "serverScore": "Punteggio del server",
-    "saved": "Salvato su questo dispositivo",
-    "notSaved": "Impossibile salvare su questo dispositivo. Puoi ancora ascoltare le risposte finché resti su questa pagina.",
+    "saved": "Salvato nel tuo account",
+    "notSaved": "Impossibile salvare nel tuo account. Puoi ancora ascoltare le risposte finché resti su questa pagina.",
     "home": "Torna all’inizio",
     "retry": "Riprova",
     "snippetPicture": "Descrizione dell’immagine",
@@ -98,7 +103,13 @@
     "slowDown": "Aspetta un minuto, poi chiedi di nuovo un voto IA.",
     "dailyCap": "La correzione IA è piena per oggi. Riprova domani.",
     "signInAgain": "Accedi di nuovo, poi chiedi un voto IA.",
-    "aiScore": "Voto IA"
+    "aiScore": "Voto IA",
+    "saving": "Salvataggio nel tuo account…",
+    "checking": "Controllo della pronuncia…",
+    "sayAgain": "Dillo di nuovo. Di’ ogni parola chiaramente.",
+    "stars": "{n} su 5",
+    "checkFailed": "Non è stato possibile controllare la pronuncia su questo dispositivo. La risposta viene comunque salvata.",
+    "weak": "Parole da esercitare"
   },
   "common": {
     "language": "Lingua",
@@ -111,5 +122,9 @@
     "play": "Riproduci la risposta alla domanda {n}",
     "stop": "Ferma la riproduzione della domanda {n}",
     "progress": "Domanda {index} di {total}"
+  },
+  "account": {
+    "loading": "Caricamento dei progressi salvati…",
+    "error": "Impossibile caricare i progressi salvati. Controlla la connessione e riprova."
   }
 }

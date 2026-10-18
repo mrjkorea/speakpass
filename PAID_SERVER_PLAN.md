@@ -25,7 +25,7 @@ A paid grade has four hops.
 1. The Android app buys a one-time product in Google Play. It sets the obfuscated account id to the student id. It does not consume the purchase.
 2. The app sends the Worker the test id, the product id, the purchase token, the student id, and the transcripts for the questions it should grade.
 3. The Worker checks the purchase with Google. If the pack is owned, the Worker grades the transcripts. The reply is raw points, a maximum, a percent, and a short comment for each question.
-4. The app saves that reply. Scores go through `js/mrj-scores.js`. Progress goes through `MRJ_AUTH.loadPack` and `MRJ_AUTH.savePack`. The Worker does not write the spreadsheet.
+4. The app saves that reply. Scores go through `mrj-scores.js`. Progress goes through `MRJ_AUTH.loadPack` and `MRJ_AUTH.savePack`. The Worker does not write the spreadsheet.
 
 The Worker holds two secrets. One is the grader key. The other is the Google service-account JSON. The grading prompt lives in the Worker too. The student app does not contain the key, the prompt, or the grader's name.
 
@@ -149,7 +149,7 @@ The sign-in script in `mrjkorea/mrj-signin` already stores both things. This dra
 
 `save_pack` and `load_pack` use the sheet `AppProgress`. The columns are `id_key`, `program`, `progress_json`, and `updated_at`. A long value spills into `AppProgressMore` with columns `id_key`, `program`, `part`, and `chunk`. The client sends `action`, `id`, `token`, `program`, and `progress_json`. For every program except `decodable`, the script replaces the stored string with the string you send. SpeakPass uses the program `speakpass`, so the phone must load the pack, merge on the phone, and save the whole string. If the load fails, the phone does not save. A save without a load would wipe the row.
 
-`js/mrj-scores.js` is the copy from `day4-speak`, unchanged. That copy posts one learning event and also calls `MRJ_AUTH.noteScore`. The event fields stay `student_email`, `student_name`, `session_id`, and one event with `event_id`, `event_kind`, `source`, `curriculum_program`, `app_name`, `book_title`, `unit_title`, `item_id`, `item_type`, `score_value`, `score_max`, `score_pct`, `correctness`, `completed`, `duration_seconds`, `local_date`, `identity_method`, `identity_confidence`, and `metadata_json`.
+`mrj-scores.js` is the copy from `day4-speak`, unchanged. That copy posts one learning event and also calls `MRJ_AUTH.noteScore`. The event fields stay `student_email`, `student_name`, `session_id`, and one event with `event_id`, `event_kind`, `source`, `curriculum_program`, `app_name`, `book_title`, `unit_title`, `item_id`, `item_type`, `score_value`, `score_max`, `score_pct`, `correctness`, `completed`, `duration_seconds`, `local_date`, `identity_method`, `identity_confidence`, and `metadata_json`.
 
 `note_score` writes `StudentScoreIndex`. The columns are `id_key`, `program`, `item_id`, `score_value`, `score_max`, `score_pct`, `local_date`, and `updated_at`. One student, one program, and one item id share one row. A later save replaces that row.
 
@@ -195,11 +195,11 @@ Do these steps later. They were not done for this draft.
 8. Paste the whole JSON into the secret `PLAY_SERVICE_ACCOUNT`. Delete the JSON file from the computer.
 9. In Play Console, create one-time products with the ids in `worker/src/products.js`. Do not create subscriptions. Do not create consumable credits. Do not add a card form to the website.
 10. In the Android app, use Play Billing. On the purchase, set the obfuscated account id to the student id. Do not call consume. Send the product id, the purchase token, and the Whistle transcript to the Worker. Then call `savePaidResult` from `js/paid-mark.js`.
-11. The site already loads the shared sign-in with `data-mrj-app="speakpass"` and loads `js/mrj-scores.js` before the app module. After deploy, set `GRADE_WORKER_URL` in `js/config.js` to the Worker https address with no path. Until that line is set, the button says the service is not deployed. `gradePaid` still returns `coming soon`.
+11. The site already loads the shared sign-in with `data-mrj-app="speakpass"` and loads `mrj-scores.js` before the app module. After deploy, set `GRADE_WORKER_URL` in `js/config.js` to the Worker https address with no path. Until that line is set, the button says the service is not deployed. `gradePaid` still returns `coming soon`.
 12. Buy one license-test product from a test account. Grade one full test. Confirm the reply has `scoreMax` 41, the score sheet gained rows for program `speakpass`, and the pack load shows the same test. Confirm a canceled token is refused.
 
 Run the draft tests before you deploy. From `worker/`, run `node --test`. From the repo root, run `node scripts/check.mjs`.
 
 ## What this draft does not do
 
-It does not deploy the Worker. It does not create Cloudflare, Play, or a grader account. It does not buy credit. It does not change the sign-in script, the score columns, or `js/mrj-scores.js`. The Get AI marking button is wired, and `GRADE_WORKER_URL` is empty, so the button does not call the Worker yet. `gradePaid` still returns `coming soon`.
+It does not deploy the Worker. It does not create Cloudflare, Play, or a grader account. It does not buy credit. It does not change the sign-in script, the score columns, or `mrj-scores.js`. The Get AI marking button is wired, and `GRADE_WORKER_URL` is empty, so the button does not call the Worker yet. `gradePaid` still returns `coming soon`.

@@ -41,10 +41,272 @@
       "image": "images/test09_q3.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a small phone repair counter, with generic dark phones and no brand logos. Number of people and appearance: Three adults. Clothing: A technician wears a purple shirt. A customer wears a white blouse. A second worker wears a gray polo. Actions: The technician uses a tiny screwdriver on a phone. The customer watches. The second worker sorts chargers. Objects: A dark phone, a tiny screwdriver, a tray of small parts, and a box of plain chargers. Foreground: The technician and the customer are at the counter, close to the camera. Background: Shelves of plain phones and the second worker are in the background.",
       "key_elements": [
-        "technician in a purple shirt repairing a phone",
-        "customer in a white blouse watching",
-        "tray of small parts",
-        "worker sorting chargers in the background"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a phone repair counter.",
+          "accept": [
+            "phone repair",
+            "a mobile-phone repair shop",
+            "a cell phone repair counter",
+            "a shop fixing phones",
+            "an electronics repair counter"
+          ],
+          "contradict": [
+            {
+              "text": "this is a pharmacy",
+              "cap": 1
+            },
+            {
+              "text": "this is a print shop",
+              "cap": 2
+            },
+            {
+              "text": "this is a flower shop",
+              "cap": 1
+            },
+            {
+              "text": "this is outdoors",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are at the counter.",
+          "accept": [
+            "three people",
+            "three adults",
+            "a technician, a customer, and another worker",
+            "3 people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "repair",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A technician uses a small screwdriver on a dark phone.",
+          "accept": [
+            "repairing a phone",
+            "using a screwdriver on a phone",
+            "fixing a mobile phone",
+            "a tiny screwdriver",
+            "working on a dark phone"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is repairing a phone",
+              "cap": 2
+            },
+            {
+              "text": "he is sorting chargers",
+              "cap": 3
+            },
+            {
+              "text": "the phone is a shoe",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "purple",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The technician wears a purple shirt.",
+          "accept": [
+            "purple shirt",
+            "a violet shirt",
+            "the technician in purple",
+            "a purple polo or button shirt"
+          ],
+          "contradict": [
+            {
+              "text": "the technician wears a white blouse",
+              "cap": 3
+            },
+            {
+              "text": "the technician wears a gray polo",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "watch",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A customer in a white blouse stands and watches the repair.",
+          "accept": [
+            "white blouse",
+            "a customer watching",
+            "a woman in white looking at the phone",
+            "watching the repair"
+          ],
+          "contradict": [
+            {
+              "text": "the customer is repairing the phone",
+              "cap": 3
+            },
+            {
+              "text": "nobody is watching",
+              "cap": 3
+            },
+            {
+              "text": "she wears a purple shirt",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "chargers",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "A second worker in a gray polo sorts chargers in a cardboard box.",
+          "accept": [
+            "sorting chargers",
+            "a box of chargers",
+            "gray polo",
+            "grey polo shirt",
+            "another worker with white adapters"
+          ],
+          "contradict": [
+            {
+              "text": "the worker in gray is using the screwdriver",
+              "cap": 3
+            },
+            {
+              "text": "there is no second worker",
+              "cap": 3
+            },
+            {
+              "text": "he wears a purple shirt",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "tray",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A black compartment tray of small parts sits on the counter.",
+          "accept": [
+            "a tray of small parts",
+            "a tray of screws",
+            "small parts in compartments",
+            "a parts organizer"
+          ],
+          "contradict": [
+            {
+              "text": "there are no small parts",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "phone",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The phone being repaired is dark and lies on a black mat.",
+          "accept": [
+            "a dark phone",
+            "a black phone on a mat",
+            "the phone is face up on the counter"
+          ],
+          "contradict": [
+            {
+              "text": "there is no phone",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "shelves",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Shelves in the background display plain dark phones.",
+          "accept": [
+            "shelves of phones",
+            "plain phones on the wall",
+            "a row of black phones",
+            "phones on display"
+          ],
+          "contradict": [
+            {
+              "text": "the shelves hold flowers",
+              "cap": 2
+            },
+            {
+              "text": "the shelves are empty",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "box",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The chargers are white blocks in an open cardboard box.",
+          "accept": [
+            "a cardboard box of chargers",
+            "white charging bricks",
+            "white adapters in a box"
+          ],
+          "contradict": [
+            {
+              "text": "the box contains shoes",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The technician is seated on the left, the customer stands beside him, and the second worker is in the background on the right.",
+          "accept": [
+            "technician on the left",
+            "the customer stands next to him",
+            "the other worker is in the background",
+            "the box is on the right"
+          ],
+          "contradict": [
+            {
+              "text": "the charger box is in the foreground and the phone is in the far background",
+              "cap": 3
+            }
+          ]
+        }
       ],
       "model_answer": "This picture shows a small phone repair counter. In the foreground, a technician in a purple shirt is using a tiny screwdriver on a dark phone while a customer in a white blouse watches. A tray of small parts sits between them. In the background, shelves hold plain phones, and another worker sorts a box of chargers."
     },
@@ -56,12 +318,272 @@
       "image": "images/test09_q4.jpg",
       "image_prompt": "Photo-realistic photograph with natural colors, no visible brand logos, no celebrity faces, and no readable text. Setting: a neighborhood print shop with large printers and no readable logos. Number of people and appearance: Three adults. Clothing: A clerk wears a teal apron. A customer wears a brown sweater. Another employee wears a black t-shirt. Actions: The clerk hands over a stack of paper. The customer receives it. The employee loads paper into a second machine. A large printer runs on a low stand just behind the counter. Objects: A stack of paper, a large printer, and sample sheets with abstract shapes rather than words. Foreground: The clerk and the customer at the counter are closest to the camera. Background: The second printer and a wall of pinned sample sheets are behind them.",
       "key_elements": [
-        "clerk in a teal apron handing over paper",
-        "customer in a brown sweater",
-        "large printer running behind the counter",
-        "employee loading a second machine"
+        {
+          "id": "place",
+          "role": "main",
+          "weight": 3,
+          "category": "place",
+          "text": "The scene is a print shop.",
+          "accept": [
+            "print shop",
+            "a printing shop",
+            "a copy shop",
+            "a place with large printers",
+            "a neighborhood printer"
+          ],
+          "contradict": [
+            {
+              "text": "this is a pharmacy",
+              "cap": 1
+            },
+            {
+              "text": "this is a hair salon",
+              "cap": 1
+            },
+            {
+              "text": "this is a playground",
+              "cap": 1
+            },
+            {
+              "text": "this is an airport",
+              "cap": 1
+            }
+          ]
+        },
+        {
+          "id": "people_count",
+          "role": "main",
+          "weight": 3,
+          "category": "people",
+          "text": "Three adults are in the shop.",
+          "accept": [
+            "three people",
+            "three adults",
+            "a clerk, a customer, and another employee",
+            "3 people"
+          ],
+          "contradict": [
+            {
+              "text": "only one person",
+              "cap": 2
+            },
+            {
+              "text": "only two people",
+              "cap": 3
+            },
+            {
+              "text": "four people",
+              "cap": 3
+            },
+            {
+              "text": "five people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "handoff",
+          "role": "main",
+          "weight": 3,
+          "category": "action",
+          "text": "A clerk hands a thick stack of paper to a customer.",
+          "accept": [
+            "handing over a stack of paper",
+            "passing a pile of paper",
+            "giving the customer printed sheets",
+            "both of them hold a stack of paper"
+          ],
+          "contradict": [
+            {
+              "text": "nobody is holding paper",
+              "cap": 2
+            },
+            {
+              "text": "they are exchanging a shoe",
+              "cap": 1
+            },
+            {
+              "text": "the stack is a single sheet only",
+              "cap": 4
+            }
+          ]
+        },
+        {
+          "id": "apron",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The clerk wears a teal apron over a black top.",
+          "accept": [
+            "teal apron",
+            "a blue-green apron",
+            "a green-blue apron",
+            "an apron over black"
+          ],
+          "contradict": [
+            {
+              "text": "the clerk wears a brown sweater",
+              "cap": 3
+            },
+            {
+              "text": "the clerk wears a black t-shirt only",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "customer",
+          "role": "main",
+          "weight": 2,
+          "category": "clothing",
+          "text": "The customer wears a brown sweater.",
+          "accept": [
+            "brown sweater",
+            "a brown jumper",
+            "the customer in brown",
+            "a knit brown sweater"
+          ],
+          "contradict": [
+            {
+              "text": "the customer wears a teal apron",
+              "cap": 3
+            },
+            {
+              "text": "the customer wears a black t-shirt",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "load",
+          "role": "main",
+          "weight": 2,
+          "category": "action",
+          "text": "Another employee in a black t-shirt loads paper into a second printer.",
+          "accept": [
+            "loading paper",
+            "a black t-shirt",
+            "putting paper into a printer",
+            "another employee at a machine",
+            "feeding a printer"
+          ],
+          "contradict": [
+            {
+              "text": "the employee in black is handing paper to the customer",
+              "cap": 3
+            },
+            {
+              "text": "nobody is at the second machine",
+              "cap": 3
+            },
+            {
+              "text": "he wears a teal apron",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "printer",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "A large gray printer sits just behind the wooden counter.",
+          "accept": [
+            "a large printer",
+            "a gray printer behind the counter",
+            "a big copier",
+            "a printer on a low stand"
+          ],
+          "contradict": [
+            {
+              "text": "there is no printer",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "second",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The second printer is on a metal stand in the background.",
+          "accept": [
+            "a second printer",
+            "another machine",
+            "a printer on a stand",
+            "two printers"
+          ],
+          "contradict": [
+            {
+              "text": "there is only a cash register and no printer",
+              "cap": 2
+            }
+          ]
+        },
+        {
+          "id": "samples",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "Sample sheets with colored geometric shapes, not words, hang on the wall.",
+          "accept": [
+            "sample sheets",
+            "prints on the wall",
+            "colored squares on the samples",
+            "abstract color blocks",
+            "samples pinned to the wall"
+          ],
+          "contradict": [
+            {
+              "text": "the wall is blank",
+              "cap": 3
+            },
+            {
+              "text": "the samples are photographs of people",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "stack",
+          "role": "detail",
+          "weight": 1,
+          "category": "object",
+          "text": "The stack being handed over is a thick pile of white paper.",
+          "accept": [
+            "a thick stack",
+            "white paper",
+            "a pile of sheets",
+            "a ream of paper"
+          ],
+          "contradict": [
+            {
+              "text": "they are holding a newspaper they are reading",
+              "cap": 3
+            }
+          ]
+        },
+        {
+          "id": "positions",
+          "role": "detail",
+          "weight": 1,
+          "category": "position",
+          "text": "The clerk and the customer are in the foreground at the counter, and the second employee is behind them.",
+          "accept": [
+            "in the foreground",
+            "the other employee is in the background",
+            "at the counter",
+            "the clerk is on the left and the customer is on the right"
+          ],
+          "contradict": [
+            {
+              "text": "the person loading the printer is closest to the camera",
+              "cap": 3
+            }
+          ]
+        }
       ],
-      "model_answer": "This picture shows a neighborhood print shop. In the foreground, a clerk in a teal apron is handing a stack of paper to a customer in a brown sweater. A large printer is running just behind the counter. In the background, another employee loads paper into a second machine, and sample sheets hang on the wall."
+      "model_answer": "This picture shows a neighborhood print shop. In the foreground, a clerk in a teal apron is handing a stack of paper to a customer in a brown sweater. A large printer sits just behind the counter. In the background, another employee loads paper into a second machine, and sample sheets hang on the wall."
     },
     {
       "q": 5,

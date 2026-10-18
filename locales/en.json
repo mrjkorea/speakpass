@@ -11,7 +11,12 @@
     "loadError": "The test list could not be loaded. Check your connection and try again.",
     "noTests": "No practice tests are available yet.",
     "micNote": "A full test uses your microphone. Timers run straight through and cannot be paused.",
-    "questionCount": "{count} questions"
+    "questionCount": "{count} questions",
+    "savedTitle": "Saved progress",
+    "savedCount": "{done} of {total} questions saved",
+    "savedNone": "No saved answers for this test yet.",
+    "savedItem": "Question {n}: {score}/{total}",
+    "savedDone": "Question {n} saved"
   },
   "practice": {
     "title": "Practice",
@@ -61,7 +66,7 @@
     "start": "Start",
     "end": "End",
     "leaveTitle": "End this session?",
-    "leaveBody": "The timer will stop. Answers recorded so far are kept on this device.",
+    "leaveBody": "The timer will stop. Answers recorded so far are saved to your account.",
     "leaveYes": "End session",
     "leaveNo": "Keep going",
     "micDenied": "Microphone access was blocked. Allow the microphone in your browser settings, then try again.",
@@ -82,8 +87,8 @@
     "noAudio": "No recording",
     "deviceScore": "On-device score",
     "serverScore": "Server score",
-    "saved": "Saved on this device",
-    "notSaved": "Could not save on this device. You can still play the answers until you leave this page.",
+    "saved": "Saved to your account",
+    "notSaved": "Could not save to your account. You can still play the answers until you leave this page.",
     "home": "Back to start",
     "retry": "Try again",
     "snippetPicture": "Picture description",
@@ -98,7 +103,13 @@
     "slowDown": "Wait a minute, then ask for an AI mark again.",
     "dailyCap": "AI marking is full for today. Try again tomorrow.",
     "signInAgain": "Sign in again, then ask for an AI mark.",
-    "aiScore": "AI mark"
+    "aiScore": "AI mark",
+    "saving": "Saving to your account…",
+    "checking": "Checking pronunciation…",
+    "sayAgain": "Say it again. Say each word clearly.",
+    "stars": "{n} out of 5",
+    "checkFailed": "Pronunciation could not be checked on this device. Your answer is still saved.",
+    "weak": "Words to practice"
   },
   "common": {
     "language": "Language",
@@ -111,5 +122,9 @@
     "play": "Play the answer to question {n}",
     "stop": "Stop playing the answer to question {n}",
     "progress": "Question {index} of {total}"
+  },
+  "account": {
+    "loading": "Loading your saved progress…",
+    "error": "Your saved progress could not be loaded. Check your connection and try again."
   }
 }

@@ -1,6 +1,8 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { APP_NAME, LANGS } from '../js/config.js';
 import { gradeFree, gradePaid } from '../js/grade.js';
+import { MANIFEST_FILE, MODEL_ORIGIN, SHARED_URL, modelUrls } from '../js/pronounce/model-ref.js';
+import { PASS_AT, THRESHOLDS, bandFor, starsFromPct } from '../js/pronounce/stars.js';
 import { markdownLite, renderDocument } from '../js/html.js';
 import { matchLang } from '../js/i18n.js';
 import { buildPlan, readSeconds } from '../js/plan.js';
@@ -125,6 +127,47 @@ for (let n = 1; n <= 10; n += 1) {
   moved.questions[7].document = { ...moved.questions[7].document, read_sec: 45 };
   delete moved.questions[7].read_sec;
   if (readSeconds(moved.questions[7]) !== 45) throw new Error(`${id} read_sec`);
+  for (const q of test.questions) {
+    if (q.q !== 3 && q.q !== 4) continue;
+    if (typeof q.image !== 'string' || !/^images\/test\d{2}_q[34]\.jpg$/.test(q.image)) {
+      throw new Error(`${id} image path q${q.q}`);
+    }
+    if (q.image !== `images/${id}_q${q.q}.jpg`) throw new Error(`${id} image file q${q.q}`);
+    readFileSync(new URL(`../${q.image}`, import.meta.url));
+    const items = q.key_elements;
+    if (!Array.isArray(items) || items.length < 10) throw new Error(`${id} checklist q${q.q}`);
+    const ids = new Set();
+    let mainW = 0;
+    let detailN = 0;
+    const categories = ['place', 'people', 'clothing', 'action', 'object', 'position'];
+    for (const item of items) {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) throw new Error(`${id} item q${q.q}`);
+      if (typeof item.id !== 'string' || !item.id || ids.has(item.id)) throw new Error(`${id} id q${q.q}`);
+      ids.add(item.id);
+      if (item.role !== 'main' && item.role !== 'detail') throw new Error(`${id} role ${item.id}`);
+      if (item.role === 'main' && item.weight !== 2 && item.weight !== 3) throw new Error(`${id} weight ${item.id}`);
+      if (item.role === 'detail' && item.weight !== 1) throw new Error(`${id} weight ${item.id}`);
+      if (item.role === 'main') mainW += item.weight;
+      else detailN += 1;
+      if (!categories.includes(item.category)) throw new Error(`${id} category ${item.id}`);
+      if (typeof item.text !== 'string' || item.text.length < 8) throw new Error(`${id} text ${item.id}`);
+      if (!Array.isArray(item.accept) || item.accept.length < 3) throw new Error(`${id} accept ${item.id}`);
+      if (item.accept.some((phrase) => typeof phrase !== 'string' || !phrase.trim())) {
+        throw new Error(`${id} accept blank ${item.id}`);
+      }
+      const cons = item.contradict || [];
+      if (!Array.isArray(cons)) throw new Error(`${id} contradict ${item.id}`);
+      for (const entry of cons) {
+        if (!entry || typeof entry.text !== 'string' || !entry.text.trim()) throw new Error(`${id} contradict text`);
+        if (!Number.isInteger(entry.cap) || entry.cap < 0 || entry.cap > 5) throw new Error(`${id} cap ${item.id}`);
+        if (String(q.model_answer).toLowerCase().includes(entry.text.toLowerCase())) {
+          throw new Error(`${id} q${q.q} model matches contradiction: ${entry.text}`);
+        }
+      }
+    }
+    if (mainW < 12 || detailN < 4) throw new Error(`${id} balance q${q.q}`);
+    if (typeof q.model_answer !== 'string' || q.model_answer.length < 80) throw new Error(`${id} model q${q.q}`);
+  }
 }
 
 const html = renderDocument({
@@ -141,7 +184,35 @@ if (!listed.includes('<ul>') || !listed.includes('<strong>Guest:</strong>') || !
 }
 
 if (await gradeFree(1, null) !== 'coming soon') throw new Error('gradeFree');
+if (await gradeFree(3, null) !== 'coming soon') throw new Error('gradeFree q3');
 if (await gradePaid({ id: 'x' }) !== 'coming soon') throw new Error('gradePaid');
+
+if (PASS_AT !== 60) throw new Error('pass at 60');
+if (THRESHOLDS.green !== 75 || THRESHOLDS.yellow !== 50) throw new Error('thresholds 75/50');
+if (bandFor(75) !== 'green' || bandFor(74) !== 'yellow' || bandFor(50) !== 'yellow' || bandFor(49) !== 'red') throw new Error('bands');
+if (starsFromPct(100) !== 5 || starsFromPct(90) !== 5) throw new Error('5 stars');
+if (starsFromPct(89.9) !== 4 || starsFromPct(80) !== 4) throw new Error('4 stars');
+if (starsFromPct(79.9) !== 3 || starsFromPct(70) !== 3) throw new Error('3 stars');
+if (starsFromPct(69.9) !== 2 || starsFromPct(60) !== 2) throw new Error('2 stars');
+if (starsFromPct(59.9) !== 1 || starsFromPct(0) !== 1) throw new Error('1 star');
+
+if (MANIFEST_FILE !== 'models/hubert/manifest.json') throw new Error('model manifest');
+if (!MODEL_ORIGIN.startsWith('https://mrjkorea.github.io/pronounce/')) throw new Error('shared model');
+if (SHARED_URL !== 'https://mrjkorea.github.io/pronounce/src/shared.js') throw new Error('shared engine');
+const urls = modelUrls();
+if (!urls.manifest.endsWith(MANIFEST_FILE)) throw new Error('model urls');
+
+const banned = ['openai', 'nvidia', 'anthropic', 'whisper', 'wav2vec', 'citrinet', 'chatgpt', 'claude', 'gemini', 'onnx', 'espeak', 'whistle'];
+for (const lang of LANGS) {
+  const blob = readFileSync(new URL(`../locales/${lang.id}.json`, import.meta.url), 'utf8').toLowerCase();
+  for (const word of banned) {
+    if (blob.includes(word)) throw new Error(`${lang.id} names ${word}`);
+  }
+}
+const page = readFileSync(new URL('../index.html', import.meta.url), 'utf8').toLowerCase();
+for (const word of banned) {
+  if (page.includes(word)) throw new Error(`page names ${word}`);
+}
 
 const manifest = JSON.parse(readFileSync(new URL('../manifest.webmanifest', import.meta.url), 'utf8'));
 if (manifest.name !== APP_NAME || manifest.short_name !== APP_NAME) {

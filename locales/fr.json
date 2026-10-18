@@ -11,7 +11,12 @@
     "loadError": "La liste des tests n’a pas pu être chargée. Vérifiez la connexion et réessayez.",
     "noTests": "Aucun test d’entraînement pour le moment.",
     "micNote": "Un test complet utilise le microphone. Les minuteurs avancent sans pause.",
-    "questionCount": "{count} questions"
+    "questionCount": "{count} questions",
+    "savedTitle": "Progrès enregistré",
+    "savedCount": "{done} questions sur {total} enregistrées",
+    "savedNone": "Aucune réponse enregistrée pour ce test.",
+    "savedItem": "Question {n} : {score}/{total}",
+    "savedDone": "Question {n} enregistrée"
   },
   "practice": {
     "title": "Entraînement",
@@ -61,7 +66,7 @@
     "start": "Commencer",
     "end": "Terminer",
     "leaveTitle": "Terminer cette session ?",
-    "leaveBody": "Le minuteur s’arrêtera. Les réponses déjà enregistrées restent sur cet appareil.",
+    "leaveBody": "Le minuteur s’arrêtera. Les réponses déjà enregistrées sont gardées dans votre compte.",
     "leaveYes": "Terminer la session",
     "leaveNo": "Continuer",
     "micDenied": "L’accès au microphone a été bloqué. Autorisez-le dans les réglages du navigateur, puis réessayez.",
@@ -82,8 +87,8 @@
     "noAudio": "Pas d’enregistrement",
     "deviceScore": "Note sur l’appareil",
     "serverScore": "Note du serveur",
-    "saved": "Enregistré sur cet appareil",
-    "notSaved": "Impossible d’enregistrer sur cet appareil. Vous pouvez encore écouter les réponses tant que vous restez sur cette page.",
+    "saved": "Enregistré dans votre compte",
+    "notSaved": "Impossible d’enregistrer dans votre compte. Vous pouvez encore écouter les réponses tant que vous restez sur cette page.",
     "home": "Retour au début",
     "retry": "Réessayer",
     "snippetPicture": "Description de l’image",
@@ -98,7 +103,13 @@
     "slowDown": "Attends une minute, puis demande une note IA.",
     "dailyCap": "La correction par IA est complète pour aujourd’hui. Réessaie demain.",
     "signInAgain": "Reconnecte-toi, puis demande une note IA.",
-    "aiScore": "Note IA"
+    "aiScore": "Note IA",
+    "saving": "Enregistrement dans votre compte…",
+    "checking": "Vérification de la prononciation…",
+    "sayAgain": "Dis-le encore. Dis chaque mot clairement.",
+    "stars": "{n} sur 5",
+    "checkFailed": "La prononciation n’a pas pu être vérifiée sur cet appareil. Ta réponse est quand même enregistrée.",
+    "weak": "Mots à travailler"
   },
   "common": {
     "language": "Langue",
@@ -111,5 +122,9 @@
     "play": "Écouter la réponse à la question {n}",
     "stop": "Arrêter la lecture de la question {n}",
     "progress": "Question {index} sur {total}"
+  },
+  "account": {
+    "loading": "Chargement de votre progrès enregistré…",
+    "error": "Votre progrès enregistré n’a pas pu être chargé. Vérifiez la connexion et réessayez."
   }
 }
