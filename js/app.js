@@ -1,5 +1,6 @@
 import { reportScoredItems, loadProgressPack, saveProgressPack, studentId } from './cloud.js';
 import { APP_NAME, LANGS } from './config.js';
+import { requestAiMark, workerUrl } from './mark-client.js';
 import { activeStream, beginArm, hasStream, releaseMic } from './audio.js';
 import { createSession } from './engine.js';
 import { gradeFree, gradePaid, gradeReadAloud, warmChecker } from './grade.js';
@@ -168,7 +169,10 @@ async function presentReview(attempt) {
     attempt,
     saved: null,
     grades,
-    selection: state.selection
+    selection: state.selection,
+    marks: {},
+    markNote: '',
+    marking: false
   };
   state.session = null;
   state.view = null;
@@ -393,11 +397,58 @@ function onClick(event) {
   } else if (action === 'confirm-end') confirmEnd();
   else if (action === 'play') togglePlay(button.dataset.q);
   else if (action === 'retry' && state.review) startSession(state.review.selection);
+  else if (action === 'mark') askForMark();
   else if (action === 'reload') boot();
   else if (action === 'reload-progress') {
     const id = studentId() || state.studentId;
     if (id) hydrate(id);
   }
+}
+
+function markMessage(error) {
+  if (error === 'not_deployed') return t('review.notDeployed');
+  if (error === 'sign_in') return t('review.signIn');
+  if (error === 'no_transcript') return t('review.noTranscript');
+  if (error === 'student_cap') return t('review.studentCap');
+  if (error === 'slow_down') return t('review.slowDown');
+  if (error === 'daily_cap') return t('review.dailyCap');
+  return t('review.markFailed');
+}
+
+async function askForMark() {
+  const review = state.review;
+  if (!review || review.marking) return;
+  if (!workerUrl()) {
+    review.markNote = t('review.notDeployed');
+    render();
+    return;
+  }
+  review.marking = true;
+  review.markNote = t('review.marking');
+  render();
+  let result;
+  try {
+    result = await requestAiMark(review.attempt);
+  } catch (err) {
+    result = { ok: false, error: 'grade_failed' };
+  }
+  if (!state.review || state.review !== review) return;
+  review.marking = false;
+  if (!result || !result.ok) {
+    const code = result && result.error;
+    review.markNote = code === 'sign_in' && review.markTried
+      ? t('review.signInAgain')
+      : markMessage(code);
+    review.markTried = true;
+    render();
+    return;
+  }
+  review.markTried = true;
+  const marks = {};
+  for (const row of result.grade.questions || []) marks[row.q] = row;
+  review.marks = marks;
+  review.markNote = result.saved ? t('review.marked') : t('review.markFailed');
+  render();
 }
 
 function onChange(event) {
@@ -785,8 +836,16 @@ function renderReview() {
     const playLabel = playing
       ? t('a11y.stop', { n: ans.q })
       : t('a11y.play', { n: ans.q });
-    const scoreValue = ans.q <= 4 ? (grades.free[ans.q] || '') : (grades.paid || '');
-    const scoreName = ans.q <= 4 ? t('review.deviceScore') : t('review.serverScore');
+    const ai = state.review.marks && state.review.marks[ans.q];
+    const scoreValue = ai
+      ? `${ai.scoreValue}/${ai.scoreMax}`
+      : (ans.q <= 4 ? (grades.free[ans.q] || '') : (grades.paid || ''));
+    const scoreName = ai
+      ? t('review.aiScore')
+      : (ans.q <= 4 ? t('review.deviceScore') : t('review.serverScore'));
+    const comment = ai && ai.comment
+      ? `<p class="note">${escapeHtml(ai.comment)}</p>`
+      : '';
     const showSnippet = !readDetail || readDetail.status !== 'scored';
     const scoreBlock = readDetail
       ? readAloudScoreHtml(readDetail)
@@ -798,10 +857,18 @@ function renderReview() {
         ${showSnippet ? `<p class="snippet"${lang}>${escapeHtml(snippet)}</p>` : ''}
         <button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" ${hasAudio ? '' : 'disabled'} aria-label="${escapeHtml(playLabel)}">${escapeHtml(playText)}</button>
         ${scoreBlock}
+        ${comment}
       </article>`;
   }).join('');
   const retry = attempt.mode === 'practice'
-    ? `<button type="button" class="btn primary" data-action="retry">${escapeHtml(t('review.retry'))}</button>`
+    ? `<button type="button" class="btn secondary" data-action="retry">${escapeHtml(t('review.retry'))}</button>`
+    : '';
+  const canMark = attempt.answers.some((ans) => ans.q >= 1 && ans.q <= 11);
+  const mark = canMark
+    ? `<button type="button" class="btn primary" data-action="mark" ${state.review.marking ? 'disabled' : ''}>${escapeHtml(state.review.marking ? t('review.marking') : t('review.mark'))}</button>`
+    : '';
+  const note = state.review.markNote
+    ? `<p class="alert" role="status">${escapeHtml(state.review.markNote)}</p>`
     : '';
   return shell(`
     <h1 id="step-title" tabindex="-1">${escapeHtml(t('review.title'))}</h1>
@@ -809,7 +876,9 @@ function renderReview() {
     <p>${escapeHtml(lead)}</p>
     <p class="saved">${escapeHtml(saved == null ? t('review.saving') : (saved ? t('review.saved') : t('review.notSaved')))}</p>
     <div class="answers">${cards}</div>
+    ${note}
     <div class="dock actions">
+      ${mark}
       ${retry}
       <button type="button" class="btn secondary" data-action="home">${escapeHtml(t('review.home'))}</button>
     </div>

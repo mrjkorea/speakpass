@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v7';
+const CACHE = 'app-shell-v8';
 
 const PRECACHE = [
   './index.html',
@@ -21,6 +21,8 @@ const PRECACHE = [
   './mrj-scores.js',
   './js/engine.js',
   './js/app.js',
+  './js/paid-mark.js',
+  './js/mark-client.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-180.png',

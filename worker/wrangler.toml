@@ -1,0 +1,17 @@
+name = "speakpass-grade"
+main = "src/index.js"
+compatibility_date = "2026-10-13"
+
+# Plain settings. Secrets are added in the Cloudflare dashboard, not in this file.
+# GRADE_API_KEY holds the grader key.
+# PLAY_SERVICE_ACCOUNT is used only when PAYMENT_MODE is "play".
+
+[vars]
+PAYMENT_MODE = "free"
+PACKAGE_NAME = "com.mrjkorea.speakpass"
+ALLOWED_ORIGINS = "https://mrjkorea.github.io"
+SIGNIN_ENDPOINT = "https://script.google.com/macros/s/AKfycbwtJTUO3gbcMrlAwsn1feWxyp7Rw2cxpfe1bOT9v2rxmQHa2Tlc6pFNWAjU6ZAdlD6kFQ/exec"
+
+[[kv_namespaces]]
+binding = "GRADE_LIMITS"
+id = "6688ac88a5224bdebf0b492d4e8ace97"

@@ -1,6 +1,12 @@
 /** Product name. This is the only app-name constant. */
 export const APP_NAME = 'SpeakPass AI';
 
+/**
+ * Address of the marking Worker. Leave this empty until it is deployed.
+ * After deploy, set the https address of the Worker, with no path on the end.
+ */
+export const GRADE_WORKER_URL = 'https://speakpass-grade.mrjenglish.workers.dev';
+
 /** Shared MRJ account id. Packs and scores use this id. */
 export const APP_ID = 'speakpass';
 

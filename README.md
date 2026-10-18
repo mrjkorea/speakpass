@@ -117,6 +117,8 @@ The score is saved with the existing account pack and score sheet. The item id i
 
 Test cloud saves only with ids that start with `zz_test_`.
 
+The review screen also has a Get AI marking button for questions 5 through 11. It sends the on-device transcript to the marking Worker at `GRADE_WORKER_URL` in `js/config.js` (deployed on Cloudflare Workers in free mode). Audio is not uploaded. Deploy commands are in `DEPLOY_STEPS.md`.
+
 ## Install and offline
 
 The manifest and service worker make the site installable (home screen, and a PWA package such as the Microsoft Store). After one online visit, a reload works offline.

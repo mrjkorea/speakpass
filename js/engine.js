@@ -1,4 +1,4 @@
-import { activeStream, beep, startRecorder } from './audio.js';
+import { activeStream, beep, startListener, startRecorder } from './audio.js';
 import { startCountdown } from './timer.js';
 
 function uid() {
@@ -86,12 +86,14 @@ export function createSession({ test, plan, mode, onView }) {
           if (cancelled) return;
 
           let recorder = null;
+          let listener = null;
           try {
             const media = activeStream();
             if (media) recorder = startRecorder(media);
           } catch (err) {
             recorder = null;
           }
+          try { listener = startListener(); } catch (err) { listener = null; }
           const speak = Number(q.speak_sec) || 0;
           const speakTimer = startCountdown(speak, (left) => {
             emit({ status: 'running', step, stepIndex: index, phase: 'speak', remaining: left, total: speak, recording: !!recorder });
@@ -103,12 +105,17 @@ export function createSession({ test, plan, mode, onView }) {
           if (recorder) {
             try { recorded = await recorder.stop(); } catch (err) { recorded = emptyRecording(); }
           }
+          let transcript = '';
+          if (listener) {
+            try { transcript = String(await listener.stop() || '').trim(); } catch (err) { transcript = ''; }
+          }
           answers.push({
             q: q.q,
             type: q.type,
             mimeType: recorded.mimeType || (recorded.blob && recorded.blob.type) || '',
             blob: recorded.blob || new Blob(),
-            speakSec: speak
+            speakSec: speak,
+            transcript
           });
           if (cancelled || speakResult.cancelled) return;
           beep('end');
