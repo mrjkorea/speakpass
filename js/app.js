@@ -839,7 +839,7 @@ function renderReview() {
       : t('a11y.play', { n: ans.q });
     const ai = state.review.marks && state.review.marks[ans.q];
     const scoreValue = ai
-      ? `${ai.scoreValue}/${ai.scoreMax}`
+      ? `${ai.scoreValue}/${ai.scoreMax}${Number(ai.scoreMax) > 0 ? ` (${Math.round((Number(ai.scoreValue) / Number(ai.scoreMax)) * 100)}%)` : ''}`
       : (ans.q <= 4 ? (grades.free[ans.q] || '') : (grades.paid || ''));
     const scoreName = ai
       ? t('review.aiScore')
