@@ -7,6 +7,10 @@ import { MODEL_FILE, SHARED_URL } from './model-ref.js';
 export { PASS_AT };
 
 const APP_ID = 'toeic';
+// The shared checker keeps only 6.5 s of audio by default (built for one sentence).
+// A TOEIC read-aloud is a whole 45 s passage, so the cut audio never matched the text and every
+// answer came back 0/5 "Say it again". Keep the full answer.
+const READ_MAX_MS = 60000;
 
 let enginePromise = null;
 let gradeChain = Promise.resolve();
@@ -67,7 +71,7 @@ async function scoreOne(text, blob) {
   try {
     const { api, meta } = await ensureEngine();
     const t0 = performance.now();
-    const graded = await api.grade(blob, target, APP_ID);
+    const graded = await api.grade(blob, target, APP_ID, { maxMs: READ_MAX_MS });
     const perf = graded && graded.perf ? graded.perf : {};
     const scoreMs = Number(perf.totalMs) || (performance.now() - t0);
     return packGrade(graded, scoreMs, meta);

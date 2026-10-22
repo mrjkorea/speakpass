@@ -15,6 +15,7 @@ import { playNarration, prepareNarration, questionClipId, stopNarration } from '
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
 import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
 import { formatHMS } from './format.js';
+import { fillTranscript, fillTranscripts } from './transcribe.js';
 import { startCountdown } from './timer.js';
 
 const RING = 2 * Math.PI * 52;
@@ -183,6 +184,13 @@ async function presentReview(attempt) {
   const owner = state.sessionOwner || studentId();
   const grades = { free: {}, paid: null, read: {}, checklist: {} };
   const test = state.catalog.find((item) => item.id === attempt.testId);
+  if (attempt.answers.some((a) => a && a.q >= 3 && a.blob && a.blob.size && !String(a.transcript || '').trim()) && studentId()) {
+    state.screen = 'loading';
+    state.loadingText = 'Scoring your answers…';
+    render();
+  }
+  try { await fillTranscripts(attempt.answers); } catch (err) { /* keep going */ }
+  state.loadingText = '';
   for (const ans of attempt.answers) {
     if (ans.localRead) {
       grades.read[ans.q] = ans.localRead;
@@ -518,6 +526,10 @@ async function gradeClassAnswer(view) {
   const test = state.catalog.find((item) => item.id === attempt.testId);
   const grades = { free: {}, paid: null, read: {}, checklist: {} };
   const source = test && test.questions.find((item) => item.q === ans.q);
+  if (ans.q >= 3 && !String(ans.transcript || '').trim()) {
+    try { await fillTranscript(ans); } catch (err) { /* keep going */ }
+    if (token !== classToken) return;
+  }
   if (isReadAloudScore(ans)) {
     grades.read[ans.q] = { status: ans.blob && ans.blob.size ? 'checking' : 'empty' };
     grades.free[ans.q] = ans.blob && ans.blob.size ? null : 'coming soon';
@@ -854,6 +866,7 @@ async function askForMark() {
   let result;
   try {
     await saveChain;
+    try { await fillTranscripts(attempt.answers); } catch (err) { /* keep going */ }
     result = await requestAiMark(attempt);
   } catch (err) {
     result = { ok: false, error: 'grade_failed' };
@@ -1496,7 +1509,7 @@ function renderError() {
 function renderLoading() {
   return shell(`
     <h1>${escapeHtml(t('appName'))}</h1>
-    <p>${escapeHtml(t('home.loading'))}</p>
+    <p>${escapeHtml(state.loadingText || t('home.loading'))}</p>
   `);
 }
 
