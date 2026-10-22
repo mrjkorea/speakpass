@@ -20,7 +20,8 @@
     "exam": "Sınav",
     "classMode": "Ders",
     "examHelp": "Sınav modu resmi süreleri kullanır. Mikrofonu kontrol edin, Başla’ya bir kez basın, her soru kendiliğinden ilerler.",
-    "classHelp": "Ders modunda süre sınırı yoktur. Saat ileri sayar ve resmi hedefi gösterir. Hazır olunca Bitti’ye basın."
+    "classHelp": "Ders modunda süre sınırı yoktur. Saat ileri sayar ve resmi hedefi gösterir. Hazır olunca Bitti’ye basın.",
+    "chooseVoice": "Anlatım sesi"
   },
   "practice": {
     "title": "Alıştırma",
@@ -192,5 +193,15 @@
     "NH": "Soruya uyan sözcükler ve kısa öbekler kullanabilir.",
     "NM": "Soruya ilişkin birkaç tanıdık sözcük söyleyebilir.",
     "NL": "Birkaç ayrı sözcük söyleyebilir ya da yanıtı izlemek zordur."
+  },
+  "voice": {
+    "mixed": "Karışık (gerçek sınav tarzı)",
+    "us-f": "Amerikalı kadın",
+    "us-m": "Amerikalı erkek",
+    "uk-f": "İngiliz kadın",
+    "uk-m": "İngiliz erkek",
+    "au-f": "Avustralyalı kadın",
+    "au-m": "Avustralyalı erkek",
+    "nz-f": "Yeni Zelandalı kadın"
   }
 }

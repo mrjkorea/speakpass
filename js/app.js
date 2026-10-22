@@ -11,7 +11,7 @@ import { gradeFree, gradePaid, gradeReadAloud, warmChecker } from './grade.js';
 import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
 import { classScreenHtml, estimateHtml, examIntroHtml, examMicHtml, examRunHtml } from './mode-view.js';
-import { playNarration, prepareNarration, questionClipId, stopNarration } from './narration.js';
+import { playNarration, prepareNarration, questionClipId, stopNarration, setNarrationVoice, getNarrationVoice, normalizeVoice, VOICE_KEYS, MIXED_VOICE } from './narration.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
 import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
 import { formatHMS } from './format.js';
@@ -942,6 +942,7 @@ async function storeMarks(attempt, marks) {
 
 function onChange(event) {
   if (event.target.id === 'lang') setLang(event.target.value);
+  if (event.target.id === 'voice-select') chooseVoice(event.target.value);
   if (event.target.id === 'test-select') {
     state.testId = event.target.value;
     render();
@@ -1031,6 +1032,7 @@ function renderHome() {
     </label>
     <p class="count">${escapeHtml(t('home.questionCount', { count: test.questions.length }))}</p>
     ${cloudHtml(test)}
+    ${voiceHtml()}
     <p class="note">${escapeHtml(t('home.micNote'))}</p>
     <div class="dock actions">
       <button type="button" class="btn primary" data-action="exam">${escapeHtml(t('home.exam'))}</button>
@@ -1041,6 +1043,42 @@ function renderHome() {
     <p class="note">${escapeHtml(t('home.examHelp'))}</p>
     <p class="note">${escapeHtml(t('home.classHelp'))}</p>
   `);
+}
+
+function voiceHtml() {
+  const current = getNarrationVoice();
+  const opts = [MIXED_VOICE, ...VOICE_KEYS].map((key) => {
+    const selected = key === current ? ' selected' : '';
+    return `<option value="${escapeHtml(key)}"${selected}>${escapeHtml(t(`voice.${key}`))}</option>`;
+  }).join('');
+  return `
+    <label class="field">
+      <span>${escapeHtml(t('home.chooseVoice'))}</span>
+      <select id="voice-select">${opts}</select>
+    </label>`;
+}
+
+function chooseVoice(key) {
+  const next = normalizeVoice(key);
+  setNarrationVoice(next);
+  if (state.pack) state.pack.voice = next;
+  const owner = studentId();
+  if (!owner || state.packStatus !== 'ready') return;
+  const run = saveChain.then(async () => {
+    if (studentId() !== owner) return;
+    let pack = state.pack;
+    try {
+      const loaded = await loadProgressPack();
+      if (loaded && loaded.ok) pack = parsePack(loaded.progress_json);
+    } catch (err) { /* keep the pack already on screen */ }
+    pack.voice = next;
+    const res = await saveProgressPack(packJson(pack));
+    if (res && res.ok && studentId() === owner) {
+      state.pack = pack;
+      packEpoch += 1;
+    }
+  }).catch(() => {});
+  saveChain = run.then(() => {});
 }
 
 function savedLabel(row, q) {
@@ -1751,6 +1789,7 @@ async function hydrate(id) {
     return;
   }
   if (epoch === packEpoch) state.pack = parsePack(res.progress_json);
+  setNarrationVoice(state.pack && state.pack.voice);
   state.packStatus = 'ready';
   if (state.catalog.length && state.screen !== 'session' && state.screen !== 'review') {
     state.screen = 'home';

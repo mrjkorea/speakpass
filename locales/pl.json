@@ -20,7 +20,8 @@
     "exam": "Egzamin",
     "classMode": "Lekcja",
     "examHelp": "Tryb egzaminu używa oficjalnych czasów. Sprawdź mikrofon, naciśnij Start raz, a każde pytanie przejdzie samo.",
-    "classHelp": "Tryb lekcji nie ma limitu czasu. Zegar liczy w górę i pokazuje oficjalny cel. Naciśnij Gotowe, gdy będziesz gotów."
+    "classHelp": "Tryb lekcji nie ma limitu czasu. Zegar liczy w górę i pokazuje oficjalny cel. Naciśnij Gotowe, gdy będziesz gotów.",
+    "chooseVoice": "Głos lektora"
   },
   "practice": {
     "title": "Ćwiczenie",
@@ -192,5 +193,15 @@
     "NH": "Potrafi użyć słów i krótkich zwrotów pasujących do pytania.",
     "NM": "Potrafi powiedzieć kilka znanych słów związanych z pytaniem.",
     "NL": "Potrafi powiedzieć kilka osobnych słów albo odpowiedź jest trudna do śledzenia."
+  },
+  "voice": {
+    "mixed": "Mieszany (jak na prawdziwym teście)",
+    "us-f": "Amerykanka",
+    "us-m": "Amerykanin",
+    "uk-f": "Brytyjka",
+    "uk-m": "Brytyjczyk",
+    "au-f": "Australijka",
+    "au-m": "Australijczyk",
+    "nz-f": "Nowozelandka"
   }
 }

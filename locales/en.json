@@ -20,7 +20,8 @@
     "exam": "Exam",
     "classMode": "Class",
     "examHelp": "Exam mode uses the official times. Check the microphone, press Start once, and every question moves ahead by itself.",
-    "classHelp": "Class mode has no time limit. The clock counts up and shows the official target. Press Done when you are ready."
+    "classHelp": "Class mode has no time limit. The clock counts up and shows the official target. Press Done when you are ready.",
+    "chooseVoice": "Narration voice"
   },
   "practice": {
     "title": "Practice",
@@ -192,5 +193,15 @@
     "NH": "Can use words and short phrases that fit the question.",
     "NM": "Can say a few familiar words that relate to the question.",
     "NL": "Can say a few isolated words, or the answer is hard to follow."
+  },
+  "voice": {
+    "mixed": "Mixed (real test style)",
+    "us-f": "American woman",
+    "us-m": "American man",
+    "uk-f": "British woman",
+    "uk-m": "British man",
+    "au-f": "Australian woman",
+    "au-m": "Australian man",
+    "nz-f": "New Zealand woman"
   }
 }
