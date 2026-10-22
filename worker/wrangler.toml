@@ -15,6 +15,3 @@ SIGNIN_ENDPOINT = "https://script.google.com/macros/s/AKfycbwtJTUO3gbcMrlAwsn1fe
 [[kv_namespaces]]
 binding = "GRADE_LIMITS"
 id = "6688ac88a5224bdebf0b492d4e8ace97"
-
-[ai]
-binding = "AI"

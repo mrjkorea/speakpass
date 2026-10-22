@@ -184,7 +184,7 @@ async function presentReview(attempt) {
   const owner = state.sessionOwner || studentId();
   const grades = { free: {}, paid: null, read: {}, checklist: {} };
   const test = state.catalog.find((item) => item.id === attempt.testId);
-  if (attempt.answers.some((a) => a && a.q >= 3 && a.blob && a.blob.size && !String(a.transcript || '').trim()) && studentId()) {
+  if (attempt.answers.some((a) => a && a.q >= 3 && a.blob && a.blob.size && !String(a.transcript || '').trim()) ) {
     state.screen = 'loading';
     state.loadingText = 'Scoring your answers…';
     render();

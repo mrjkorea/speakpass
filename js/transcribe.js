@@ -1,12 +1,64 @@
-// Server speech-to-text fallback. Many phones and in-app browsers have no working
-// on-device speech recognition (or it cannot share the microphone with the recorder),
-// which left questions 3-11 with no transcript, so nothing could be scored or marked.
-// Signed-in students only. The worker sends the audio to Whisper and keeps nothing.
-import { GRADE_WORKER_URL } from './config.js';
-
+// Speech-to-text for questions 3-11: Whistle, on the student's device only.
+// No cloud speech service and no browser SpeechRecognition. The audio never leaves the device.
 const RATE = 16000;
+let worker = null;
+let seq = 0;
+const waiting = new Map();
+let loadedInfo = null;
+let lastStats = null;
 
-async function toWavBase64(blob) {
+function statusEl() {
+  if (typeof document === 'undefined') return null;
+  let el = document.getElementById('stt-status');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'stt-status';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    el.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;background:#1f2937;color:#fff;padding:10px 16px;border-radius:10px;font:14px/1.3 system-ui,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.25);display:none;max-width:90vw;text-align:center';
+    document.body.appendChild(el);
+  }
+  return el;
+}
+function showStatus(text) {
+  const el = statusEl();
+  if (!el) return;
+  el.textContent = text || '';
+  el.style.display = text ? 'block' : 'none';
+}
+
+function getWorker() {
+  if (worker) return worker;
+  worker = new Worker(new URL('./whistle-worker.js', import.meta.url));
+  worker.onmessage = (event) => {
+    const msg = event.data || {};
+    if (msg.type === 'progress') {
+      const pct = Math.round((msg.loaded / msg.total) * 100);
+      if (!loadedInfo) showStatus(`Downloading speech model… ${pct}% (${(msg.loaded / 1e6).toFixed(1)} / ${(msg.total / 1e6).toFixed(1)} MB)`);
+    } else if (msg.type === 'loaded') {
+      loadedInfo = msg.info;
+    } else if (msg.id && waiting.has(msg.id)) {
+      waiting.get(msg.id)(msg);
+      waiting.delete(msg.id);
+    } else if (msg.type === 'error') {
+      console.warn('whistle', msg.error);
+    }
+  };
+  worker.onerror = (e) => {
+    console.warn('whistle worker error', e && e.message);
+    for (const done of waiting.values()) done({ type: 'error', error: 'worker' });
+    waiting.clear();
+    worker = null;
+  };
+  return worker;
+}
+
+/** Start the one-time model download early (cheap when it is already on the device). */
+export function preloadWhistle() {
+  try { getWorker().postMessage({ type: 'load' }); } catch (err) { /* no workers */ }
+}
+
+async function toPcm16k(blob) {
   const buf = await blob.arrayBuffer();
   const Ctx = globalThis.AudioContext || globalThis.webkitAudioContext;
   const ctx = new Ctx();
@@ -19,67 +71,61 @@ async function toWavBase64(blob) {
   } finally {
     try { ctx.close(); } catch (err) { /* ignore */ }
   }
-  const frames = Math.ceil(decoded.duration * RATE);
-  const off = new OfflineAudioContext(1, Math.max(1, frames), RATE);
+  const frames = Math.max(1, Math.ceil(decoded.duration * RATE));
+  const off = new OfflineAudioContext(1, frames, RATE);
   const src = off.createBufferSource();
   src.buffer = decoded;
   src.connect(off.destination);
   src.start();
-  const out = (await off.startRendering()).getChannelData(0);
-  const bytes = new Uint8Array(44 + out.length * 2);
-  const v = new DataView(bytes.buffer);
-  const str = (o, s) => { for (let i = 0; i < s.length; i += 1) v.setUint8(o + i, s.charCodeAt(i)); };
-  str(0, 'RIFF'); v.setUint32(4, 36 + out.length * 2, true); str(8, 'WAVE'); str(12, 'fmt ');
-  v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
-  v.setUint32(24, RATE, true); v.setUint32(28, RATE * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
-  str(36, 'data'); v.setUint32(40, out.length * 2, true);
-  for (let i = 0; i < out.length; i += 1) {
-    const s = Math.max(-1, Math.min(1, out[i]));
-    v.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-  }
-  let bin = '';
-  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-  return btoa(bin);
+  return new Float32Array((await off.startRendering()).getChannelData(0));
 }
 
-/** Fills ans.transcript from the server when the device heard nothing. Never throws. */
-export async function fillTranscript(ans, deps) {
+function ask(pcm) {
+  return new Promise((resolve) => {
+    const id = ++seq;
+    waiting.set(id, resolve);
+    getWorker().postMessage({ type: 'transcribe', id, pcm: pcm.buffer }, [pcm.buffer]);
+  });
+}
+
+/** Timing of the last transcription, for testing. */
+export function whistleStats() { return { model: loadedInfo, last: lastStats }; }
+
+/** Fills ans.transcript on the device. Never throws. */
+export async function fillTranscript(ans) {
   if (!ans || Number(ans.q) < 3) return false;
   if (String(ans.transcript || '').trim()) return false;
   if (!ans.blob || !ans.blob.size) return false;
-  if (ans.serverTranscriptTried) return false;
-  const auth = (deps && deps.auth) || globalThis.MRJ_AUTH;
-  const id = auth && auth.student ? String(auth.student() || '').trim() : '';
-  const token = auth && auth.token ? String(auth.token() || '').trim() : '';
-  if (!id || !token || !GRADE_WORKER_URL) return false;
-  ans.serverTranscriptTried = true;
+  if (ans.sttTried) return false;
+  ans.sttTried = true;
   try {
-    const audio = await toWavBase64(ans.blob);
-    const res = await fetch(`${GRADE_WORKER_URL}/transcribe`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ studentId: id, token, audio })
-    });
-    const data = await res.json().catch(() => null);
-    if (!res.ok || !data || !data.ok) {
-      console.warn('transcribe failed', res.status, data && data.error);
-      if (res.status >= 500) ans.serverTranscriptTried = false;
+    preloadWhistle();
+    const pcm = await toPcm16k(ans.blob);
+    if (loadedInfo) showStatus('Writing out your answer…');
+    const samples = pcm.length;
+    const res = await ask(pcm);
+    if (!res || res.type !== 'result') {
+      console.warn('whistle failed', res && res.error);
+      ans.sttTried = false;
       return false;
     }
-    const text = String(data.text || '').trim();
+    lastStats = { q: ans.q, ms: res.ms, parts: res.parts, seconds: Math.round(samples / RATE) };
+    const text = String(res.text || '').trim();
     if (text) ans.transcript = text;
     return !!text;
   } catch (err) {
-    console.warn('transcribe error', err);
-    ans.serverTranscriptTried = false;
+    console.warn('whistle error', err);
+    ans.sttTried = false;
     return false;
+  } finally {
+    if (!waiting.size) showStatus('');
   }
 }
 
-/** Two at a time keeps phones responsive. */
-export async function fillTranscripts(answers, deps) {
-  const list = (answers || []).filter((a) => a && Number(a.q) >= 3);
-  let i = 0;
-  const lane = async () => { while (i < list.length) { const a = list[i]; i += 1; await fillTranscript(a, deps); } };
-  await Promise.all([lane(), lane()]);
+/** One at a time: the engine holds one model and is not thread-safe. */
+export async function fillTranscripts(answers) {
+  for (const a of (answers || [])) {
+    if (a && Number(a.q) >= 3) await fillTranscript(a);
+  }
 }
+if (typeof window !== 'undefined') window.__whistleStats = whistleStats;

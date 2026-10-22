@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v15';
+const CACHE = 'app-shell-v16';
 // Same cache the shared pronunciation loader uses. One copy for every MRJ app.
 const SHARED_MODEL_CACHE = 'mrj-hubert-phoneme-en-int8-v1';
 
@@ -35,6 +35,9 @@ const PRECACHE = [
   './js/paid-mark.js',
   './js/mark-client.js',
   './js/transcribe.js',
+  './js/whistle-worker.js',
+  './vendor/whistle/needle.js',
+  './vendor/whistle/needle.wasm',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-180.png',
@@ -99,7 +102,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(keys
-        .filter((key) => key !== CACHE && key !== SHARED_MODEL_CACHE)
+        .filter((key) => key !== CACHE && key !== SHARED_MODEL_CACHE && key !== 'whistle-model-v1')
         .map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
@@ -112,6 +115,8 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   // The shared pronunciation model is cached by the pronounce checker itself; don't store a second copy.
   if (url.pathname.startsWith('/pronounce/models/')) return;
+  // Whistle model parts live in their own cache (whistle-model-v1), filled by the worker.
+  if (/whistle\.cact\.part\d$/.test(url.pathname)) return;
 
   event.respondWith((async () => {
     try {
