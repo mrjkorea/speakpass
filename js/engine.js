@@ -1,4 +1,5 @@
-import { activeStream, beep, startListener, startRecorder } from './audio.js';
+import { activeStream, beep, startRecorder } from './audio.js';
+import { preloadWhistle } from './transcribe.js';
 import { startCountdown } from './timer.js';
 
 function uid() {
@@ -86,14 +87,13 @@ export function createSession({ test, plan, mode, onView }) {
           if (cancelled) return;
 
           let recorder = null;
-          let listener = null;
           try {
             const media = activeStream();
             if (media) recorder = startRecorder(media);
           } catch (err) {
             recorder = null;
           }
-          try { listener = startListener(); } catch (err) { listener = null; }
+          if (Number(q.q) >= 3) preloadWhistle();
           const speak = Number(q.speak_sec) || 0;
           const speakTimer = startCountdown(speak, (left) => {
             emit({ status: 'running', step, stepIndex: index, phase: 'speak', remaining: left, total: speak, recording: !!recorder });
@@ -105,10 +105,7 @@ export function createSession({ test, plan, mode, onView }) {
           if (recorder) {
             try { recorded = await recorder.stop(); } catch (err) { recorded = emptyRecording(); }
           }
-          let transcript = '';
-          if (listener) {
-            try { transcript = String(await listener.stop() || '').trim(); } catch (err) { transcript = ''; }
-          }
+          const transcript = ''; // Whistle fills this on the device after recording
           answers.push({
             q: q.q,
             type: q.type,

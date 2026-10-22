@@ -114,45 +114,6 @@ function warmup(mediaStream) {
   });
 }
 
-/**
- * On-device speech text for the same moment as the recording.
- * stop() resolves with the text heard so far. Safe when the browser has no recognizer.
- */
-export function startListener() {
-  const Ctor = typeof window !== 'undefined'
-    && (window.SpeechRecognition || window.webkitSpeechRecognition);
-  if (!Ctor) return { stop() { return Promise.resolve(''); } };
-  let rec;
-  try { rec = new Ctor(); } catch (err) {
-    return { stop() { return Promise.resolve(''); } };
-  }
-  let text = '';
-  rec.lang = 'en-US';
-  rec.continuous = true;
-  rec.interimResults = true;
-  rec.onresult = (event) => {
-    let next = '';
-    const results = event && event.results;
-    if (!results) return;
-    for (let i = 0; i < results.length; i += 1) {
-      const piece = results[i] && results[i][0] && results[i][0].transcript;
-      if (piece) next += `${piece} `;
-    }
-    text = next.replace(/\s+/g, ' ').trim();
-  };
-  try { rec.start(); } catch (err) {
-    return { stop() { return Promise.resolve(''); } };
-  }
-  return {
-    stop() {
-      try { rec.stop(); } catch (err) { /* the text already heard is enough */ }
-      return new Promise((resolve) => {
-        setTimeout(() => resolve(text), 250);
-      });
-    }
-  };
-}
-
 /** Start recording. stop() resolves once with { blob, mimeType } and is safe to call twice. */
 export function startRecorder(mediaStream) {
   const rec = makeRecorder(mediaStream);
