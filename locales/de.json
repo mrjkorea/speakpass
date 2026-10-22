@@ -16,7 +16,11 @@
     "savedCount": "{done} von {total} Fragen gespeichert",
     "savedNone": "Für diesen Test sind noch keine Antworten gespeichert.",
     "savedItem": "Frage {n}: {score}/{total}",
-    "savedDone": "Frage {n} gespeichert"
+    "savedDone": "Frage {n} gespeichert",
+    "exam": "Prüfung",
+    "classMode": "Unterricht",
+    "examHelp": "Der Prüfungsmodus nutzt die offiziellen Zeiten. Prüfe das Mikrofon, drücke einmal Start, und jede Frage geht von selbst weiter.",
+    "classHelp": "Der Unterrichtsmodus hat kein Zeitlimit. Die Uhr zählt hoch und zeigt die offizielle Zielzeit. Drücke Fertig, wenn du soweit bist."
   },
   "practice": {
     "title": "Üben",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Gespeicherter Fortschritt wird geladen…",
     "error": "Dein gespeicherter Fortschritt konnte nicht geladen werden. Prüfe die Verbindung und versuche es erneut."
+  },
+  "exam": {
+    "micTitle": "Mikrofonprüfung",
+    "micHelp": "Lies den englischen Satz laut. Spiele ihn dann ab und prüfe, ob deine Stimme klar ist.",
+    "record": "Aufnehmen",
+    "recording": "Aufnahme…",
+    "playBack": "Abspielen",
+    "recordAgain": "Nochmal aufnehmen",
+    "continue": "Weiter",
+    "level": "Mikrofonpegel",
+    "start": "Start",
+    "startHint": "Drücke Start nur einmal. Die Übung läuft von selbst weiter.",
+    "leave": "Verlassen"
+  },
+  "classMode": {
+    "title": "Unterricht",
+    "help": "Es gibt kein Zeitlimit. Die Uhr zählt hoch und zeigt die offizielle Zielzeit. Drücke Fertig, wenn du soweit bist. Die Rückmeldung kommt nach jeder Frage.",
+    "part": "Dieser Teil",
+    "back": "Zurück zum Start",
+    "done": "Fertig",
+    "target": "Ziel {time}",
+    "over": "Über der offiziellen Zielzeit",
+    "next": "Nächste Frage",
+    "finish": "Beenden",
+    "hear": "Nochmal hören",
+    "yourAnswer": "Deine Antwort",
+    "corrected": "Korrigiert",
+    "model": "Musterantwort",
+    "band": "Band {score} von {max}",
+    "recorded": "Aufgenommen",
+    "noTranscript": "Noch kein Transkript.",
+    "timeUsed": "Genutzte Zeit {used}s. Offizielles Ziel {target}s."
+  },
+  "results": {
+    "estimate": "Schätzung",
+    "score": "Geschätzte Punktzahl {score} / 200",
+    "level": "Geschätztes Niveau {level}",
+    "partial": "Aussprache ★ {pron} von 5. Bild ★ {picture} von 5. Die anderen Fragen sind aufgenommen.",
+    "needMark": "Bitte um eine Bewertung, um eine korrigierte Antwort und ein geschätztes Niveau zu sehen.",
+    "fixFirst": "Diesen Teil zuerst verbessern",
+    "parts": "Teile",
+    "history": "Punktverlauf",
+    "historyEmpty": "Noch keine geschätzten Punkte. Beende eine Prüfung und lass die späteren Fragen bewerten.",
+    "checklist": "Bild-Checkliste",
+    "capped": "Eine Aussage, die nicht zum Bild passt, hat diese Punktzahl begrenzt.",
+    "facts": "Angaben im Dokument",
+    "recorded": "Aufgenommen",
+    "examDone": "Du hast diese Prüfung beendet. Die Punkte stehen unten.",
+    "classDone": "Die Rückmeldung aus dem Unterricht ist gespeichert. Die Punkte stehen unten."
+  },
+  "levels": {
+    "AH": "Kann eine klare, ausführliche Antwort mit sicherer Grammatik und sicherem Wortschatz fortsetzen.",
+    "AM": "Kann eine Antwort mit Gründen ausbauen und gut verständlich bleiben.",
+    "AL": "Kann eine volle Antwort geben und stützen, mit einigen ungleichen Sätzen.",
+    "IH": "Kann antworten und einen Grund nennen, mit Pausen oder Grammatikfehlern.",
+    "IM3": "Kann in kurzen verbundenen Sätzen eine passende Antwort und einen Grund geben.",
+    "IM2": "Kann in einfachen Sätzen antworten, die Stützung ist dünn.",
+    "IM1": "Kann mit kurzen Sätzen und einem kleinen Wortschatz antworten.",
+    "IL": "Kann ein paar zusammenhängende Sätze sagen, mit häufigen Pausen.",
+    "NH": "Kann Wörter und kurze Wendungen verwenden, die zur Frage passen.",
+    "NM": "Kann ein paar vertraute Wörter sagen, die zur Frage gehören.",
+    "NL": "Kann ein paar einzelne Wörter sagen, oder die Antwort ist schwer zu verstehen."
   }
 }

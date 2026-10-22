@@ -5,7 +5,7 @@ export const MAX_ATTEMPTS = 40;
 export const MAX_PACK_CHARS = 45000;
 
 export function emptyPack() {
-  return { v: PACK_VERSION, items: {}, attempts: [] };
+  return { v: PACK_VERSION, items: {}, attempts: [], tests: {} };
 }
 
 export function itemKey(testId, q) {
@@ -81,7 +81,8 @@ export function parsePack(json) {
         q,
         type: String((ans && ans.type) || ''),
         score,
-        total
+        total,
+        graded: ans.graded === true || total > 1
       });
     }
     attempts.push({
@@ -95,7 +96,15 @@ export function parsePack(json) {
       answers
     });
   }
-  return { v: PACK_VERSION, items, attempts };
+  let tests = {};
+  if (data.tests && typeof data.tests === 'object' && !Array.isArray(data.tests)) {
+    try {
+      tests = JSON.parse(JSON.stringify(data.tests));
+    } catch (err) {
+      tests = {};
+    }
+  }
+  return { v: PACK_VERSION, items, attempts, tests };
 }
 
 function ratio(score, total) {
@@ -144,7 +153,13 @@ export function applyAttempt(pack, attempt, gradeByQ) {
       total: graded.total
     };
     scored.push(row);
-    answers.push({ q: row.q, type: row.type, score: row.score, total: row.total });
+    answers.push({
+      q: row.q,
+      type: row.type,
+      score: row.score,
+      total: row.total,
+      graded: graded.graded === true
+    });
   }
   if (answers.length) {
     next.attempts.push({
@@ -162,6 +177,46 @@ export function applyAttempt(pack, attempt, gradeByQ) {
     next.attempts = next.attempts.slice(-MAX_ATTEMPTS);
   }
   return { pack: next, scored };
+}
+
+/**
+ * Writes marking bands onto an attempt already stored in the pack.
+ * Does not add another try. Keeps the better saved score on each item.
+ */
+export function applyMarkScores(pack, attemptId, rows) {
+  const next = parsePack(JSON.stringify(parsePack(pack)));
+  const id = String(attemptId || '');
+  const attempt = next.attempts.find((item) => item.id === id);
+  for (const row of rows || []) {
+    const q = Number(row && row.q);
+    const score = finiteNumber(row && row.score);
+    const total = finiteNumber(row && row.total);
+    if (!Number.isInteger(q) || score == null || total == null || total <= 0) continue;
+    if (attempt) {
+      const answer = attempt.answers.find((item) => item.q === q);
+      if (answer) {
+        answer.score = score;
+        answer.total = total;
+        answer.graded = true;
+      }
+    }
+    const testId = String((row && row.testId) || (attempt && attempt.testId) || '');
+    if (!testId) continue;
+    const key = itemKey(testId, q);
+    const prev = next.items[key];
+    const prevRatio = prev ? ratio(prev.score, prev.total) : -1;
+    const nextRatio = ratio(score, total);
+    const keepPrev = !!prev && prev.graded === true && prevRatio >= nextRatio;
+    next.items[key] = {
+      score: keepPrev ? prev.score : score,
+      total: keepPrev ? prev.total : total,
+      graded: true,
+      attempts: prev ? prev.attempts : 1,
+      at: String((attempt && attempt.finishedAt) || (prev && prev.at) || ''),
+      type: String((row && row.type) || (prev && prev.type) || '')
+    };
+  }
+  return { pack: next };
 }
 
 export function questionsForTest(pack, testId) {

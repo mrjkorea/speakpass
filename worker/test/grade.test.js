@@ -69,9 +69,33 @@ describe("scores", () => {
     const q5 = scored.questions.find((row) => row.q === 5);
     const q1 = scored.questions.find((row) => row.q === 1);
     assert.equal(q5.scoreValue, 3);
+    assert.equal(q5.band, 3);
+    assert.equal(q5.corrected, "");
     assert.equal(q5.comment, "");
     assert.equal(q1.scoreValue, 0);
+    assert.equal(q1.band, 0);
     assert.equal(q1.scoreMax, 6);
+  });
+
+  it("keeps a corrected answer and the band on the same scale as the score", () => {
+    const scored = applyModel([11], [], {
+      questions: [{
+        q: 11,
+        score: 4,
+        band: 1,
+        corrected: "I think flexible hours help most teams.",
+        comment: "Clear opinion with a short reason."
+      }]
+    });
+    const row = scored.questions[0];
+    assert.equal(row.band, 4);
+    assert.equal(row.scoreValue, 4);
+    assert.equal(row.scoreMax, 5);
+    assert.equal(row.corrected, "I think flexible hours help most teams.");
+    const named = applyModel([5], [], {
+      questions: [{ q: 5, score: 2, corrected: "A deepseek rewrite.", comment: "Fine." }]
+    });
+    assert.equal(named.questions[0].corrected, "");
   });
 });
 
@@ -225,7 +249,8 @@ describe("request shape", () => {
   it("turns thinking off and caps the reply", () => {
     const body = gradeRequest([{ role: "system", content: RUBRIC }]);
     assert.equal(body.thinking.type, "disabled");
-    assert.equal(body.max_tokens, 900);
+    assert.equal(body.max_tokens, OUTPUT_CAP);
+    assert.ok(OUTPUT_CAP >= 900);
     assert.equal(body.messages[0].content.startsWith("You grade a practice speaking test"), true);
   });
 });

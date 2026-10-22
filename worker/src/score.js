@@ -27,6 +27,12 @@ export function cleanComment(text) {
   return raw.slice(0, 160);
 }
 
+export function cleanCorrected(text) {
+  const raw = String(text || "").replace(/\s+/g, " ").trim();
+  if (!raw || BLOCKED.test(raw)) return "";
+  return raw.slice(0, 700);
+}
+
 export function blankQuestion(q) {
   const max = maxFor(q);
   const row = {
@@ -34,6 +40,8 @@ export function blankQuestion(q) {
     scoreValue: 0,
     scoreMax: max,
     scorePct: 0,
+    band: 0,
+    corrected: "",
     comment: ""
   };
   if (READ_ALOUD.has(q)) {
@@ -53,6 +61,8 @@ function fromModel(q, item) {
     row.scoreValue = clampInt(item && item.score, maxFor(q));
   }
   row.scorePct = percent(row.scoreValue, row.scoreMax);
+  row.band = row.scoreValue;
+  row.corrected = cleanCorrected(item && item.corrected);
   row.comment = cleanComment(item && item.comment);
   return row;
 }

@@ -16,7 +16,11 @@
     "savedCount": "Zapisano {done} z {total} pytań",
     "savedNone": "Brak zapisanych odpowiedzi dla tego testu.",
     "savedItem": "Pytanie {n}: {score}/{total}",
-    "savedDone": "Zapisano pytanie {n}"
+    "savedDone": "Zapisano pytanie {n}",
+    "exam": "Egzamin",
+    "classMode": "Lekcja",
+    "examHelp": "Tryb egzaminu używa oficjalnych czasów. Sprawdź mikrofon, naciśnij Start raz, a każde pytanie przejdzie samo.",
+    "classHelp": "Tryb lekcji nie ma limitu czasu. Zegar liczy w górę i pokazuje oficjalny cel. Naciśnij Gotowe, gdy będziesz gotów."
   },
   "practice": {
     "title": "Ćwiczenie",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Wczytywanie zapisanych postępów…",
     "error": "Nie udało się wczytać zapisanych postępów. Sprawdź połączenie i spróbuj ponownie."
+  },
+  "exam": {
+    "micTitle": "Sprawdzenie mikrofonu",
+    "micHelp": "Przeczytaj na głos zdanie po angielsku. Potem odtwórz je i sprawdź, czy głos jest wyraźny.",
+    "record": "Nagraj",
+    "recording": "Nagrywanie…",
+    "playBack": "Odtwórz",
+    "recordAgain": "Nagraj ponownie",
+    "continue": "Dalej",
+    "level": "Poziom mikrofonu",
+    "start": "Start",
+    "startHint": "Naciśnij Start tylko raz. Ćwiczenie idzie dalej samo.",
+    "leave": "Wyjdź"
+  },
+  "classMode": {
+    "title": "Lekcja",
+    "help": "Nie ma limitu czasu. Zegar liczy w górę i pokazuje oficjalny cel. Naciśnij Gotowe, gdy będziesz gotów. Informacja zwrotna pojawia się po każdym pytaniu.",
+    "part": "Ta część",
+    "back": "Wróć na start",
+    "done": "Gotowe",
+    "target": "cel {time}",
+    "over": "Po oficjalnym czasie",
+    "next": "Następne pytanie",
+    "finish": "Zakończ",
+    "hear": "Posłuchaj jeszcze raz",
+    "yourAnswer": "Twoja odpowiedź",
+    "corrected": "Poprawiona",
+    "model": "Odpowiedź wzorcowa",
+    "band": "Pasmo {score} z {max}",
+    "recorded": "Nagrane",
+    "noTranscript": "Nie ma jeszcze transkrypcji.",
+    "timeUsed": "Czas użyty {used} s. Oficjalny cel {target} s."
+  },
+  "results": {
+    "estimate": "Szacunek",
+    "score": "Szacowany wynik {score} / 200",
+    "level": "Szacowany poziom {level}",
+    "partial": "Wymowa ★ {pron} z 5. Obraz ★ {picture} z 5. Pozostałe pytania są nagrane.",
+    "needMark": "Poproś o ocenę, aby zobaczyć poprawioną odpowiedź i szacowany poziom.",
+    "fixFirst": "Najpierw popraw tę część",
+    "parts": "Części",
+    "history": "Historia wyników",
+    "historyEmpty": "Nie ma jeszcze szacowanych wyników. Ukończ egzamin i oceń późniejsze pytania, aby zobaczyć je tutaj.",
+    "checklist": "Lista obrazu",
+    "capped": "Zdanie niezgodne z obrazem ograniczyło ten wynik.",
+    "facts": "Fakty z dokumentu",
+    "recorded": "Nagrane",
+    "examDone": "Ukończyłeś ten egzamin. Wyniki pytań są poniżej.",
+    "classDone": "Informacja z lekcji jest zapisana. Wyniki pytań są poniżej."
+  },
+  "levels": {
+    "AH": "Potrafi prowadzić jasną, szczegółową odpowiedź ze stabilną gramatyką i słownictwem.",
+    "AM": "Potrafi rozwinąć odpowiedź powodami i pozostać łatwym do śledzenia.",
+    "AL": "Potrafi dać pełną odpowiedź i ją podeprzeć, z kilkoma nierównymi zdaniami.",
+    "IH": "Potrafi odpowiedzieć i dodać powód, z pauzami lub potknięciami gramatycznymi.",
+    "IM3": "Potrafi dać trafną odpowiedź i jeden powód w krótkich połączonych zdaniach.",
+    "IM2": "Potrafi odpowiadać prostymi zdaniami, z cienkim wsparciem.",
+    "IM1": "Potrafi odpowiadać krótkimi zdaniami i ograniczonym słownictwem.",
+    "IL": "Potrafi powiedzieć kilka powiązanych zdań, z częstymi pauzami.",
+    "NH": "Potrafi użyć słów i krótkich zwrotów pasujących do pytania.",
+    "NM": "Potrafi powiedzieć kilka znanych słów związanych z pytaniem.",
+    "NL": "Potrafi powiedzieć kilka osobnych słów albo odpowiedź jest trudna do śledzenia."
   }
 }

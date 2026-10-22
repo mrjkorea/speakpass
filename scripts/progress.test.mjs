@@ -4,6 +4,7 @@ import { APP_ID, APP_NAME } from '../js/config.js';
 import { noteScoreArgs, scorePostArgs } from '../js/cloud.js';
 import {
   applyAttempt,
+  applyMarkScores,
   coerceScore,
   emptyPack,
   itemKey,
@@ -75,6 +76,34 @@ assert(questionsForTest(roundTrip, 'test02').length === 0, 'other test empty');
 assert(parsePack('').items && Object.keys(parsePack('').items).length === 0, 'empty pack');
 assert(parsePack('not-json').v === 1, 'bad json');
 assert(itemKey('test01', 11) === 'test01:11', 'key shape');
+
+const withTests = parsePack(JSON.stringify({
+  v: 1,
+  items: { 'test01:1': { score: 4, total: 5, graded: true, attempts: 1, at: '', type: 'read_aloud' } },
+  attempts: [],
+  tests: { test01: { full: { raw: 20 } } }
+}));
+assert(withTests.tests.test01.full.raw === 20, 'paid tests stay in the pack');
+const marked = applyMarkScores({
+  v: 1,
+  items: {},
+  attempts: [{
+    id: 'exam-1',
+    testId: 'test01',
+    testTitle: 'Practice Test 1',
+    mode: 'exam',
+    startedAt: '',
+    finishedAt: '2026-10-22T00:00:00.000Z',
+    complete: true,
+    answers: [{ q: 5, type: 'respond_questions', score: 1, total: 1, graded: false }]
+  }],
+  tests: { test01: { full: { raw: 20 } } }
+}, 'exam-1', [{ q: 5, testId: 'test01', type: 'respond_questions', score: 2, total: 3 }]);
+assert(marked.pack.tests.test01.full.raw === 20, 'marking keeps paid tests');
+assert(marked.pack.attempts[0].answers[0].score === 2, 'band is stored on the attempt');
+assert(marked.pack.attempts[0].answers[0].total === 3, 'band total');
+assert(marked.pack.items['test01:5'].score === 2, 'item takes the band');
+assert(marked.pack.items['test01:5'].attempts === 1, 'marking does not add a try');
 
 const note = noteScoreArgs('test01:5', 1, 1);
 assert(note.app === 'speakpass' && note.item === 'test01:5' && note.score === 1 && note.total === 1, 'note aliases');

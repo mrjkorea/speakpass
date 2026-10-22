@@ -1,6 +1,6 @@
 const MODEL = "deepseek-flash";
 const ENDPOINT = "https://api.deepseek.com/chat/completions";
-export const OUTPUT_CAP = 900;
+export const OUTPUT_CAP = 2048;
 
 export function gradeRequest(messages) {
   return {

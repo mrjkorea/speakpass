@@ -42,3 +42,29 @@ export function startCountdown(seconds, onTick) {
     cancel() { finish(true); }
   };
 }
+
+/**
+ * Count-up clock. There is no limit. stop() returns seconds elapsed.
+ * onTick receives seconds elapsed (a float).
+ */
+export function startCountup(onTick) {
+  const start = performance.now();
+  let timerId = 0;
+  let settled = false;
+  const elapsed = () => (performance.now() - start) / 1000;
+  const tick = () => {
+    if (settled) return;
+    onTick(elapsed());
+    timerId = setTimeout(tick, 100);
+  };
+  timerId = setTimeout(tick, 100);
+  return {
+    elapsed,
+    stop() {
+      if (settled) return elapsed();
+      settled = true;
+      clearTimeout(timerId);
+      return elapsed();
+    }
+  };
+}

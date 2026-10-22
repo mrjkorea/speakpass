@@ -1,5 +1,20 @@
 # Deploy the marking Worker
 
+## Redeploy for corrected answers
+
+The Worker reply now includes `band` and `corrected` on each question. `band` matches the score (0–3, or 0–5 on question 11). `corrected` is a cleaned version of the student’s own words. Free-mode limits in `worker/src/limits.js` stay as they are. `PAYMENT_MODE` stays `"free"`.
+
+From the repo root, after the code is published:
+
+```bash
+cd worker
+npx wrangler@4 deploy
+```
+
+Do not change `PAYMENT_MODE`. Do not change the daily caps. Until this deploy, Get AI marking still returns the older fields and the corrected answer stays empty.
+
+# Deploy the marking Worker
+
 These commands were not run for this draft. Run them only after a Cloudflare account exists and you already have an API key for the grader. Do not create those here. Do not turn on the paid Cloudflare plan.
 
 From the repo root:

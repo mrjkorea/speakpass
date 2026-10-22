@@ -16,7 +16,11 @@
     "savedCount": "{done} questions sur {total} enregistrées",
     "savedNone": "Aucune réponse enregistrée pour ce test.",
     "savedItem": "Question {n} : {score}/{total}",
-    "savedDone": "Question {n} enregistrée"
+    "savedDone": "Question {n} enregistrée",
+    "exam": "Examen",
+    "classMode": "Classe",
+    "examHelp": "Le mode examen utilise les temps officiels. Vérifiez le micro, appuyez une fois sur Démarrer, et chaque question avance seule.",
+    "classHelp": "Le mode classe n’a pas de limite de temps. L’horloge compte et montre le temps officiel. Appuyez sur Terminé quand vous êtes prêt."
   },
   "practice": {
     "title": "Entraînement",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Chargement de votre progrès enregistré…",
     "error": "Votre progrès enregistré n’a pas pu être chargé. Vérifiez la connexion et réessayez."
+  },
+  "exam": {
+    "micTitle": "Vérification du micro",
+    "micHelp": "Lisez la phrase anglaise à voix haute. Puis écoutez-la et vérifiez que votre voix est claire.",
+    "record": "Enregistrer",
+    "recording": "Enregistrement…",
+    "playBack": "Écouter",
+    "recordAgain": "Enregistrer encore",
+    "continue": "Continuer",
+    "level": "Niveau du micro",
+    "start": "Démarrer",
+    "startHint": "Appuyez une seule fois sur Démarrer. L’exercice continue seul.",
+    "leave": "Quitter"
+  },
+  "classMode": {
+    "title": "Classe",
+    "help": "Il n’y a pas de limite de temps. L’horloge compte et montre le temps officiel. Appuyez sur Terminé quand vous êtes prêt. Le retour apparaît après chaque question.",
+    "part": "Cette partie",
+    "back": "Retour au début",
+    "done": "Terminé",
+    "target": "objectif {time}",
+    "over": "Au-delà du temps officiel",
+    "next": "Question suivante",
+    "finish": "Finir",
+    "hear": "Réécouter",
+    "yourAnswer": "Votre réponse",
+    "corrected": "Corrigée",
+    "model": "Réponse modèle",
+    "band": "Bande {score} sur {max}",
+    "recorded": "Enregistrée",
+    "noTranscript": "Pas encore de transcription.",
+    "timeUsed": "Temps utilisé {used}s. Objectif officiel {target}s."
+  },
+  "results": {
+    "estimate": "Estimation",
+    "score": "Score estimé {score} / 200",
+    "level": "Niveau estimé {level}",
+    "partial": "Prononciation ★ {pron} sur 5. Image ★ {picture} sur 5. Les autres questions sont enregistrées.",
+    "needMark": "Demandez une note pour voir une réponse corrigée et un niveau estimé.",
+    "fixFirst": "Améliorez d’abord cette partie",
+    "parts": "Parties",
+    "history": "Historique des scores",
+    "historyEmpty": "Pas encore de score estimé. Terminez un examen et faites noter les dernières questions pour les voir ici.",
+    "checklist": "Liste de l’image",
+    "capped": "Une phrase qui ne correspond pas à l’image a limité ce score.",
+    "facts": "Faits du document",
+    "recorded": "Enregistrée",
+    "examDone": "Vous avez fini cet examen. Les scores sont ci-dessous.",
+    "classDone": "Le retour de la classe est enregistré. Les scores sont ci-dessous."
+  },
+  "levels": {
+    "AH": "Peut poursuivre une réponse claire et détaillée avec une grammaire et un vocabulaire stables.",
+    "AM": "Peut développer une réponse avec des raisons et rester facile à suivre.",
+    "AL": "Peut donner une réponse complète et l’appuyer, avec quelques phrases inégales.",
+    "IH": "Peut répondre et ajouter une raison, avec des pauses ou des écarts de grammaire.",
+    "IM3": "Peut donner une réponse pertinente et une raison en phrases courtes liées.",
+    "IM2": "Peut répondre avec des phrases simples, avec un appui mince.",
+    "IM1": "Peut répondre avec des phrases courtes et un vocabulaire limité.",
+    "IL": "Peut dire quelques phrases liées, avec des pauses fréquentes.",
+    "NH": "Peut utiliser des mots et de courtes expressions qui vont avec la question.",
+    "NM": "Peut dire quelques mots connus liés à la question.",
+    "NL": "Peut dire quelques mots isolés, ou la réponse est difficile à suivre."
   }
 }
