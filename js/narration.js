@@ -10,7 +10,25 @@ export const CUE_PREP_ID = 'cue.begin_preparing';
 export const CUE_SPEAK_ID = 'cue.begin_speaking';
 export const INTRO_CLIP_ID = 'directions.intro';
 
+export const VOICE_KEYS = ['us-f', 'us-m', 'uk-f', 'uk-m', 'au-f', 'au-m', 'nz-f'];
+export const MIXED_VOICE = 'mixed';
+
 let manifest = null;
+let voices = [];
+let voice = MIXED_VOICE;
+
+export function normalizeVoice(key) {
+  return VOICE_KEYS.includes(key) ? key : MIXED_VOICE;
+}
+
+/** 'mixed' keeps the rotating exam cast. A voice key reads every line from audio/narration/<key>/. */
+export function setNarrationVoice(key) {
+  voice = normalizeVoice(key);
+}
+
+export function getNarrationVoice() {
+  return voice;
+}
 let baseUrl = null;
 let loading = null;
 let current = null;
@@ -57,6 +75,7 @@ export function prepareNarration() {
     .then((res) => (res.ok ? res.json() : { clips: {} }))
     .then((data) => {
       manifest = data && data.clips && typeof data.clips === 'object' ? data.clips : {};
+      voices = data && Array.isArray(data.voices) ? data.voices : [];
       return manifest;
     })
     .catch(() => {
@@ -101,7 +120,8 @@ export function playNarration(id) {
   };
   current = entry;
 
-  const file = manifest && manifest[id];
+  let file = manifest && manifest[id];
+  if (file && voice !== MIXED_VOICE && voices.includes(voice)) file = `${voice}/${clipFile(id)}`;
   if (!file || typeof Audio === 'undefined') {
     entry.settle({ played: false, id });
     return { done, stop() { entry.settle({ played: false, id }); } };

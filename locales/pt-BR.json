@@ -20,7 +20,8 @@
     "exam": "Prova",
     "classMode": "Aula",
     "examHelp": "O modo prova usa os tempos oficiais. Confira o microfone, pressione Iniciar uma vez e cada pergunta avança sozinha.",
-    "classHelp": "O modo aula não tem limite de tempo. O relógio conta para cima e mostra o tempo oficial. Pressione Pronto quando quiser."
+    "classHelp": "O modo aula não tem limite de tempo. O relógio conta para cima e mostra o tempo oficial. Pressione Pronto quando quiser.",
+    "chooseVoice": "Voz da narração"
   },
   "practice": {
     "title": "Praticar",
@@ -192,5 +193,15 @@
     "NH": "Consegue usar palavras e expressões curtas que cabem na pergunta.",
     "NM": "Consegue dizer algumas palavras conhecidas ligadas à pergunta.",
     "NL": "Consegue dizer algumas palavras isoladas, ou a resposta é difícil de acompanhar."
+  },
+  "voice": {
+    "mixed": "Mista (estilo prova real)",
+    "us-f": "Mulher americana",
+    "us-m": "Homem americano",
+    "uk-f": "Mulher britânica",
+    "uk-m": "Homem britânico",
+    "au-f": "Mulher australiana",
+    "au-m": "Homem australiano",
+    "nz-f": "Mulher neozelandesa"
   }
 }

@@ -20,7 +20,8 @@
     "exam": "Prüfung",
     "classMode": "Unterricht",
     "examHelp": "Der Prüfungsmodus nutzt die offiziellen Zeiten. Prüfe das Mikrofon, drücke einmal Start, und jede Frage geht von selbst weiter.",
-    "classHelp": "Der Unterrichtsmodus hat kein Zeitlimit. Die Uhr zählt hoch und zeigt die offizielle Zielzeit. Drücke Fertig, wenn du soweit bist."
+    "classHelp": "Der Unterrichtsmodus hat kein Zeitlimit. Die Uhr zählt hoch und zeigt die offizielle Zielzeit. Drücke Fertig, wenn du soweit bist.",
+    "chooseVoice": "Sprecherstimme"
   },
   "practice": {
     "title": "Üben",
@@ -192,5 +193,15 @@
     "NH": "Kann Wörter und kurze Wendungen verwenden, die zur Frage passen.",
     "NM": "Kann ein paar vertraute Wörter sagen, die zur Frage gehören.",
     "NL": "Kann ein paar einzelne Wörter sagen, oder die Antwort ist schwer zu verstehen."
+  },
+  "voice": {
+    "mixed": "Gemischt (wie im echten Test)",
+    "us-f": "Amerikanische Frau",
+    "us-m": "Amerikanischer Mann",
+    "uk-f": "Britische Frau",
+    "uk-m": "Britischer Mann",
+    "au-f": "Australische Frau",
+    "au-m": "Australischer Mann",
+    "nz-f": "Neuseeländische Frau"
   }
 }

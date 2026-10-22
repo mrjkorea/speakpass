@@ -20,7 +20,8 @@
     "exam": "Examen",
     "classMode": "Clase",
     "examHelp": "El modo examen usa los tiempos oficiales. Comprueba el micrófono, pulsa Inicio una vez y cada pregunta avanza sola.",
-    "classHelp": "El modo clase no tiene límite de tiempo. El reloj cuenta hacia arriba y muestra el tiempo oficial. Pulsa Listo cuando quieras."
+    "classHelp": "El modo clase no tiene límite de tiempo. El reloj cuenta hacia arriba y muestra el tiempo oficial. Pulsa Listo cuando quieras.",
+    "chooseVoice": "Voz de narración"
   },
   "practice": {
     "title": "Práctica",
@@ -192,5 +193,15 @@
     "NH": "Puede usar palabras y frases cortas que encajan con la pregunta.",
     "NM": "Puede decir unas palabras conocidas relacionadas con la pregunta.",
     "NL": "Puede decir unas palabras sueltas, o la respuesta es difícil de seguir."
+  },
+  "voice": {
+    "mixed": "Mixta (estilo examen real)",
+    "us-f": "Mujer estadounidense",
+    "us-m": "Hombre estadounidense",
+    "uk-f": "Mujer británica",
+    "uk-m": "Hombre británico",
+    "au-f": "Mujer australiana",
+    "au-m": "Hombre australiano",
+    "nz-f": "Mujer neozelandesa"
   }
 }

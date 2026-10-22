@@ -20,7 +20,8 @@
     "exam": "Thi",
     "classMode": "Lớp học",
     "examHelp": "Chế độ thi dùng thời gian chính thức. Kiểm tra micro, nhấn Bắt đầu một lần, rồi mỗi câu tự chuyển tiếp.",
-    "classHelp": "Chế độ lớp học không giới hạn thời gian. Đồng hồ đếm lên và hiện thời gian mục tiêu. Nhấn Xong khi bạn sẵn sàng."
+    "classHelp": "Chế độ lớp học không giới hạn thời gian. Đồng hồ đếm lên và hiện thời gian mục tiêu. Nhấn Xong khi bạn sẵn sàng.",
+    "chooseVoice": "Giọng đọc"
   },
   "practice": {
     "title": "Luyện tập",
@@ -192,5 +193,15 @@
     "NH": "Có thể dùng từ và cụm ngắn phù hợp với câu hỏi.",
     "NM": "Có thể nói vài từ quen thuộc liên quan đến câu hỏi.",
     "NL": "Có thể nói vài từ rời, hoặc câu trả lời khó theo dõi."
+  },
+  "voice": {
+    "mixed": "Hỗn hợp (giống bài thi thật)",
+    "us-f": "Nữ Mỹ",
+    "us-m": "Nam Mỹ",
+    "uk-f": "Nữ Anh",
+    "uk-m": "Nam Anh",
+    "au-f": "Nữ Úc",
+    "au-m": "Nam Úc",
+    "nz-f": "Nữ New Zealand"
   }
 }

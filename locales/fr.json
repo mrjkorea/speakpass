@@ -20,7 +20,8 @@
     "exam": "Examen",
     "classMode": "Classe",
     "examHelp": "Le mode examen utilise les temps officiels. Vérifiez le micro, appuyez une fois sur Démarrer, et chaque question avance seule.",
-    "classHelp": "Le mode classe n’a pas de limite de temps. L’horloge compte et montre le temps officiel. Appuyez sur Terminé quand vous êtes prêt."
+    "classHelp": "Le mode classe n’a pas de limite de temps. L’horloge compte et montre le temps officiel. Appuyez sur Terminé quand vous êtes prêt.",
+    "chooseVoice": "Voix de narration"
   },
   "practice": {
     "title": "Entraînement",
@@ -192,5 +193,15 @@
     "NH": "Peut utiliser des mots et de courtes expressions qui vont avec la question.",
     "NM": "Peut dire quelques mots connus liés à la question.",
     "NL": "Peut dire quelques mots isolés, ou la réponse est difficile à suivre."
+  },
+  "voice": {
+    "mixed": "Mixte (style examen réel)",
+    "us-f": "Femme américaine",
+    "us-m": "Homme américain",
+    "uk-f": "Femme britannique",
+    "uk-m": "Homme britannique",
+    "au-f": "Femme australienne",
+    "au-m": "Homme australien",
+    "nz-f": "Femme néo-zélandaise"
   }
 }

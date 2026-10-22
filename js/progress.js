@@ -5,7 +5,7 @@ export const MAX_ATTEMPTS = 40;
 export const MAX_PACK_CHARS = 45000;
 
 export function emptyPack() {
-  return { v: PACK_VERSION, items: {}, attempts: [], tests: {} };
+  return { v: PACK_VERSION, items: {}, attempts: [], tests: {}, voice: 'mixed' };
 }
 
 export function itemKey(testId, q) {
@@ -104,7 +104,8 @@ export function parsePack(json) {
       tests = {};
     }
   }
-  return { v: PACK_VERSION, items, attempts, tests };
+  const voice = typeof data.voice === 'string' && /^[a-z]{2}-[mf]$/.test(data.voice) ? data.voice : 'mixed';
+  return { v: PACK_VERSION, items, attempts, tests, voice };
 }
 
 function ratio(score, total) {

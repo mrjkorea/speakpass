@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "clips": {
     "cue.begin_preparing": "cue-begin_preparing.mp3",
     "cue.begin_speaking": "cue-begin_speaking.mp3",
@@ -99,5 +99,14 @@
     "test10.q9": "test10-q9.mp3",
     "test10.q10": "test10-q10.mp3",
     "test10.q11": "test10-q11.mp3"
-  }
+  },
+  "voices": [
+    "us-f",
+    "us-m",
+    "uk-f",
+    "uk-m",
+    "au-f",
+    "au-m",
+    "nz-f"
+  ]
 }

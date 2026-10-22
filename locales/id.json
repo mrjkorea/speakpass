@@ -20,7 +20,8 @@
     "exam": "Ujian",
     "classMode": "Kelas",
     "examHelp": "Mode ujian memakai waktu resmi. Periksa mikrofon, tekan Mulai sekali, lalu setiap soal berjalan sendiri.",
-    "classHelp": "Mode kelas tidak dibatasi waktu. Jam menghitung naik dan menampilkan target resmi. Tekan Selesai saat Anda siap."
+    "classHelp": "Mode kelas tidak dibatasi waktu. Jam menghitung naik dan menampilkan target resmi. Tekan Selesai saat Anda siap.",
+    "chooseVoice": "Suara narasi"
   },
   "practice": {
     "title": "Latihan",
@@ -192,5 +193,15 @@
     "NH": "Dapat memakai kata dan frasa pendek yang sesuai pertanyaan.",
     "NM": "Dapat mengucapkan beberapa kata yang dikenal dan terkait pertanyaan.",
     "NL": "Dapat mengucapkan beberapa kata terpisah, atau jawabannya sulit diikuti."
+  },
+  "voice": {
+    "mixed": "Campuran (gaya tes asli)",
+    "us-f": "Wanita Amerika",
+    "us-m": "Pria Amerika",
+    "uk-f": "Wanita Inggris",
+    "uk-m": "Pria Inggris",
+    "au-f": "Wanita Australia",
+    "au-m": "Pria Australia",
+    "nz-f": "Wanita Selandia Baru"
   }
 }
