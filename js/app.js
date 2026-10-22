@@ -1,13 +1,21 @@
 import { reportScoredItems, loadProgressPack, saveProgressPack, studentId } from './cloud.js';
 import { APP_NAME, LANGS } from './config.js';
 import { requestAiMark, workerUrl } from './mark-client.js';
-import { activeStream, beginArm, hasStream, releaseMic } from './audio.js';
+import { activeStream, beginArm, getAudioContext, hasStream, openLevelMeter, releaseMic, startRecorder } from './audio.js';
+import { scoreChecklist, factHits } from './checklist.js';
+import { createClassRun } from './class-run.js';
+import { createExamRun } from './exam-run.js';
 import { createSession } from './engine.js';
+import { estimateFromRows, starsOf } from './estimate.js';
 import { gradeFree, gradePaid, gradeReadAloud, warmChecker } from './grade.js';
 import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
+import { classScreenHtml, estimateHtml, examIntroHtml, examMicHtml, examRunHtml } from './mode-view.js';
+import { playNarration, prepareNarration, questionClipId, stopNarration } from './narration.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
-import { applyAttempt, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
+import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
+import { formatHMS } from './format.js';
+import { startCountdown } from './timer.js';
 
 const RING = 2 * Math.PI * 52;
 
@@ -30,7 +38,13 @@ const state = {
   pack: emptyPack(),
   packStatus: 'idle',
   studentId: '',
-  sessionOwner: ''
+  sessionOwner: '',
+  examStage: 'mic',
+  micBlob: null,
+  micRecording: false,
+  micLevel: 0,
+  playingMic: false,
+  classFeedback: null
 };
 
 let renderedScreen = '';
@@ -43,6 +57,8 @@ let hydrateSeq = 0;
 let reviewToken = 0;
 let packEpoch = 0;
 let saveChain = Promise.resolve();
+let stopMeter = () => {};
+let classToken = 0;
 
 function t(key, vars) {
   const raw = lookup(state.dict, key) ?? lookup(state.en, key) ?? key;
@@ -116,21 +132,35 @@ function stopPlayback() {
     audioUrl = '';
   }
   state.playingQ = null;
+  state.playingMic = false;
 }
 
 function goHome() {
   stopPlayback();
+  stopNarration();
+  stopMeter();
+  stopMeter = () => {};
   releaseMic();
   reviewToken += 1;
+  classToken += 1;
   state.session = null;
   state.view = null;
   state.dialog = false;
   state.review = null;
+  state.classFeedback = null;
   state.micError = '';
   state.arming = false;
+  state.micBlob = null;
+  state.micRecording = false;
+  state.playingMic = false;
   state.screen = 'home';
   viewKey = '';
   render();
+}
+
+function unsavedAnswers(attempt) {
+  if (!attempt.savedQs) attempt.savedQs = new Set();
+  return (attempt.answers || []).filter((ans) => !attempt.savedQs.has(ans.q));
 }
 
 function gradeByQuestion(attempt, grades) {
@@ -151,13 +181,30 @@ async function presentReview(attempt) {
   releaseMic();
   const token = ++reviewToken;
   const owner = state.sessionOwner || studentId();
-  const grades = { free: {}, paid: null, read: {} };
+  const grades = { free: {}, paid: null, read: {}, checklist: {} };
   const test = state.catalog.find((item) => item.id === attempt.testId);
   for (const ans of attempt.answers) {
-    if (isReadAloudScore(ans)) {
+    if (ans.localRead) {
+      grades.read[ans.q] = ans.localRead;
+      grades.free[ans.q] = ans.localRead.save || 'coming soon';
+    } else if (ans.localChecklist) {
+      grades.checklist[ans.q] = ans.localChecklist;
+      grades.free[ans.q] = `${ans.localChecklist.stars}/5`;
+    } else if (isReadAloudScore(ans)) {
       const hasAudio = !!(ans.blob && ans.blob.size);
       grades.read[ans.q] = { status: hasAudio ? 'checking' : 'empty' };
       grades.free[ans.q] = hasAudio ? null : 'coming soon';
+    } else if (ans.q === 3 || ans.q === 4 || ans.type === 'describe_picture') {
+      const source = test && test.questions.find((item) => item.q === ans.q);
+      const said = String(ans.transcript || '').trim();
+      if (source && said) {
+        const detail = scoreChecklist(source, said);
+        grades.checklist[ans.q] = detail;
+        ans.localChecklist = detail;
+        grades.free[ans.q] = `${detail.stars}/5`;
+      } else {
+        grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
+      }
     } else if (ans.q <= 4) {
       grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
     }
@@ -184,6 +231,7 @@ async function presentReview(attempt) {
   render();
 
   for (const ans of attempt.answers) {
+    if (ans.localRead) continue;
     if (!isReadAloudScore(ans) || !(ans.blob && ans.blob.size)) continue;
     const source = test && test.questions.find((item) => item.q === ans.q);
     const detail = await gradeReadAloud((source && source.text) || '', ans.blob);
@@ -199,11 +247,15 @@ async function presentReview(attempt) {
 
   let saved = false;
   let scored = [];
-  if (owner && state.packStatus === 'ready') {
-    const gradesMap = gradeByQuestion(attempt, grades);
+  const pending = unsavedAnswers(attempt);
+  if (owner && state.packStatus === 'ready' && (pending.length || (attempt.savedQs && attempt.savedQs.size))) {
     const run = saveChain.then(async () => {
       if (studentId() !== owner) return { saved: false, scored: [] };
-      const applied = applyAttempt(state.pack, attempt, gradesMap);
+      const pendingNow = unsavedAnswers(attempt);
+      if (!pendingNow.length) return { saved: true, scored: [] };
+      const subset = { ...attempt, answers: pendingNow };
+      const gradesMap = gradeByQuestion(subset, grades);
+      const applied = applyAttempt(state.pack, subset, gradesMap);
       let ok = false;
       try {
         const res = await saveProgressPack(packJson(applied.pack));
@@ -215,6 +267,7 @@ async function presentReview(attempt) {
       if (ok) {
         state.pack = applied.pack;
         packEpoch += 1;
+        for (const ans of pendingNow) attempt.savedQs.add(ans.q);
       }
       return { saved: ok, scored: applied.scored };
     }).catch(() => ({ saved: false, scored: [] }));
@@ -223,6 +276,7 @@ async function presentReview(attempt) {
     saved = result.saved;
     scored = result.scored;
   }
+  if (!pending.length && attempt.savedQs && attempt.savedQs.size) saved = true;
   if (token === reviewToken && state.review && state.review.attempt === attempt) {
     state.review.saved = saved;
     if (state.screen === 'review') render();
@@ -236,6 +290,344 @@ async function presentReview(attempt) {
       mode: attempt.mode
     }).catch(() => {});
   }
+}
+
+function dialogFragment() {
+  return state.dialog ? dialogHtml() : '';
+}
+
+function openExam() {
+  if (state.packStatus !== 'ready') return;
+  stopPlayback();
+  stopNarration();
+  releaseMic();
+  state.sessionOwner = studentId();
+  state.selection = { mode: 'exam' };
+  state.session = null;
+  state.view = null;
+  state.review = null;
+  state.classFeedback = null;
+  state.micError = '';
+  state.micBlob = null;
+  state.micRecording = false;
+  state.micLevel = 0;
+  state.playingMic = false;
+  state.examStage = 'mic';
+  state.dialog = false;
+  state.screen = 'exam';
+  viewKey = '';
+  render();
+}
+
+async function examRecord() {
+  if (state.micRecording) return;
+  stopPlayback();
+  state.micRecording = true;
+  state.micError = '';
+  state.playingMic = false;
+  render();
+  try {
+    await beginArm();
+    const stream = activeStream();
+    if (!stream) {
+      const err = new Error('mic');
+      err.code = 'no-mic';
+      throw err;
+    }
+    const audio = getAudioContext();
+    if (audio) await audio.resume().catch(() => {});
+    stopMeter();
+    stopMeter = openLevelMeter(stream, (level) => {
+      state.micLevel = level;
+      const fill = document.getElementById('mic-meter');
+      const wrap = document.getElementById('mic-meter-wrap');
+      if (fill) fill.style.width = `${Math.round(level * 100)}%`;
+      if (wrap) wrap.setAttribute('aria-valuenow', String(Math.round(level * 100)));
+    });
+    const rec = startRecorder(stream);
+    await new Promise((resolve) => {
+      const timer = startCountdown(3, () => {});
+      timer.done.then(resolve);
+    });
+    const recorded = await rec.stop();
+    state.micBlob = recorded && recorded.blob && recorded.blob.size ? recorded.blob : null;
+    if (!state.micBlob) state.micError = t('run.micMissing');
+  } catch (err) {
+    state.micBlob = null;
+    state.micError = micMessage(err);
+  } finally {
+    stopMeter();
+    stopMeter = () => {};
+    state.micRecording = false;
+    if (state.screen === 'exam') render({ focus: state.micError ? 'mic-error' : 'step-title' });
+  }
+}
+
+function examPlayback() {
+  if (!state.micBlob || !state.micBlob.size) return;
+  if (state.playingMic) {
+    stopPlayback();
+    render();
+    return;
+  }
+  stopPlayback();
+  audioUrl = URL.createObjectURL(state.micBlob);
+  audioEl = new Audio(audioUrl);
+  audioEl.setAttribute('playsinline', '');
+  state.playingMic = true;
+  audioEl.onended = () => {
+    state.playingMic = false;
+    stopPlayback();
+    if (state.screen === 'exam') render();
+  };
+  render();
+  audioEl.play().catch(() => {
+    state.playingMic = false;
+    stopPlayback();
+    render();
+  });
+}
+
+async function examStart() {
+  if (state.arming || !state.micBlob) return;
+  const test = currentTest();
+  if (!test) return;
+  state.arming = true;
+  state.micError = '';
+  const button = document.querySelector('[data-action="exam-start"]');
+  if (button) button.disabled = true;
+  try {
+    await prepareNarration();
+    if (!hasStream()) await beginArm();
+    const audio = getAudioContext();
+    if (audio) await audio.resume().catch(() => {});
+    if (!activeStream()) {
+      state.micError = t('run.micMissing');
+      state.examStage = 'mic';
+      state.arming = false;
+      render({ focus: 'mic-error' });
+      return;
+    }
+    const plan = buildPlan(test, { mode: 'full' });
+    state.sessionOwner = studentId();
+    state.selection = { mode: 'exam' };
+    viewKey = '';
+    state.examStage = 'run';
+    state.screen = 'exam';
+    state.session = createExamRun({
+      test,
+      plan,
+      onView: handleExamView
+    });
+    state.arming = false;
+    state.session.begin();
+  } catch (err) {
+    state.arming = false;
+    state.micError = micMessage(err);
+    state.examStage = 'mic';
+    render({ focus: 'mic-error' });
+  }
+}
+
+function handleExamView(view) {
+  state.view = view;
+  if (view.status === 'done') {
+    presentReview(view.attempt);
+    return;
+  }
+  const key = [
+    view.status,
+    view.stepIndex,
+    view.phase,
+    view.showQuestionText ? 1 : 0,
+    view.script || '',
+    view.twice ? 1 : 0
+  ].join('|');
+  const structural = key !== viewKey;
+  viewKey = key;
+  if (structural || state.screen !== 'exam') render({ focus: 'step-title' });
+  else updateExamClock(view);
+}
+
+function openClass() {
+  if (state.packStatus !== 'ready') return;
+  stopPlayback();
+  releaseMic();
+  state.session = null;
+  state.view = null;
+  state.review = null;
+  state.classFeedback = null;
+  state.micError = '';
+  state.screen = 'class';
+  render();
+}
+
+function startClass(selection) {
+  const test = currentTest();
+  if (!test || state.packStatus !== 'ready') return;
+  stopPlayback();
+  stopNarration();
+  releaseMic();
+  const plan = buildPlan(test, {
+    mode: 'practice',
+    scope: selection.scope,
+    q: selection.q,
+    part: selection.part
+  });
+  if (!plan.some((step) => step.kind === 'question')) return;
+  state.sessionOwner = studentId();
+  state.selection = { mode: 'class', scope: selection.scope, q: selection.q, part: selection.part };
+  state.micError = '';
+  state.dialog = false;
+  state.review = null;
+  state.classFeedback = null;
+  viewKey = '';
+  classToken += 1;
+  state.session = createClassRun({
+    test,
+    plan,
+    onView: handleClassView
+  });
+  state.screen = 'class-run';
+  state.session.begin();
+}
+
+function handleClassView(view) {
+  state.view = view;
+  if (view.status === 'done') {
+    presentReview(view.attempt);
+    return;
+  }
+  if (view.status === 'feedback') {
+    viewKey = `feedback|${view.stepIndex}`;
+    gradeClassAnswer(view);
+    return;
+  }
+  const key = `${view.status}|${view.stepIndex}|${view.phase}`;
+  const structural = key !== viewKey;
+  viewKey = key;
+  if (structural || state.screen !== 'class-run') render({ focus: 'step-title' });
+  else updateClassClock(view);
+}
+
+async function gradeClassAnswer(view) {
+  const ans = view.answer;
+  const attempt = view.attempt;
+  if (!ans || !attempt) return;
+  const token = ++classToken;
+  const test = state.catalog.find((item) => item.id === attempt.testId);
+  const grades = { free: {}, paid: null, read: {}, checklist: {} };
+  const source = test && test.questions.find((item) => item.q === ans.q);
+  if (isReadAloudScore(ans)) {
+    grades.read[ans.q] = { status: ans.blob && ans.blob.size ? 'checking' : 'empty' };
+    grades.free[ans.q] = ans.blob && ans.blob.size ? null : 'coming soon';
+  } else if (ans.q === 3 || ans.q === 4 || ans.type === 'describe_picture') {
+    const said = String(ans.transcript || '').trim();
+    if (source && said) {
+      const detail = scoreChecklist(source, said);
+      grades.checklist[ans.q] = detail;
+      ans.localChecklist = detail;
+      grades.free[ans.q] = `${detail.stars}/5`;
+    } else {
+      grades.free[ans.q] = 'coming soon';
+    }
+  } else if (ans.q <= 4) {
+    grades.free[ans.q] = 'coming soon';
+  } else {
+    grades.paid = 'coming soon';
+  }
+  state.classFeedback = { answer: ans, grades, source, marks: {}, markNote: '', marking: false, markTried: false };
+  if (state.screen === 'class-run') render({ focus: 'step-title' });
+  if (isReadAloudScore(ans) && ans.blob && ans.blob.size) {
+    const detail = await gradeReadAloud((source && source.text) || '', ans.blob);
+    if (token !== classToken) return;
+    ans.localRead = detail;
+    grades.read[ans.q] = detail;
+    grades.free[ans.q] = detail.save || 'coming soon';
+    if (state.screen === 'class-run') render();
+  }
+  if (token !== classToken) return;
+  await commitClassGrade(attempt, grades, ans);
+}
+
+async function commitClassGrade(attempt, grades, ans) {
+  const owner = state.sessionOwner || studentId();
+  if (!owner || state.packStatus !== 'ready') return;
+  if (attempt.savedQs && attempt.savedQs.has(ans.q)) return;
+  const subset = { ...attempt, id: `${attempt.id}:${ans.q}`, answers: [ans], complete: false };
+  const gradesMap = gradeByQuestion(subset, grades);
+  const run = saveChain.then(async () => {
+    if (studentId() !== owner) return;
+    const applied = applyAttempt(state.pack, subset, gradesMap);
+    let ok = false;
+    try {
+      const res = await saveProgressPack(packJson(applied.pack));
+      ok = !!(res && res.ok);
+    } catch (err) {
+      ok = false;
+    }
+    if (!ok || studentId() !== owner) return;
+    state.pack = applied.pack;
+    packEpoch += 1;
+    if (!attempt.savedQs) attempt.savedQs = new Set();
+    attempt.savedQs.add(ans.q);
+    await reportScoredItems(applied.scored, {
+      testTitle: attempt.testTitle,
+      testId: attempt.testId,
+      mode: attempt.mode
+    });
+  }).catch(() => {});
+  saveChain = run.then(() => {});
+  await run;
+}
+
+async function classContinue() {
+  if (!state.session) return;
+  if (!hasStream()) {
+    state.arming = true;
+    const button = document.querySelector('[data-action="class-continue"]');
+    if (button) button.disabled = true;
+    try {
+      await beginArm();
+    } catch (err) {
+      state.arming = false;
+      state.micError = micMessage(err);
+      render({ focus: 'mic-error' });
+      return;
+    }
+    state.arming = false;
+    if (!activeStream()) {
+      state.micError = t('run.micMissing');
+      render({ focus: 'mic-error' });
+      return;
+    }
+  }
+  state.micError = '';
+  state.session.continue();
+}
+
+async function classDone() {
+  if (!state.session || !state.view || state.view.phase === 'saving' || state.view.phase === 'feedback') return;
+  const button = document.querySelector('[data-action="class-done"]');
+  if (button) button.disabled = true;
+  if (!hasStream()) {
+    try {
+      await beginArm();
+    } catch (err) {
+      state.micError = micMessage(err);
+      render({ focus: 'mic-error' });
+      return;
+    }
+  }
+  await state.session.done();
+}
+
+function classHear() {
+  const step = state.view && state.view.step;
+  const q = step && step.question;
+  const test = currentTest();
+  if (!q || !test) return;
+  prepareNarration().then(() => playNarration(questionClipId(test.id, q.q)));
 }
 
 function handleView(view) {
@@ -378,6 +770,24 @@ function onClick(event) {
   if (!button || button.disabled) return;
   const action = button.dataset.action;
   if (action === 'full') startSession({ mode: 'full' });
+  else if (action === 'exam') openExam();
+  else if (action === 'class') openClass();
+  else if (action === 'exam-record') examRecord();
+  else if (action === 'exam-playback') examPlayback();
+  else if (action === 'exam-intro') {
+    if (state.micBlob) {
+      state.examStage = 'intro';
+      state.micError = '';
+      render();
+    }
+  }
+  else if (action === 'exam-start') examStart();
+  else if (action === 'class-q') startClass({ scope: 'question', q: Number(button.dataset.q) });
+  else if (action === 'class-part') startClass({ scope: 'part', part: button.dataset.part });
+  else if (action === 'class-continue') classContinue();
+  else if (action === 'class-done') classDone();
+  else if (action === 'class-hear') classHear();
+  else if (action === 'class-next' && state.session) state.session.next();
   else if (action === 'practice') {
     state.screen = 'practice';
     render();
@@ -396,7 +806,11 @@ function onClick(event) {
     render();
   } else if (action === 'confirm-end') confirmEnd();
   else if (action === 'play') togglePlay(button.dataset.q);
-  else if (action === 'retry' && state.review) startSession(state.review.selection);
+  else if (action === 'retry' && state.review) {
+    const sel = state.review.selection;
+    if (sel && sel.mode === 'class') startClass(sel);
+    else startSession(sel);
+  }
   else if (action === 'mark') askForMark();
   else if (action === 'reload') boot();
   else if (action === 'reload-progress') {
@@ -416,8 +830,19 @@ function markMessage(error) {
 }
 
 async function askForMark() {
-  const review = state.review;
+  const review = state.review || state.classFeedback;
   if (!review || review.marking) return;
+  const liveAttempt = (state.view && state.view.attempt) || (state.review && state.review.attempt);
+  const attempt = state.review
+    ? state.review.attempt
+    : {
+      testId: liveAttempt && liveAttempt.testId,
+      testTitle: liveAttempt && liveAttempt.testTitle,
+      id: liveAttempt && liveAttempt.id,
+      mode: 'class',
+      answers: review.answer ? [review.answer] : []
+    };
+  if (!attempt || !attempt.testId || !attempt.answers || !attempt.answers.length) return;
   if (!workerUrl()) {
     review.markNote = t('review.notDeployed');
     render();
@@ -428,11 +853,13 @@ async function askForMark() {
   render();
   let result;
   try {
-    result = await requestAiMark(review.attempt);
+    await saveChain;
+    result = await requestAiMark(attempt);
   } catch (err) {
     result = { ok: false, error: 'grade_failed' };
   }
-  if (!state.review || state.review !== review) return;
+  if (state.review && state.review !== review) return;
+  if (!state.review && state.classFeedback !== review) return;
   review.marking = false;
   if (!result || !result.ok) {
     const code = result && result.error;
@@ -449,6 +876,55 @@ async function askForMark() {
   review.marks = marks;
   review.markNote = result.saved ? t('review.marked') : t('review.markFailed');
   render();
+  if (liveAttempt) storeMarks(liveAttempt, Object.values(marks)).catch(() => {});
+}
+
+async function storeMarks(attempt, marks) {
+  const rows = (marks || []).filter((row) => row && Number(row.q) >= 5).map((row) => ({
+    q: Number(row.q),
+    testId: attempt.testId,
+    type: ((attempt.answers || []).find((ans) => ans.q === Number(row.q)) || {}).type || '',
+    score: Number(row.band != null ? row.band : row.scoreValue) || 0,
+    total: Number(row.scoreMax) || (Number(row.q) === 11 ? 5 : 3)
+  }));
+  if (!rows.length || !attempt.testId) return;
+  const owner = state.sessionOwner || studentId();
+  if (!owner || state.packStatus !== 'ready') return;
+  const run = saveChain.then(async () => {
+    if (studentId() !== owner) return;
+    let pack = state.pack;
+    try {
+      const loaded = await loadProgressPack();
+      if (loaded && loaded.ok) pack = parsePack(loaded.progress_json);
+    } catch (err) { /* keep the pack already on screen */ }
+    if (attempt.mode === 'class') {
+      for (const row of rows) {
+        pack = applyMarkScores(pack, `${attempt.id}:${row.q}`, [row]).pack;
+      }
+    } else {
+      pack = applyMarkScores(pack, attempt.id, rows).pack;
+    }
+    const res = await saveProgressPack(packJson(pack));
+    if (res && res.ok && studentId() === owner) {
+      state.pack = pack;
+      packEpoch += 1;
+      if (state.screen === 'review' || state.screen === 'home') render();
+    }
+    if (studentId() !== owner) return;
+    await reportScoredItems(rows.map((row) => ({
+      item: `${row.testId}:${row.q}`,
+      q: row.q,
+      type: row.type,
+      score: row.score,
+      total: row.total
+    })), {
+      testTitle: attempt.testTitle,
+      testId: attempt.testId,
+      mode: attempt.mode
+    });
+  }).catch(() => {});
+  saveChain = run.then(() => {});
+  await run;
 }
 
 function onChange(event) {
@@ -460,7 +936,7 @@ function onChange(event) {
 }
 
 function onLeave(event) {
-  if (state.screen === 'session') {
+  if (state.screen === 'session' || state.screen === 'exam' || state.screen === 'class-run') {
     event.preventDefault();
     event.returnValue = '';
   }
@@ -544,9 +1020,13 @@ function renderHome() {
     ${cloudHtml(test)}
     <p class="note">${escapeHtml(t('home.micNote'))}</p>
     <div class="dock actions">
-      <button type="button" class="btn primary" data-action="full">${escapeHtml(t('home.fullTest'))}</button>
+      <button type="button" class="btn primary" data-action="exam">${escapeHtml(t('home.exam'))}</button>
+      <button type="button" class="btn primary" data-action="class">${escapeHtml(t('home.classMode'))}</button>
+      <button type="button" class="btn secondary" data-action="full">${escapeHtml(t('home.fullTest'))}</button>
       <button type="button" class="btn secondary" data-action="practice">${escapeHtml(t('home.practice'))}</button>
     </div>
+    <p class="note">${escapeHtml(t('home.examHelp'))}</p>
+    <p class="note">${escapeHtml(t('home.classHelp'))}</p>
   `);
 }
 
@@ -819,52 +1299,168 @@ function readAloudScoreHtml(detail) {
     ${weakLine}`;
 }
 
+function liveRows(attempt, grades, marks) {
+  return (attempt.answers || []).map((ans) => {
+    const read = grades.read && grades.read[ans.q];
+    if (read && (read.status === 'scored' || read.status === 'again')) {
+      return { q: ans.q, score: Number(read.stars) || 0, total: 5, graded: true };
+    }
+    const list = grades.checklist && grades.checklist[ans.q];
+    if (list) return { q: ans.q, score: list.stars, total: 5, graded: true };
+    const mark = marks && marks[ans.q];
+    if (mark && ans.q >= 5) {
+      return {
+        q: ans.q,
+        score: Number(mark.band != null ? mark.band : mark.scoreValue) || 0,
+        total: Number(mark.scoreMax) || (ans.q === 11 ? 5 : 3),
+        graded: true
+      };
+    }
+    return { q: ans.q, score: 0, total: 1, graded: false };
+  });
+}
+
+function historyPointsFor(testId) {
+  const points = [];
+  for (const attempt of (state.pack && state.pack.attempts) || []) {
+    if (!attempt || attempt.testId !== testId) continue;
+    const rows = (attempt.answers || []).map((ans) => ({
+      q: ans.q,
+      score: ans.score,
+      total: ans.total,
+      graded: ans.graded === true || Number(ans.total) > 1
+    }));
+    const estimate = estimateFromRows(rows);
+    if (estimate.complete) points.push({ score: estimate.score });
+  }
+  return points.slice(-12);
+}
+
+function checklistBlock(detail) {
+  if (!detail) return '';
+  const rows = (detail.rows || []).map((row) => {
+    const missedMain = row.role === 'main' && !row.hit;
+    const cls = row.hit ? 'check hit' : (missedMain ? 'check miss main' : 'check miss');
+    const symbol = row.hit ? '✓' : '–';
+    const text = missedMain ? `<strong>${escapeHtml(row.text)}</strong>` : escapeHtml(row.text);
+    return `<li class="${cls}"><span aria-hidden="true">${symbol}</span> ${text}</li>`;
+  }).join('');
+  const capped = detail.capped ? `<p class="note">${escapeHtml(t('results.capped'))}</p>` : '';
+  const label = t('review.stars', { n: detail.stars });
+  return `
+    <p class="score stars" role="img" aria-label="${escapeHtml(label)}">
+      <span class="score-name">${escapeHtml(t('results.checklist'))}</span>
+      <span class="star-row" aria-hidden="true">${starMarks(detail.stars)}</span>
+      <span>${detail.stars}/5</span>
+    </p>
+    <ul class="checks">${rows}</ul>
+    ${capped}`;
+}
+
+function answerCard(ans, grades, source, marks) {
+  const picture = ans.type === 'describe_picture';
+  const readDetail = isReadAloudScore(ans) ? (grades.read && grades.read[ans.q]) : null;
+  const checklist = grades.checklist && grades.checklist[ans.q];
+  const ai = marks && marks[ans.q];
+  const hasAudio = ans.blob && ans.blob.size > 0;
+  const playing = state.playingQ === ans.q;
+  const playText = !hasAudio ? t('review.noAudio') : (playing ? t('review.stop') : t('review.play'));
+  const playLabel = playing ? t('a11y.stop', { n: ans.q }) : t('a11y.play', { n: ans.q });
+  let scoreBlock = '';
+  if (readDetail) scoreBlock = readAloudScoreHtml(readDetail);
+  else if (checklist) scoreBlock = checklistBlock(checklist);
+  else if (ai && ans.q >= 5) {
+    const score = ai.band != null ? ai.band : ai.scoreValue;
+    const max = ai.scoreMax || (ans.q === 11 ? 5 : 3);
+    scoreBlock = `<p class="score">${escapeHtml(t('classMode.band', { score, max }))}</p>`;
+  } else if (ans.q >= 5) {
+    scoreBlock = `<p class="score">${escapeHtml(t('classMode.recorded'))}</p>`;
+  } else {
+    const value = grades.free ? grades.free[ans.q] : '';
+    scoreBlock = `<p class="score">${escapeHtml(t('review.deviceScore'))}: ${escapeHtml(String(value || ''))}</p>`;
+  }
+  const comment = ai && ai.comment ? `<p class="note">${escapeHtml(ai.comment)}</p>` : '';
+  const said = String(ans.transcript || '').trim();
+  const compare = ans.q >= 3 ? `
+    <div class="compare">
+      <section>
+        <h3>${escapeHtml(t('classMode.yourAnswer'))}</h3>
+        <p lang="en" dir="ltr">${escapeHtml(said || t('classMode.noTranscript'))}</p>
+      </section>
+      ${ans.q >= 5 ? `<section>
+        <h3>${escapeHtml(t('classMode.corrected'))}</h3>
+        <p lang="en" dir="ltr">${escapeHtml((ai && ai.corrected) || t('results.needMark'))}</p>
+      </section>` : ''}
+    </div>` : '';
+  const model = source && source.model_answer && ans.q >= 3
+    ? `<section class="model-answer"><h3>${escapeHtml(t('classMode.model'))}</h3><p lang="en" dir="ltr">${escapeHtml(source.model_answer)}</p></section>`
+    : '';
+  let facts = '';
+  if (source && ans.q >= 8 && ans.q <= 10) {
+    const hits = factHits(source, said);
+    if (hits.length) {
+      facts = `<section class="facts"><h3>${escapeHtml(t('results.facts'))}</h3><ul class="checks">${hits.map((fact) => `
+        <li class="check ${fact.hit ? 'hit' : 'miss'}"><span aria-hidden="true">${fact.hit ? '✓' : '–'}</span> ${escapeHtml(fact.text)}</li>
+      `).join('')}</ul></section>`;
+    }
+  }
+  const used = ans.usedSec != null
+    ? `<p class="note">${escapeHtml(t('classMode.timeUsed', { used: ans.usedSec, target: ans.speakSec }))}</p>`
+    : '';
+  let pictureHtml = '';
+  if (picture && source && source.image) {
+    const src = new URL(source.image, document.baseURI).href;
+    pictureHtml = `<div class="frame" data-frame><img class="scene" alt="${escapeHtml(t('run.pictureAlt', { n: ans.q }))}" src="${escapeHtml(src)}"></div>`;
+  }
+  const showSnippet = ans.q <= 2 && (!readDetail || readDetail.status !== 'scored');
+  const snippet = ans.type === 'read_aloud' ? (source && source.text) || '' : '';
+  return `
+    <article class="answer-card">
+      <h2>${escapeHtml(t('run.qLabel', { n: ans.q }))}</h2>
+      <p class="part-name">${escapeHtml(t(`parts.${ans.type}.title`))}</p>
+      ${pictureHtml}
+      ${showSnippet && snippet ? `<p class="snippet" lang="en" dir="ltr">${escapeHtml(snippet)}</p>` : ''}
+      <button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" ${hasAudio ? '' : 'disabled'} aria-label="${escapeHtml(playLabel)}">${escapeHtml(playText)}</button>
+      ${used}
+      ${scoreBlock}
+      ${comment}
+      ${compare}
+      ${model}
+      ${facts}
+    </article>`;
+}
+
+function summaryFor(attempt, grades, marks) {
+  if (!attempt || (attempt.mode !== 'exam' && attempt.mode !== 'class' && attempt.mode !== 'full')) return '';
+  const rows = liveRows(attempt, grades, marks);
+  const estimate = estimateFromRows(rows);
+  return estimateHtml({
+    t,
+    estimate,
+    pron: starsOf(rows, [1, 2]),
+    picture: starsOf(rows, [3, 4]),
+    historyPoints: historyPointsFor(attempt.testId)
+  });
+}
+
 function renderReview() {
   const { attempt, saved, grades } = state.review;
   const test = state.catalog.find((item) => item.id === attempt.testId);
-  const lead = attempt.mode === 'full' ? t('review.fullDone') : t('review.practiceDone');
+  const lead = attempt.mode === 'exam'
+    ? t('results.examDone')
+    : attempt.mode === 'class'
+      ? t('results.classDone')
+      : attempt.mode === 'full'
+        ? t('review.fullDone')
+        : t('review.practiceDone');
   const cards = attempt.answers.map((ans) => {
     const source = test && test.questions.find((item) => item.q === ans.q);
-    const picture = ans.type === 'describe_picture';
-    const readDetail = isReadAloudScore(ans) ? (grades.read && grades.read[ans.q]) : null;
-    const snippet = picture
-      ? t('review.snippetPicture')
-      : (ans.type === 'read_aloud' ? (source && source.text) || '' : (source && source.question) || '');
-    const lang = picture ? '' : ' lang="en" dir="ltr"';
-    const hasAudio = ans.blob && ans.blob.size > 0;
-    const playing = state.playingQ === ans.q;
-    const playText = !hasAudio ? t('review.noAudio') : (playing ? t('review.stop') : t('review.play'));
-    const playLabel = playing
-      ? t('a11y.stop', { n: ans.q })
-      : t('a11y.play', { n: ans.q });
-    const ai = state.review.marks && state.review.marks[ans.q];
-    const scoreValue = ai
-      ? `${ai.scoreValue}/${ai.scoreMax}${Number(ai.scoreMax) > 0 ? ` (${Math.round((Number(ai.scoreValue) / Number(ai.scoreMax)) * 100)}%)` : ''}`
-      : (ans.q <= 4 ? (grades.free[ans.q] || '') : (grades.paid || ''));
-    const scoreName = ai
-      ? t('review.aiScore')
-      : (ans.q <= 4 ? t('review.deviceScore') : t('review.serverScore'));
-    const comment = ai && ai.comment
-      ? `<p class="note">${escapeHtml(ai.comment)}</p>`
-      : '';
-    const showSnippet = !readDetail || readDetail.status !== 'scored';
-    const scoreBlock = readDetail
-      ? readAloudScoreHtml(readDetail)
-      : `<p class="score">${escapeHtml(scoreName)}: ${escapeHtml(String(scoreValue))}</p>`;
-    return `
-      <article class="answer-card">
-        <h2>${escapeHtml(t('run.qLabel', { n: ans.q }))}</h2>
-        <p class="part-name">${escapeHtml(t(`parts.${ans.type}.title`))}</p>
-        ${showSnippet ? `<p class="snippet"${lang}>${escapeHtml(snippet)}</p>` : ''}
-        <button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" ${hasAudio ? '' : 'disabled'} aria-label="${escapeHtml(playLabel)}">${escapeHtml(playText)}</button>
-        ${scoreBlock}
-        ${comment}
-      </article>`;
+    return answerCard(ans, grades, source, state.review.marks);
   }).join('');
-  const retry = attempt.mode === 'practice'
+  const retry = attempt.mode === 'practice' || attempt.mode === 'class'
     ? `<button type="button" class="btn secondary" data-action="retry">${escapeHtml(t('review.retry'))}</button>`
     : '';
-  const canMark = attempt.answers.some((ans) => ans.q >= 1 && ans.q <= 11);
+  const canMark = attempt.answers.some((ans) => ans.q >= 5 && ans.q <= 11);
   const mark = canMark
     ? `<button type="button" class="btn primary" data-action="mark" ${state.review.marking ? 'disabled' : ''}>${escapeHtml(state.review.marking ? t('review.marking') : t('review.mark'))}</button>`
     : '';
@@ -876,8 +1472,10 @@ function renderReview() {
     <p class="test-name" lang="en" dir="ltr">${escapeHtml(attempt.testTitle || '')}</p>
     <p>${escapeHtml(lead)}</p>
     <p class="saved">${escapeHtml(saved == null ? t('review.saving') : (saved ? t('review.saved') : t('review.notSaved')))}</p>
+    ${summaryFor(attempt, grades, state.review.marks)}
     <div class="answers">${cards}</div>
     ${note}
+    <div class="legal">${legalHtml()}</div>
     <div class="dock actions">
       ${mark}
       ${retry}
@@ -902,6 +1500,81 @@ function renderLoading() {
   `);
 }
 
+function renderClass() {
+  const test = currentTest();
+  if (!test) return renderHome();
+  const groups = new Map();
+  for (const q of [...test.questions].sort((a, b) => a.q - b.q)) {
+    const type = questionType(q);
+    if (!groups.has(type)) groups.set(type, []);
+    groups.get(type).push(q);
+  }
+  const cards = PART_ORDER.filter((id) => groups.has(id)).map((id) => {
+    const questions = groups.get(id);
+    const buttons = questions.map((q) => `
+      <button type="button" class="btn secondary" data-action="class-q" data-q="${q.q}">${escapeHtml(t('run.qLabel', { n: q.q }))}</button>
+    `).join('');
+    return `
+      <section class="part-card">
+        <h2>${escapeHtml(t(`parts.${id}.title`))}</h2>
+        <button type="button" class="btn primary" data-action="class-part" data-part="${escapeHtml(id)}">${escapeHtml(t('classMode.part'))}</button>
+        <div class="q-row">${buttons}</div>
+      </section>`;
+  }).join('');
+  return shell(`
+    <h1>${escapeHtml(t('classMode.title'))}</h1>
+    <p>${escapeHtml(t('classMode.help'))}</p>
+    ${cards}
+    <button type="button" class="btn secondary dock" data-action="back">${escapeHtml(t('classMode.back'))}</button>
+  `);
+}
+
+function renderExam() {
+  const dialog = dialogFragment();
+  if (state.examStage === 'run' && state.view) return examRunHtml({ t, view: state.view, dialog });
+  if (state.examStage === 'intro') return examIntroHtml({ t, dialog });
+  return examMicHtml({
+    t,
+    recording: state.micRecording,
+    level: state.micLevel,
+    hasTake: !!(state.micBlob && state.micBlob.size),
+    playing: state.playingMic,
+    error: state.micError,
+    dialog
+  });
+}
+
+function renderClassRun() {
+  const view = state.view;
+  if (view && view.status === 'feedback' && state.classFeedback) {
+    const ans = state.classFeedback.answer;
+    const test = currentTest();
+    const source = state.classFeedback.source || (test && ans && test.questions.find((item) => item.q === ans.q));
+    const card = ans ? answerCard(ans, state.classFeedback.grades, source, state.classFeedback.marks) : '';
+    const note = state.classFeedback.markNote
+      ? `<p class="alert" role="status">${escapeHtml(state.classFeedback.markNote)}</p>`
+      : '';
+    const canMark = ans && ans.q >= 5 && ans.q <= 11;
+    const mark = canMark
+      ? `<button type="button" class="btn primary" data-action="mark" ${state.classFeedback.marking ? 'disabled' : ''}>${escapeHtml(state.classFeedback.marking ? t('review.marking') : t('review.mark'))}</button>`
+      : '';
+    const last = view.stepIndex >= ((state.session && state.session.plan.length - 1) || 0);
+    return shell(`
+      <h1 id="step-title" tabindex="-1">${escapeHtml(t('review.title'))}</h1>
+      ${card}
+      ${note}
+      <div class="dock actions">
+        ${mark}
+        <button type="button" class="btn secondary" data-action="class-next">${escapeHtml(last ? t('classMode.finish') : t('classMode.next'))}</button>
+      </div>
+    `, { showEnd: true });
+  }
+  const err = state.micError
+    ? `<p id="mic-error" class="alert" role="alert" tabindex="-1">${escapeHtml(state.micError)}</p>`
+    : '';
+  return shell(`${err}${classScreenHtml({ t, view: view || {} })}`, { showEnd: true });
+}
+
 function viewForScreen() {
   if (!state.en) {
     return `
@@ -914,6 +1587,9 @@ function viewForScreen() {
   if (state.screen === 'account') return renderAccount();
   if (state.screen === 'error') return renderError();
   if (state.screen === 'practice') return renderPractice();
+  if (state.screen === 'class') return renderClass();
+  if (state.screen === 'exam') return renderExam();
+  if (state.screen === 'class-run') return renderClassRun();
   if (state.screen === 'session') return renderSession();
   if (state.screen === 'review' && state.review) return renderReview();
   return renderHome();
@@ -956,6 +1632,34 @@ function bindFrames() {
     img.addEventListener('error', fail);
     if (img.complete && img.naturalWidth === 0) fail();
   });
+}
+
+function updateExamClock(view) {
+  const prep = document.getElementById('prep-digits');
+  const speak = document.getElementById('speak-digits');
+  if (prep) prep.textContent = formatHMS(view.prepActive ? view.prepLeft : (view.prepTotal || 0));
+  if (speak) speak.textContent = formatHMS(view.speakActive ? view.speakLeft : (view.speakTotal || 0));
+  const prepBox = document.querySelector('.clock-box.prep');
+  const speakBox = document.querySelector('.clock-box.speak');
+  if (prepBox) prepBox.classList.toggle('is-active', !!view.prepActive);
+  if (speakBox) {
+    speakBox.classList.toggle('is-active', !!view.speakActive);
+    speakBox.classList.toggle('is-live', !!view.recording);
+  }
+}
+
+function updateClassClock(view) {
+  const over = view.target > 0 && view.elapsed > view.target;
+  const box = document.querySelector('.countup');
+  if (over && box && !box.classList.contains('is-over')) {
+    render();
+    return;
+  }
+  const num = document.getElementById('count-num');
+  const target = document.getElementById('count-target');
+  if (num) num.textContent = formatHMS(view.elapsed || 0);
+  if (target) target.textContent = t('classMode.target', { time: formatHMS(view.target || 0) });
+  if (box) box.classList.toggle('is-over', !!over);
 }
 
 function updateTimer(view) {
@@ -1097,6 +1801,7 @@ async function boot() {
     render();
   }
   registerServiceWorker();
+  prepareNarration();
   exposeBench();
   warmChecker();
 }

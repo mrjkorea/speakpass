@@ -198,6 +198,40 @@ export function startRecorder(mediaStream) {
   };
 }
 
+/** Live microphone level from 0 to 1. Call the returned function to stop. */
+export function openLevelMeter(mediaStream, onLevel) {
+  const context = getAudioContext();
+  if (!context || !mediaStream) return () => {};
+  let source;
+  let analyser;
+  try {
+    source = context.createMediaStreamSource(mediaStream);
+    analyser = context.createAnalyser();
+    analyser.fftSize = 512;
+    source.connect(analyser);
+  } catch (err) {
+    return () => {};
+  }
+  const data = new Uint8Array(analyser.fftSize);
+  let frame = 0;
+  const tick = () => {
+    analyser.getByteTimeDomainData(data);
+    let sum = 0;
+    for (let i = 0; i < data.length; i += 1) {
+      const x = (data[i] - 128) / 128;
+      sum += x * x;
+    }
+    const rms = Math.sqrt(sum / data.length);
+    onLevel(Math.max(0, Math.min(1, rms * 3.2)));
+    frame = requestAnimationFrame(tick);
+  };
+  frame = requestAnimationFrame(tick);
+  return () => {
+    cancelAnimationFrame(frame);
+    try { source.disconnect(); } catch (err) { /* already stopped */ }
+  };
+}
+
 export function beep(kind) {
   try {
     const context = getAudioContext();

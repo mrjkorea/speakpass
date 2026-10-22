@@ -16,7 +16,11 @@
     "savedCount": "{done} dari {total} soal tersimpan",
     "savedNone": "Belum ada jawaban tersimpan untuk tes ini.",
     "savedItem": "Soal {n}: {score}/{total}",
-    "savedDone": "Soal {n} tersimpan"
+    "savedDone": "Soal {n} tersimpan",
+    "exam": "Ujian",
+    "classMode": "Kelas",
+    "examHelp": "Mode ujian memakai waktu resmi. Periksa mikrofon, tekan Mulai sekali, lalu setiap soal berjalan sendiri.",
+    "classHelp": "Mode kelas tidak dibatasi waktu. Jam menghitung naik dan menampilkan target resmi. Tekan Selesai saat Anda siap."
   },
   "practice": {
     "title": "Latihan",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Memuat kemajuan yang tersimpan…",
     "error": "Kemajuan yang tersimpan tidak dapat dimuat. Periksa koneksi dan coba lagi."
+  },
+  "exam": {
+    "micTitle": "Pemeriksaan mikrofon",
+    "micHelp": "Bacakan kalimat bahasa Inggris. Lalu putar kembali dan pastikan suara Anda jelas.",
+    "record": "Rekam",
+    "recording": "Merekam…",
+    "playBack": "Putar",
+    "recordAgain": "Rekam lagi",
+    "continue": "Lanjut",
+    "level": "Level mikrofon",
+    "start": "Mulai",
+    "startHint": "Tekan Mulai sekali saja. Latihan berlanjut sendiri.",
+    "leave": "Keluar"
+  },
+  "classMode": {
+    "title": "Kelas",
+    "help": "Tidak ada batas waktu. Jam menghitung naik dan menampilkan target resmi. Tekan Selesai saat siap. Umpan balik muncul setelah setiap soal.",
+    "part": "Bagian ini",
+    "back": "Kembali ke awal",
+    "done": "Selesai",
+    "target": "target {time}",
+    "over": "Melebihi target resmi",
+    "next": "Soal berikutnya",
+    "finish": "Akhiri",
+    "hear": "Dengar lagi",
+    "yourAnswer": "Jawaban Anda",
+    "corrected": "Diperbaiki",
+    "model": "Jawaban contoh",
+    "band": "Pita {score} dari {max}",
+    "recorded": "Terekam",
+    "noTranscript": "Belum ada transkrip.",
+    "timeUsed": "Waktu terpakai {used} dtk. Target resmi {target} dtk."
+  },
+  "results": {
+    "estimate": "Perkiraan",
+    "score": "Skor perkiraan {score} / 200",
+    "level": "Tingkat perkiraan {level}",
+    "partial": "Pelafalan ★ {pron} dari 5. Gambar ★ {picture} dari 5. Soal lain sudah direkam.",
+    "needMark": "Minta penilaian untuk melihat jawaban yang diperbaiki dan tingkat perkiraan.",
+    "fixFirst": "Perbaiki bagian ini dulu",
+    "parts": "Bagian",
+    "history": "Riwayat skor",
+    "historyEmpty": "Belum ada skor perkiraan. Selesaikan ujian dan nilai soal-soal akhir untuk melihatnya di sini.",
+    "checklist": "Daftar gambar",
+    "capped": "Pernyataan yang tidak sesuai gambar membatasi skor ini.",
+    "facts": "Fakta di dokumen",
+    "recorded": "Terekam",
+    "examDone": "Anda menyelesaikan ujian ini. Skor tiap soal ada di bawah.",
+    "classDone": "Umpan balik kelas tersimpan. Skor tiap soal ada di bawah."
+  },
+  "levels": {
+    "AH": "Dapat melanjutkan jawaban yang jelas dan rinci dengan tata bahasa dan kosakata yang stabil.",
+    "AM": "Dapat mengembangkan jawaban dengan alasan dan tetap mudah diikuti.",
+    "AL": "Dapat memberi jawaban lengkap beserta dukungan, dengan beberapa kalimat yang belum rata.",
+    "IH": "Dapat menjawab dan menambah satu alasan, dengan jeda atau kekeliruan tata bahasa.",
+    "IM3": "Dapat memberi jawaban yang relevan dan satu alasan dalam kalimat pendek yang tersambung.",
+    "IM2": "Dapat menjawab dengan kalimat sederhana, dukungannya masih tipis.",
+    "IM1": "Dapat menjawab dengan kalimat pendek dan kosakata yang terbatas.",
+    "IL": "Dapat mengucapkan beberapa kalimat yang berhubungan, dengan jeda yang sering.",
+    "NH": "Dapat memakai kata dan frasa pendek yang sesuai pertanyaan.",
+    "NM": "Dapat mengucapkan beberapa kata yang dikenal dan terkait pertanyaan.",
+    "NL": "Dapat mengucapkan beberapa kata terpisah, atau jawabannya sulit diikuti."
   }
 }

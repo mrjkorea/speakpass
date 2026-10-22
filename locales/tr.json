@@ -16,7 +16,11 @@
     "savedCount": "{done} / {total} soru kaydedildi",
     "savedNone": "Bu test için henüz kayıtlı yanıt yok.",
     "savedItem": "Soru {n}: {score}/{total}",
-    "savedDone": "Soru {n} kaydedildi"
+    "savedDone": "Soru {n} kaydedildi",
+    "exam": "Sınav",
+    "classMode": "Ders",
+    "examHelp": "Sınav modu resmi süreleri kullanır. Mikrofonu kontrol edin, Başla’ya bir kez basın, her soru kendiliğinden ilerler.",
+    "classHelp": "Ders modunda süre sınırı yoktur. Saat ileri sayar ve resmi hedefi gösterir. Hazır olunca Bitti’ye basın."
   },
   "practice": {
     "title": "Alıştırma",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Kayıtlı ilerlemeniz yükleniyor…",
     "error": "Kayıtlı ilerlemeniz yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin."
+  },
+  "exam": {
+    "micTitle": "Mikrofon kontrolü",
+    "micHelp": "İngilizce cümleyi sesli okuyun. Sonra geri dinleyin ve sesinizin net olduğunu kontrol edin.",
+    "record": "Kaydet",
+    "recording": "Kaydediliyor…",
+    "playBack": "Dinle",
+    "recordAgain": "Yeniden kaydet",
+    "continue": "Devam",
+    "level": "Mikrofon düzeyi",
+    "start": "Başla",
+    "startHint": "Başla’ya yalnızca bir kez basın. Alıştırma kendiliğinden sürer.",
+    "leave": "Çık"
+  },
+  "classMode": {
+    "title": "Ders",
+    "help": "Süre sınırı yoktur. Saat ileri sayar ve resmi hedefi gösterir. Hazır olunca Bitti’ye basın. Geri bildirim her sorudan sonra gelir.",
+    "part": "Bu bölüm",
+    "back": "Başa dön",
+    "done": "Bitti",
+    "target": "hedef {time}",
+    "over": "Resmi hedef süreyi geçti",
+    "next": "Sonraki soru",
+    "finish": "Bitir",
+    "hear": "Yeniden dinle",
+    "yourAnswer": "Yanıtınız",
+    "corrected": "Düzeltilmiş",
+    "model": "Örnek yanıt",
+    "band": "Bant {score} / {max}",
+    "recorded": "Kaydedildi",
+    "noTranscript": "Henüz döküm yok.",
+    "timeUsed": "Kullanılan süre {used} sn. Resmi hedef {target} sn."
+  },
+  "results": {
+    "estimate": "Tahmin",
+    "score": "Tahmini puan {score} / 200",
+    "level": "Tahmini düzey {level}",
+    "partial": "Telaffuz ★ {pron}/5. Resim ★ {picture}/5. Diğer sorular kaydedildi.",
+    "needMark": "Düzeltilmiş yanıt ve tahmini düzey için puan isteyin.",
+    "fixFirst": "Önce bu bölümü düzeltin",
+    "parts": "Bölümler",
+    "history": "Puan geçmişi",
+    "historyEmpty": "Henüz tahmini puan yok. Bir sınavı bitirip sonraki soruları puanlatınca burada görünür.",
+    "checklist": "Resim listesi",
+    "capped": "Resimle uyuşmayan bir ifade bu puanı sınırladı.",
+    "facts": "Belgedeki bilgiler",
+    "recorded": "Kaydedildi",
+    "examDone": "Bu sınavı bitirdiniz. Soru puanları aşağıda.",
+    "classDone": "Ders geri bildirimi kaydedildi. Soru puanları aşağıda."
+  },
+  "levels": {
+    "AH": "Dengeli dil bilgisi ve sözcüklerle açık, ayrıntılı bir yanıtı sürdürebilir.",
+    "AM": "Gerekçelerle yanıtı geliştirebilir ve takip edilmesi kolay kalır.",
+    "AL": "Tam bir yanıt verip destekleyebilir, birkaç cümle düzensiz olabilir.",
+    "IH": "Yanıt verip bir gerekçe ekleyebilir, duraklama veya dil bilgisi kayması olabilir.",
+    "IM3": "Kısa bağlı cümlelerle ilgili bir yanıt ve bir gerekçe verebilir.",
+    "IM2": "Basit cümlelerle yanıt verebilir, destek azdır.",
+    "IM1": "Kısa cümleler ve sınırlı sözcüklerle yanıt verebilir.",
+    "IL": "Birkaç ilgili cümle söyleyebilir, sık duraklar.",
+    "NH": "Soruya uyan sözcükler ve kısa öbekler kullanabilir.",
+    "NM": "Soruya ilişkin birkaç tanıdık sözcük söyleyebilir.",
+    "NL": "Birkaç ayrı sözcük söyleyebilir ya da yanıtı izlemek zordur."
   }
 }

@@ -23,7 +23,12 @@ function linesFor(question, transcript) {
   } else if (question.q <= 4) {
     lines.push("Task: describe the picture.");
     lines.push(`Picture notes: ${question.image_prompt || ""}`);
-    const keys = Array.isArray(question.key_elements) ? question.key_elements.join("; ") : "";
+    const keys = Array.isArray(question.key_elements)
+      ? question.key_elements.map((item) => {
+        if (typeof item === "string") return item;
+        return item && item.text ? String(item.text) : "";
+      }).filter(Boolean).join("; ")
+      : "";
     lines.push(`Main things to mention: ${keys}`);
   } else if (question.q <= 7) {
     lines.push("Task: answer the question.");

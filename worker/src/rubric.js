@@ -48,7 +48,9 @@ Do not lower a mark for those slips.
 A missing sentence, a wrong fact, or a different topic is a real miss.
 Do not invent sounds you cannot see. For questions 1 and 2, the two marks describe how completely the transcript follows the printed text.
 Keep each comment to 20 words or fewer.
+Add "corrected": a corrected version of the student's own answer. Keep the student's meaning. Fix grammar and word choice. Do not add facts the student did not say. Use an empty string when there is no English answer. For questions 1 and 2, corrected is empty.
+Add "band": the same integer as score for questions 3 to 11. For questions 1 and 2, band is pronunciation plus intonation.
 Do not name any software, model, or company.
 Return JSON only, with no markdown, in this shape:
-{"questions":[{"q":1,"pronunciation":0,"intonation":0,"comment":""},{"q":3,"score":0,"comment":""},{"q":11,"score":0,"comment":""}]}
+{"questions":[{"q":1,"pronunciation":0,"intonation":0,"band":0,"corrected":"","comment":""},{"q":5,"score":0,"band":0,"corrected":"","comment":""},{"q":11,"score":0,"band":0,"corrected":"","comment":""}]}
 Use pronunciation and intonation for questions 1 and 2. Use score for questions 3 through 11. Include only the questions you were given.`;

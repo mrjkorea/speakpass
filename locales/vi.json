@@ -16,7 +16,11 @@
     "savedCount": "Đã lưu {done}/{total} câu",
     "savedNone": "Bài này chưa có câu trả lời đã lưu.",
     "savedItem": "Câu {n}: {score}/{total}",
-    "savedDone": "Đã lưu câu {n}"
+    "savedDone": "Đã lưu câu {n}",
+    "exam": "Thi",
+    "classMode": "Lớp học",
+    "examHelp": "Chế độ thi dùng thời gian chính thức. Kiểm tra micro, nhấn Bắt đầu một lần, rồi mỗi câu tự chuyển tiếp.",
+    "classHelp": "Chế độ lớp học không giới hạn thời gian. Đồng hồ đếm lên và hiện thời gian mục tiêu. Nhấn Xong khi bạn sẵn sàng."
   },
   "practice": {
     "title": "Luyện tập",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Đang tải tiến độ đã lưu…",
     "error": "Không tải được tiến độ đã lưu. Kiểm tra kết nối và thử lại."
+  },
+  "exam": {
+    "micTitle": "Kiểm tra micro",
+    "micHelp": "Đọc to câu tiếng Anh. Sau đó nghe lại và kiểm tra giọng nói có rõ không.",
+    "record": "Ghi âm",
+    "recording": "Đang ghi…",
+    "playBack": "Nghe lại",
+    "recordAgain": "Ghi lại",
+    "continue": "Tiếp tục",
+    "level": "Mức micro",
+    "start": "Bắt đầu",
+    "startHint": "Chỉ nhấn Bắt đầu một lần. Bài luyện tiếp tục một mình.",
+    "leave": "Rời"
+  },
+  "classMode": {
+    "title": "Lớp học",
+    "help": "Không giới hạn thời gian. Đồng hồ đếm lên và hiện thời gian mục tiêu chính thức. Nhấn Xong khi sẵn sàng. Nhận xét hiện ngay sau mỗi câu.",
+    "part": "Phần này",
+    "back": "Về đầu",
+    "done": "Xong",
+    "target": "mục tiêu {time}",
+    "over": "Đã quá thời gian mục tiêu",
+    "next": "Câu tiếp",
+    "finish": "Kết thúc",
+    "hear": "Nghe lại",
+    "yourAnswer": "Câu trả lời của bạn",
+    "corrected": "Đã sửa",
+    "model": "Câu trả lời mẫu",
+    "band": "Mức {score} / {max}",
+    "recorded": "Đã ghi",
+    "noTranscript": "Chưa có bản chép lời.",
+    "timeUsed": "Đã dùng {used} giây. Mục tiêu chính thức {target} giây."
+  },
+  "results": {
+    "estimate": "Ước lượng",
+    "score": "Điểm ước lượng {score} / 200",
+    "level": "Mức ước lượng {level}",
+    "partial": "Phát âm ★ {pron}/5. Tranh ★ {picture}/5. Các câu khác đã được ghi.",
+    "needMark": "Hãy xin chấm để xem câu đã sửa và mức ước lượng.",
+    "fixFirst": "Sửa phần này trước",
+    "parts": "Các phần",
+    "history": "Lịch sử điểm",
+    "historyEmpty": "Chưa có điểm ước lượng. Hãy hoàn thành một bài thi và chấm các câu sau để thấy ở đây.",
+    "checklist": "Danh sách tranh",
+    "capped": "Một câu không khớp với tranh đã giới hạn điểm này.",
+    "facts": "Thông tin trong tài liệu",
+    "recorded": "Đã ghi",
+    "examDone": "Bạn đã xong bài thi này. Điểm từng câu ở bên dưới.",
+    "classDone": "Nhận xét của lớp đã được lưu. Điểm từng câu ở bên dưới."
+  },
+  "levels": {
+    "AH": "Có thể nói tiếp một câu trả lời rõ và chi tiết với ngữ pháp và từ vựng ổn định.",
+    "AM": "Có thể phát triển câu trả lời bằng lý do và vẫn dễ nghe.",
+    "AL": "Có thể trả lời đầy đủ và đưa dẫn chứng, một vài câu có thể chưa đều.",
+    "IH": "Có thể trả lời và thêm một lý do, đôi khi ngừng hoặc sai ngữ pháp.",
+    "IM3": "Có thể đưa câu trả lời đúng ý và một lý do bằng những câu ngắn nối với nhau.",
+    "IM2": "Có thể trả lời bằng câu đơn, phần dẫn chứng còn mỏng.",
+    "IM1": "Có thể trả lời bằng câu ngắn và vốn từ hạn chế.",
+    "IL": "Có thể nói vài câu liên quan, hay ngừng.",
+    "NH": "Có thể dùng từ và cụm ngắn phù hợp với câu hỏi.",
+    "NM": "Có thể nói vài từ quen thuộc liên quan đến câu hỏi.",
+    "NL": "Có thể nói vài từ rời, hoặc câu trả lời khó theo dõi."
   }
 }

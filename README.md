@@ -26,6 +26,8 @@ The same files can be published on GitHub Pages (`.nojekyll` is included so ever
 
 ## What you can do
 
+- **Exam.** A microphone check, then one Start. Directions, preparation, and speaking use the official times and move ahead by themselves. The screen shows “Question N of 11” and two clocks, PREPARATION TIME and RESPONSE TIME, as hh:mm:ss. A beep sounds before each response. Questions 8–10 are heard, not printed, while the document stays on screen, and question 10 is played twice. There is no skip and no score until the end. Narration is pre-recorded audio listed in `audio/narration/manifest.json` and `NARRATION_SCRIPT.md`. Until a clip is added, the screen shows that text and the official times still run. The app does not speak with a browser voice.
+- **Class.** No time limit. The clock counts up and shows the official target. The student presses Done. Directions follow the chosen interface language. Feedback appears after each question.
 - **Full test.** All 11 questions in order. Each part starts when you press Start. Preparation counts down, a tone plays, recording starts by itself, and recording stops when the speaking time ends.
 - **Practice.** One question, or every question in a part. You can try again from the review screen.
 - **Review.** Each finished question is saved to the signed-in account. Playback of a recording stays on this page.
@@ -44,6 +46,11 @@ css/styles.css
 js/config.js            APP_NAME and the language list
 js/app.js               Screens
 js/engine.js            Timers and the question sequence
+js/exam-run.js          Exam mode: one start, then official times
+js/class-run.js         Class mode: unlimited time, Done between questions
+js/narration.js         Pre-recorded narration clips
+js/checklist.js         Picture checklist and document facts
+js/estimate.js          Estimated 0–200 score and level
 js/audio.js             Microphone, beeps, MediaRecorder
 js/progress.js          Cloud progress pack (no audio)
 js/cloud.js             Sign-in pack load/save and score posts
@@ -113,7 +120,9 @@ Test the cloud path only with ids that start with `zz_test_`.
 
 Questions 1 and 2 are scored on the device after the recording stops. The checker is the shared pronunciation loader at `src/shared.js` on the pronunciation site. It uses one model file, `hubert-base-phoneme-en-int8.onnx`, assembled from `models/hubert/part-00.bin`, `part-01.bin`, and `part-02.bin`. The loader stores that file once per browser in the cache `mrj-hubert-phoneme-en-int8-v1`, so every MRJ app reuses it and a later visit still scores with no further download. Word colours are green at 75 and above, yellow from 50 to 74, and red under 50. The line passes when the average is 60 or above. Silence or the wrong passage asks the student to say it again and the saved score is 0/5. Otherwise that average becomes 1–5 stars (90 and above is 5, 80 is 4, 70 is 3, 60 is 2, below 60 is 1).
 
-The score is saved with the existing account pack and score sheet. The item id is still `<test>:<question number>`. A read-aloud score is `N/5`. Questions 3 and 4 still use `gradeFree`, which returns `coming soon` (saved as 1/1 when a recording exists). `gradePaid` for questions 5–11 is unchanged. Audio is not uploaded.
+The score is saved with the existing account pack and score sheet. The item id is still `<test>:<question number>`. A read-aloud score is `N/5`. Questions 3 and 4 use the picture checklist when a transcript exists: weighted hits become 0–5 stars, matched details are ticked, missed main items stay visible, and a contradiction caps the score. With no transcript they still use `gradeFree` (`coming soon`, saved as 1/1 when a recording exists). Questions 5–11 can be sent to the marking Worker with Get AI marking. The Worker can return a band (0–3, or 0–5 on question 11) and a corrected answer. `gradePaid` is unchanged. Audio is not uploaded.
+
+A finished exam can show an estimated score from 0 to 200 and a level from AH down to NL. That figure is labelled estimate. It appears only after questions 1–4 have stars and questions 5–11 have bands. The same screen shows five part bars and a history chart built from the saved account pack. Nothing about progress is stored only on this computer.
 
 Test cloud saves only with ids that start with `zz_test_`.
 

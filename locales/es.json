@@ -16,7 +16,11 @@
     "savedCount": "{done} de {total} preguntas guardadas",
     "savedNone": "Todavía no hay respuestas guardadas para esta prueba.",
     "savedItem": "Pregunta {n}: {score}/{total}",
-    "savedDone": "Pregunta {n} guardada"
+    "savedDone": "Pregunta {n} guardada",
+    "exam": "Examen",
+    "classMode": "Clase",
+    "examHelp": "El modo examen usa los tiempos oficiales. Comprueba el micrófono, pulsa Inicio una vez y cada pregunta avanza sola.",
+    "classHelp": "El modo clase no tiene límite de tiempo. El reloj cuenta hacia arriba y muestra el tiempo oficial. Pulsa Listo cuando quieras."
   },
   "practice": {
     "title": "Práctica",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Cargando tu progreso guardado…",
     "error": "No se pudo cargar tu progreso guardado. Revisa la conexión e inténtalo de nuevo."
+  },
+  "exam": {
+    "micTitle": "Prueba del micrófono",
+    "micHelp": "Lee la frase en inglés en voz alta. Luego escúchala y comprueba que tu voz se oye clara.",
+    "record": "Grabar",
+    "recording": "Grabando…",
+    "playBack": "Reproducir",
+    "recordAgain": "Grabar otra vez",
+    "continue": "Continuar",
+    "level": "Nivel del micrófono",
+    "start": "Inicio",
+    "startHint": "Pulsa Inicio una sola vez. La práctica sigue sola.",
+    "leave": "Salir"
+  },
+  "classMode": {
+    "title": "Clase",
+    "help": "No hay límite de tiempo. El reloj cuenta hacia arriba y muestra el tiempo oficial. Pulsa Listo cuando quieras. La valoración aparece después de cada pregunta.",
+    "part": "Esta parte",
+    "back": "Volver al inicio",
+    "done": "Listo",
+    "target": "objetivo {time}",
+    "over": "Pasó el tiempo oficial",
+    "next": "Siguiente pregunta",
+    "finish": "Terminar",
+    "hear": "Oír otra vez",
+    "yourAnswer": "Tu respuesta",
+    "corrected": "Corregida",
+    "model": "Respuesta modelo",
+    "band": "Banda {score} de {max}",
+    "recorded": "Grabada",
+    "noTranscript": "Todavía no hay transcripción.",
+    "timeUsed": "Tiempo usado {used}s. Objetivo oficial {target}s."
+  },
+  "results": {
+    "estimate": "Estimación",
+    "score": "Puntuación estimada {score} / 200",
+    "level": "Nivel estimado {level}",
+    "partial": "Pronunciación ★ {pron} de 5. Imagen ★ {picture} de 5. Las otras preguntas están grabadas.",
+    "needMark": "Pide una corrección para ver la respuesta corregida y un nivel estimado.",
+    "fixFirst": "Mejora primero esta parte",
+    "parts": "Partes",
+    "history": "Historial de puntuaciones",
+    "historyEmpty": "Todavía no hay puntuaciones estimadas. Termina un examen y corrige las últimas preguntas para verlas aquí.",
+    "checklist": "Lista de la imagen",
+    "capped": "Una frase que no coincide con la imagen limitó esta puntuación.",
+    "facts": "Datos del documento",
+    "recorded": "Grabada",
+    "examDone": "Terminaste este examen. Las puntuaciones están abajo.",
+    "classDone": "La valoración de la clase está guardada. Las puntuaciones están abajo."
+  },
+  "levels": {
+    "AH": "Puede mantener una respuesta clara y detallada con gramática y vocabulario estables.",
+    "AM": "Puede desarrollar una respuesta con razones y hacerse entender.",
+    "AL": "Puede dar una respuesta completa y apoyarla, con algunas frases irregulares.",
+    "IH": "Puede responder y añadir una razón, con algunas pausas o fallos de gramática.",
+    "IM3": "Puede dar una respuesta pertinente y una razón en frases cortas enlazadas.",
+    "IM2": "Puede responder con frases simples y un apoyo breve.",
+    "IM1": "Puede responder con frases cortas y un vocabulario limitado.",
+    "IL": "Puede decir unas frases relacionadas, con pausas frecuentes.",
+    "NH": "Puede usar palabras y frases cortas que encajan con la pregunta.",
+    "NM": "Puede decir unas palabras conocidas relacionadas con la pregunta.",
+    "NL": "Puede decir unas palabras sueltas, o la respuesta es difícil de seguir."
   }
 }

@@ -16,7 +16,11 @@
     "savedCount": "{done} of {total} questions saved",
     "savedNone": "No saved answers for this test yet.",
     "savedItem": "Question {n}: {score}/{total}",
-    "savedDone": "Question {n} saved"
+    "savedDone": "Question {n} saved",
+    "exam": "Exam",
+    "classMode": "Class",
+    "examHelp": "Exam mode uses the official times. Check the microphone, press Start once, and every question moves ahead by itself.",
+    "classHelp": "Class mode has no time limit. The clock counts up and shows the official target. Press Done when you are ready."
   },
   "practice": {
     "title": "Practice",
@@ -126,5 +130,67 @@
   "account": {
     "loading": "Loading your saved progress…",
     "error": "Your saved progress could not be loaded. Check your connection and try again."
+  },
+  "exam": {
+    "micTitle": "Microphone check",
+    "micHelp": "Read the English sentence aloud. Then play it back and check that your voice is clear.",
+    "record": "Record",
+    "recording": "Recording…",
+    "playBack": "Play back",
+    "recordAgain": "Record again",
+    "continue": "Continue",
+    "level": "Microphone level",
+    "start": "Start",
+    "startHint": "Press Start once. The practice continues by itself.",
+    "leave": "Leave"
+  },
+  "classMode": {
+    "title": "Class",
+    "help": "Time is unlimited. The clock counts up and shows the official target. Press Done when you are ready. Feedback appears after each question.",
+    "part": "This part",
+    "back": "Back to start",
+    "done": "Done",
+    "target": "target {time}",
+    "over": "Past the official target",
+    "next": "Next question",
+    "finish": "Finish",
+    "hear": "Hear again",
+    "yourAnswer": "Your answer",
+    "corrected": "Corrected",
+    "model": "Model answer",
+    "band": "Band {score} of {max}",
+    "recorded": "Recorded",
+    "noTranscript": "No transcript yet.",
+    "timeUsed": "Time used {used}s. Official target {target}s."
+  },
+  "results": {
+    "estimate": "Estimate",
+    "score": "Estimated score {score} / 200",
+    "level": "Estimated level {level}",
+    "partial": "Pronunciation ★ {pron}/5. Picture ★ {picture}/5. Other questions are recorded.",
+    "needMark": "Ask for a mark to see a corrected answer and an estimated level.",
+    "fixFirst": "Fix this part first",
+    "parts": "Parts",
+    "history": "Score history",
+    "historyEmpty": "No estimated scores yet. Finish an exam and mark the later questions to see them here.",
+    "checklist": "Picture checklist",
+    "capped": "A statement that does not match the picture limited this score.",
+    "facts": "Document facts",
+    "recorded": "Recorded",
+    "examDone": "You finished this exam. Question scores are below.",
+    "classDone": "Class feedback is saved. Question scores are below."
+  },
+  "levels": {
+    "AH": "Can keep a clear, detailed answer going with steady grammar and vocabulary.",
+    "AM": "Can develop an answer with reasons and stay easy to follow.",
+    "AL": "Can give a full answer and support it, with a few uneven sentences.",
+    "IH": "Can answer and add a reason, with some pauses or grammar slips.",
+    "IM3": "Can give a relevant answer and one reason in short connected sentences.",
+    "IM2": "Can answer in simple sentences, with thin support.",
+    "IM1": "Can respond with short sentences and a limited range of words.",
+    "IL": "Can say a few related sentences, with frequent pauses.",
+    "NH": "Can use words and short phrases that fit the question.",
+    "NM": "Can say a few familiar words that relate to the question.",
+    "NL": "Can say a few isolated words, or the answer is hard to follow."
   }
 }

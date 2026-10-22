@@ -33,13 +33,19 @@ function postScore(scores, fields) {
 }
 
 function readPack(json) {
-  if (!json) return { v: 1, tests: {} };
+  if (!json) return { v: 1, tests: {}, items: {}, attempts: [] };
   const parsed = JSON.parse(String(json));
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
     throw new Error("pack");
   }
-  const tests = parsed.tests && typeof parsed.tests === "object" ? parsed.tests : {};
-  return { v: 1, tests: { ...tests } };
+  const tests = parsed.tests && typeof parsed.tests === "object" && !Array.isArray(parsed.tests)
+    ? parsed.tests
+    : {};
+  const items = parsed.items && typeof parsed.items === "object" && !Array.isArray(parsed.items)
+    ? parsed.items
+    : {};
+  const attempts = Array.isArray(parsed.attempts) ? parsed.attempts : [];
+  return { v: 1, tests: { ...tests }, items, attempts };
 }
 
 export async function savePaidResult(grade, deps) {
