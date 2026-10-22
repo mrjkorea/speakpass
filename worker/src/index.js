@@ -6,6 +6,7 @@ import { clearTokenCache, idKey, verifyPurchase } from "./play.js";
 import { buildMessages, normalizeAnswers } from "./prompt.js";
 import { applyModel, publicGrade } from "./score.js";
 import { verifySession } from "./session.js";
+import { AUDIO_B64_CAP, cachedSession, reserveTranscribe, runWhisper } from "./transcribe.js";
 
 const BODY_CAP = 100000;
 
@@ -73,6 +74,9 @@ export async function handle(request, env, deps) {
     return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
   }
 
+  const path = new URL(request.url).pathname.replace(/\/+$/, "");
+  if (path === "/transcribe") return transcribe(request, env, kv, fetchImpl, nowSeconds, gate);
+
   let body;
   try {
     const text = await request.text();
@@ -133,6 +137,43 @@ export async function handle(request, env, deps) {
   }
   const scored = applyModel(built.pending, built.skipped, modelJson);
   return json(200, publicGrade(test, scored), gate.origin, gate.allow);
+}
+
+async function transcribe(request, env, kv, fetchImpl, nowSeconds, gate) {
+  if (!env.AI || typeof env.AI.run !== "function") {
+    return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
+  }
+  let body;
+  try {
+    const text = await request.text();
+    if (text.length > AUDIO_B64_CAP + 2000) {
+      return json(413, { ok: false, error: "too_long" }, gate.origin, gate.allow);
+    }
+    body = JSON.parse(text);
+  } catch {
+    return json(400, { ok: false, error: "bad_request" }, gate.origin, gate.allow);
+  }
+  const audio = String(body && body.audio || "");
+  if (!audio || audio.length > AUDIO_B64_CAP || !/^[A-Za-z0-9+/=]+$/.test(audio)) {
+    return json(400, { ok: false, error: "bad_request" }, gate.origin, gate.allow);
+  }
+  let session;
+  try {
+    session = await cachedSession(env, kv, body, fetchImpl);
+  } catch {
+    return json(503, { ok: false, error: "not_ready" }, gate.origin, gate.allow);
+  }
+  if (!session.ok) return json(401, { ok: false, error: "sign_in" }, gate.origin, gate.allow);
+  const slot = await reserveTranscribe(kv, session.studentId, nowSeconds);
+  if (!slot.ok) {
+    return json(slot.error === "not_ready" ? 503 : 429, { ok: false, error: slot.error }, gate.origin, gate.allow);
+  }
+  try {
+    const text = await runWhisper(env, audio);
+    return json(200, { ok: true, text }, gate.origin, gate.allow);
+  } catch {
+    return json(502, { ok: false, error: "transcribe_failed" }, gate.origin, gate.allow);
+  }
 }
 
 export default {
