@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "clips": {
     "cue.begin_preparing": "cue-begin_preparing.mp3",
     "cue.begin_speaking": "cue-begin_speaking.mp3",
