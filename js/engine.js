@@ -1,6 +1,7 @@
 import { activeStream, beep, startRecorder } from './audio.js';
 import { preloadWhistle } from './transcribe.js';
 import { startCountdown } from './timer.js';
+import { callerClipId, directionClipId, narrationPasses, playNarration, prepareNarration, questionClipId, setIntroClipId, stopNarration } from './narration.js';
 
 function uid() {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -25,6 +26,8 @@ export function createSession({ test, plan, mode, onView }) {
   let running = false;
   let started = false;
   let cancelTimer = () => {};
+  let heardIntro = false;
+  let heardCaller = false;
   const endWaiters = [];
   let endPromise = null;
   const answers = [];
@@ -58,6 +61,7 @@ export function createSession({ test, plan, mode, onView }) {
         const step = plan[index];
         if (step.kind === 'directions') {
           emit({ status: 'directions', step, stepIndex: index, phase: 'directions', remaining: 0, total: 0, recording: false });
+          prepareNarration().then(() => { if (!cancelled && plan[index] === step) playNarration(directionClipId(step.part)); }).catch(() => {});
           return;
         }
         if (step.kind === 'read_document') {
@@ -76,6 +80,23 @@ export function createSession({ test, plan, mode, onView }) {
         if (step.kind === 'question') {
           const q = step.question;
           const prep = Number(q.prep_sec) || 0;
+          // Spoken prompts, as in the real test: set intro, caller intro, then the question.
+          const clips = [];
+          if (q.type === 'respond_questions' && !heardIntro) { heardIntro = true; clips.push(setIntroClipId(test.id)); }
+          if (q.type === 'info_questions' && !heardCaller) { heardCaller = true; clips.push(callerClipId(test.id)); }
+          for (let pass = 0; pass < narrationPasses(q.q); pass += 1) clips.push(questionClipId(test.id, q.q));
+          if (clips.length) {
+            await prepareNarration();
+            for (const id of clips) {
+              if (cancelled) return;
+              emit({ status: 'running', step, stepIndex: index, phase: 'listen', remaining: prep, total: prep, recording: false });
+              const playback = playNarration(id);
+              cancelTimer = () => playback.stop();
+              await playback.done;
+              cancelTimer = () => {};
+            }
+            if (cancelled) return;
+          }
           const prepTimer = startCountdown(prep, (left) => {
             emit({ status: 'running', step, stepIndex: index, phase: 'prepare', remaining: left, total: prep, recording: false });
           });
@@ -149,6 +170,7 @@ export function createSession({ test, plan, mode, onView }) {
       if (cancelled) return;
       const step = plan[index];
       if (!step || step.kind !== 'directions') return;
+      stopNarration();
       index += 1;
       return proceed();
     },
@@ -156,6 +178,7 @@ export function createSession({ test, plan, mode, onView }) {
       if (endPromise) return endPromise;
       cancelled = true;
       try { cancelTimer(); } catch (err) { /* ignore */ }
+      stopNarration();
       if (!running) {
         attempt.complete = false;
         attempt.finishedAt = new Date().toISOString();

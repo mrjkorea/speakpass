@@ -26,7 +26,8 @@
     "fullExamLine": "Les 11 questions avec les temps officiels.",
     "practiceMode": "Entraînement",
     "practiceLine": "Choisissez une question, sans ou avec chrono.",
-    "details": "Détails"
+    "details": "Détails",
+    "hearVoice": "Écouter cette voix"
   },
   "practice": {
     "title": "Entraînement",
@@ -39,7 +40,8 @@
     "tryAgain": "Réessayer",
     "tryTimed": "Essayer avec chrono",
     "tryUntimed": "Essayer sans chrono",
-    "pickAnother": "Choisir une autre question"
+    "pickAnother": "Choisir une autre question",
+    "qRange": "Questions {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Image indisponible",
     "pictureAlt": "Image de la question {n}",
     "scenario": "Situation",
-    "caller": "Correspondant"
+    "caller": "Correspondant",
+    "listen": "Écoutez"
   },
   "review": {
     "title": "Réécoute",
@@ -126,7 +129,8 @@
     "sayAgain": "Dis-le encore. Dis chaque mot clairement.",
     "stars": "{n} sur 5",
     "checkFailed": "La prononciation n’a pas pu être vérifiée sur cet appareil. Ta réponse est quand même enregistrée.",
-    "weak": "Mots à travailler"
+    "weak": "Mots à travailler",
+    "listen": "Écouter ma réponse"
   },
   "common": {
     "language": "Langue",

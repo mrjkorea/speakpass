@@ -911,3 +911,16 @@ details.cloud .details-link { text-decoration: underline; margin-inline-start: 0
   .dock.actions .btn { width: auto; flex: 1 1 14rem; }
   .lang-big { max-width: 26rem; }
 }
+
+/* Round 1023b: big score, picture beside the tick list */
+.big-score { font-size: 2rem; margin: .5rem 0; display: flex; align-items: baseline; gap: .5rem; }
+.big-score strong { font-size: 2.6rem; line-height: 1; }
+.big-score-label { font-size: 1.1rem; font-weight: 600; opacity: .8; }
+.pic-checks { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+.pic-checks .frame { margin: 0; }
+.pic-checks .checks { list-style: none; padding: 0; margin: 0; }
+.pic-checks .check { display: flex; gap: .5rem; padding: .25rem 0; }
+.pic-checks .check .tick { font-weight: 700; width: 1.2em; flex: none; }
+.pic-checks .check.hit .tick { color: #1a7f37; }
+.pic-checks .check.miss .tick { color: #c62828; }
+@media (max-width: 720px) { .pic-checks { grid-template-columns: 1fr; } }

@@ -1,6 +1,16 @@
 import { beep } from './audio.js';
 import { beginCapture } from './capture.js';
 import { startCountup } from './timer.js';
+import {
+  callerClipId,
+  directionClipId,
+  narrationPasses,
+  playNarration,
+  prepareNarration,
+  questionClipId,
+  setIntroClipId,
+  stopNarration
+} from './narration.js';
 
 function uid() {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -21,6 +31,25 @@ export function createClassRun({ test, plan, onView }) {
   let count = null;
   let capture = null;
   const endWaiters = [];
+  let heardIntro = false;
+  let heardCaller = false;
+  let speakToken = 0;
+
+  // Untimed practice reads the directions and the questions aloud, like the real test. The clock still waits for Done.
+  async function narrate(ids) {
+    const token = ++speakToken;
+    try { await prepareNarration(); } catch (err) { return; }
+    for (const id of ids) {
+      if (cancelled || token !== speakToken) return;
+      const playback = playNarration(id);
+      await playback.done;
+    }
+  }
+
+  function hush() {
+    speakToken += 1;
+    stopNarration();
+  }
   let endPromise = null;
   const answers = [];
   const attempt = {
@@ -69,6 +98,7 @@ export function createClassRun({ test, plan, onView }) {
     if (step.kind === 'directions') {
       phase = 'directions';
       emit({ status: 'directions', phase, target: 0, elapsed: 0, recording: false });
+      narrate([directionClipId(step.part)]);
       return;
     }
     if (step.kind === 'read_document') {
@@ -87,6 +117,12 @@ export function createClassRun({ test, plan, onView }) {
         emit({ status: 'running', phase: 'prepare', elapsed, target, recording: false });
       });
       emit({ status: 'running', phase: 'prepare', elapsed: 0, target, recording: false });
+      const q = step.question;
+      const clips = [];
+      if (q.type === 'respond_questions' && !heardIntro) { heardIntro = true; clips.push(setIntroClipId(test.id)); }
+      if (q.type === 'info_questions' && !heardCaller) { heardCaller = true; clips.push(callerClipId(test.id)); }
+      for (let pass = 0; pass < narrationPasses(q.q); pass += 1) clips.push(questionClipId(test.id, q.q));
+      if (clips.length) narrate(clips);
     }
   }
 
@@ -136,6 +172,7 @@ export function createClassRun({ test, plan, onView }) {
       if (cancelled) return;
       const step = plan[index];
       if (!step || (step.kind !== 'directions' && step.kind !== 'read_document')) return;
+      hush();
       stopClock();
       index += 1;
       if (index >= plan.length) {
@@ -152,6 +189,7 @@ export function createClassRun({ test, plan, onView }) {
       const step = plan[index];
       if (!step || step.kind !== 'question') return;
       if (phase === 'prepare') {
+        hush();
         stopClock();
         beep('start');
         capture = beginCapture();
@@ -182,6 +220,7 @@ export function createClassRun({ test, plan, onView }) {
     end() {
       if (endPromise) return endPromise;
       cancelled = true;
+      hush();
       stopClock();
       const pending = capture;
       capture = null;

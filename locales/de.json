@@ -26,7 +26,8 @@
     "fullExamLine": "Alle 11 Fragen mit offiziellen Zeiten.",
     "practiceMode": "Üben",
     "practiceLine": "Eine Frage wählen, ohne oder mit Zeit.",
-    "details": "Details"
+    "details": "Details",
+    "hearVoice": "Diese Stimme anhören"
   },
   "practice": {
     "title": "Üben",
@@ -39,7 +40,8 @@
     "tryAgain": "Nochmal",
     "tryTimed": "Mit Zeit versuchen",
     "tryUntimed": "Ohne Zeit versuchen",
-    "pickAnother": "Andere Frage wählen"
+    "pickAnother": "Andere Frage wählen",
+    "qRange": "Fragen {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Bild nicht verfügbar",
     "pictureAlt": "Bild zu Frage {n}",
     "scenario": "Situation",
-    "caller": "Anrufer"
+    "caller": "Anrufer",
+    "listen": "Zuhören"
   },
   "review": {
     "title": "Rückblick",
@@ -126,7 +129,8 @@
     "sayAgain": "Sag es noch einmal. Sprich jedes Wort deutlich.",
     "stars": "{n} von 5",
     "checkFailed": "Die Aussprache konnte auf diesem Gerät nicht geprüft werden. Deine Antwort wird trotzdem gespeichert.",
-    "weak": "Wörter zum Üben"
+    "weak": "Wörter zum Üben",
+    "listen": "Meine Antwort anhören"
   },
   "common": {
     "language": "Sprache",

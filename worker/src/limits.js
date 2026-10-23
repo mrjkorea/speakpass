@@ -1,10 +1,10 @@
 import { idKey } from "./play.js";
 
-/** Caps for one UTC day. Chosen so a class can mark a test and retry, and a leaked key cannot run all day. */
+/** Caps for one UTC day. Pilot: every answer is marked automatically, so the per-student cap is high and the gap is short. */
 export const CAPS = {
-  studentPerDay: 3,
-  minGapSeconds: 60,
-  dailyTotal: 120
+  studentPerDay: 60,
+  minGapSeconds: 2,
+  dailyTotal: 1000
 };
 
 export function dayStamp(nowSeconds) {

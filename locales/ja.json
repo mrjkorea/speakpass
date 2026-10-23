@@ -26,7 +26,8 @@
     "fullExamLine": "全11問、公式の制限時間。",
     "practiceMode": "練習",
     "practiceLine": "1問を選んで、時間なしか時間ありで。",
-    "details": "詳細"
+    "details": "詳細",
+    "hearVoice": "この声を聞く"
   },
   "practice": {
     "title": "練習",
@@ -39,7 +40,8 @@
     "tryAgain": "もう一度",
     "tryTimed": "時間ありで挑戦",
     "tryUntimed": "時間なしで挑戦",
-    "pickAnother": "別の問題を選ぶ"
+    "pickAnother": "別の問題を選ぶ",
+    "qRange": "問題 {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "画像を表示できません",
     "pictureAlt": "問題 {n} の画像",
     "scenario": "状況",
-    "caller": "発信者"
+    "caller": "発信者",
+    "listen": "聞く"
   },
   "review": {
     "title": "振り返り",
@@ -126,7 +129,8 @@
     "sayAgain": "もう一度言ってください。一語ずつはっきり言ってください。",
     "stars": "5段階中 {n}",
     "checkFailed": "この端末では発音を確認できませんでした。回答は保存されます。",
-    "weak": "練習する語"
+    "weak": "練習する語",
+    "listen": "自分の解答を聞く"
   },
   "common": {
     "language": "言語",

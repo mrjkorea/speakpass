@@ -93,6 +93,7 @@ export async function handle(request, env, deps) {
   }
 
   let studentId = "";
+  const timing = { signInMs: 0, modelMs: 0, tokensIn: 0, tokensOut: 0 };
   if (mode === "play") {
     let owned;
     try {
@@ -106,6 +107,7 @@ export async function handle(request, env, deps) {
     studentId = idKey(body.studentId) || idKey(body.purchaseToken).slice(0, 40);
   } else {
     let session;
+    const t0 = Date.now();
     try {
       session = await verifySession(env, body, fetchImpl);
     } catch {
@@ -115,6 +117,7 @@ export async function handle(request, env, deps) {
       return json(401, { ok: false, error: "sign_in" }, gate.origin, gate.allow);
     }
     studentId = session.studentId;
+    timing.signInMs = Date.now() - t0;
   }
 
   const slot = await reserveGrade(kv, studentId, nowSeconds);
@@ -127,14 +130,18 @@ export async function handle(request, env, deps) {
   let modelJson = { questions: [] };
   if (built.pending.length) {
     try {
+      const t1 = Date.now();
       const graded = await gradeTranscripts(env, built.messages, fetchImpl);
+      timing.modelMs = Date.now() - t1;
+      timing.tokensIn = graded.usage.hit + graded.usage.miss;
+      timing.tokensOut = graded.usage.output;
       modelJson = graded.parsed;
     } catch {
       return json(502, { ok: false, error: "grade_failed" }, gate.origin, gate.allow);
     }
   }
   const scored = applyModel(built.pending, built.skipped, modelJson);
-  return json(200, publicGrade(test, scored), gate.origin, gate.allow);
+  return json(200, { ...publicGrade(test, scored), timing }, gate.origin, gate.allow);
 }
 
 export default {

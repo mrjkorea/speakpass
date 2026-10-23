@@ -26,7 +26,8 @@
     "fullExamLine": "All 11 questions with official timers.",
     "practiceMode": "Practice",
     "practiceLine": "Pick one question, untimed or timed.",
-    "details": "Details"
+    "details": "Details",
+    "hearVoice": "Hear this voice"
   },
   "practice": {
     "title": "Practice",
@@ -39,7 +40,8 @@
     "tryAgain": "Try again",
     "tryTimed": "Try it timed",
     "tryUntimed": "Try it untimed",
-    "pickAnother": "Choose another question"
+    "pickAnother": "Choose another question",
+    "qRange": "Questions {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Picture not available",
     "pictureAlt": "Picture for question {n}",
     "scenario": "Situation",
-    "caller": "Caller"
+    "caller": "Caller",
+    "listen": "Listen"
   },
   "review": {
     "title": "Review",
@@ -126,7 +129,8 @@
     "sayAgain": "Say it again. Say each word clearly.",
     "stars": "{n} out of 5",
     "checkFailed": "Pronunciation could not be checked on this device. Your answer is still saved.",
-    "weak": "Words to practice"
+    "weak": "Words to practice",
+    "listen": "Listen to my answer"
   },
   "common": {
     "language": "Language",

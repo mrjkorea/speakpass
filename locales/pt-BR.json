@@ -26,7 +26,8 @@
     "fullExamLine": "As 11 questões com tempos oficiais.",
     "practiceMode": "Praticar",
     "practiceLine": "Escolha uma questão, sem tempo ou com tempo.",
-    "details": "Detalhes"
+    "details": "Detalhes",
+    "hearVoice": "Ouvir esta voz"
   },
   "practice": {
     "title": "Praticar",
@@ -39,7 +40,8 @@
     "tryAgain": "Tentar de novo",
     "tryTimed": "Tentar com tempo",
     "tryUntimed": "Tentar sem tempo",
-    "pickAnother": "Escolher outra questão"
+    "pickAnother": "Escolher outra questão",
+    "qRange": "Perguntas {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Imagem indisponível",
     "pictureAlt": "Imagem da pergunta {n}",
     "scenario": "Situação",
-    "caller": "Quem liga"
+    "caller": "Quem liga",
+    "listen": "Ouça"
   },
   "review": {
     "title": "Revisão",
@@ -126,7 +129,8 @@
     "sayAgain": "Diga de novo. Diga cada palavra com clareza.",
     "stars": "{n} de 5",
     "checkFailed": "Não foi possível verificar a pronúncia neste aparelho. Sua resposta ainda é salva.",
-    "weak": "Palavras para praticar"
+    "weak": "Palavras para praticar",
+    "listen": "Ouvir minha resposta"
   },
   "common": {
     "language": "Idioma",
