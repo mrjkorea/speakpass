@@ -21,13 +21,25 @@
     "classMode": "Class",
     "examHelp": "Exam mode uses the official times. Check the microphone, press Start once, and every question moves ahead by itself.",
     "classHelp": "Class mode has no time limit. The clock counts up and shows the official target. Press Done when you are ready.",
-    "chooseVoice": "Narration voice"
+    "chooseVoice": "Narration voice",
+    "fullExam": "Full Exam",
+    "fullExamLine": "All 11 questions with official timers.",
+    "practiceMode": "Practice",
+    "practiceLine": "Pick one question, untimed or timed.",
+    "details": "Details"
   },
   "practice": {
     "title": "Practice",
     "help": "Choose one question, or practice every question in a part. You can try again as many times as you want.",
     "part": "Practice this part",
-    "back": "Back to start"
+    "back": "Back to start",
+    "pickHelp": "Choose a question. Untimed has no time limit. Timed uses the official timers.",
+    "untimed": "Untimed",
+    "timed": "Timed",
+    "tryAgain": "Try again",
+    "tryTimed": "Try it timed",
+    "tryUntimed": "Try it untimed",
+    "pickAnother": "Choose another question"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Recorded",
     "examDone": "You finished this exam. Question scores are below.",
     "classDone": "Class feedback is saved. Question scores are below.",
-    "pronunciation": "Pronunciation"
+    "pronunciation": "Pronunciation",
+    "tip": "Tip"
   },
   "levels": {
     "AH": "Can keep a clear, detailed answer going with steady grammar and vocabulary.",
@@ -204,5 +217,12 @@
     "au-f": "Australian woman",
     "au-m": "Australian man",
     "nz-f": "New Zealand woman"
+  },
+  "tips": {
+    "read_aloud": "Pause at commas and periods. Stress key words. Let your voice fall at the end of a sentence.",
+    "describe_picture": "Describe the main scene first, then people, actions and background. Use the present continuous.",
+    "respond_questions": "Answer the question directly first, then add one reason or detail.",
+    "info_questions": "Find the exact line in the schedule. Say times, places and names clearly.",
+    "opinion": "Say your opinion, give two reasons with an example, then repeat your opinion."
   }
 }

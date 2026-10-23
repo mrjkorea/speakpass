@@ -21,13 +21,25 @@
     "classMode": "课堂",
     "examHelp": "考试模式使用正式时间。先检查麦克风，按一次开始，之后每道题会自动前进。",
     "classHelp": "课堂模式不限时。时钟向上计时，并显示正式目标时间。准备好后按完成。",
-    "chooseVoice": "朗读声音"
+    "chooseVoice": "朗读声音",
+    "fullExam": "完整模考",
+    "fullExamLine": "全部11题，使用官方计时。",
+    "practiceMode": "练习",
+    "practiceLine": "选一道题，不计时或计时。",
+    "details": "详情"
   },
   "practice": {
     "title": "练习",
     "help": "可以选择一道题，也可以练习某一部分的全部题目。可以反复重试。",
     "part": "练习这一部分",
-    "back": "返回开始"
+    "back": "返回开始",
+    "pickHelp": "选择一道题。不计时没有时间限制，计时使用官方时间。",
+    "untimed": "不计时",
+    "timed": "计时",
+    "tryAgain": "再试一次",
+    "tryTimed": "计时再试",
+    "tryUntimed": "不计时再试",
+    "pickAnother": "选择其他题目"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "已录音",
     "examDone": "考试已完成。各题分数在下面。",
     "classDone": "课堂反馈已保存。各题分数在下面。",
-    "pronunciation": "发音"
+    "pronunciation": "发音",
+    "tip": "提示"
   },
   "levels": {
     "AH": "能用稳定的语法和词汇，把清楚、详细的回答说下去。",
@@ -204,5 +217,12 @@
     "au-f": "澳大利亚女声",
     "au-m": "澳大利亚男声",
     "nz-f": "新西兰女声"
+  },
+  "tips": {
+    "read_aloud": "在逗号和句号处停顿。重读关键词，句末语调下降。",
+    "describe_picture": "先描述整体场景，再说人物、动作和背景。使用现在进行时。",
+    "respond_questions": "先直接回答问题，再补充一个理由或细节。",
+    "info_questions": "在日程表中找到准确的那一行。清楚地说出时间、地点和名字。",
+    "opinion": "先表明观点，给出两个理由并举例，最后重申观点。"
   }
 }

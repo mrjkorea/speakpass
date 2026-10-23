@@ -21,13 +21,25 @@
     "classMode": "Lezione",
     "examHelp": "La modalità esame usa i tempi ufficiali. Controlla il microfono, premi Avvia una volta e ogni domanda va avanti da sola.",
     "classHelp": "La modalità lezione non ha un limite di tempo. L’orologio conta e mostra il tempo ufficiale. Premi Fatto quando sei pronto.",
-    "chooseVoice": "Voce narrante"
+    "chooseVoice": "Voce narrante",
+    "fullExam": "Esame completo",
+    "fullExamLine": "Tutte le 11 domande con i tempi ufficiali.",
+    "practiceMode": "Pratica",
+    "practiceLine": "Scegli una domanda, senza tempo o a tempo.",
+    "details": "Dettagli"
   },
   "practice": {
     "title": "Pratica",
     "help": "Scegli una domanda oppure esercitati su tutte le domande di una parte. Puoi riprovare tutte le volte che vuoi.",
     "part": "Esercitati su questa parte",
-    "back": "Torna all’inizio"
+    "back": "Torna all’inizio",
+    "pickHelp": "Scegli una domanda. Senza tempo non c'è limite. A tempo usa i tempi ufficiali.",
+    "untimed": "Senza tempo",
+    "timed": "A tempo",
+    "tryAgain": "Riprova",
+    "tryTimed": "Prova a tempo",
+    "tryUntimed": "Prova senza tempo",
+    "pickAnother": "Scegli un'altra domanda"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Registrata",
     "examDone": "Hai finito questo esame. I punteggi sono sotto.",
     "classDone": "Il commento della lezione è salvato. I punteggi sono sotto.",
-    "pronunciation": "Pronuncia"
+    "pronunciation": "Pronuncia",
+    "tip": "Consiglio"
   },
   "levels": {
     "AH": "Può continuare una risposta chiara e dettagliata con grammatica e vocabolario stabili.",
@@ -204,5 +217,12 @@
     "au-f": "Donna australiana",
     "au-m": "Uomo australiano",
     "nz-f": "Donna neozelandese"
+  },
+  "tips": {
+    "read_aloud": "Fai una pausa a virgole e punti. Metti l'accento sulle parole chiave. Abbassa la voce a fine frase.",
+    "describe_picture": "Descrivi prima la scena generale, poi persone, azioni e sfondo. Usa il present continuous.",
+    "respond_questions": "Rispondi prima direttamente, poi aggiungi un motivo o un dettaglio.",
+    "info_questions": "Trova la riga esatta nel programma. Di' chiaramente orari, luoghi e nomi.",
+    "opinion": "Esprimi la tua opinione, dai due motivi con un esempio e ripeti l'opinione."
   }
 }

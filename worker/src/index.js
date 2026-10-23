@@ -123,7 +123,7 @@ export async function handle(request, env, deps) {
     return json(status, { ok: false, error: slot.error }, gate.origin, gate.allow);
   }
 
-  const built = buildMessages(test, answers);
+  const built = buildMessages(test, answers, body && body.lang);
   let modelJson = { questions: [] };
   if (built.pending.length) {
     try {

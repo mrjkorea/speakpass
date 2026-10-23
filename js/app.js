@@ -832,8 +832,7 @@ function onClick(event) {
   const button = event.target.closest('[data-action]');
   if (!button || button.disabled) return;
   const action = button.dataset.action;
-  if (action === 'full') startSession({ mode: 'full' });
-  else if (action === 'exam') openExam();
+  if (action === 'exam') openExam();
   else if (action === 'class') openClass();
   else if (action === 'exam-record') examRecord();
   else if (action === 'exam-playback') examPlayback();
@@ -851,10 +850,10 @@ function onClick(event) {
   else if (action === 'class-done') classDone();
   else if (action === 'class-hear') classHear();
   else if (action === 'class-next' && state.session) state.session.next();
-  else if (action === 'practice') {
-    state.screen = 'practice';
-    render();
-  } else if (action === 'home' || action === 'back') goHome();
+  else if (action === 'practice') openClass();
+  else if (action === 'try-untimed') startClass({ scope: 'question', q: Number(button.dataset.q) });
+  else if (action === 'try-timed') startSession({ mode: 'practice', scope: 'question', q: Number(button.dataset.q) });
+  else if (action === 'home' || action === 'back') goHome();
   else if (action === 'practice-q') {
     startSession({ mode: 'practice', scope: 'question', q: Number(button.dataset.q) });
   } else if (action === 'practice-part') {
@@ -996,7 +995,7 @@ async function storeMarks(attempt, marks) {
 }
 
 function onChange(event) {
-  if (event.target.id === 'lang') setLang(event.target.value);
+  if (event.target.id === 'lang' || event.target.hasAttribute('data-lang-select')) setLang(event.target.value);
   if (event.target.id === 'voice-select') chooseVoice(event.target.value);
   if (event.target.id === 'test-select') {
     state.testId = event.target.value;
@@ -1056,16 +1055,37 @@ function dialogHtml() {
 }
 
 function legalHtml() {
-  const enTag = lookup(state.en, 'home.tagline');
-  const enDis = lookup(state.en, 'home.disclaimer');
-  const parts = [];
-  if (state.lang !== 'en') {
-    parts.push(`<p class="tagline">${escapeHtml(t('home.tagline'))}</p>`);
-    parts.push(`<p class="disclaimer">${escapeHtml(t('home.disclaimer'))}</p>`);
+  return `<p class="disclaimer">${escapeHtml(t('home.tagline'))} ${escapeHtml(t('home.disclaimer'))}</p>`;
+}
+
+function langOptions() {
+  return LANGS.map((lang) => {
+    const selected = lang.id === state.lang ? ' selected' : '';
+    return `<option value="${escapeHtml(lang.id)}"${selected}>${escapeHtml(lang.label)}</option>`;
+  }).join('');
+}
+
+/** Small language picker for screens with their own header (exam) or the sign-in overlay. */
+function langMini(extraClass = '') {
+  return `<label class="lang-mini ${extraClass}"><span aria-hidden="true">🌐</span><span class="sr-only">${escapeHtml(t('common.language'))}</span><select data-lang-select aria-label="${escapeHtml(t('common.language'))}">${langOptions()}</select></label>`;
+}
+
+function syncLangFloat() {
+  let node = document.getElementById('lang-float');
+  if (!node) {
+    node = document.createElement('div');
+    node.id = 'lang-float';
+    document.body.appendChild(node);
   }
-  parts.push(`<p class="tagline" lang="en" dir="ltr">${escapeHtml(enTag)}</p>`);
-  parts.push(`<p class="disclaimer" lang="en" dir="ltr">${escapeHtml(enDis)}</p>`);
-  return parts.join('');
+  const signedIn = !!studentId() && state.packStatus === 'ready';
+  node.hidden = signedIn || !state.en;
+  if (!node.hidden) node.innerHTML = langMini('float');
+}
+
+function tipFor(type) {
+  const key = `tips.${type}`;
+  const text = t(key);
+  return text && text !== key ? text : '';
 }
 
 function renderHome() {
@@ -1078,25 +1098,24 @@ function renderHome() {
     return `<option value="${escapeHtml(item.id)}"${selected}>${escapeHtml(item.title)}</option>`;
   }).join('');
   return shell(`
-    <p class="eyebrow">${escapeHtml(t('home.eyebrow'))}</p>
-    <h1>${escapeHtml(t('appName'))}</h1>
-    <div class="legal">${legalHtml()}</div>
-    <label class="field">
-      <span>${escapeHtml(t('home.chooseTest'))}</span>
-      <select id="test-select" lang="en" dir="ltr">${options}</select>
+    <h1 class="home-title">${escapeHtml(t('appName'))}</h1>
+    <label class="field lang-big">
+      <span>🌐 ${escapeHtml(t('common.language'))}</span>
+      <select data-lang-select>${langOptions()}</select>
     </label>
-    <p class="count">${escapeHtml(t('home.questionCount', { count: test.questions.length }))}</p>
-    ${cloudHtml(test)}
-    ${voiceHtml()}
-    <p class="note">${escapeHtml(t('home.micNote'))}</p>
-    <div class="dock actions">
-      <button type="button" class="btn primary" data-action="exam">${escapeHtml(t('home.exam'))}</button>
-      <button type="button" class="btn primary" data-action="class">${escapeHtml(t('home.classMode'))}</button>
-      <button type="button" class="btn secondary" data-action="full">${escapeHtml(t('home.fullTest'))}</button>
-      <button type="button" class="btn secondary" data-action="practice">${escapeHtml(t('home.practice'))}</button>
+    <div class="home-fields">
+      <label class="field">
+        <span>${escapeHtml(t('home.chooseTest'))}</span>
+        <select id="test-select" lang="en" dir="ltr">${options}</select>
+      </label>
+      ${voiceHtml()}
     </div>
-    <p class="note">${escapeHtml(t('home.examHelp'))}</p>
-    <p class="note">${escapeHtml(t('home.classHelp'))}</p>
+    <div class="mode-pick">
+      <button type="button" class="btn primary mode-btn" data-action="exam"><strong>${escapeHtml(t('home.fullExam'))}</strong><small>${escapeHtml(t('home.fullExamLine'))}</small></button>
+      <button type="button" class="btn primary mode-btn alt" data-action="practice"><strong>${escapeHtml(t('home.practiceMode'))}</strong><small>${escapeHtml(t('home.practiceLine'))}</small></button>
+    </div>
+    ${cloudHtml(test)}
+    <div class="legal">${legalHtml()}</div>
   `);
 }
 
@@ -1144,14 +1163,14 @@ function savedLabel(row, q) {
 function cloudHtml(test) {
   const rows = questionsForTest(state.pack, test.id);
   const count = t('home.savedCount', { done: rows.length, total: test.questions.length });
-  const body = rows.length
-    ? `<p>${escapeHtml(count)}</p><ul>${rows.map((row) => `<li data-saved-q="${row.q}">${escapeHtml(savedLabel(row, row.q))}</li>`).join('')}</ul>`
+  const list = rows.length
+    ? `<ul>${rows.map((row) => `<li data-saved-q="${row.q}">${escapeHtml(savedLabel(row, row.q))}</li>`).join('')}</ul>`
     : `<p>${escapeHtml(t('home.savedNone'))}</p>`;
   return `
-    <section class="cloud" id="saved-progress" aria-labelledby="saved-title">
-      <h2 id="saved-title">${escapeHtml(t('home.savedTitle'))}</h2>
-      ${body}
-    </section>`;
+    <details class="cloud" id="saved-progress">
+      <summary><span id="saved-title">${escapeHtml(t('home.savedTitle'))}: ${escapeHtml(count)}</span> <span class="details-link">${escapeHtml(t('home.details'))}</span></summary>
+      ${list}
+    </details>`;
 }
 
 function renderAccount() {
@@ -1163,39 +1182,6 @@ function renderAccount() {
     <h1>${escapeHtml(t('appName'))}</h1>
     <div class="legal">${legalHtml()}</div>
     ${body}
-  `);
-}
-
-function renderPractice() {
-  const test = currentTest();
-  if (!test) return renderHome();
-  const groups = new Map();
-  for (const q of [...test.questions].sort((a, b) => a.q - b.q)) {
-    const type = questionType(q);
-    if (!groups.has(type)) groups.set(type, []);
-    groups.get(type).push(q);
-  }
-  const cards = PART_ORDER.filter((id) => groups.has(id)).map((id) => {
-    const questions = groups.get(id);
-    const buttons = questions.map((q) => {
-      const saved = savedQuestion(state.pack, test.id, q.q);
-      const label = saved ? savedLabel(saved, q.q) : t('run.qLabel', { n: q.q });
-      const cls = saved ? 'btn secondary is-saved' : 'btn secondary';
-      const mark = saved ? ' data-saved="1"' : '';
-      return `<button type="button" class="${cls}" data-action="practice-q" data-q="${q.q}"${mark}>${escapeHtml(label)}</button>`;
-    }).join('');
-    return `
-      <section class="part-card">
-        <h2>${escapeHtml(t(`parts.${id}.title`))}</h2>
-        <button type="button" class="btn primary" data-action="practice-part" data-part="${escapeHtml(id)}">${escapeHtml(t('practice.part'))}</button>
-        <div class="q-row">${buttons}</div>
-      </section>`;
-  }).join('');
-  return shell(`
-    <h1>${escapeHtml(t('practice.title'))}</h1>
-    <p>${escapeHtml(t('practice.help'))}</p>
-    ${cards}
-    <button type="button" class="btn secondary dock" data-action="back">${escapeHtml(t('practice.back'))}</button>
   `);
 }
 
@@ -1486,7 +1472,14 @@ function answerCard(ans, grades, source, marks) {
     const value = grades.free ? grades.free[ans.q] : '';
     scoreBlock = `<p class="score">${escapeHtml(t('review.deviceScore'))}: ${escapeHtml(String(value || ''))}</p>`;
   }
-  const comment = ai && ai.comment ? `<p class="note">${escapeHtml(ai.comment)}</p>` : '';
+  const comment = ai && ai.comment ? `<p class="note ai-comment">${escapeHtml(ai.comment)}</p>` : '';
+  const partTip = tipFor(ans.type);
+  const tips = (ai && ai.tip) || partTip ? `
+    <section class="tips">
+      <h3>💡 ${escapeHtml(t('results.tip'))}</h3>
+      ${ai && ai.tip ? `<p>${escapeHtml(ai.tip)}</p>` : ''}
+      ${partTip ? `<p class="note">${escapeHtml(partTip)}</p>` : ''}
+    </section>` : '';
   const said = String(ans.transcript || '').trim();
   const compare = ans.q >= 3 ? `
     <div class="compare">
@@ -1532,6 +1525,7 @@ function answerCard(ans, grades, source, marks) {
       ${scoreBlock}
       ${ans.q >= 3 ? pronLine(ans.pron) : ''}
       ${comment}
+      ${tips}
       ${compare}
       ${model}
       ${facts}
@@ -1565,9 +1559,15 @@ function renderReview() {
     const source = test && test.questions.find((item) => item.q === ans.q);
     return answerCard(ans, grades, source, state.review.marks);
   }).join('');
-  const retry = attempt.mode === 'practice' || attempt.mode === 'class'
+  const sel = state.review.selection;
+  const oneQ = sel && sel.scope === 'question' && sel.q;
+  let retry = attempt.mode === 'practice' || attempt.mode === 'class'
     ? `<button type="button" class="btn secondary" data-action="retry">${escapeHtml(t('review.retry'))}</button>`
     : '';
+  if (oneQ && attempt.mode === 'practice') {
+    retry += `<button type="button" class="btn secondary" data-action="try-untimed" data-q="${oneQ}">${escapeHtml(t('practice.tryUntimed'))}</button>
+      <button type="button" class="btn secondary" data-action="practice">${escapeHtml(t('practice.pickAnother'))}</button>`;
+  }
   const canMark = attempt.answers.some((ans) => ans.q >= 5 && ans.q <= 11);
   const mark = canMark
     ? `<button type="button" class="btn primary" data-action="mark" ${state.review.marking ? 'disabled' : ''}>${escapeHtml(state.review.marking ? t('review.marking') : t('review.mark'))}</button>`
@@ -1618,26 +1618,33 @@ function renderClass() {
     groups.get(type).push(q);
   }
   const cards = PART_ORDER.filter((id) => groups.has(id)).map((id) => {
-    const questions = groups.get(id);
-    const buttons = questions.map((q) => `
-      <button type="button" class="btn secondary" data-action="class-q" data-q="${q.q}">${escapeHtml(t('run.qLabel', { n: q.q }))}</button>
-    `).join('');
+    const rows = groups.get(id).map((q) => `
+      <li class="pick-row">
+        <span class="pick-q">${escapeHtml(t('run.qLabel', { n: q.q }))}</span>
+        <button type="button" class="btn secondary" data-action="class-q" data-q="${q.q}">${escapeHtml(t('practice.untimed'))}</button>
+        <button type="button" class="btn primary" data-action="practice-q" data-q="${q.q}">${escapeHtml(t('practice.timed'))}</button>
+      </li>`).join('');
+    const tip = tipFor(id);
     return `
       <section class="part-card">
         <h2>${escapeHtml(t(`parts.${id}.title`))}</h2>
-        <button type="button" class="btn primary" data-action="class-part" data-part="${escapeHtml(id)}">${escapeHtml(t('classMode.part'))}</button>
-        <div class="q-row">${buttons}</div>
+        ${tip ? `<p class="tip">💡 ${escapeHtml(tip)}</p>` : ''}
+        <ul class="pick-list">${rows}</ul>
       </section>`;
   }).join('');
   return shell(`
-    <h1>${escapeHtml(t('classMode.title'))}</h1>
-    <p>${escapeHtml(t('classMode.help'))}</p>
-    ${cards}
-    <button type="button" class="btn secondary dock" data-action="back">${escapeHtml(t('classMode.back'))}</button>
+    <h1>${escapeHtml(t('practice.title'))}</h1>
+    <p>${escapeHtml(t('practice.pickHelp'))}</p>
+    <div class="part-grid">${cards}</div>
+    <button type="button" class="btn secondary dock" data-action="back">${escapeHtml(t('practice.back'))}</button>
   `);
 }
 
 function renderExam() {
+  return renderExamInner().replace('</header>', `${langMini('exam-lang')}</header>`);
+}
+
+function renderExamInner() {
   const dialog = dialogFragment();
   if (state.examStage === 'run' && state.view) return examRunHtml({ t, view: state.view, dialog });
   if (state.examStage === 'intro') return examIntroHtml({ t, dialog });
@@ -1667,13 +1674,21 @@ function renderClassRun() {
       ? `<button type="button" class="btn primary" data-action="mark" ${state.classFeedback.marking ? 'disabled' : ''}>${escapeHtml(state.classFeedback.marking ? t('review.marking') : t('review.mark'))}</button>`
       : '';
     const last = view.stepIndex >= ((state.session && state.session.plan.length - 1) || 0);
+    const single = state.selection && state.selection.scope === 'question';
+    const again = ans ? `
+        <button type="button" class="btn secondary" data-action="try-untimed" data-q="${ans.q}">${escapeHtml(t('practice.tryAgain'))}</button>
+        <button type="button" class="btn primary" data-action="try-timed" data-q="${ans.q}">${escapeHtml(t('practice.tryTimed'))}</button>` : '';
+    const next = single
+      ? `<button type="button" class="btn secondary" data-action="practice">${escapeHtml(t('practice.pickAnother'))}</button>`
+      : `<button type="button" class="btn secondary" data-action="class-next">${escapeHtml(last ? t('classMode.finish') : t('classMode.next'))}</button>`;
     return shell(`
       <h1 id="step-title" tabindex="-1">${escapeHtml(t('review.title'))}</h1>
       ${card}
       ${note}
       <div class="dock actions">
         ${mark}
-        <button type="button" class="btn secondary" data-action="class-next">${escapeHtml(last ? t('classMode.finish') : t('classMode.next'))}</button>
+        ${again}
+        ${next}
       </div>
     `, { showEnd: true });
   }
@@ -1694,7 +1709,7 @@ function viewForScreen() {
   if (state.screen === 'loading') return renderLoading();
   if (state.screen === 'account') return renderAccount();
   if (state.screen === 'error') return renderError();
-  if (state.screen === 'practice') return renderPractice();
+  if (state.screen === 'practice') return renderClass();
   if (state.screen === 'class') return renderClass();
   if (state.screen === 'exam') return renderExam();
   if (state.screen === 'class-run') return renderClassRun();
@@ -1710,6 +1725,7 @@ function render(opts = {}) {
   const screenChanged = renderedScreen !== state.screen;
   renderedScreen = state.screen;
   root.innerHTML = viewForScreen();
+  syncLangFloat();
   const skip = document.querySelector('.skip');
   if (skip && state.en) skip.textContent = t('a11y.skip');
   applyDocumentChrome();

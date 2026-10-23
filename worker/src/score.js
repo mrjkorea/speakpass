@@ -42,7 +42,8 @@ export function blankQuestion(q) {
     scorePct: 0,
     band: 0,
     corrected: "",
-    comment: ""
+    comment: "",
+    tip: ""
   };
   if (READ_ALOUD.has(q)) {
     row.pronunciation = 0;
@@ -64,6 +65,7 @@ function fromModel(q, item) {
   row.band = row.scoreValue;
   row.corrected = cleanCorrected(item && item.corrected);
   row.comment = cleanComment(item && item.comment);
+  row.tip = cleanComment(item && item.tip);
   return row;
 }
 

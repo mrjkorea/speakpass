@@ -21,13 +21,25 @@
     "classMode": "Lớp học",
     "examHelp": "Chế độ thi dùng thời gian chính thức. Kiểm tra micro, nhấn Bắt đầu một lần, rồi mỗi câu tự chuyển tiếp.",
     "classHelp": "Chế độ lớp học không giới hạn thời gian. Đồng hồ đếm lên và hiện thời gian mục tiêu. Nhấn Xong khi bạn sẵn sàng.",
-    "chooseVoice": "Giọng đọc"
+    "chooseVoice": "Giọng đọc",
+    "fullExam": "Thi đầy đủ",
+    "fullExamLine": "Cả 11 câu, tính giờ chính thức.",
+    "practiceMode": "Luyện tập",
+    "practiceLine": "Chọn một câu, không giới hạn hoặc tính giờ.",
+    "details": "Chi tiết"
   },
   "practice": {
     "title": "Luyện tập",
     "help": "Chọn một câu, hoặc luyện mọi câu trong một phần. Bạn có thể làm lại bao nhiêu lần cũng được.",
     "part": "Luyện phần này",
-    "back": "Về trang đầu"
+    "back": "Về trang đầu",
+    "pickHelp": "Chọn một câu. Không giới hạn thì không tính giờ. Tính giờ dùng thời gian chính thức.",
+    "untimed": "Không giới hạn",
+    "timed": "Tính giờ",
+    "tryAgain": "Thử lại",
+    "tryTimed": "Thử có tính giờ",
+    "tryUntimed": "Thử không giới hạn",
+    "pickAnother": "Chọn câu khác"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Đã ghi",
     "examDone": "Bạn đã xong bài thi này. Điểm từng câu ở bên dưới.",
     "classDone": "Nhận xét của lớp đã được lưu. Điểm từng câu ở bên dưới.",
-    "pronunciation": "Phát âm"
+    "pronunciation": "Phát âm",
+    "tip": "Mẹo"
   },
   "levels": {
     "AH": "Có thể nói tiếp một câu trả lời rõ và chi tiết với ngữ pháp và từ vựng ổn định.",
@@ -204,5 +217,12 @@
     "au-f": "Nữ Úc",
     "au-m": "Nam Úc",
     "nz-f": "Nữ New Zealand"
+  },
+  "tips": {
+    "read_aloud": "Ngắt ở dấu phẩy và dấu chấm. Nhấn từ khóa. Hạ giọng ở cuối câu.",
+    "describe_picture": "Tả cảnh chung trước, rồi đến người, hành động và nền. Dùng thì hiện tại tiếp diễn.",
+    "respond_questions": "Trả lời thẳng câu hỏi trước, rồi thêm một lý do hoặc chi tiết.",
+    "info_questions": "Tìm đúng dòng trong lịch. Nói rõ giờ, địa điểm và tên.",
+    "opinion": "Nêu ý kiến, đưa hai lý do kèm ví dụ, rồi nhắc lại ý kiến."
   }
 }

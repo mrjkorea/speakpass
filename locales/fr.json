@@ -21,13 +21,25 @@
     "classMode": "Classe",
     "examHelp": "Le mode examen utilise les temps officiels. Vérifiez le micro, appuyez une fois sur Démarrer, et chaque question avance seule.",
     "classHelp": "Le mode classe n’a pas de limite de temps. L’horloge compte et montre le temps officiel. Appuyez sur Terminé quand vous êtes prêt.",
-    "chooseVoice": "Voix de narration"
+    "chooseVoice": "Voix de narration",
+    "fullExam": "Examen complet",
+    "fullExamLine": "Les 11 questions avec les temps officiels.",
+    "practiceMode": "Entraînement",
+    "practiceLine": "Choisissez une question, sans ou avec chrono.",
+    "details": "Détails"
   },
   "practice": {
     "title": "Entraînement",
     "help": "Choisissez une question, ou entraînez-vous sur toutes les questions d’une partie. Vous pouvez recommencer autant de fois que vous voulez.",
     "part": "S’entraîner sur cette partie",
-    "back": "Retour au début"
+    "back": "Retour au début",
+    "pickHelp": "Choisissez une question. Sans chrono : pas de limite. Avec chrono : temps officiels.",
+    "untimed": "Sans chrono",
+    "timed": "Avec chrono",
+    "tryAgain": "Réessayer",
+    "tryTimed": "Essayer avec chrono",
+    "tryUntimed": "Essayer sans chrono",
+    "pickAnother": "Choisir une autre question"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Enregistrée",
     "examDone": "Vous avez fini cet examen. Les scores sont ci-dessous.",
     "classDone": "Le retour de la classe est enregistré. Les scores sont ci-dessous.",
-    "pronunciation": "Prononciation"
+    "pronunciation": "Prononciation",
+    "tip": "Conseil"
   },
   "levels": {
     "AH": "Peut poursuivre une réponse claire et détaillée avec une grammaire et un vocabulaire stables.",
@@ -204,5 +217,12 @@
     "au-f": "Femme australienne",
     "au-m": "Homme australien",
     "nz-f": "Femme néo-zélandaise"
+  },
+  "tips": {
+    "read_aloud": "Marquez une pause aux virgules et aux points. Accentuez les mots clés. Baissez la voix en fin de phrase.",
+    "describe_picture": "Décrivez d'abord la scène, puis les personnes, les actions et l'arrière-plan. Utilisez le present continuous.",
+    "respond_questions": "Répondez d'abord directement, puis ajoutez une raison ou un détail.",
+    "info_questions": "Trouvez la ligne exacte dans le programme. Dites clairement heures, lieux et noms.",
+    "opinion": "Donnez votre avis, deux raisons avec un exemple, puis répétez votre avis."
   }
 }

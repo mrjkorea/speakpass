@@ -21,13 +21,25 @@
     "classMode": "Ders",
     "examHelp": "Sınav modu resmi süreleri kullanır. Mikrofonu kontrol edin, Başla’ya bir kez basın, her soru kendiliğinden ilerler.",
     "classHelp": "Ders modunda süre sınırı yoktur. Saat ileri sayar ve resmi hedefi gösterir. Hazır olunca Bitti’ye basın.",
-    "chooseVoice": "Anlatım sesi"
+    "chooseVoice": "Anlatım sesi",
+    "fullExam": "Tam Sınav",
+    "fullExamLine": "11 sorunun tamamı, resmî sürelerle.",
+    "practiceMode": "Pratik",
+    "practiceLine": "Bir soru seç, süresiz ya da süreli.",
+    "details": "Ayrıntılar"
   },
   "practice": {
-    "title": "Alıştırma",
+    "title": "Pratik",
     "help": "Tek bir soru seçin veya bir bölümdeki tüm soruları çalışın. İstediğiniz kadar yeniden deneyebilirsiniz.",
     "part": "Bu bölümü çalış",
-    "back": "Başlangıca dön"
+    "back": "Başlangıca dön",
+    "pickHelp": "Bir soru seç. Süresiz modda sınır yok. Süreli modda resmî süreler var.",
+    "untimed": "Süresiz",
+    "timed": "Süreli",
+    "tryAgain": "Tekrar dene",
+    "tryTimed": "Süreli dene",
+    "tryUntimed": "Süresiz dene",
+    "pickAnother": "Başka soru seç"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Kaydedildi",
     "examDone": "Bu sınavı bitirdiniz. Soru puanları aşağıda.",
     "classDone": "Ders geri bildirimi kaydedildi. Soru puanları aşağıda.",
-    "pronunciation": "Telaffuz"
+    "pronunciation": "Telaffuz",
+    "tip": "İpucu"
   },
   "levels": {
     "AH": "Dengeli dil bilgisi ve sözcüklerle açık, ayrıntılı bir yanıtı sürdürebilir.",
@@ -204,5 +217,12 @@
     "au-f": "Avustralyalı kadın",
     "au-m": "Avustralyalı erkek",
     "nz-f": "Yeni Zelandalı kadın"
+  },
+  "tips": {
+    "read_aloud": "Virgül ve noktalarda dur. Anahtar kelimeleri vurgula. Cümle sonunda sesini alçalt.",
+    "describe_picture": "Önce genel sahneyi, sonra kişileri, eylemleri ve arka planı anlat. Present continuous kullan.",
+    "respond_questions": "Önce soruyu doğrudan cevapla, sonra bir neden ya da ayrıntı ekle.",
+    "info_questions": "Programdaki doğru satırı bul. Saatleri, yerleri ve isimleri net söyle.",
+    "opinion": "Görüşünü söyle, örnekle iki neden ver, sonra görüşünü tekrarla."
   }
 }
