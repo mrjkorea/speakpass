@@ -37,10 +37,18 @@ function fillPron(ans) {
 
 function blendChecklist(detail, pron) {
   if (!detail) return;
-  if (detail.contentStars == null) detail.contentStars = detail.stars;
+  if (detail.content3 == null) detail.content3 = detail.score3 != null ? detail.score3 : Math.round((Number(detail.stars) || 0) * 0.6);
   detail.pron = usablePron(pron) ? pron : null;
-  detail.score = blendScore(detail.contentStars, 5, detail.pron);
-  detail.stars = Math.max(0, Math.min(5, Math.round(detail.score)));
+  detail.score = blendScore(detail.content3, 3, detail.pron);
+  detail.max = 3;
+  detail.stars = Math.max(0, Math.min(5, Math.round((detail.score / 3) * 5)));
+}
+
+function checkScore(detail) {
+  if (!detail) return 0;
+  if (detail.max === 3 && detail.score != null) return detail.score;
+  if (detail.score3 != null) return detail.score3;
+  return Math.round((Number(detail.score != null ? detail.score : detail.stars) || 0) * 0.6);
 }
 
 function pronLine(pron) {
@@ -150,6 +158,7 @@ function secsLeft(remaining) {
 function phaseLabel(phase) {
   if (phase === 'speak') return t('run.speak');
   if (phase === 'reading') return t('run.reading');
+  if (phase === 'listen') return t('run.listen');
   return t('run.prepare');
 }
 
@@ -228,7 +237,7 @@ async function presentReview(attempt) {
       grades.free[ans.q] = ans.localRead.save || 'coming soon';
     } else if (ans.localChecklist) {
       grades.checklist[ans.q] = ans.localChecklist;
-      grades.free[ans.q] = `${ans.localChecklist.score != null ? ans.localChecklist.score : ans.localChecklist.stars}/5`;
+      grades.free[ans.q] = `${checkScore(ans.localChecklist)}/3`;
     } else if (isReadAloudScore(ans)) {
       const hasAudio = !!(ans.blob && ans.blob.size);
       grades.read[ans.q] = { status: hasAudio ? 'checking' : 'empty' };
@@ -240,7 +249,7 @@ async function presentReview(attempt) {
         const detail = scoreChecklist(source, said);
         grades.checklist[ans.q] = detail;
         ans.localChecklist = detail;
-        grades.free[ans.q] = `${detail.stars}/5`;
+        grades.free[ans.q] = `${checkScore(detail)}/3`;
       } else {
         grades.free[ans.q] = await gradeFree(ans.q, ans.blob);
       }
@@ -268,6 +277,7 @@ async function presentReview(attempt) {
   viewKey = '';
   presenting = false;
   render();
+  if (attempt.answers.some((ans) => ans.q >= 5 && String(ans.transcript || '').trim())) askForMark();
 
   for (const ans of attempt.answers) {
     if (ans.localRead) continue;
@@ -286,7 +296,7 @@ async function presentReview(attempt) {
     const list = grades.checklist[ans.q];
     if (list) {
       blendChecklist(list, ans.pron);
-      grades.free[ans.q] = `${list.score}/5`;
+      grades.free[ans.q] = `${checkScore(list)}/3`;
     }
     if (token === reviewToken && state.review && state.review.attempt === attempt && state.screen === 'review') render();
   }
@@ -580,7 +590,7 @@ async function gradeClassAnswer(view) {
       const detail = scoreChecklist(source, said);
       grades.checklist[ans.q] = detail;
       ans.localChecklist = detail;
-      grades.free[ans.q] = `${detail.stars}/5`;
+      grades.free[ans.q] = `${checkScore(detail)}/3`;
     } else {
       grades.free[ans.q] = 'coming soon';
     }
@@ -591,6 +601,7 @@ async function gradeClassAnswer(view) {
   }
   state.classFeedback = { answer: ans, grades, source, marks: {}, markNote: '', marking: false, markTried: false };
   if (state.screen === 'class-run') render({ focus: 'step-title' });
+  if (ans.q >= 5 && String(ans.transcript || '').trim()) askForMark();
   if (isReadAloudScore(ans) && ans.blob && ans.blob.size) {
     const detail = await gradeReadAloud((source && source.text) || '', ans.blob);
     if (token !== classToken) return;
@@ -606,7 +617,7 @@ async function gradeClassAnswer(view) {
     const list = grades.checklist[ans.q];
     if (list) {
       blendChecklist(list, ans.pron);
-      grades.free[ans.q] = `${list.score}/5`;
+      grades.free[ans.q] = `${checkScore(list)}/3`;
     }
     if (state.screen === 'class-run') render();
   }
@@ -796,7 +807,8 @@ function togglePlay(qNumber) {
     return;
   }
   stopPlayback();
-  const ans = state.review && state.review.attempt.answers.find((item) => item.q === q);
+  let ans = state.review && state.review.attempt.answers.find((item) => item.q === q);
+  if (!ans && state.classFeedback && state.classFeedback.answer && state.classFeedback.answer.q === q) ans = state.classFeedback.answer;
   if (!ans || !ans.blob || !ans.blob.size) return;
   audioUrl = URL.createObjectURL(ans.blob);
   audioEl = new Audio(audioUrl);
@@ -874,6 +886,7 @@ function onClick(event) {
     else startSession(sel);
   }
   else if (action === 'mark') askForMark();
+  else if (action === 'voice-preview') previewVoice();
   else if (action === 'reload') boot();
   else if (action === 'reload-progress') {
     const id = studentId() || state.studentId;
@@ -911,7 +924,7 @@ async function askForMark() {
     return;
   }
   review.marking = true;
-  review.markNote = t('review.marking');
+  review.markNote = '';
   render();
   let result;
   try {
@@ -937,7 +950,7 @@ async function askForMark() {
   const marks = {};
   for (const row of result.grade.questions || []) marks[row.q] = row;
   review.marks = marks;
-  review.markNote = result.saved ? t('review.marked') : t('review.markFailed');
+  review.markNote = '';
   render();
   if (liveAttempt) storeMarks(liveAttempt, Object.values(marks)).catch(() => {});
 }
@@ -1129,12 +1142,20 @@ function voiceHtml() {
     <label class="field">
       <span>${escapeHtml(t('home.chooseVoice'))}</span>
       <select id="voice-select">${opts}</select>
-    </label>`;
+    </label>
+    <button type="button" class="btn secondary" data-action="voice-preview">🔊 ${escapeHtml(t('home.hearVoice'))}</button>`;
+}
+
+async function previewVoice() {
+  stopNarration();
+  try { await prepareNarration(); } catch (err) { return; }
+  playNarration('cue.begin_preparing');
 }
 
 function chooseVoice(key) {
   const next = normalizeVoice(key);
   setNarrationVoice(next);
+  previewVoice();
   if (state.pack) state.pack.voice = next;
   const owner = studentId();
   if (!owner || state.packStatus !== 'ready') return;
@@ -1229,9 +1250,8 @@ function timerBlock(view, hint, compact, extraClass = '') {
   const rec = view.phase === 'speak'
     ? `<p class="rec"><span class="dot" aria-hidden="true"></span>${escapeHtml(t('run.recording'))}</p>`
     : '';
-  const stop = view.phase === 'speak'
-    ? `<button type="button" class="btn danger" data-action="stop-speak">${escapeHtml(t('review.stop'))}</button>`
-    : '';
+  // Timed practice and the full exam end on the clock, as on the real test. No Stop button.
+  const stop = '';
   return `
     <div class="timer-wrap phase-${escapeHtml(view.phase)}${compact ? ' compact' : ''}${extraClass ? ` ${extraClass}` : ''}">
       <div class="timer-face" role="timer" aria-label="${escapeHtml(t('a11y.timer', { phase: label, n: secs }))}">
@@ -1398,7 +1418,7 @@ function liveRows(attempt, grades, marks) {
       return { q: ans.q, score: Number(read.stars) || 0, total: 5, graded: true };
     }
     const list = grades.checklist && grades.checklist[ans.q];
-    if (list) return { q: ans.q, score: list.score != null ? list.score : list.stars, total: 5, graded: true };
+    if (list) return { q: ans.q, score: checkScore(list), total: 3, graded: true };
     const mark = marks && marks[ans.q];
     if (mark && ans.q >= 5) {
       const total = Number(mark.scoreMax) || (ans.q === 11 ? 5 : 3);
@@ -1429,45 +1449,61 @@ function historyPointsFor(testId) {
   return points.slice(-12);
 }
 
-function checklistBlock(detail) {
+function checklistBlock(detail, pictureHtml) {
   if (!detail) return '';
   const rows = (detail.rows || []).map((row) => {
-    const missedMain = row.role === 'main' && !row.hit;
-    const cls = row.hit ? 'check hit' : (missedMain ? 'check miss main' : 'check miss');
-    const symbol = row.hit ? '✓' : '–';
-    const text = missedMain ? `<strong>${escapeHtml(row.text)}</strong>` : escapeHtml(row.text);
-    return `<li class="${cls}"><span aria-hidden="true">${symbol}</span> ${text}</li>`;
+    const cls = row.hit ? 'check hit' : 'check miss';
+    const symbol = row.hit ? '✓' : '✗';
+    return `<li class="${cls}"><span class="tick" aria-hidden="true">${symbol}</span> <span lang="en" dir="ltr">${escapeHtml(row.text)}</span></li>`;
   }).join('');
   const capped = detail.capped ? `<p class="note">${escapeHtml(t('results.capped'))}</p>` : '';
-  const label = t('review.stars', { n: detail.stars });
   return `
-    <p class="score stars" role="img" aria-label="${escapeHtml(label)}">
-      <span class="score-name">${escapeHtml(t('results.checklist'))}</span>
-      <span class="star-row" aria-hidden="true">${starMarks(detail.stars)}</span>
-      <span>${detail.stars}/5</span>
-    </p>
-    <ul class="checks">${rows}</ul>
+    ${bigScore(checkScore(detail), 3)}
+    <div class="pic-checks">
+      ${pictureHtml || ''}
+      <section>
+        <h3>${escapeHtml(t('results.checklist'))}</h3>
+        <ul class="checks">${rows}</ul>
+      </section>
+    </div>
     ${capped}`;
 }
 
-function answerCard(ans, grades, source, marks) {
+function markBusy() {
+  const review = state.review || state.classFeedback;
+  return !!(review && review.marking);
+}
+
+function bigScore(score, max) {
+  const shown = Number.isInteger(Number(score)) ? String(score) : Number(score).toFixed(1);
+  return `<p class="big-score" role="img" aria-label="${escapeHtml(t('classMode.band', { score: shown, max }))}"><span class="big-score-label">Score</span> <strong>${escapeHtml(shown)}/${escapeHtml(String(max))}</strong></p>`;
+}
+
+function answerCard(ans, grades, source, marks, mode) {
   const picture = ans.type === 'describe_picture';
   const readDetail = isReadAloudScore(ans) ? (grades.read && grades.read[ans.q]) : null;
   const checklist = grades.checklist && grades.checklist[ans.q];
   const ai = marks && marks[ans.q];
   const hasAudio = ans.blob && ans.blob.size > 0;
   const playing = state.playingQ === ans.q;
-  const playText = !hasAudio ? t('review.noAudio') : (playing ? t('review.stop') : t('review.play'));
+  const canListen = mode !== 'exam' && hasAudio;
+  const playText = playing ? t('review.stop') : t('review.listen');
   const playLabel = playing ? t('a11y.stop', { n: ans.q }) : t('a11y.play', { n: ans.q });
+  let pictureHtml = '';
+  if (picture && source && source.image) {
+    const src = new URL(source.image, document.baseURI).href;
+    pictureHtml = `<div class="frame" data-frame><img class="scene" alt="${escapeHtml(t('run.pictureAlt', { n: ans.q }))}" src="${escapeHtml(src)}"></div>`;
+  }
   let scoreBlock = '';
   if (readDetail) scoreBlock = readAloudScoreHtml(readDetail);
-  else if (checklist) scoreBlock = checklistBlock(checklist);
+  else if (checklist) scoreBlock = checklistBlock(checklist, pictureHtml);
   else if (ai && ans.q >= 5) {
     const score = ai.band != null ? ai.band : ai.scoreValue;
     const max = ai.scoreMax || (ans.q === 11 ? 5 : 3);
-    scoreBlock = `<p class="score">${escapeHtml(t('classMode.band', { score, max }))}</p>`;
+    scoreBlock = bigScore(score, max);
   } else if (ans.q >= 5) {
-    scoreBlock = `<p class="score">${escapeHtml(t('classMode.recorded'))}</p>`;
+    const busy = markBusy();
+    scoreBlock = `<p class="score marking-line">${escapeHtml(busy ? t('review.marking') : t('classMode.recorded'))}</p>`;
   } else {
     const value = grades.free ? grades.free[ans.q] : '';
     scoreBlock = `<p class="score">${escapeHtml(t('review.deviceScore'))}: ${escapeHtml(String(value || ''))}</p>`;
@@ -1481,17 +1517,11 @@ function answerCard(ans, grades, source, marks) {
       ${partTip ? `<p class="note">${escapeHtml(partTip)}</p>` : ''}
     </section>` : '';
   const said = String(ans.transcript || '').trim();
-  const compare = ans.q >= 3 ? `
-    <div class="compare">
-      <section>
-        <h3>${escapeHtml(t('classMode.yourAnswer'))}</h3>
-        <p lang="en" dir="ltr">${escapeHtml(said || t('classMode.noTranscript'))}</p>
-      </section>
-      ${ans.q >= 5 ? `<section>
-        <h3>${escapeHtml(t('classMode.corrected'))}</h3>
-        <p lang="en" dir="ltr">${escapeHtml((ai && ai.corrected) || t('results.needMark'))}</p>
-      </section>` : ''}
-    </div>` : '';
+  const compare = ans.q >= 5 && ai && ai.corrected ? `
+    <section class="compare">
+      <h3>${escapeHtml(t('classMode.corrected'))}</h3>
+      <p lang="en" dir="ltr">${escapeHtml(ai.corrected)}</p>
+    </section>` : '';
   const model = source && source.model_answer && ans.q >= 3
     ? `<section class="model-answer"><h3>${escapeHtml(t('classMode.model'))}</h3><p lang="en" dir="ltr">${escapeHtml(source.model_answer)}</p></section>`
     : '';
@@ -1507,20 +1537,15 @@ function answerCard(ans, grades, source, marks) {
   const used = ans.usedSec != null
     ? `<p class="note">${escapeHtml(t('classMode.timeUsed', { used: ans.usedSec, target: ans.speakSec }))}</p>`
     : '';
-  let pictureHtml = '';
-  if (picture && source && source.image) {
-    const src = new URL(source.image, document.baseURI).href;
-    pictureHtml = `<div class="frame" data-frame><img class="scene" alt="${escapeHtml(t('run.pictureAlt', { n: ans.q }))}" src="${escapeHtml(src)}"></div>`;
-  }
   const showSnippet = ans.q <= 2 && (!readDetail || readDetail.status !== 'scored');
   const snippet = ans.type === 'read_aloud' ? (source && source.text) || '' : '';
   return `
     <article class="answer-card">
       <h2>${escapeHtml(t('run.qLabel', { n: ans.q }))}</h2>
       <p class="part-name">${escapeHtml(t(`parts.${ans.type}.title`))}</p>
-      ${pictureHtml}
+      ${checklist ? '' : pictureHtml}
       ${showSnippet && snippet ? `<p class="snippet" lang="en" dir="ltr">${escapeHtml(snippet)}</p>` : ''}
-      <button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" ${hasAudio ? '' : 'disabled'} aria-label="${escapeHtml(playLabel)}">${escapeHtml(playText)}</button>
+      ${canListen ? `<button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" aria-label="${escapeHtml(playLabel)}">🔊 ${escapeHtml(playText)}</button>` : ''}
       ${used}
       ${scoreBlock}
       ${ans.q >= 3 ? pronLine(ans.pron) : ''}
@@ -1557,7 +1582,7 @@ function renderReview() {
         : t('review.practiceDone');
   const cards = attempt.answers.map((ans) => {
     const source = test && test.questions.find((item) => item.q === ans.q);
-    return answerCard(ans, grades, source, state.review.marks);
+    return answerCard(ans, grades, source, state.review.marks, attempt.mode);
   }).join('');
   const sel = state.review.selection;
   const oneQ = sel && sel.scope === 'question' && sel.q;
@@ -1568,10 +1593,7 @@ function renderReview() {
     retry += `<button type="button" class="btn secondary" data-action="try-untimed" data-q="${oneQ}">${escapeHtml(t('practice.tryUntimed'))}</button>
       <button type="button" class="btn secondary" data-action="practice">${escapeHtml(t('practice.pickAnother'))}</button>`;
   }
-  const canMark = attempt.answers.some((ans) => ans.q >= 5 && ans.q <= 11);
-  const mark = canMark
-    ? `<button type="button" class="btn primary" data-action="mark" ${state.review.marking ? 'disabled' : ''}>${escapeHtml(state.review.marking ? t('review.marking') : t('review.mark'))}</button>`
-    : '';
+  const mark = '';
   const note = state.review.markNote
     ? `<p class="alert" role="status">${escapeHtml(state.review.markNote)}</p>`
     : '';
@@ -1618,7 +1640,13 @@ function renderClass() {
     groups.get(type).push(q);
   }
   const cards = PART_ORDER.filter((id) => groups.has(id)).map((id) => {
-    const rows = groups.get(id).map((q) => `
+    const qs = groups.get(id);
+    const rows = id === 'info_questions' && qs.length > 1 ? `
+      <li class="pick-row">
+        <span class="pick-q">${escapeHtml(t('practice.qRange', { a: qs[0].q, b: qs[qs.length - 1].q }))}</span>
+        <button type="button" class="btn secondary" data-action="class-part" data-part="${id}">${escapeHtml(t('practice.untimed'))}</button>
+        <button type="button" class="btn primary" data-action="practice-part" data-part="${id}">${escapeHtml(t('practice.timed'))}</button>
+      </li>` : qs.map((q) => `
       <li class="pick-row">
         <span class="pick-q">${escapeHtml(t('run.qLabel', { n: q.q }))}</span>
         <button type="button" class="btn secondary" data-action="class-q" data-q="${q.q}">${escapeHtml(t('practice.untimed'))}</button>
@@ -1665,14 +1693,11 @@ function renderClassRun() {
     const ans = state.classFeedback.answer;
     const test = currentTest();
     const source = state.classFeedback.source || (test && ans && test.questions.find((item) => item.q === ans.q));
-    const card = ans ? answerCard(ans, state.classFeedback.grades, source, state.classFeedback.marks) : '';
+    const card = ans ? answerCard(ans, state.classFeedback.grades, source, state.classFeedback.marks, 'class') : '';
     const note = state.classFeedback.markNote
       ? `<p class="alert" role="status">${escapeHtml(state.classFeedback.markNote)}</p>`
       : '';
-    const canMark = ans && ans.q >= 5 && ans.q <= 11;
-    const mark = canMark
-      ? `<button type="button" class="btn primary" data-action="mark" ${state.classFeedback.marking ? 'disabled' : ''}>${escapeHtml(state.classFeedback.marking ? t('review.marking') : t('review.mark'))}</button>`
-      : '';
+    const mark = '';
     const last = view.stepIndex >= ((state.session && state.session.plan.length - 1) || 0);
     const single = state.selection && state.selection.scope === 'question';
     const again = ans ? `

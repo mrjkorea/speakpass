@@ -26,7 +26,8 @@
     "fullExamLine": "11 sorunun tamamı, resmî sürelerle.",
     "practiceMode": "Pratik",
     "practiceLine": "Bir soru seç, süresiz ya da süreli.",
-    "details": "Ayrıntılar"
+    "details": "Ayrıntılar",
+    "hearVoice": "Bu sesi dinle"
   },
   "practice": {
     "title": "Pratik",
@@ -39,7 +40,8 @@
     "tryAgain": "Tekrar dene",
     "tryTimed": "Süreli dene",
     "tryUntimed": "Süresiz dene",
-    "pickAnother": "Başka soru seç"
+    "pickAnother": "Başka soru seç",
+    "qRange": "Sorular {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Resim yok",
     "pictureAlt": "Soru {n} resmi",
     "scenario": "Durum",
-    "caller": "Arayan"
+    "caller": "Arayan",
+    "listen": "Dinle"
   },
   "review": {
     "title": "Gözden geçir",
@@ -126,7 +129,8 @@
     "sayAgain": "Tekrar söyle. Her sözcüğü açık söyle.",
     "stars": "5 üzerinden {n}",
     "checkFailed": "Bu cihazda telaffuz kontrol edilemedi. Yanıtın yine de kaydedilir.",
-    "weak": "Çalışılacak sözcükler"
+    "weak": "Çalışılacak sözcükler",
+    "listen": "Cevabımı dinle"
   },
   "common": {
     "language": "Dil",

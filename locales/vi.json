@@ -26,7 +26,8 @@
     "fullExamLine": "Cả 11 câu, tính giờ chính thức.",
     "practiceMode": "Luyện tập",
     "practiceLine": "Chọn một câu, không giới hạn hoặc tính giờ.",
-    "details": "Chi tiết"
+    "details": "Chi tiết",
+    "hearVoice": "Nghe giọng này"
   },
   "practice": {
     "title": "Luyện tập",
@@ -39,7 +40,8 @@
     "tryAgain": "Thử lại",
     "tryTimed": "Thử có tính giờ",
     "tryUntimed": "Thử không giới hạn",
-    "pickAnother": "Chọn câu khác"
+    "pickAnother": "Chọn câu khác",
+    "qRange": "Câu {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Không có tranh",
     "pictureAlt": "Tranh của câu {n}",
     "scenario": "Tình huống",
-    "caller": "Người gọi"
+    "caller": "Người gọi",
+    "listen": "Nghe"
   },
   "review": {
     "title": "Xem lại",
@@ -126,7 +129,8 @@
     "sayAgain": "Hãy nói lại. Hãy nói rõ từng từ.",
     "stars": "{n} trên 5",
     "checkFailed": "Không kiểm tra được phát âm trên thiết bị này. Câu trả lời vẫn được lưu.",
-    "weak": "Từ cần luyện"
+    "weak": "Từ cần luyện",
+    "listen": "Nghe câu trả lời của tôi"
   },
   "common": {
     "language": "Ngôn ngữ",

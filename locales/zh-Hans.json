@@ -26,7 +26,8 @@
     "fullExamLine": "全部11题，使用官方计时。",
     "practiceMode": "练习",
     "practiceLine": "选一道题，不计时或计时。",
-    "details": "详情"
+    "details": "详情",
+    "hearVoice": "试听这个声音"
   },
   "practice": {
     "title": "练习",
@@ -39,7 +40,8 @@
     "tryAgain": "再试一次",
     "tryTimed": "计时再试",
     "tryUntimed": "不计时再试",
-    "pickAnother": "选择其他题目"
+    "pickAnother": "选择其他题目",
+    "qRange": "第 {a}-{b} 题"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "图片无法显示",
     "pictureAlt": "第 {n} 题的图片",
     "scenario": "情境",
-    "caller": "来电者"
+    "caller": "来电者",
+    "listen": "听"
   },
   "review": {
     "title": "回放",
@@ -126,7 +129,8 @@
     "sayAgain": "请再说一遍。请把每个词说清楚。",
     "stars": "5 分中的 {n} 分",
     "checkFailed": "这台设备无法检查发音。你的答案仍会保存。",
-    "weak": "需要练习的词"
+    "weak": "需要练习的词",
+    "listen": "听我的回答"
   },
   "common": {
     "language": "语言",

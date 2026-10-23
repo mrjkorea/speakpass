@@ -26,7 +26,8 @@
     "fullExamLine": "Semua 11 soal dengan waktu resmi.",
     "practiceMode": "Latihan",
     "practiceLine": "Pilih satu soal, tanpa waktu atau dengan waktu.",
-    "details": "Detail"
+    "details": "Detail",
+    "hearVoice": "Dengarkan suara ini"
   },
   "practice": {
     "title": "Latihan",
@@ -39,7 +40,8 @@
     "tryAgain": "Coba lagi",
     "tryTimed": "Coba dengan waktu",
     "tryUntimed": "Coba tanpa waktu",
-    "pickAnother": "Pilih soal lain"
+    "pickAnother": "Pilih soal lain",
+    "qRange": "Soal {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Gambar tidak tersedia",
     "pictureAlt": "Gambar untuk soal {n}",
     "scenario": "Situasi",
-    "caller": "Penelepon"
+    "caller": "Penelepon",
+    "listen": "Dengar"
   },
   "review": {
     "title": "Tinjauan",
@@ -126,7 +129,8 @@
     "sayAgain": "Ucapkan lagi. Ucapkan setiap kata dengan jelas.",
     "stars": "{n} dari 5",
     "checkFailed": "Pelafalan tidak dapat diperiksa di perangkat ini. Jawaban Anda tetap disimpan.",
-    "weak": "Kata untuk dilatih"
+    "weak": "Kata untuk dilatih",
+    "listen": "Dengarkan jawaban saya"
   },
   "common": {
     "language": "Bahasa",

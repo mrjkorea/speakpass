@@ -26,7 +26,8 @@
     "fullExamLine": "Tutte le 11 domande con i tempi ufficiali.",
     "practiceMode": "Pratica",
     "practiceLine": "Scegli una domanda, senza tempo o a tempo.",
-    "details": "Dettagli"
+    "details": "Dettagli",
+    "hearVoice": "Ascolta questa voce"
   },
   "practice": {
     "title": "Pratica",
@@ -39,7 +40,8 @@
     "tryAgain": "Riprova",
     "tryTimed": "Prova a tempo",
     "tryUntimed": "Prova senza tempo",
-    "pickAnother": "Scegli un'altra domanda"
+    "pickAnother": "Scegli un'altra domanda",
+    "qRange": "Domande {a}-{b}"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "Immagine non disponibile",
     "pictureAlt": "Immagine della domanda {n}",
     "scenario": "Situazione",
-    "caller": "Chi chiama"
+    "caller": "Chi chiama",
+    "listen": "Ascolta"
   },
   "review": {
     "title": "Riascolto",
@@ -126,7 +129,8 @@
     "sayAgain": "Dillo di nuovo. Di’ ogni parola chiaramente.",
     "stars": "{n} su 5",
     "checkFailed": "Non è stato possibile controllare la pronuncia su questo dispositivo. La risposta viene comunque salvata.",
-    "weak": "Parole da esercitare"
+    "weak": "Parole da esercitare",
+    "listen": "Ascolta la mia risposta"
   },
   "common": {
     "language": "Lingua",

@@ -26,7 +26,8 @@
     "fullExamLine": "11문항 전체, 공식 시간 적용.",
     "practiceMode": "연습",
     "practiceLine": "문항 하나를 골라 시간 제한 없이 또는 시간 제한으로.",
-    "details": "자세히"
+    "details": "자세히",
+    "hearVoice": "이 목소리 듣기"
   },
   "practice": {
     "title": "연습",
@@ -39,7 +40,8 @@
     "tryAgain": "다시 하기",
     "tryTimed": "시간 제한으로 해보기",
     "tryUntimed": "무제한으로 해보기",
-    "pickAnother": "다른 문항 고르기"
+    "pickAnother": "다른 문항 고르기",
+    "qRange": "{a}-{b}번 문제"
   },
   "parts": {
     "read_aloud": {
@@ -93,7 +95,8 @@
     "imageMissing": "그림을 표시할 수 없습니다",
     "pictureAlt": "문제 {n}의 그림",
     "scenario": "상황",
-    "caller": "전화한 사람"
+    "caller": "전화한 사람",
+    "listen": "듣기"
   },
   "review": {
     "title": "다시 듣기",
@@ -126,7 +129,8 @@
     "sayAgain": "다시 말해 주세요. 각 단어를 분명하게 말해 주세요.",
     "stars": "5점 만점에 {n}점",
     "checkFailed": "이 기기에서는 발음을 확인하지 못했습니다. 답은 그대로 저장됩니다.",
-    "weak": "연습할 단어"
+    "weak": "연습할 단어",
+    "listen": "내 답변 듣기"
   },
   "common": {
     "language": "언어",
