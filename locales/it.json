@@ -179,7 +179,8 @@
     "facts": "Fatti del documento",
     "recorded": "Registrata",
     "examDone": "Hai finito questo esame. I punteggi sono sotto.",
-    "classDone": "Il commento della lezione è salvato. I punteggi sono sotto."
+    "classDone": "Il commento della lezione è salvato. I punteggi sono sotto.",
+    "pronunciation": "Pronuncia"
   },
   "levels": {
     "AH": "Può continuare una risposta chiara e dettagliata con grammatica e vocabolario stabili.",

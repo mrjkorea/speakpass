@@ -179,7 +179,8 @@
     "facts": "Fatos do documento",
     "recorded": "Gravada",
     "examDone": "Você terminou esta prova. As pontuações estão abaixo.",
-    "classDone": "O retorno da aula foi salvo. As pontuações estão abaixo."
+    "classDone": "O retorno da aula foi salvo. As pontuações estão abaixo.",
+    "pronunciation": "Pronúncia"
   },
   "levels": {
     "AH": "Consegue manter uma resposta clara e detalhada com gramática e vocabulário estáveis.",

@@ -103,6 +103,7 @@ export async function fillTranscript(ans) {
     const pcm = await toPcm16k(ans.blob);
     if (loadedInfo) showStatus('Writing out your answer…');
     const samples = pcm.length;
+    const keep = pcm.slice();
     const res = await ask(pcm);
     if (!res || res.type !== 'result') {
       console.warn('whistle failed', res && res.error);
@@ -112,6 +113,9 @@ export async function fillTranscript(ans) {
     lastStats = { q: ans.q, ms: res.ms, parts: res.parts, seconds: Math.round(samples / RATE) };
     const text = String(res.text || '').trim();
     if (text) ans.transcript = text;
+    // Whistle's own parts (cut at pauses, max 28 s) for the small pronunciation check.
+    const parts = (res.ranges || []).filter((r) => r && r.text).map((r) => ({ pcm: keep.subarray(r.s, r.e), text: r.text }));
+    Object.defineProperty(ans, 'sttParts', { value: parts, enumerable: false, configurable: true, writable: true });
     return !!text;
   } catch (err) {
     console.warn('whistle error', err);

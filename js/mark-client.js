@@ -34,9 +34,13 @@ export async function requestAiMark(attempt, deps) {
   if (!answers.length) return { ok: false, error: "no_transcript" };
   const fetchImpl = (deps && deps.fetch) || fetch;
   let res;
+  // Never leave "Getting the AI mark…" spinning forever.
+  const ac = typeof AbortController !== "undefined" ? new AbortController() : null;
+  const timer = ac ? setTimeout(() => ac.abort(), 90000) : null;
   try {
     res = await fetchImpl(url, {
       method: "POST",
+      signal: ac ? ac.signal : undefined,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         testId: attempt.testId,
@@ -46,8 +50,10 @@ export async function requestAiMark(attempt, deps) {
       })
     });
   } catch {
-    return { ok: false, error: "not_deployed" };
+    if (timer) clearTimeout(timer);
+    return { ok: false, error: ac && ac.signal.aborted ? "grade_failed" : "not_deployed" };
   }
+  if (timer) clearTimeout(timer);
   let data = null;
   try {
     data = await res.json();
