@@ -253,7 +253,7 @@ export const BANDS = { three: 0.5, two: 0.3 };
 function itemHit(item, have, transcript) {
   const phrases = [...((item && item.accept) || []), ...((item && item.keys) || [])].filter(Boolean);
   if (phrases.some((phrase) => looseHit(have, phrase))) return true;
-  if (item && item.text && looseHit(have, item.text, 0.6)) return true;
+  if (item && item.category !== 'place' && item.text && looseHit(have, item.text, 0.75)) return true;
   if (item && item.category === 'people') {
     const m = normalizePhrase(item.text).match(/\b(one|two|three|four|five|six|seven|\d)\b/);
     const n = m ? Number(NUMBERS[m[1]] || m[1]) : 0;
@@ -280,7 +280,9 @@ export function scoreChecklist(question, transcript) {
     if (hit && weight > 0) earned += weight;
     let contradicted = false;
     for (const entry of (item && item.contradict) || []) {
-      if (!entry || !phraseHit(text, entry.text)) continue;
+      if (!entry) continue;
+      const core = String(entry.text || '').replace(/^(this is|it is|there is|there are|the scene is|the picture shows)\s+(an?\s+|the\s+)?/i, '');
+      if (!phraseHit(text, entry.text) && !(item.category === 'place' && core && phraseHit(text, core))) continue;
       contradicted = true;
       const nextCap = Number(entry.cap);
       if (Number.isFinite(nextCap)) cap = Math.min(cap, Math.max(1, Math.round(nextCap * 0.6)));
@@ -294,6 +296,9 @@ export function scoreChecklist(question, transcript) {
       contradicted
     };
   });
+  // Relevance gate: a description of the wrong scene cannot score above 1.
+  const place = items.find((item) => item && item.category === 'place');
+  if (place && !rows.find((row) => row.id === place.id).hit) cap = Math.min(cap, rows.filter((row) => row.hit).length < 4 ? 1 : 2);
   const share = possible > 0 ? earned / possible : 0;
   const words = normalizePhrase(text).split(' ').filter(Boolean).length;
   let score = 0;
