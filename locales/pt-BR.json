@@ -197,7 +197,9 @@
     "examDone": "Você terminou esta prova. As pontuações estão abaixo.",
     "classDone": "O retorno da aula foi salvo. As pontuações estão abaixo.",
     "pronunciation": "Pronúncia",
-    "tip": "Dica"
+    "tip": "Dica",
+    "freeMark": "Free marking",
+    "aiMark": "AI marking"
   },
   "levels": {
     "AH": "Consegue manter uma resposta clara e detalhada com gramática e vocabulário estáveis.",

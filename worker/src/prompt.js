@@ -22,7 +22,7 @@ function linesFor(question, transcript) {
     lines.push(`Printed text: ${question.text || ""}`);
   } else if (question.q <= 4) {
     lines.push("Task: describe the picture.");
-    lines.push(`Picture notes: ${question.image_prompt || ""}`);
+    lines.push(`Picture notes: ${question.description || question.image_prompt || ""}`);
     const keys = Array.isArray(question.key_elements)
       ? question.key_elements.map((item) => {
         if (typeof item === "string") return item;

@@ -197,7 +197,9 @@
     "examDone": "Terminaste este examen. Las puntuaciones están abajo.",
     "classDone": "La valoración de la clase está guardada. Las puntuaciones están abajo.",
     "pronunciation": "Pronunciación",
-    "tip": "Consejo"
+    "tip": "Consejo",
+    "freeMark": "Corrección gratis",
+    "aiMark": "Corrección con IA"
   },
   "levels": {
     "AH": "Puede mantener una respuesta clara y detallada con gramática y vocabulario estables.",

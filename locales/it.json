@@ -197,7 +197,9 @@
     "examDone": "Hai finito questo esame. I punteggi sono sotto.",
     "classDone": "Il commento della lezione è salvato. I punteggi sono sotto.",
     "pronunciation": "Pronuncia",
-    "tip": "Consiglio"
+    "tip": "Consiglio",
+    "freeMark": "Free marking",
+    "aiMark": "AI marking"
   },
   "levels": {
     "AH": "Può continuare una risposta chiara e dettagliata con grammatica e vocabolario stabili.",

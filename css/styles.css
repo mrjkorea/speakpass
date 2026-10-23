@@ -924,3 +924,9 @@ details.cloud .details-link { text-decoration: underline; margin-inline-start: 0
 .pic-checks .check.hit .tick { color: #1a7f37; }
 .pic-checks .check.miss .tick { color: #c62828; }
 @media (max-width: 720px) { .pic-checks { grid-template-columns: 1fr; } }
+
+.dual-mark{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:1rem;align-items:start}
+.mark-panel{border:1px solid #d8dde6;border-radius:12px;padding:.8rem}
+.mark-panel>h3{margin:0 0 .4rem;font-size:1rem}
+.ai-tip{margin:.5rem 0 0}
+@media (max-width:760px){.dual-mark{grid-template-columns:1fr}}

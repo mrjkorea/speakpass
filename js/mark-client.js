@@ -9,9 +9,10 @@ export function workerUrl(configured) {
 function answersToSend(attempt) {
   const list = attempt && Array.isArray(attempt.answers) ? attempt.answers : [];
   const out = [];
+  const first = attempt && attempt.mode === 'exam' ? 5 : 3;
   for (const ans of list) {
     const q = Number(ans && ans.q);
-    if (!Number.isInteger(q) || q < 5 || q > 11) continue;
+    if (!Number.isInteger(q) || q < first || q > 11) continue;
     const transcript = String(ans && ans.transcript || "").trim();
     if (!transcript) continue;
     out.push({ q, transcript });
@@ -20,7 +21,7 @@ function answersToSend(attempt) {
 }
 
 /**
- * Asks the Worker to mark questions 5 through 11 (1-4 are marked on the device), then saves with the shared score client.
+ * Asks the Worker to mark questions 3 through 11 (1-2 are marked on the device), then saves with the shared score client.
  * An empty URL means the Worker is not deployed. No request is sent.
  */
 export async function requestAiMark(attempt, deps) {

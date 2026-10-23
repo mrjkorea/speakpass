@@ -277,7 +277,7 @@ async function presentReview(attempt) {
   viewKey = '';
   presenting = false;
   render();
-  if (attempt.answers.some((ans) => ans.q >= 5 && String(ans.transcript || '').trim())) askForMark();
+  if (attempt.answers.some((ans) => ans.q >= (attempt.mode === 'exam' ? 5 : 3) && String(ans.transcript || '').trim())) askForMark();
 
   for (const ans of attempt.answers) {
     if (ans.localRead) continue;
@@ -601,7 +601,7 @@ async function gradeClassAnswer(view) {
   }
   state.classFeedback = { answer: ans, grades, source, marks: {}, markNote: '', marking: false, markTried: false };
   if (state.screen === 'class-run') render({ focus: 'step-title' });
-  if (ans.q >= 5 && String(ans.transcript || '').trim()) askForMark();
+  if (ans.q >= 3 && String(ans.transcript || '').trim()) askForMark();
   if (isReadAloudScore(ans) && ans.blob && ans.blob.size) {
     const detail = await gradeReadAloud((source && source.text) || '', ans.blob);
     if (token !== classToken) return;
@@ -1496,6 +1496,19 @@ function answerCard(ans, grades, source, marks, mode) {
   }
   let scoreBlock = '';
   if (readDetail) scoreBlock = readAloudScoreHtml(readDetail);
+  else if (checklist && mode !== 'exam') {
+    let aiPanel;
+    if (ai) {
+      const sc = ai.band != null ? ai.band : ai.scoreValue;
+      aiPanel = `${bigScore(sc, ai.scoreMax || 3)}${ai.comment ? `<p class="note ai-comment">${escapeHtml(ai.comment)}</p>` : ''}${ai.tip ? `<p class="ai-tip">💡 ${escapeHtml(ai.tip)}</p>` : ''}`;
+    } else {
+      aiPanel = `<p class="score marking-line">${escapeHtml(markBusy() ? t('review.marking') : t('classMode.recorded'))}</p>`;
+    }
+    scoreBlock = `<div class="dual-mark">
+      <section class="mark-panel free-panel"><h3>${escapeHtml(t('results.freeMark'))}</h3>${checklistBlock(checklist, pictureHtml)}</section>
+      <section class="mark-panel ai-panel"><h3>${escapeHtml(t('results.aiMark'))}</h3>${aiPanel}</section>
+    </div>`;
+  }
   else if (checklist) scoreBlock = checklistBlock(checklist, pictureHtml);
   else if (ai && ans.q >= 5) {
     const score = ai.band != null ? ai.band : ai.scoreValue;
@@ -1508,12 +1521,13 @@ function answerCard(ans, grades, source, marks, mode) {
     const value = grades.free ? grades.free[ans.q] : '';
     scoreBlock = `<p class="score">${escapeHtml(t('review.deviceScore'))}: ${escapeHtml(String(value || ''))}</p>`;
   }
-  const comment = ai && ai.comment ? `<p class="note ai-comment">${escapeHtml(ai.comment)}</p>` : '';
+  const dual = !!(checklist && mode !== 'exam');
+  const comment = ai && ai.comment && !dual ? `<p class="note ai-comment">${escapeHtml(ai.comment)}</p>` : '';
   const partTip = tipFor(ans.type);
-  const tips = (ai && ai.tip) || partTip ? `
+  const tips = (ai && ai.tip && !dual) || partTip ? `
     <section class="tips">
       <h3>💡 ${escapeHtml(t('results.tip'))}</h3>
-      ${ai && ai.tip ? `<p>${escapeHtml(ai.tip)}</p>` : ''}
+      ${ai && ai.tip && !dual ? `<p>${escapeHtml(ai.tip)}</p>` : ''}
       ${partTip ? `<p class="note">${escapeHtml(partTip)}</p>` : ''}
     </section>` : '';
   const said = String(ans.transcript || '').trim();

@@ -197,7 +197,9 @@
     "examDone": "Vous avez fini cet examen. Les scores sont ci-dessous.",
     "classDone": "Le retour de la classe est enregistré. Les scores sont ci-dessous.",
     "pronunciation": "Prononciation",
-    "tip": "Conseil"
+    "tip": "Conseil",
+    "freeMark": "Free marking",
+    "aiMark": "AI marking"
   },
   "levels": {
     "AH": "Peut poursuivre une réponse claire et détaillée avec une grammaire et un vocabulaire stables.",
