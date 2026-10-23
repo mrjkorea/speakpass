@@ -21,13 +21,25 @@
     "classMode": "Aula",
     "examHelp": "O modo prova usa os tempos oficiais. Confira o microfone, pressione Iniciar uma vez e cada pergunta avança sozinha.",
     "classHelp": "O modo aula não tem limite de tempo. O relógio conta para cima e mostra o tempo oficial. Pressione Pronto quando quiser.",
-    "chooseVoice": "Voz da narração"
+    "chooseVoice": "Voz da narração",
+    "fullExam": "Prova completa",
+    "fullExamLine": "As 11 questões com tempos oficiais.",
+    "practiceMode": "Praticar",
+    "practiceLine": "Escolha uma questão, sem tempo ou com tempo.",
+    "details": "Detalhes"
   },
   "practice": {
     "title": "Praticar",
     "help": "Escolha uma pergunta ou pratique todas as perguntas de uma parte. Você pode tentar de novo quantas vezes quiser.",
     "part": "Praticar esta parte",
-    "back": "Voltar ao início"
+    "back": "Voltar ao início",
+    "pickHelp": "Escolha uma questão. Sem tempo não tem limite. Com tempo usa os tempos oficiais.",
+    "untimed": "Sem tempo",
+    "timed": "Com tempo",
+    "tryAgain": "Tentar de novo",
+    "tryTimed": "Tentar com tempo",
+    "tryUntimed": "Tentar sem tempo",
+    "pickAnother": "Escolher outra questão"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Gravada",
     "examDone": "Você terminou esta prova. As pontuações estão abaixo.",
     "classDone": "O retorno da aula foi salvo. As pontuações estão abaixo.",
-    "pronunciation": "Pronúncia"
+    "pronunciation": "Pronúncia",
+    "tip": "Dica"
   },
   "levels": {
     "AH": "Consegue manter uma resposta clara e detalhada com gramática e vocabulário estáveis.",
@@ -204,5 +217,12 @@
     "au-f": "Mulher australiana",
     "au-m": "Homem australiano",
     "nz-f": "Mulher neozelandesa"
+  },
+  "tips": {
+    "read_aloud": "Pause nas vírgulas e nos pontos. Enfatize as palavras-chave. Abaixe a voz no fim da frase.",
+    "describe_picture": "Descreva primeiro a cena geral e depois pessoas, ações e fundo. Use o present continuous.",
+    "respond_questions": "Responda primeiro diretamente e depois acrescente um motivo ou detalhe.",
+    "info_questions": "Encontre a linha exata na agenda. Diga horários, lugares e nomes com clareza.",
+    "opinion": "Dê sua opinião, dois motivos com um exemplo e repita sua opinião no final."
   }
 }

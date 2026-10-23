@@ -21,13 +21,25 @@
     "classMode": "Clase",
     "examHelp": "El modo examen usa los tiempos oficiales. Comprueba el micrófono, pulsa Inicio una vez y cada pregunta avanza sola.",
     "classHelp": "El modo clase no tiene límite de tiempo. El reloj cuenta hacia arriba y muestra el tiempo oficial. Pulsa Listo cuando quieras.",
-    "chooseVoice": "Voz de narración"
+    "chooseVoice": "Voz de narración",
+    "fullExam": "Examen completo",
+    "fullExamLine": "Las 11 preguntas con tiempos oficiales.",
+    "practiceMode": "Práctica",
+    "practiceLine": "Elige una pregunta, sin tiempo o con tiempo.",
+    "details": "Detalles"
   },
   "practice": {
     "title": "Práctica",
     "help": "Elige una pregunta o practica todas las de una parte. Puedes repetir las veces que quieras.",
     "part": "Practicar esta parte",
-    "back": "Volver al inicio"
+    "back": "Volver al inicio",
+    "pickHelp": "Elige una pregunta. Sin tiempo no tiene límite. Con tiempo usa los tiempos oficiales.",
+    "untimed": "Sin tiempo",
+    "timed": "Con tiempo",
+    "tryAgain": "Intentar de nuevo",
+    "tryTimed": "Probar con tiempo",
+    "tryUntimed": "Probar sin tiempo",
+    "pickAnother": "Elegir otra pregunta"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Grabada",
     "examDone": "Terminaste este examen. Las puntuaciones están abajo.",
     "classDone": "La valoración de la clase está guardada. Las puntuaciones están abajo.",
-    "pronunciation": "Pronunciación"
+    "pronunciation": "Pronunciación",
+    "tip": "Consejo"
   },
   "levels": {
     "AH": "Puede mantener una respuesta clara y detallada con gramática y vocabulario estables.",
@@ -204,5 +217,12 @@
     "au-f": "Mujer australiana",
     "au-m": "Hombre australiano",
     "nz-f": "Mujer neozelandesa"
+  },
+  "tips": {
+    "read_aloud": "Haz pausas en comas y puntos. Acentúa las palabras clave. Baja la voz al final de la frase.",
+    "describe_picture": "Describe primero la escena general y luego las personas, acciones y el fondo. Usa el presente continuo.",
+    "respond_questions": "Responde primero directamente y luego añade una razón o un detalle.",
+    "info_questions": "Busca la línea exacta en el horario. Di horas, lugares y nombres con claridad.",
+    "opinion": "Da tu opinión, dos razones con un ejemplo y repite tu opinión al final."
   }
 }

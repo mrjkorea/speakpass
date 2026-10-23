@@ -21,13 +21,25 @@
     "classMode": "Kelas",
     "examHelp": "Mode ujian memakai waktu resmi. Periksa mikrofon, tekan Mulai sekali, lalu setiap soal berjalan sendiri.",
     "classHelp": "Mode kelas tidak dibatasi waktu. Jam menghitung naik dan menampilkan target resmi. Tekan Selesai saat Anda siap.",
-    "chooseVoice": "Suara narasi"
+    "chooseVoice": "Suara narasi",
+    "fullExam": "Ujian Lengkap",
+    "fullExamLine": "Semua 11 soal dengan waktu resmi.",
+    "practiceMode": "Latihan",
+    "practiceLine": "Pilih satu soal, tanpa waktu atau dengan waktu.",
+    "details": "Detail"
   },
   "practice": {
     "title": "Latihan",
     "help": "Pilih satu soal, atau latih semua soal dalam satu bagian. Anda bisa mengulang sesering yang Anda mau.",
     "part": "Latih bagian ini",
-    "back": "Kembali ke awal"
+    "back": "Kembali ke awal",
+    "pickHelp": "Pilih soal. Tanpa waktu tidak ada batas. Dengan waktu memakai waktu resmi.",
+    "untimed": "Tanpa waktu",
+    "timed": "Dengan waktu",
+    "tryAgain": "Coba lagi",
+    "tryTimed": "Coba dengan waktu",
+    "tryUntimed": "Coba tanpa waktu",
+    "pickAnother": "Pilih soal lain"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Terekam",
     "examDone": "Anda menyelesaikan ujian ini. Skor tiap soal ada di bawah.",
     "classDone": "Umpan balik kelas tersimpan. Skor tiap soal ada di bawah.",
-    "pronunciation": "Pelafalan"
+    "pronunciation": "Pelafalan",
+    "tip": "Tips"
   },
   "levels": {
     "AH": "Dapat melanjutkan jawaban yang jelas dan rinci dengan tata bahasa dan kosakata yang stabil.",
@@ -204,5 +217,12 @@
     "au-f": "Wanita Australia",
     "au-m": "Pria Australia",
     "nz-f": "Wanita Selandia Baru"
+  },
+  "tips": {
+    "read_aloud": "Berhenti sejenak di koma dan titik. Tekankan kata kunci. Turunkan nada di akhir kalimat.",
+    "describe_picture": "Jelaskan suasana umum dulu, lalu orang, kegiatan, dan latar. Gunakan present continuous.",
+    "respond_questions": "Jawab pertanyaan langsung dulu, lalu tambahkan satu alasan atau detail.",
+    "info_questions": "Cari baris yang tepat di jadwal. Sebutkan waktu, tempat, dan nama dengan jelas.",
+    "opinion": "Sampaikan pendapat, beri dua alasan dengan contoh, lalu ulangi pendapat Anda."
   }
 }

@@ -21,13 +21,25 @@
     "classMode": "Unterricht",
     "examHelp": "Der Prüfungsmodus nutzt die offiziellen Zeiten. Prüfe das Mikrofon, drücke einmal Start, und jede Frage geht von selbst weiter.",
     "classHelp": "Der Unterrichtsmodus hat kein Zeitlimit. Die Uhr zählt hoch und zeigt die offizielle Zielzeit. Drücke Fertig, wenn du soweit bist.",
-    "chooseVoice": "Sprecherstimme"
+    "chooseVoice": "Sprecherstimme",
+    "fullExam": "Volle Prüfung",
+    "fullExamLine": "Alle 11 Fragen mit offiziellen Zeiten.",
+    "practiceMode": "Üben",
+    "practiceLine": "Eine Frage wählen, ohne oder mit Zeit.",
+    "details": "Details"
   },
   "practice": {
     "title": "Üben",
     "help": "Wähle eine einzelne Frage oder übe alle Fragen eines Teils. Du kannst so oft wiederholen, wie du möchtest.",
     "part": "Diesen Teil üben",
-    "back": "Zum Start"
+    "back": "Zum Start",
+    "pickHelp": "Wähle eine Frage. Ohne Zeit gibt es kein Limit. Mit Zeit gelten die offiziellen Zeiten.",
+    "untimed": "Ohne Zeit",
+    "timed": "Mit Zeit",
+    "tryAgain": "Nochmal",
+    "tryTimed": "Mit Zeit versuchen",
+    "tryUntimed": "Ohne Zeit versuchen",
+    "pickAnother": "Andere Frage wählen"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Aufgenommen",
     "examDone": "Du hast diese Prüfung beendet. Die Punkte stehen unten.",
     "classDone": "Die Rückmeldung aus dem Unterricht ist gespeichert. Die Punkte stehen unten.",
-    "pronunciation": "Aussprache"
+    "pronunciation": "Aussprache",
+    "tip": "Tipp"
   },
   "levels": {
     "AH": "Kann eine klare, ausführliche Antwort mit sicherer Grammatik und sicherem Wortschatz fortsetzen.",
@@ -204,5 +217,12 @@
     "au-f": "Australische Frau",
     "au-m": "Australischer Mann",
     "nz-f": "Neuseeländische Frau"
+  },
+  "tips": {
+    "read_aloud": "Pausiere bei Kommas und Punkten. Betone Schlüsselwörter. Senke die Stimme am Satzende.",
+    "describe_picture": "Beschreibe zuerst die ganze Szene, dann Personen, Handlungen und Hintergrund. Nutze das Present Continuous.",
+    "respond_questions": "Beantworte die Frage zuerst direkt und nenne dann einen Grund oder ein Detail.",
+    "info_questions": "Finde die genaue Zeile im Plan. Nenne Zeiten, Orte und Namen deutlich.",
+    "opinion": "Nenne deine Meinung, zwei Gründe mit Beispiel und wiederhole am Ende deine Meinung."
   }
 }

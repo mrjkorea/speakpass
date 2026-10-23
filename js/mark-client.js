@@ -46,7 +46,8 @@ export async function requestAiMark(attempt, deps) {
         testId: attempt.testId,
         studentId: id,
         token,
-        answers
+        answers,
+        lang: (deps && deps.lang) || (globalThis.document && document.documentElement.lang) || "en"
       })
     });
   } catch {

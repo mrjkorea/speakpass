@@ -21,13 +21,25 @@
     "classMode": "Lekcja",
     "examHelp": "Tryb egzaminu używa oficjalnych czasów. Sprawdź mikrofon, naciśnij Start raz, a każde pytanie przejdzie samo.",
     "classHelp": "Tryb lekcji nie ma limitu czasu. Zegar liczy w górę i pokazuje oficjalny cel. Naciśnij Gotowe, gdy będziesz gotów.",
-    "chooseVoice": "Głos lektora"
+    "chooseVoice": "Głos lektora",
+    "fullExam": "Pełny egzamin",
+    "fullExamLine": "Wszystkie 11 pytań z oficjalnym czasem.",
+    "practiceMode": "Ćwiczenia",
+    "practiceLine": "Wybierz jedno pytanie, bez czasu lub na czas.",
+    "details": "Szczegóły"
   },
   "practice": {
-    "title": "Ćwiczenie",
+    "title": "Ćwiczenia",
     "help": "Wybierz jedno pytanie albo poćwicz wszystkie pytania z części. Możesz powtarzać tyle razy, ile chcesz.",
     "part": "Ćwicz tę część",
-    "back": "Wróć na start"
+    "back": "Wróć na start",
+    "pickHelp": "Wybierz pytanie. Bez czasu nie ma limitu. Na czas używa oficjalnych limitów.",
+    "untimed": "Bez czasu",
+    "timed": "Na czas",
+    "tryAgain": "Spróbuj ponownie",
+    "tryTimed": "Spróbuj na czas",
+    "tryUntimed": "Spróbuj bez czasu",
+    "pickAnother": "Wybierz inne pytanie"
   },
   "parts": {
     "read_aloud": {
@@ -180,7 +192,8 @@
     "recorded": "Nagrane",
     "examDone": "Ukończyłeś ten egzamin. Wyniki pytań są poniżej.",
     "classDone": "Informacja z lekcji jest zapisana. Wyniki pytań są poniżej.",
-    "pronunciation": "Wymowa"
+    "pronunciation": "Wymowa",
+    "tip": "Wskazówka"
   },
   "levels": {
     "AH": "Potrafi prowadzić jasną, szczegółową odpowiedź ze stabilną gramatyką i słownictwem.",
@@ -204,5 +217,12 @@
     "au-f": "Australijka",
     "au-m": "Australijczyk",
     "nz-f": "Nowozelandka"
+  },
+  "tips": {
+    "read_aloud": "Rób pauzy przy przecinkach i kropkach. Akcentuj słowa kluczowe. Obniżaj głos na końcu zdania.",
+    "describe_picture": "Najpierw opisz całą scenę, potem ludzi, czynności i tło. Używaj present continuous.",
+    "respond_questions": "Najpierw odpowiedz wprost, potem dodaj jeden powód lub szczegół.",
+    "info_questions": "Znajdź właściwą linię w planie. Wyraźnie podaj godziny, miejsca i nazwiska.",
+    "opinion": "Podaj swoją opinię, dwa powody z przykładem, a na końcu powtórz opinię."
   }
 }

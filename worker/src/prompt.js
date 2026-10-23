@@ -66,11 +66,27 @@ export function normalizeAnswers(raw) {
     .map(([q, transcript]) => ({ q, transcript }));
 }
 
+/** Student UI languages the app offers. Feedback language only; answers stay English. */
+export const FEEDBACK_LANGS = {
+  en: "English", ko: "Korean", "zh-Hans": "Simplified Chinese", ja: "Japanese", es: "Spanish",
+  hi: "Hindi", de: "German", vi: "Vietnamese", "pt-BR": "Brazilian Portuguese", id: "Indonesian",
+  fr: "French", ar: "Arabic", tr: "Turkish", it: "Italian", pl: "Polish"
+};
+
+export function feedbackLanguage(lang) {
+  const key = String(lang || "").trim();
+  return Object.prototype.hasOwnProperty.call(FEEDBACK_LANGS, key) ? FEEDBACK_LANGS[key] : "English";
+}
+
 /** Rubric is message 0. The test and transcripts are message 1. */
-export function buildMessages(test, answers) {
+export function buildMessages(test, answers, lang) {
   const pending = [];
   const skipped = [];
-  const blocks = [`Practice test ${test.id}. Grade only these questions.`];
+  const language = feedbackLanguage(lang);
+  const blocks = [
+    `Practice test ${test.id}. Grade only these questions.`,
+    `Write every "comment" and "tip" in ${language}. Keep "corrected" in English.`
+  ];
   for (const answer of answers) {
     const question = (test.questions || []).find((item) => item.q === answer.q);
     if (!question) continue;
