@@ -108,8 +108,9 @@ self.onmessage = async (event) => {
     if (msg.type === 'transcribe') {
       const t0 = performance.now();
       const pcm = new Float32Array(msg.pcm);
-      const texts = cut(pcm).map(runPass).filter(Boolean);
-      self.postMessage({ type: 'result', id: msg.id, text: texts.join(' ').replace(/\s+/g, ' ').trim(), parts: texts.length, ms: Math.round(performance.now() - t0), info });
+      const pieces = cut(pcm).map((sub) => ({ s: sub.byteOffset / 4, e: sub.byteOffset / 4 + sub.length, text: runPass(sub) }));
+      const texts = pieces.map((x) => x.text).filter(Boolean);
+      self.postMessage({ type: 'result', id: msg.id, text: texts.join(' ').replace(/\s+/g, ' ').trim(), parts: texts.length, ranges: pieces, ms: Math.round(performance.now() - t0), info });
     }
   } catch (err) {
     if (msg.type !== 'transcribe') ready = null;

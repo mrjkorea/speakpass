@@ -179,7 +179,8 @@
     "facts": "Belgedeki bilgiler",
     "recorded": "Kaydedildi",
     "examDone": "Bu sınavı bitirdiniz. Soru puanları aşağıda.",
-    "classDone": "Ders geri bildirimi kaydedildi. Soru puanları aşağıda."
+    "classDone": "Ders geri bildirimi kaydedildi. Soru puanları aşağıda.",
+    "pronunciation": "Telaffuz"
   },
   "levels": {
     "AH": "Dengeli dil bilgisi ve sözcüklerle açık, ayrıntılı bir yanıtı sürdürebilir.",

@@ -179,7 +179,8 @@
     "facts": "Angaben im Dokument",
     "recorded": "Aufgenommen",
     "examDone": "Du hast diese Prüfung beendet. Die Punkte stehen unten.",
-    "classDone": "Die Rückmeldung aus dem Unterricht ist gespeichert. Die Punkte stehen unten."
+    "classDone": "Die Rückmeldung aus dem Unterricht ist gespeichert. Die Punkte stehen unten.",
+    "pronunciation": "Aussprache"
   },
   "levels": {
     "AH": "Kann eine klare, ausführliche Antwort mit sicherer Grammatik und sicherem Wortschatz fortsetzen.",

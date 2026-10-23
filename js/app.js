@@ -16,6 +16,37 @@ import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
 import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
 import { formatHMS } from './format.js';
 import { fillTranscript, fillTranscripts } from './transcribe.js';
+import { gradeSpoken } from './pronounce/boot.js';
+import { blendScore, usablePron } from './pronounce/blend.js';
+
+/** Small HuBERT pronunciation check for Q3-Q11 (after Whistle). Neutral (null) on any skip. */
+function fillPron(ans) {
+  if (!ans || ans.q < 3) return Promise.resolve(null);
+  if (ans.pronPromise) return ans.pronPromise;
+  const t0 = performance.now();
+  ans.pronPromise = gradeSpoken(ans.sttParts).catch(() => null).then((pron) => {
+    ans.pron = pron || null;
+    (window.__pronStats = window.__pronStats || []).push({
+      q: ans.q, ms: Math.round(performance.now() - t0), pct: pron ? pron.pct : null,
+      parts: (ans.sttParts || []).length, hubertMs: pron ? pron.ms : null
+    });
+    return ans.pron;
+  });
+  return ans.pronPromise;
+}
+
+function blendChecklist(detail, pron) {
+  if (!detail) return;
+  if (detail.contentStars == null) detail.contentStars = detail.stars;
+  detail.pron = usablePron(pron) ? pron : null;
+  detail.score = blendScore(detail.contentStars, 5, detail.pron);
+  detail.stars = Math.max(0, Math.min(5, Math.round(detail.score)));
+}
+
+function pronLine(pron) {
+  if (!usablePron(pron)) return '';
+  return `<p class="score pron-line"><span class="score-name">${escapeHtml(t('results.pronunciation'))}</span> <span class="line-band band-${pron.band}">${pron.pct}%</span></p>`;
+}
 import { startCountdown } from './timer.js';
 
 const RING = 2 * Math.PI * 52;
@@ -197,7 +228,7 @@ async function presentReview(attempt) {
       grades.free[ans.q] = ans.localRead.save || 'coming soon';
     } else if (ans.localChecklist) {
       grades.checklist[ans.q] = ans.localChecklist;
-      grades.free[ans.q] = `${ans.localChecklist.stars}/5`;
+      grades.free[ans.q] = `${ans.localChecklist.score != null ? ans.localChecklist.score : ans.localChecklist.stars}/5`;
     } else if (isReadAloudScore(ans)) {
       const hasAudio = !!(ans.blob && ans.blob.size);
       grades.read[ans.q] = { status: hasAudio ? 'checking' : 'empty' };
@@ -248,6 +279,16 @@ async function presentReview(attempt) {
     if (token === reviewToken && state.review && state.review.attempt === attempt && state.screen === 'review') {
       render();
     }
+  }
+  for (const ans of attempt.answers) {
+    if (ans.q < 3 || !String(ans.transcript || '').trim()) continue;
+    await fillPron(ans);
+    const list = grades.checklist[ans.q];
+    if (list) {
+      blendChecklist(list, ans.pron);
+      grades.free[ans.q] = `${list.score}/5`;
+    }
+    if (token === reviewToken && state.review && state.review.attempt === attempt && state.screen === 'review') render();
   }
   for (const ans of attempt.answers) {
     if (ans.q <= 4 && grades.free[ans.q] == null) grades.free[ans.q] = 'coming soon';
@@ -559,6 +600,16 @@ async function gradeClassAnswer(view) {
     if (state.screen === 'class-run') render();
   }
   if (token !== classToken) return;
+  if (ans.q >= 3 && String(ans.transcript || '').trim()) {
+    await fillPron(ans);
+    if (token !== classToken) return;
+    const list = grades.checklist[ans.q];
+    if (list) {
+      blendChecklist(list, ans.pron);
+      grades.free[ans.q] = `${list.score}/5`;
+    }
+    if (state.screen === 'class-run') render();
+  }
   await commitClassGrade(attempt, grades, ans);
 }
 
@@ -893,11 +944,15 @@ async function askForMark() {
 }
 
 async function storeMarks(attempt, marks) {
+  const byQ = {};
+  for (const ans of (attempt.answers || [])) byQ[ans.q] = ans;
+  await Promise.all((marks || []).map((row) => fillPron(byQ[Number(row && row.q)])));
   const rows = (marks || []).filter((row) => row && Number(row.q) >= 5).map((row) => ({
     q: Number(row.q),
     testId: attempt.testId,
     type: ((attempt.answers || []).find((ans) => ans.q === Number(row.q)) || {}).type || '',
-    score: Number(row.band != null ? row.band : row.scoreValue) || 0,
+    score: blendScore(Number(row.band != null ? row.band : row.scoreValue) || 0,
+      Number(row.scoreMax) || (Number(row.q) === 11 ? 5 : 3), (byQ[Number(row.q)] || {}).pron),
     total: Number(row.scoreMax) || (Number(row.q) === 11 ? 5 : 3)
   }));
   if (!rows.length || !attempt.testId) return;
@@ -1357,13 +1412,14 @@ function liveRows(attempt, grades, marks) {
       return { q: ans.q, score: Number(read.stars) || 0, total: 5, graded: true };
     }
     const list = grades.checklist && grades.checklist[ans.q];
-    if (list) return { q: ans.q, score: list.stars, total: 5, graded: true };
+    if (list) return { q: ans.q, score: list.score != null ? list.score : list.stars, total: 5, graded: true };
     const mark = marks && marks[ans.q];
     if (mark && ans.q >= 5) {
+      const total = Number(mark.scoreMax) || (ans.q === 11 ? 5 : 3);
       return {
         q: ans.q,
-        score: Number(mark.band != null ? mark.band : mark.scoreValue) || 0,
-        total: Number(mark.scoreMax) || (ans.q === 11 ? 5 : 3),
+        score: blendScore(Number(mark.band != null ? mark.band : mark.scoreValue) || 0, total, ans.pron),
+        total,
         graded: true
       };
     }
@@ -1474,6 +1530,7 @@ function answerCard(ans, grades, source, marks) {
       <button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" ${hasAudio ? '' : 'disabled'} aria-label="${escapeHtml(playLabel)}">${escapeHtml(playText)}</button>
       ${used}
       ${scoreBlock}
+      ${ans.q >= 3 ? pronLine(ans.pron) : ''}
       ${comment}
       ${compare}
       ${model}

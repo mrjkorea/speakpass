@@ -179,7 +179,8 @@
     "facts": "Fakta di dokumen",
     "recorded": "Terekam",
     "examDone": "Anda menyelesaikan ujian ini. Skor tiap soal ada di bawah.",
-    "classDone": "Umpan balik kelas tersimpan. Skor tiap soal ada di bawah."
+    "classDone": "Umpan balik kelas tersimpan. Skor tiap soal ada di bawah.",
+    "pronunciation": "Pelafalan"
   },
   "levels": {
     "AH": "Dapat melanjutkan jawaban yang jelas dan rinci dengan tata bahasa dan kosakata yang stabil.",
