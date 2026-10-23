@@ -197,7 +197,9 @@
     "examDone": "Ukończyłeś ten egzamin. Wyniki pytań są poniżej.",
     "classDone": "Informacja z lekcji jest zapisana. Wyniki pytań są poniżej.",
     "pronunciation": "Wymowa",
-    "tip": "Wskazówka"
+    "tip": "Wskazówka",
+    "freeMark": "Free marking",
+    "aiMark": "AI marking"
   },
   "levels": {
     "AH": "Potrafi prowadzić jasną, szczegółową odpowiedź ze stabilną gramatyką i słownictwem.",

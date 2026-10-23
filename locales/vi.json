@@ -197,7 +197,9 @@
     "examDone": "Bạn đã xong bài thi này. Điểm từng câu ở bên dưới.",
     "classDone": "Nhận xét của lớp đã được lưu. Điểm từng câu ở bên dưới.",
     "pronunciation": "Phát âm",
-    "tip": "Mẹo"
+    "tip": "Mẹo",
+    "freeMark": "Chấm miễn phí",
+    "aiMark": "Chấm bằng AI"
   },
   "levels": {
     "AH": "Có thể nói tiếp một câu trả lời rõ và chi tiết với ngữ pháp và từ vựng ổn định.",

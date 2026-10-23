@@ -197,7 +197,9 @@
     "examDone": "You finished this exam. Question scores are below.",
     "classDone": "Class feedback is saved. Question scores are below.",
     "pronunciation": "Pronunciation",
-    "tip": "Tip"
+    "tip": "Tip",
+    "freeMark": "Free marking",
+    "aiMark": "AI marking"
   },
   "levels": {
     "AH": "Can keep a clear, detailed answer going with steady grammar and vocabulary.",

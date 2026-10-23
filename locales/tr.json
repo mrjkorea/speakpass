@@ -197,7 +197,9 @@
     "examDone": "Bu sınavı bitirdiniz. Soru puanları aşağıda.",
     "classDone": "Ders geri bildirimi kaydedildi. Soru puanları aşağıda.",
     "pronunciation": "Telaffuz",
-    "tip": "İpucu"
+    "tip": "İpucu",
+    "freeMark": "Free marking",
+    "aiMark": "AI marking"
   },
   "levels": {
     "AH": "Dengeli dil bilgisi ve sözcüklerle açık, ayrıntılı bir yanıtı sürdürebilir.",

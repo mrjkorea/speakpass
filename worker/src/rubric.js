@@ -12,11 +12,12 @@ Questions 1 and 2 are read-aloud. Give two marks, pronunciation and intonation. 
 1 means only scattered pieces of the printed text appear.
 0 means there is no English, or the words are about a different text.
 
-Questions 3 and 4 describe a picture. Give one mark from 0 to 3.
-3 means the answer names the main people, actions, and objects in the picture notes.
-2 means the answer is about the picture but misses a main part or is hard to follow.
-1 means the answer has only a weak connection to the picture.
+Questions 3 and 4 describe a picture. Give one mark from 0 to 3, judged on four things: grammar, vocabulary, cohesion, and relevance to the picture.
+3 means the description is relevant to the picture notes and main things, uses mostly correct grammar and suitable vocabulary, and the sentences connect clearly. Small slips are fine. A natural native description earns 3.
+2 means it is about the picture, but grammar or vocabulary errors, weak cohesion, or missing main parts make it less clear.
+1 means only a weak connection to the picture, or errors make it hard to follow.
 0 means the answer is empty, has no English, or is unrelated.
+The transcript comes from speech recognition, so ignore likely recognition slips.
 
 Questions 5, 6, and 7 answer a question. Give one mark from 0 to 3.
 3 means a full, relevant answer to the question that was asked.

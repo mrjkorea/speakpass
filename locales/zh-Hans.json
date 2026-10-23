@@ -197,7 +197,9 @@
     "examDone": "考试已完成。各题分数在下面。",
     "classDone": "课堂反馈已保存。各题分数在下面。",
     "pronunciation": "发音",
-    "tip": "提示"
+    "tip": "提示",
+    "freeMark": "免费评分",
+    "aiMark": "AI 评分"
   },
   "levels": {
     "AH": "能用稳定的语法和词汇，把清楚、详细的回答说下去。",
