@@ -41,7 +41,8 @@
     "tryTimed": "计时再试",
     "tryUntimed": "不计时再试",
     "pickAnother": "选择其他题目",
-    "qRange": "第 {a}-{b} 题"
+    "qRange": "第 {a}-{b} 题",
+    "partLocked": "Save at least one answer in the previous part to unlock this section."
   },
   "parts": {
     "read_aloud": {
@@ -159,7 +160,8 @@
     "level": "麦克风音量",
     "start": "开始",
     "startHint": "只按一次开始。练习会自动继续。",
-    "leave": "离开"
+    "leave": "离开",
+    "skipMicTeacher": "Skip mic check (teacher)"
   },
   "classMode": {
     "title": "课堂",

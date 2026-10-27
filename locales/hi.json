@@ -41,7 +41,8 @@
     "tryTimed": "समय के साथ करें",
     "tryUntimed": "बिना समय करें",
     "pickAnother": "दूसरा प्रश्न चुनें",
-    "qRange": "प्रश्न {a}-{b}"
+    "qRange": "प्रश्न {a}-{b}",
+    "partLocked": "Save at least one answer in the previous part to unlock this section."
   },
   "parts": {
     "read_aloud": {
@@ -159,7 +160,8 @@
     "level": "माइक्रोफ़ोन स्तर",
     "start": "प्रारंभ",
     "startHint": "प्रारंभ एक बार दबाएँ। अभ्यास अपने आप चलता रहता है।",
-    "leave": "बाहर जाएँ"
+    "leave": "बाहर जाएँ",
+    "skipMicTeacher": "Skip mic check (teacher)"
   },
   "classMode": {
     "title": "कक्षा",

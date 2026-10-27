@@ -12,6 +12,7 @@ import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
 import { classScreenHtml, estimateHtml, examIntroHtml, examMicHtml, examRunHtml } from './mode-view.js';
 import { playNarration, prepareNarration, questionClipId, stopNarration, setNarrationVoice, getNarrationVoice, normalizeVoice, VOICE_KEYS, MIXED_VOICE } from './narration.js';
+import { examMicGateOpen, practicePartUnlocked, practiceQuestionUnlocked } from './path-gate.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
 import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
 import { formatHMS } from './format.js';
@@ -448,7 +449,7 @@ function examPlayback() {
 }
 
 async function examStart() {
-  if (state.arming || !state.micBlob) return;
+  if (state.arming || (!state.micBlob && !examMicGateOpen())) return;
   const test = currentTest();
   if (!test) return;
   state.arming = true;
@@ -849,27 +850,60 @@ function onClick(event) {
   else if (action === 'exam-record') examRecord();
   else if (action === 'exam-playback') examPlayback();
   else if (action === 'exam-intro') {
-    if (state.micBlob) {
+    if (state.micBlob || examMicGateOpen()) {
       state.examStage = 'intro';
       state.micError = '';
       render();
     }
   }
+  else if (action === 'exam-skip-mic') {
+    if (!examMicGateOpen()) return;
+    state.micBlob = state.micBlob || new Blob();
+    state.examStage = 'intro';
+    state.micError = '';
+    render();
+  }
   else if (action === 'exam-start') examStart();
-  else if (action === 'class-q') startClass({ scope: 'question', q: Number(button.dataset.q) });
-  else if (action === 'class-part') startClass({ scope: 'part', part: button.dataset.part });
+  else if (action === 'class-q') {
+    const q = Number(button.dataset.q);
+    const test = currentTest();
+    if (test && !practiceQuestionUnlocked(state.pack, test, q)) return;
+    startClass({ scope: 'question', q });
+  }
+  else if (action === 'class-part') {
+    const part = button.dataset.part;
+    const test = currentTest();
+    if (test && !practicePartUnlocked(state.pack, test, part)) return;
+    startClass({ scope: 'part', part });
+  }
   else if (action === 'class-continue') classContinue();
   else if (action === 'class-done') classDone();
   else if (action === 'class-hear') classHear();
   else if (action === 'class-next' && state.session) state.session.next();
   else if (action === 'practice') openClass();
-  else if (action === 'try-untimed') startClass({ scope: 'question', q: Number(button.dataset.q) });
-  else if (action === 'try-timed') startSession({ mode: 'practice', scope: 'question', q: Number(button.dataset.q) });
+  else if (action === 'try-untimed') {
+    const q = Number(button.dataset.q);
+    const test = currentTest();
+    if (test && !practiceQuestionUnlocked(state.pack, test, q)) return;
+    startClass({ scope: 'question', q });
+  }
+  else if (action === 'try-timed') {
+    const q = Number(button.dataset.q);
+    const test = currentTest();
+    if (test && !practiceQuestionUnlocked(state.pack, test, q)) return;
+    startSession({ mode: 'practice', scope: 'question', q });
+  }
   else if (action === 'home' || action === 'back') goHome();
   else if (action === 'practice-q') {
-    startSession({ mode: 'practice', scope: 'question', q: Number(button.dataset.q) });
+    const q = Number(button.dataset.q);
+    const test = currentTest();
+    if (test && !practiceQuestionUnlocked(state.pack, test, q)) return;
+    startSession({ mode: 'practice', scope: 'question', q });
   } else if (action === 'practice-part') {
-    startSession({ mode: 'practice', scope: 'part', part: button.dataset.part });
+    const part = button.dataset.part;
+    const test = currentTest();
+    if (test && !practicePartUnlocked(state.pack, test, part)) return;
+    startSession({ mode: 'practice', scope: 'part', part });
   } else if (action === 'begin') onBegin();
   else if (action === 'stop-speak') stopSpeak();
   else if (action === 'ask-end') {
@@ -1025,6 +1059,27 @@ function onLeave(event) {
 
 function markSvg() {
   return `<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="1.6"></circle><rect x="8" y="13" width="2.2" height="6" rx="1"></rect><rect x="12" y="10" width="2.2" height="12" rx="1"></rect><rect x="16" y="7" width="2.2" height="18" rx="1"></rect><rect x="20" y="11" width="2.2" height="10" rx="1"></rect></svg>`;
+}
+
+function syncStudentNamePill() {
+  const el = document.querySelector('[data-mrj-name-pill]');
+  if (!el) return;
+  const id = studentId();
+  if (!id || state.packStatus !== 'ready') {
+    el.hidden = true;
+    el.textContent = '';
+    el.removeAttribute('title');
+    return;
+  }
+  el.hidden = false;
+  const compact = (window.innerWidth || 800) < 480;
+  const display = compact && id.length > 10 ? `${id.slice(0, 8)}…` : id;
+  if (el.textContent !== display) el.textContent = display;
+  const label = `My progress for ${id}`;
+  if (compact && id.length > 10) {
+    if (el.title !== id) el.title = id;
+  } else if (el.title) el.removeAttribute('title');
+  if (el.getAttribute('aria-label') !== label) el.setAttribute('aria-label', label);
 }
 
 function shell(main, { showEnd = false } = {}) {
@@ -1655,16 +1710,20 @@ function renderClass() {
   }
   const cards = PART_ORDER.filter((id) => groups.has(id)).map((id) => {
     const qs = groups.get(id);
+    const unlocked = practicePartUnlocked(state.pack, test, id);
+    const lockedNote = unlocked
+      ? ''
+      : `<p class="pick-locked">${escapeHtml(t('practice.partLocked'))}</p>`;
     const rows = id === 'info_questions' && qs.length > 1 ? `
-      <li class="pick-row">
+      <li class="pick-row${unlocked ? '' : ' is-locked'}">
         <span class="pick-q">${escapeHtml(t('practice.qRange', { a: qs[0].q, b: qs[qs.length - 1].q }))}</span>
-        <button type="button" class="btn secondary" data-action="class-part" data-part="${id}">${escapeHtml(t('practice.untimed'))}</button>
-        <button type="button" class="btn primary" data-action="practice-part" data-part="${id}">${escapeHtml(t('practice.timed'))}</button>
+        <button type="button" class="btn secondary" data-action="class-part" data-part="${id}" ${unlocked ? '' : 'disabled'}>${escapeHtml(t('practice.untimed'))}</button>
+        <button type="button" class="btn primary" data-action="practice-part" data-part="${id}" ${unlocked ? '' : 'disabled'}>${escapeHtml(t('practice.timed'))}</button>
       </li>` : qs.map((q) => `
-      <li class="pick-row">
+      <li class="pick-row${unlocked ? '' : ' is-locked'}">
         <span class="pick-q">${escapeHtml(t('run.qLabel', { n: q.q }))}</span>
-        <button type="button" class="btn secondary" data-action="class-q" data-q="${q.q}">${escapeHtml(t('practice.untimed'))}</button>
-        <button type="button" class="btn primary" data-action="practice-q" data-q="${q.q}">${escapeHtml(t('practice.timed'))}</button>
+        <button type="button" class="btn secondary" data-action="class-q" data-q="${q.q}" ${unlocked ? '' : 'disabled'}>${escapeHtml(t('practice.untimed'))}</button>
+        <button type="button" class="btn primary" data-action="practice-q" data-q="${q.q}" ${unlocked ? '' : 'disabled'}>${escapeHtml(t('practice.timed'))}</button>
       </li>`).join('');
     const tip = tipFor(id);
     return `
@@ -1672,6 +1731,7 @@ function renderClass() {
         <h2>${escapeHtml(t(`parts.${id}.title`))}</h2>
         ${tip ? `<p class="tip">💡 ${escapeHtml(tip)}</p>` : ''}
         <ul class="pick-list">${rows}</ul>
+        ${lockedNote}
       </section>`;
   }).join('');
   return shell(`
@@ -1697,6 +1757,7 @@ function renderExamInner() {
     hasTake: !!(state.micBlob && state.micBlob.size),
     playing: state.playingMic,
     error: state.micError,
+    teacherSkip: examMicGateOpen(),
     dialog
   });
 }
@@ -1764,6 +1825,8 @@ function render(opts = {}) {
   const screenChanged = renderedScreen !== state.screen;
   renderedScreen = state.screen;
   root.innerHTML = viewForScreen();
+  syncStudentNamePill();
+  nudgeStudentChrome();
   syncLangFloat();
   const skip = document.querySelector('.skip');
   if (skip && state.en) skip.textContent = t('a11y.skip');
@@ -1907,8 +1970,15 @@ async function hydrate(id) {
     state.screen = 'home';
   }
   render();
+  nudgeStudentChrome();
   const scores = globalThis.MRJ_SCORES;
   if (scores && typeof scores.flush === 'function') scores.flush();
+}
+
+function nudgeStudentChrome() {
+  try {
+    globalThis.dispatchEvent(new Event('resize'));
+  } catch (err) { /* ignore */ }
 }
 
 function onAuthReady(event) {
@@ -2000,5 +2070,13 @@ document.addEventListener('click', onClick);
 document.addEventListener('click', onSignedOut);
 document.addEventListener('change', onChange);
 document.addEventListener('mrj-auth-ready', onAuthReady);
+document.addEventListener('mrj-teacher', () => {
+  if (state.en) render();
+});
+if (globalThis.MRJTeacherUnlock && globalThis.MRJTeacherUnlock.installRefresh) {
+  globalThis.MRJTeacherUnlock.installRefresh(() => {
+    if (state.en) render();
+  });
+}
 window.addEventListener('beforeunload', onLeave);
 boot();

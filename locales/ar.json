@@ -41,7 +41,8 @@
     "tryTimed": "جرّبه بوقت",
     "tryUntimed": "جرّبه بدون وقت",
     "pickAnother": "اختر سؤالًا آخر",
-    "qRange": "الأسئلة {a}-{b}"
+    "qRange": "الأسئلة {a}-{b}",
+    "partLocked": "Save at least one answer in the previous part to unlock this section."
   },
   "parts": {
     "read_aloud": {
@@ -159,7 +160,8 @@
     "level": "مستوى الميكروفون",
     "start": "ابدأ",
     "startHint": "اضغط ابدأ مرة واحدة فقط. يتابع التمرين وحده.",
-    "leave": "خروج"
+    "leave": "خروج",
+    "skipMicTeacher": "Skip mic check (teacher)"
   },
   "classMode": {
     "title": "حصة",

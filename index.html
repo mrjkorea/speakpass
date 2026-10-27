@@ -15,11 +15,13 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="icons/icon-180.png">
-  <link rel="stylesheet" href="css/styles.css?v=12">
-  <link rel="stylesheet" href="https://mrjkorea.github.io/mrj-signin/mrj-auth.css">
+  <meta name="mrj-build" content="20261027-teacher-mode">
+  <link rel="stylesheet" href="css/styles.css?v=20261027-teacher-mode">
+  <link rel="stylesheet" href="https://mrjkorea.github.io/mrj-signin/mrj-auth.css?v=20261022-block-id-1.6.0">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <button type="button" class="student-pill student-pill-float" data-mrj-name-pill hidden></button>
   <div id="app">
     <main id="main" class="boot">
       <p class="tagline">English speaking practice with TOEIC-style questions. This is not a TOEIC test.</p>
@@ -33,10 +35,11 @@
       <p>This practice app needs JavaScript.</p>
     </main>
   </noscript>
-  <link rel="stylesheet" href="https://mrjkorea.github.io/mrj-signin/mrj-auth.css">
-  <script src="https://mrjkorea.github.io/mrj-signin/mrj-auth.js"></script>
-  <script src="https://mrjkorea.github.io/mrj-signin/mrj-auth-boot.js" data-mrj-app="speakpass" data-mrj-score-programs="speakpass"></script>
-  <script src="mrj-scores.js?v=20261013-speakpass"></script>
-  <script type="module" src="js/app.js?v=19"></script>
+  <link rel="stylesheet" href="https://mrjkorea.github.io/mrj-signin/mrj-auth.css?v=20261022-block-id-1.6.0">
+  <script src="https://mrjkorea.github.io/mrj-signin/mrj-auth.js?v=20261022-block-id-1.6.0"></script>
+  <script src="https://mrjkorea.github.io/mrj-signin/mrj-auth-boot.js?v=20261022-block-id-1.6.0" data-mrj-app="speakpass" data-mrj-score-programs="speakpass"></script>
+  <script src="js/mrj-teacher-unlock.js?v=20261027-teacher-mode"></script>
+  <script src="mrj-scores.js?v=20261027-teacher-mode"></script>
+  <script type="module" src="js/app.js?v=20261027-teacher-mode"></script>
 </body>
 </html>
