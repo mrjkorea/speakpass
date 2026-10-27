@@ -41,7 +41,8 @@
     "tryTimed": "Mit Zeit versuchen",
     "tryUntimed": "Ohne Zeit versuchen",
     "pickAnother": "Andere Frage wählen",
-    "qRange": "Fragen {a}-{b}"
+    "qRange": "Fragen {a}-{b}",
+    "partLocked": "Save at least one answer in the previous part to unlock this section."
   },
   "parts": {
     "read_aloud": {
@@ -159,7 +160,8 @@
     "level": "Mikrofonpegel",
     "start": "Start",
     "startHint": "Drücke Start nur einmal. Die Übung läuft von selbst weiter.",
-    "leave": "Verlassen"
+    "leave": "Verlassen",
+    "skipMicTeacher": "Skip mic check (teacher)"
   },
   "classMode": {
     "title": "Unterricht",

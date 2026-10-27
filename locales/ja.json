@@ -41,7 +41,8 @@
     "tryTimed": "時間ありで挑戦",
     "tryUntimed": "時間なしで挑戦",
     "pickAnother": "別の問題を選ぶ",
-    "qRange": "問題 {a}-{b}"
+    "qRange": "問題 {a}-{b}",
+    "partLocked": "Save at least one answer in the previous part to unlock this section."
   },
   "parts": {
     "read_aloud": {
@@ -159,7 +160,8 @@
     "level": "マイクの大きさ",
     "start": "開始",
     "startHint": "開始は一度だけ押します。練習はそのまま進みます。",
-    "leave": "出る"
+    "leave": "出る",
+    "skipMicTeacher": "Skip mic check (teacher)"
   },
   "classMode": {
     "title": "授業",

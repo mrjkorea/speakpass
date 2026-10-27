@@ -56,16 +56,19 @@ function examChrome(main, { count, leaveLabel, showLeave, footer = '', dialog = 
     </div>`;
 }
 
-export function examMicHtml({ t, recording, level, hasTake, playing, error, dialog = '' }) {
+export function examMicHtml({ t, recording, level, hasTake, playing, error, teacherSkip = false, dialog = '' }) {
   const meter = Math.round((Number(level) || 0) * 100);
   const err = error
     ? `<p id="mic-error" class="alert" role="alert" tabindex="-1">${escapeHtml(error)}</p>`
+    : '';
+  const skip = teacherSkip
+    ? `<button type="button" class="btn secondary" data-action="exam-skip-mic">${escapeHtml(t('exam.skipMicTeacher'))}</button>`
     : '';
   const play = hasTake
     ? `<button type="button" class="btn secondary" data-action="exam-playback">${escapeHtml(playing ? t('review.stop') : t('exam.playBack'))}</button>
        <button type="button" class="btn secondary" data-action="exam-record">${escapeHtml(t('exam.recordAgain'))}</button>
        <button type="button" class="btn primary" data-action="exam-intro">${escapeHtml(t('exam.continue'))}</button>`
-    : `<button type="button" class="btn primary" data-action="exam-record" ${recording ? 'disabled' : ''}>${escapeHtml(recording ? t('exam.recording') : t('exam.record'))}</button>`;
+    : `<button type="button" class="btn primary" data-action="exam-record" ${recording ? 'disabled' : ''}>${escapeHtml(recording ? t('exam.recording') : t('exam.record'))}</button>${skip}`;
   return examChrome(`
     <h1 id="step-title" tabindex="-1">${escapeHtml(t('exam.micTitle'))}</h1>
     <p>${escapeHtml(t('exam.micHelp'))}</p>

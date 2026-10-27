@@ -41,7 +41,8 @@
     "tryTimed": "Try it timed",
     "tryUntimed": "Try it untimed",
     "pickAnother": "Choose another question",
-    "qRange": "Questions {a}-{b}"
+    "qRange": "Questions {a}-{b}",
+    "partLocked": "Save at least one answer in the previous part to unlock this section."
   },
   "parts": {
     "read_aloud": {
@@ -159,7 +160,8 @@
     "level": "Microphone level",
     "start": "Start",
     "startHint": "Press Start once. The practice continues by itself.",
-    "leave": "Leave"
+    "leave": "Leave",
+    "skipMicTeacher": "Skip mic check (teacher)"
   },
   "classMode": {
     "title": "Class",
