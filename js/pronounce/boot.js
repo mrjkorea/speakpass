@@ -74,7 +74,7 @@ async function scoreOne(text, blob) {
     const graded = await api.grade(blob, target, APP_ID, { maxMs: READ_MAX_MS });
     const perf = graded && graded.perf ? graded.perf : {};
     const scoreMs = Number(perf.totalMs) || (performance.now() - t0);
-    return packGrade(graded, scoreMs, meta);
+    return packGrade(graded, scoreMs, meta, target);
   } catch (err) {
     console.error(err);
     return blank('failed', 'coming soon');

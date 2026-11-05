@@ -131,7 +131,9 @@
     "stars": "5段階中 {n}",
     "checkFailed": "この端末では発音を確認できませんでした。回答は保存されます。",
     "weak": "練習する語",
-    "listen": "自分の解答を聞く"
+    "listen": "自分の解答を聞く",
+    "model": "お手本の音声を聞く",
+    "modelMissing": "この問題のお手本音声はまだ準備できていません。"
   },
   "common": {
     "language": "言語",
@@ -143,7 +145,8 @@
     "timer": "{phase}。残り {n} 秒。",
     "play": "問題 {n} の回答を再生",
     "stop": "問題 {n} の再生を停止",
-    "progress": "問題 {index} / {total}"
+    "progress": "問題 {index} / {total}",
+    "model": "問題 {n} のお手本音声を再生"
   },
   "account": {
     "loading": "保存した進度を読み込んでいます…",

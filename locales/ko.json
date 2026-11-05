@@ -131,7 +131,9 @@
     "stars": "5점 만점에 {n}점",
     "checkFailed": "이 기기에서는 발음을 확인하지 못했습니다. 답은 그대로 저장됩니다.",
     "weak": "연습할 단어",
-    "listen": "내 답변 듣기"
+    "listen": "내 답변 듣기",
+    "model": "모범 발음 듣기",
+    "modelMissing": "이 문제의 모범 발음 음성이 아직 준비되지 않았습니다."
   },
   "common": {
     "language": "언어",
@@ -143,7 +145,8 @@
     "timer": "{phase}. {n}초 남음.",
     "play": "문제 {n}의 답 재생",
     "stop": "문제 {n}의 답 재생 정지",
-    "progress": "문제 {index} / {total}"
+    "progress": "문제 {index} / {total}",
+    "model": "{n}번 문제의 모범 발음 재생"
   },
   "account": {
     "loading": "저장된 진도를 불러오는 중…",

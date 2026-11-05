@@ -131,7 +131,9 @@
     "stars": "5 分中的 {n} 分",
     "checkFailed": "这台设备无法检查发音。你的答案仍会保存。",
     "weak": "需要练习的词",
-    "listen": "听我的回答"
+    "listen": "听我的回答",
+    "model": "听示范朗读",
+    "modelMissing": "这道题的示范朗读音频还没有准备好。"
   },
   "common": {
     "language": "语言",
@@ -143,7 +145,8 @@
     "timer": "{phase}。还剩 {n} 秒。",
     "play": "播放第 {n} 题的答案",
     "stop": "停止播放第 {n} 题的答案",
-    "progress": "第 {index} 题，共 {total} 题"
+    "progress": "第 {index} 题，共 {total} 题",
+    "model": "播放第 {n} 题的示范朗读"
   },
   "account": {
     "loading": "正在加载已保存的进度…",

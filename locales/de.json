@@ -131,7 +131,9 @@
     "stars": "{n} von 5",
     "checkFailed": "Die Aussprache konnte auf diesem Gerät nicht geprüft werden. Deine Antwort wird trotzdem gespeichert.",
     "weak": "Wörter zum Üben",
-    "listen": "Meine Antwort anhören"
+    "listen": "Meine Antwort anhören",
+    "model": "Modell anhören",
+    "modelMissing": "Die Modellaufnahme für diese Frage ist noch nicht bereit."
   },
   "common": {
     "language": "Sprache",
@@ -143,7 +145,8 @@
     "timer": "{phase}. Noch {n} Sekunden.",
     "play": "Antwort auf Frage {n} abspielen",
     "stop": "Wiedergabe von Frage {n} stoppen",
-    "progress": "Frage {index} von {total}"
+    "progress": "Frage {index} von {total}",
+    "model": "Modellaufnahme zu Frage {n} abspielen"
   },
   "account": {
     "loading": "Gespeicherter Fortschritt wird geladen…",

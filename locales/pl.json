@@ -131,7 +131,9 @@
     "stars": "{n} z 5",
     "checkFailed": "Na tym urządzeniu nie udało się sprawdzić wymowy. Odpowiedź i tak zostanie zapisana.",
     "weak": "Słowa do ćwiczenia",
-    "listen": "Odsłuchaj moją odpowiedź"
+    "listen": "Odsłuchaj moją odpowiedź",
+    "model": "Posłuchaj wzoru",
+    "modelMissing": "Nagranie wzorcowe do tego pytania nie jest jeszcze gotowe."
   },
   "common": {
     "language": "Język",
@@ -143,7 +145,8 @@
     "timer": "{phase}. Zostało {n} sekund.",
     "play": "Odtwórz odpowiedź na pytanie {n}",
     "stop": "Zatrzymaj odtwarzanie pytania {n}",
-    "progress": "Pytanie {index} z {total}"
+    "progress": "Pytanie {index} z {total}",
+    "model": "Odtwórz nagranie wzorcowe pytania {n}"
   },
   "account": {
     "loading": "Wczytywanie zapisanych postępów…",

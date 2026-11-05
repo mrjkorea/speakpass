@@ -131,7 +131,9 @@
     "stars": "{n} dari 5",
     "checkFailed": "Pelafalan tidak dapat diperiksa di perangkat ini. Jawaban Anda tetap disimpan.",
     "weak": "Kata untuk dilatih",
-    "listen": "Dengarkan jawaban saya"
+    "listen": "Dengarkan jawaban saya",
+    "model": "Dengarkan model",
+    "modelMissing": "Bacaan model untuk soal ini belum siap."
   },
   "common": {
     "language": "Bahasa",
@@ -143,7 +145,8 @@
     "timer": "{phase}. {n} detik tersisa.",
     "play": "Putar jawaban soal {n}",
     "stop": "Hentikan jawaban soal {n}",
-    "progress": "Soal {index} dari {total}"
+    "progress": "Soal {index} dari {total}",
+    "model": "Putar bacaan model soal {n}"
   },
   "account": {
     "loading": "Memuat kemajuan yang tersimpan…",

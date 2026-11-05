@@ -131,7 +131,9 @@
     "stars": "5 üzerinden {n}",
     "checkFailed": "Bu cihazda telaffuz kontrol edilemedi. Yanıtın yine de kaydedilir.",
     "weak": "Çalışılacak sözcükler",
-    "listen": "Cevabımı dinle"
+    "listen": "Cevabımı dinle",
+    "model": "Örneği dinle",
+    "modelMissing": "Bu sorunun örnek okuması henüz hazır değil."
   },
   "common": {
     "language": "Dil",
@@ -143,7 +145,8 @@
     "timer": "{phase}. {n} saniye kaldı.",
     "play": "{n}. sorunun yanıtını oynat",
     "stop": "{n}. sorunun oynatılmasını durdur",
-    "progress": "Soru {index} / {total}"
+    "progress": "Soru {index} / {total}",
+    "model": "{n}. sorunun örnek okumasını çal"
   },
   "account": {
     "loading": "Kayıtlı ilerlemeniz yükleniyor…",

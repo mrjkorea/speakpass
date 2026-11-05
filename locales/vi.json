@@ -131,7 +131,9 @@
     "stars": "{n} trên 5",
     "checkFailed": "Không kiểm tra được phát âm trên thiết bị này. Câu trả lời vẫn được lưu.",
     "weak": "Từ cần luyện",
-    "listen": "Nghe câu trả lời của tôi"
+    "listen": "Nghe câu trả lời của tôi",
+    "model": "Nghe bản mẫu",
+    "modelMissing": "Bản đọc mẫu cho câu hỏi này chưa sẵn sàng."
   },
   "common": {
     "language": "Ngôn ngữ",
@@ -143,7 +145,8 @@
     "timer": "{phase}. Còn {n} giây.",
     "play": "Phát câu trả lời của câu {n}",
     "stop": "Dừng phát câu trả lời của câu {n}",
-    "progress": "Câu {index} / {total}"
+    "progress": "Câu {index} / {total}",
+    "model": "Phát bản đọc mẫu của câu hỏi {n}"
   },
   "account": {
     "loading": "Đang tải tiến độ đã lưu…",

@@ -131,7 +131,9 @@
     "stars": "{n} sur 5",
     "checkFailed": "La prononciation n’a pas pu être vérifiée sur cet appareil. Ta réponse est quand même enregistrée.",
     "weak": "Mots à travailler",
-    "listen": "Écouter ma réponse"
+    "listen": "Écouter ma réponse",
+    "model": "Écouter le modèle",
+    "modelMissing": "La lecture modèle n’est pas encore prête pour cette question."
   },
   "common": {
     "language": "Langue",
@@ -143,7 +145,8 @@
     "timer": "{phase}. {n} secondes restantes.",
     "play": "Écouter la réponse à la question {n}",
     "stop": "Arrêter la lecture de la question {n}",
-    "progress": "Question {index} sur {total}"
+    "progress": "Question {index} sur {total}",
+    "model": "Lire le modèle de la question {n}"
   },
   "account": {
     "loading": "Chargement de votre progrès enregistré…",

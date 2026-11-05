@@ -4,7 +4,7 @@ English speaking practice with TOEIC-style questions. This is not a TOEIC test.
 
 TOEIC is a registered trademark of ETS. This product is not endorsed or approved by ETS.
 
-SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. Sign in with the shared classroom account. Progress loads from that account on every computer. Questions 1 and 2 (read a text aloud) get an on-device pronunciation score. The other questions are not scored yet.
+SpeakPass AI runs a full 11-question speaking practice or a single question. It times preparation and speaking, records your voice, and lets you play the answers back. Sign in with the shared classroom account. Progress loads from that account on every computer. Questions 1 and 2 (read a text aloud) get an on-device pronunciation score, shown word by word with the punctuation of the printed text, and after that score the student can play a model reading in the same voice. The other questions are not scored yet.
 
 The app name is the constant `APP_NAME` in `js/config.js`. The manifest (`name` and `short_name`), the page title, and `appName` in every file under `locales/` must stay the same as that constant.
 
@@ -49,6 +49,7 @@ js/engine.js            Timers and the question sequence
 js/exam-run.js          Exam mode: one start, then official times
 js/class-run.js         Class mode: unlimited time, Done between questions
 js/narration.js         Pre-recorded narration clips
+js/model-audio.js       Model readings for questions 1 and 2
 js/checklist.js         Picture checklist and document facts
 js/estimate.js          Estimated 0–200 score and level
 js/audio.js             Microphone, beeps, MediaRecorder
@@ -67,12 +68,14 @@ tests/testNN.json       One test
 images/                 Pictures for questions 3 and 4
 icons/                  Home-screen icons
 scripts/check.mjs       Checks the tests and translations
+scripts/punctuation.test.mjs  Checks the printed punctuation in the score line
 ```
 
 Check the tests and the translation keys with:
 
 ```bash
 node scripts/check.mjs
+node scripts/punctuation.test.mjs
 ```
 
 ## Add a test

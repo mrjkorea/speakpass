@@ -131,7 +131,9 @@
     "stars": "{n} out of 5",
     "checkFailed": "Pronunciation could not be checked on this device. Your answer is still saved.",
     "weak": "Words to practice",
-    "listen": "Listen to my answer"
+    "listen": "Listen to my answer",
+    "model": "Listen to the model",
+    "modelMissing": "The model reading is not ready for this question yet."
   },
   "common": {
     "language": "Language",
@@ -143,7 +145,8 @@
     "timer": "{phase}. {n} seconds remaining.",
     "play": "Play the answer to question {n}",
     "stop": "Stop playing the answer to question {n}",
-    "progress": "Question {index} of {total}"
+    "progress": "Question {index} of {total}",
+    "model": "Play the model reading of question {n}"
   },
   "account": {
     "loading": "Loading your saved progress…",

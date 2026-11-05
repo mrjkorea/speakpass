@@ -11,6 +11,7 @@ import { gradeFree, gradePaid, gradeReadAloud, warmChecker } from './grade.js';
 import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
 import { classScreenHtml, estimateHtml, examIntroHtml, examMicHtml, examRunHtml } from './mode-view.js';
+import { modelClipUrl } from './model-audio.js';
 import { playNarration, prepareNarration, questionClipId, stopNarration, setNarrationVoice, getNarrationVoice, normalizeVoice, VOICE_KEYS, MIXED_VOICE } from './narration.js';
 import { examMicGateOpen, practicePartUnlocked, practiceQuestionUnlocked } from './path-gate.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
@@ -76,6 +77,8 @@ const state = {
   dialog: false,
   review: null,
   playingQ: null,
+  modelQ: null,
+  modelNote: null,
   pack: emptyPack(),
   packStatus: 'idle',
   studentId: '',
@@ -94,6 +97,47 @@ let lastSpoken = '';
 let presenting = false;
 let audioEl = null;
 let audioUrl = '';
+let modelEl = null;
+
+function stopModel() {
+  if (modelEl) {
+    modelEl.onended = null;
+    modelEl.onerror = null;
+    try { modelEl.pause(); } catch (err) { /* already stopped */ }
+    modelEl = null;
+  }
+  state.modelQ = null;
+}
+
+/** Play or stop the pre-baked model reading of question 1 or 2. */
+function toggleModel(qNumber, testId) {
+  const q = Number(qNumber);
+  if (state.modelQ === q) {
+    stopModel();
+    render();
+    return;
+  }
+  stopPlayback();
+  const url = modelClipUrl(testId, q);
+  if (!url) return;
+  state.modelNote = null;
+  modelEl = new Audio(url);
+  modelEl.setAttribute('playsinline', '');
+  modelEl.preload = 'auto';
+  state.modelQ = q;
+  const failed = () => {
+    stopModel();
+    state.modelNote = { q, text: t('review.modelMissing') };
+    render();
+  };
+  modelEl.onended = () => {
+    stopModel();
+    render();
+  };
+  modelEl.onerror = failed;
+  render();
+  modelEl.play().catch(failed);
+}
 let hydrateSeq = 0;
 let reviewToken = 0;
 let packEpoch = 0;
@@ -175,6 +219,7 @@ function stopPlayback() {
   }
   state.playingQ = null;
   state.playingMic = false;
+  stopModel();
 }
 
 function goHome() {
@@ -600,7 +645,7 @@ async function gradeClassAnswer(view) {
   } else {
     grades.paid = 'coming soon';
   }
-  state.classFeedback = { answer: ans, grades, source, marks: {}, markNote: '', marking: false, markTried: false };
+  state.classFeedback = { answer: ans, grades, source, testId: attempt.testId, marks: {}, markNote: '', marking: false, markTried: false };
   if (state.screen === 'class-run') render({ focus: 'step-title' });
   if (ans.q >= 3 && String(ans.transcript || '').trim()) askForMark();
   if (isReadAloudScore(ans) && ans.blob && ans.blob.size) {
@@ -914,6 +959,7 @@ function onClick(event) {
     render();
   } else if (action === 'confirm-end') confirmEnd();
   else if (action === 'play') togglePlay(button.dataset.q);
+  else if (action === 'model') toggleModel(button.dataset.q, button.dataset.test);
   else if (action === 'retry' && state.review) {
     const sel = state.review.selection;
     if (sel && sel.mode === 'class') startClass(sel);
@@ -1448,7 +1494,8 @@ function readAloudScoreHtml(detail) {
   const label = t('review.stars', { n });
   const lineBand = detail.band === 'yellow' || detail.band === 'red' ? detail.band : 'green';
   const words = (detail.words || []).map((word) => {
-    const band = word.band === 'yellow' || word.band === 'red' ? word.band : 'green';
+    const band = word.band === 'yellow' || word.band === 'red' ? word.band : (word.band === 'green' ? 'green' : null);
+    if (!band) return `<span>${escapeHtml(word.word)}</span>`;
     if (band === 'red') return `<mark class="weak band-red">${escapeHtml(word.word)}</mark>`;
     return `<span class="band-${band}">${escapeHtml(word.word)}</span>`;
   }).join(' ');
@@ -1534,7 +1581,7 @@ function bigScore(score, max) {
   return `<p class="big-score" role="img" aria-label="${escapeHtml(t('classMode.band', { score: shown, max }))}"><span class="big-score-label">Score</span> <strong>${escapeHtml(shown)}/${escapeHtml(String(max))}</strong></p>`;
 }
 
-function answerCard(ans, grades, source, marks, mode) {
+function answerCard(ans, grades, source, marks, mode, testId) {
   const picture = ans.type === 'describe_picture';
   const readDetail = isReadAloudScore(ans) ? (grades.read && grades.read[ans.q]) : null;
   const checklist = grades.checklist && grades.checklist[ans.q];
@@ -1542,6 +1589,9 @@ function answerCard(ans, grades, source, marks, mode) {
   const hasAudio = ans.blob && ans.blob.size > 0;
   const playing = state.playingQ === ans.q;
   const canListen = mode !== 'exam' && hasAudio;
+  const canModel = mode !== 'exam' && ans.q >= 1 && ans.q <= 2 && !!(readDetail && readDetail.status === 'scored');
+  const modelPlaying = state.modelQ === ans.q;
+  const modelNote = state.modelNote && state.modelNote.q === ans.q ? state.modelNote.text : '';
   const playText = playing ? t('review.stop') : t('review.listen');
   const playLabel = playing ? t('a11y.stop', { n: ans.q }) : t('a11y.play', { n: ans.q });
   let pictureHtml = '';
@@ -1615,6 +1665,8 @@ function answerCard(ans, grades, source, marks, mode) {
       ${checklist ? '' : pictureHtml}
       ${showSnippet && snippet ? `<p class="snippet" lang="en" dir="ltr">${escapeHtml(snippet)}</p>` : ''}
       ${canListen ? `<button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" aria-label="${escapeHtml(playLabel)}">🔊 ${escapeHtml(playText)}</button>` : ''}
+      ${canModel ? `<button type="button" class="btn secondary model-btn" data-action="model" data-q="${ans.q}" data-test="${escapeHtml(testId || '')}" aria-label="${escapeHtml(t('a11y.model', { n: ans.q }))}">${modelPlaying ? '⏹' : '🔊'} ${escapeHtml(modelPlaying ? t('review.stop') : t('review.model'))}</button>` : ''}
+      ${modelNote ? `<p class="note model-note">${escapeHtml(modelNote)}</p>` : ''}
       ${used}
       ${scoreBlock}
       ${ans.q >= 3 ? pronLine(ans.pron) : ''}
@@ -1651,7 +1703,7 @@ function renderReview() {
         : t('review.practiceDone');
   const cards = attempt.answers.map((ans) => {
     const source = test && test.questions.find((item) => item.q === ans.q);
-    return answerCard(ans, grades, source, state.review.marks, attempt.mode);
+    return answerCard(ans, grades, source, state.review.marks, attempt.mode, attempt.testId);
   }).join('');
   const sel = state.review.selection;
   const oneQ = sel && sel.scope === 'question' && sel.q;
@@ -1768,7 +1820,7 @@ function renderClassRun() {
     const ans = state.classFeedback.answer;
     const test = currentTest();
     const source = state.classFeedback.source || (test && ans && test.questions.find((item) => item.q === ans.q));
-    const card = ans ? answerCard(ans, state.classFeedback.grades, source, state.classFeedback.marks, 'class') : '';
+    const card = ans ? answerCard(ans, state.classFeedback.grades, source, state.classFeedback.marks, 'class', state.classFeedback.testId || (test && test.id)) : '';
     const note = state.classFeedback.markNote
       ? `<p class="alert" role="status">${escapeHtml(state.classFeedback.markNote)}</p>`
       : '';
