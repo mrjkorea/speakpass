@@ -12,7 +12,7 @@ import { escapeHtml, renderDocument } from './html.js';
 import { detectLang, fill, loadDict, lookup } from './i18n.js';
 import { classScreenHtml, estimateHtml, examIntroHtml, examMicHtml, examRunHtml } from './mode-view.js';
 import { modelClipUrl } from './model-audio.js';
-import { playNarration, prepareNarration, questionClipId, stopNarration, setNarrationVoice, getNarrationVoice, normalizeVoice, VOICE_KEYS, MIXED_VOICE } from './narration.js';
+import { directionClipId, playNarration, prepareNarration, questionClipId, stopNarration, setNarrationVoice, getNarrationVoice, normalizeVoice, VOICE_KEYS, MIXED_VOICE } from './narration.js';
 import { examMicGateOpen, practicePartUnlocked, practiceQuestionUnlocked } from './path-gate.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
 import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
@@ -79,6 +79,8 @@ const state = {
   playingQ: null,
   modelQ: null,
   modelNote: null,
+  promptQ: null,
+  promptNote: null,
   pack: emptyPack(),
   packStatus: 'idle',
   studentId: '',
@@ -110,6 +112,44 @@ function stopModel() {
 }
 
 /** Play or stop the pre-baked model reading of question 1 or 2. */
+let promptHandle = null;
+
+/** Stop the reading of the question itself on a review card. */
+function stopPrompt() {
+  const handle = promptHandle;
+  promptHandle = null;
+  if (handle) handle.stop();
+  state.promptQ = null;
+}
+
+/** Play or stop the pre-recorded reading of the question itself on a review card. */
+function togglePrompt(qNumber, testId) {
+  const q = Number(qNumber);
+  if (state.promptQ === q) {
+    stopPrompt();
+    render();
+    return;
+  }
+  stopPlayback();
+  stopPrompt();
+  state.promptQ = q;
+  state.promptNote = null;
+  render();
+  const clip = q >= 5 ? questionClipId(testId, q) : directionClipId('describe_picture');
+  prepareNarration().then(() => {
+    if (state.promptQ !== q) return;
+    const handle = playNarration(clip);
+    promptHandle = handle;
+    handle.done.then((result) => {
+      if (promptHandle === handle) promptHandle = null;
+      if (state.promptQ !== q) return;
+      state.promptQ = null;
+      if (!result || !result.played) state.promptNote = { q, text: t('review.questionMissing') };
+      if (state.screen === 'review' || state.screen === 'class-run') render();
+    });
+  });
+}
+
 function toggleModel(qNumber, testId) {
   const q = Number(qNumber);
   if (state.modelQ === q) {
@@ -220,6 +260,7 @@ function stopPlayback() {
   state.playingQ = null;
   state.playingMic = false;
   stopModel();
+  stopPrompt();
 }
 
 function goHome() {
@@ -960,6 +1001,7 @@ function onClick(event) {
   } else if (action === 'confirm-end') confirmEnd();
   else if (action === 'play') togglePlay(button.dataset.q);
   else if (action === 'model') toggleModel(button.dataset.q, button.dataset.test);
+  else if (action === 'prompt') togglePrompt(button.dataset.q, button.dataset.test);
   else if (action === 'retry' && state.review) {
     const sel = state.review.selection;
     if (sel && sel.mode === 'class') startClass(sel);
@@ -1581,6 +1623,39 @@ function bigScore(score, max) {
   return `<p class="big-score" role="img" aria-label="${escapeHtml(t('classMode.band', { score: shown, max }))}"><span class="big-score-label">Score</span> <strong>${escapeHtml(shown)}/${escapeHtml(String(max))}</strong></p>`;
 }
 
+function promptBlock(ans, source, testId) {
+  if (!source || ans.q < 3) return '';
+  const type = questionType(source);
+  const playing = state.promptQ === ans.q;
+  const note = state.promptNote && state.promptNote.q === ans.q ? state.promptNote.text : '';
+  const hearable = ans.q >= 5 || type === 'describe_picture';
+  const parts = [];
+  if (type === 'respond_questions' && source.set_intro) {
+    parts.push(`<h3>${escapeHtml(t('run.scenario'))}</h3>
+      <p lang="en" dir="ltr">${escapeHtml(source.set_intro)}</p>`);
+  }
+  if (type === 'describe_picture') {
+    parts.push(`<h3>${escapeHtml(t('review.question'))}</h3>
+      <p class="ask" lang="en" dir="ltr">${escapeHtml(t('parts.describe_picture.title'))}</p>`);
+  } else {
+    parts.push(`<h3>${escapeHtml(t('review.question'))}</h3>
+      <p class="ask" lang="en" dir="ltr">${escapeHtml(source.question || '')}</p>`);
+  }
+  const doc = type === 'info_questions' && source.document
+    ? `<details class="prompt-doc"><summary>${escapeHtml(t('review.document'))}</summary>${renderDocument(source.document)}</details>`
+    : '';
+  const button = hearable
+    ? `<button type="button" class="btn secondary" data-action="prompt" data-q="${ans.q}" data-test="${escapeHtml(testId || '')}" aria-label="${escapeHtml(t('a11y.question', { n: ans.q }))}">${playing ? '⏹' : '🔊'} ${escapeHtml(playing ? t('review.stop') : t('review.hearQuestion'))}</button>`
+    : '';
+  const missing = note ? `<p class="note">${escapeHtml(note)}</p>` : '';
+  return `<section class="prompt">
+      ${parts.join('')}
+      ${doc}
+      ${missing}
+      ${button ? `<div class="prompt-actions">${button}</div>` : ''}
+    </section>`;
+}
+
 function answerCard(ans, grades, source, marks, mode, testId) {
   const picture = ans.type === 'describe_picture';
   const readDetail = isReadAloudScore(ans) ? (grades.read && grades.read[ans.q]) : null;
@@ -1662,6 +1737,7 @@ function answerCard(ans, grades, source, marks, mode, testId) {
     <article class="answer-card">
       <h2>${escapeHtml(t('run.qLabel', { n: ans.q }))}</h2>
       <p class="part-name">${escapeHtml(t(`parts.${ans.type}.title`))}</p>
+      ${promptBlock(ans, source, testId)}
       ${checklist ? '' : pictureHtml}
       ${showSnippet && snippet ? `<p class="snippet" lang="en" dir="ltr">${escapeHtml(snippet)}</p>` : ''}
       ${canListen ? `<button type="button" class="btn secondary" data-action="play" data-q="${ans.q}" aria-label="${escapeHtml(playLabel)}">🔊 ${escapeHtml(playText)}</button>` : ''}

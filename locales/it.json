@@ -133,7 +133,11 @@
     "weak": "Parole da esercitare",
     "listen": "Ascolta la mia risposta",
     "model": "Ascolta il modello",
-    "modelMissing": "La lettura modello per questa domanda non è ancora pronta."
+    "modelMissing": "La lettura modello per questa domanda non è ancora pronta.",
+    "question": "La domanda",
+    "hearQuestion": "Ascolta la domanda",
+    "questionMissing": "L'audio della domanda non è ancora pronto.",
+    "document": "Il documento originale"
   },
   "common": {
     "language": "Lingua",
@@ -146,7 +150,8 @@
     "play": "Riproduci la risposta alla domanda {n}",
     "stop": "Ferma la riproduzione della domanda {n}",
     "progress": "Domanda {index} di {total}",
-    "model": "Riproduci la lettura modello della domanda {n}"
+    "model": "Riproduci la lettura modello della domanda {n}",
+    "question": "Riproduci la domanda {n}"
   },
   "account": {
     "loading": "Caricamento dei progressi salvati…",

@@ -510,6 +510,31 @@ th { background: var(--cream-2); }
   overflow: hidden;
 }
 
+.prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-inline-start: 5px solid var(--read);
+  border-radius: 12px;
+}
+
+.prompt h3 { margin: 0; font-size: 0.95rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+
+.prompt p { margin: 0; }
+
+.prompt .ask { font-size: 1.3rem; line-height: 1.35; }
+
+.prompt .prompt-doc { margin-top: 0.35rem; }
+
+.prompt .prompt-doc summary { cursor: pointer; font-weight: 700; }
+
+.prompt .prompt-doc .document { margin-top: 0.5rem; }
+
+.prompt-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+
 .answers { display: flex; flex-direction: column; gap: 0.75rem; }
 
 .answer-card { display: flex; flex-direction: column; gap: 0.55rem; }

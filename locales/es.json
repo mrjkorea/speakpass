@@ -133,7 +133,11 @@
     "weak": "Palabras para practicar",
     "listen": "Escuchar mi respuesta",
     "model": "Escuchar el modelo",
-    "modelMissing": "La lectura modelo todavía no está lista para esta pregunta."
+    "modelMissing": "La lectura modelo todavía no está lista para esta pregunta.",
+    "question": "La pregunta",
+    "hearQuestion": "Escuchar la pregunta",
+    "questionMissing": "El audio de la pregunta todavía no está listo.",
+    "document": "El documento original"
   },
   "common": {
     "language": "Idioma",
@@ -146,7 +150,8 @@
     "play": "Reproducir la respuesta de la pregunta {n}",
     "stop": "Detener la respuesta de la pregunta {n}",
     "progress": "Pregunta {index} de {total}",
-    "model": "Reproducir la lectura modelo de la pregunta {n}"
+    "model": "Reproducir la lectura modelo de la pregunta {n}",
+    "question": "Escuchar la pregunta {n}"
   },
   "account": {
     "loading": "Cargando tu progreso guardado…",

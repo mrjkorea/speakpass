@@ -133,7 +133,11 @@
     "weak": "Từ cần luyện",
     "listen": "Nghe câu trả lời của tôi",
     "model": "Nghe bản mẫu",
-    "modelMissing": "Bản đọc mẫu cho câu hỏi này chưa sẵn sàng."
+    "modelMissing": "Bản đọc mẫu cho câu hỏi này chưa sẵn sàng.",
+    "question": "Câu hỏi",
+    "hearQuestion": "Nghe câu hỏi",
+    "questionMissing": "Âm thanh của câu hỏi chưa sẵn sàng.",
+    "document": "Tài liệu gốc"
   },
   "common": {
     "language": "Ngôn ngữ",
@@ -146,7 +150,8 @@
     "play": "Phát câu trả lời của câu {n}",
     "stop": "Dừng phát câu trả lời của câu {n}",
     "progress": "Câu {index} / {total}",
-    "model": "Phát bản đọc mẫu của câu hỏi {n}"
+    "model": "Phát bản đọc mẫu của câu hỏi {n}",
+    "question": "Phát câu hỏi {n}"
   },
   "account": {
     "loading": "Đang tải tiến độ đã lưu…",

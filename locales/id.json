@@ -133,7 +133,11 @@
     "weak": "Kata untuk dilatih",
     "listen": "Dengarkan jawaban saya",
     "model": "Dengarkan model",
-    "modelMissing": "Bacaan model untuk soal ini belum siap."
+    "modelMissing": "Bacaan model untuk soal ini belum siap.",
+    "question": "Pertanyaan",
+    "hearQuestion": "Dengarkan pertanyaan",
+    "questionMissing": "Audio pertanyaan belum siap.",
+    "document": "Dokumen asli"
   },
   "common": {
     "language": "Bahasa",
@@ -146,7 +150,8 @@
     "play": "Putar jawaban soal {n}",
     "stop": "Hentikan jawaban soal {n}",
     "progress": "Soal {index} dari {total}",
-    "model": "Putar bacaan model soal {n}"
+    "model": "Putar bacaan model soal {n}",
+    "question": "Putar pertanyaan {n}"
   },
   "account": {
     "loading": "Memuat kemajuan yang tersimpan…",

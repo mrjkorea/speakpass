@@ -133,7 +133,11 @@
     "weak": "Słowa do ćwiczenia",
     "listen": "Odsłuchaj moją odpowiedź",
     "model": "Posłuchaj wzoru",
-    "modelMissing": "Nagranie wzorcowe do tego pytania nie jest jeszcze gotowe."
+    "modelMissing": "Nagranie wzorcowe do tego pytania nie jest jeszcze gotowe.",
+    "question": "Pytanie",
+    "hearQuestion": "Wysłuchaj pytania",
+    "questionMissing": "Nagranie pytania nie jest jeszcze gotowe.",
+    "document": "Oryginalny dokument"
   },
   "common": {
     "language": "Język",
@@ -146,7 +150,8 @@
     "play": "Odtwórz odpowiedź na pytanie {n}",
     "stop": "Zatrzymaj odtwarzanie pytania {n}",
     "progress": "Pytanie {index} z {total}",
-    "model": "Odtwórz nagranie wzorcowe pytania {n}"
+    "model": "Odtwórz nagranie wzorcowe pytania {n}",
+    "question": "Odtwórz pytanie {n}"
   },
   "account": {
     "loading": "Wczytywanie zapisanych postępów…",

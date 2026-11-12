@@ -133,7 +133,11 @@
     "weak": "Words to practice",
     "listen": "Listen to my answer",
     "model": "Listen to the model",
-    "modelMissing": "The model reading is not ready for this question yet."
+    "modelMissing": "The model reading is not ready for this question yet.",
+    "question": "The question",
+    "hearQuestion": "Listen to the question",
+    "questionMissing": "The question audio is not ready for this question yet.",
+    "document": "The original document"
   },
   "common": {
     "language": "Language",
@@ -146,7 +150,8 @@
     "play": "Play the answer to question {n}",
     "stop": "Stop playing the answer to question {n}",
     "progress": "Question {index} of {total}",
-    "model": "Play the model reading of question {n}"
+    "model": "Play the model reading of question {n}",
+    "question": "Play the question for question {n}"
   },
   "account": {
     "loading": "Loading your saved progress…",

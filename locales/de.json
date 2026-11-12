@@ -133,7 +133,11 @@
     "weak": "Wörter zum Üben",
     "listen": "Meine Antwort anhören",
     "model": "Modell anhören",
-    "modelMissing": "Die Modellaufnahme für diese Frage ist noch nicht bereit."
+    "modelMissing": "Die Modellaufnahme für diese Frage ist noch nicht bereit.",
+    "question": "Die Frage",
+    "hearQuestion": "Frage anhören",
+    "questionMissing": "Die Frage ist noch nicht als Audio verfügbar.",
+    "document": "Das Originaldokument"
   },
   "common": {
     "language": "Sprache",
@@ -146,7 +150,8 @@
     "play": "Antwort auf Frage {n} abspielen",
     "stop": "Wiedergabe von Frage {n} stoppen",
     "progress": "Frage {index} von {total}",
-    "model": "Modellaufnahme zu Frage {n} abspielen"
+    "model": "Modellaufnahme zu Frage {n} abspielen",
+    "question": "Frage {n} abspielen"
   },
   "account": {
     "loading": "Gespeicherter Fortschritt wird geladen…",

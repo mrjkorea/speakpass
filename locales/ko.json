@@ -133,7 +133,11 @@
     "weak": "연습할 단어",
     "listen": "내 답변 듣기",
     "model": "모범 발음 듣기",
-    "modelMissing": "이 문제의 모범 발음 음성이 아직 준비되지 않았습니다."
+    "modelMissing": "이 문제의 모범 발음 음성이 아직 준비되지 않았습니다.",
+    "question": "질문",
+    "hearQuestion": "질문 듣기",
+    "questionMissing": "이 질문의 음성이 아직 준비되지 않았습니다.",
+    "document": "원래 문서"
   },
   "common": {
     "language": "언어",
@@ -146,7 +150,8 @@
     "play": "문제 {n}의 답 재생",
     "stop": "문제 {n}의 답 재생 정지",
     "progress": "문제 {index} / {total}",
-    "model": "{n}번 문제의 모범 발음 재생"
+    "model": "{n}번 문제의 모범 발음 재생",
+    "question": "{n}번 질문 듣기"
   },
   "account": {
     "loading": "저장된 진도를 불러오는 중…",

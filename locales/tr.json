@@ -133,7 +133,11 @@
     "weak": "Çalışılacak sözcükler",
     "listen": "Cevabımı dinle",
     "model": "Örneği dinle",
-    "modelMissing": "Bu sorunun örnek okuması henüz hazır değil."
+    "modelMissing": "Bu sorunun örnek okuması henüz hazır değil.",
+    "question": "Soru",
+    "hearQuestion": "Soruyu dinle",
+    "questionMissing": "Sorunun sesi henüz hazır değil.",
+    "document": "Orijinal belge"
   },
   "common": {
     "language": "Dil",
@@ -146,7 +150,8 @@
     "play": "{n}. sorunun yanıtını oynat",
     "stop": "{n}. sorunun oynatılmasını durdur",
     "progress": "Soru {index} / {total}",
-    "model": "{n}. sorunun örnek okumasını çal"
+    "model": "{n}. sorunun örnek okumasını çal",
+    "question": "{n}. soruyu çal"
   },
   "account": {
     "loading": "Kayıtlı ilerlemeniz yükleniyor…",
