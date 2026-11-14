@@ -5,7 +5,7 @@ export const MAX_ATTEMPTS = 40;
 export const MAX_PACK_CHARS = 45000;
 
 export function emptyPack() {
-  return { v: PACK_VERSION, items: {}, attempts: [], tests: {}, voice: 'mixed' };
+  return { v: PACK_VERSION, items: {}, attempts: [], tests: {}, voice: 'mixed', markLog: [] };
 }
 
 export function itemKey(testId, q) {
@@ -105,7 +105,64 @@ export function parsePack(json) {
     }
   }
   const voice = typeof data.voice === 'string' && /^[a-z]{2}-[mf]$/.test(data.voice) ? data.voice : 'mixed';
-  return { v: PACK_VERSION, items, attempts, tests, voice };
+  return { v: PACK_VERSION, items, attempts, tests, voice, markLog: readMarkLog(data.markLog) };
+}
+
+/**
+ * The mark log keeps every AI mark with the question and the student's words,
+ * so the marking can be reviewed weeks later. Newest entry is last.
+ */
+export const MAX_MARK_LOG = 40;
+
+function text(value, cap) {
+  const out = String(value == null ? '' : value).replace(/\s+/g, ' ').trim();
+  return out.length > cap ? out.slice(0, cap) : out;
+}
+
+function readMarkLog(raw) {
+  const list = Array.isArray(raw) ? raw.slice(-MAX_MARK_LOG) : [];
+  const out = [];
+  for (const entry of list) {
+    if (!entry || typeof entry !== 'object') continue;
+    const row = {
+      at: text(entry.at, 24),
+      date: text(entry.date, 10),
+      test: text(entry.test, 24),
+      mode: text(entry.mode, 12),
+      tin: finiteNumber(entry.tin) || 0,
+      tout: finiteNumber(entry.tout) || 0
+    };
+    if (entry.err) row.err = text(entry.err, 24);
+    const qs = Array.isArray(entry.qs) ? entry.qs : [];
+    row.qs = [];
+    for (const item of qs) {
+      const q = finiteNumber(item && item.q);
+      if (!Number.isInteger(q)) continue;
+      row.qs.push({
+        q,
+        type: text(item.type, 24),
+        question: text(item.question, 240),
+        tx: text(item.tx, 700),
+        band: finiteNumber(item.band) || 0,
+        max: finiteNumber(item.max) || 0,
+        comment: text(item.comment, 200),
+        tip: text(item.tip, 160),
+        corrected: text(item.corrected, 400)
+      });
+    }
+    if (!row.qs.length && !row.err) continue;
+    out.push(row);
+  }
+  return out;
+}
+
+/** Appends one finished mark call to the pack log, dropping the oldest entries to fit. */
+export function addMarkEntry(pack, entry) {
+  const next = parsePack(JSON.stringify(parsePack(pack)));
+  if (!entry || typeof entry !== 'object') return next;
+  const log = readMarkLog([...(next.markLog || []), entry]);
+  next.markLog = log.slice(-MAX_MARK_LOG);
+  return next;
 }
 
 function ratio(score, total) {
@@ -236,10 +293,14 @@ export function savedQuestion(pack, testId, q) {
 
 export function packJson(pack) {
   const body = parsePack(pack);
-  let text = JSON.stringify(body);
-  while (text.length > MAX_PACK_CHARS && body.attempts.length) {
-    body.attempts = body.attempts.slice(1);
-    text = JSON.stringify(body);
+  let json = JSON.stringify(body);
+  while (json.length > MAX_PACK_CHARS && body.markLog.length > 1) {
+    body.markLog = body.markLog.slice(1);
+    json = JSON.stringify(body);
   }
-  return text;
+  while (json.length > MAX_PACK_CHARS && body.attempts.length) {
+    body.attempts = body.attempts.slice(1);
+    json = JSON.stringify(body);
+  }
+  return json;
 }

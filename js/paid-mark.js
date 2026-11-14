@@ -5,8 +5,48 @@
  * A partial grade does not replace the saved full-test score.
  */
 
+import { packJson } from "./progress.js";
+
 export const PROGRAM = "speakpass";
 export const APP_LABEL = "SpeakPass AI";
+
+/**
+ * One record per mark call: the question, the student's words, and what the
+ * model returned. Jay keeps this so the marking can be judged months later.
+ */
+export function markEntry(grade, deps, scores) {
+  const attempt = deps && deps.attempt;
+  const test = deps && deps.test;
+  const answers = attempt && Array.isArray(attempt.answers) ? attempt.answers : [];
+  const catalog = test && Array.isArray(test.questions) ? test.questions : [];
+  const timing = (grade && grade.timing) || {};
+  const rows = grade && Array.isArray(grade.questions) ? grade.questions : [];
+  const qs = rows.map((row) => {
+    const q = Number(row && row.q);
+    const ans = answers.find((item) => Number(item && item.q) === q) || {};
+    const src = catalog.find((item) => Number(item && item.q) === q) || {};
+    return {
+      q,
+      type: String(ans.type || src.type || ""),
+      question: String(src.question || src.text || src.image || ""),
+      tx: String(ans.transcript || ""),
+      band: Number(row && row.band != null ? row.band : row && row.scoreValue) || 0,
+      max: Number(row && row.scoreMax) || 0,
+      comment: String((row && row.comment) || ""),
+      tip: String((row && row.tip) || ""),
+      corrected: String((row && row.corrected) || "")
+    };
+  });
+  return {
+    at: new Date().toISOString(),
+    date: scores && typeof scores.localDate === "function" ? scores.localDate() : "",
+    test: String((grade && grade.testId) || ""),
+    mode: String((attempt && attempt.mode) || ""),
+    tin: Number(timing.tokensIn) || 0,
+    tout: Number(timing.tokensOut) || 0,
+    qs
+  };
+}
 
 function scoresApi(deps) {
   return (deps && deps.scores) || globalThis.MRJ_SCORES;
@@ -33,7 +73,7 @@ function postScore(scores, fields) {
 }
 
 function readPack(json) {
-  if (!json) return { v: 1, tests: {}, items: {}, attempts: [] };
+  if (!json) return { v: 1, tests: {}, items: {}, attempts: [], markLog: [] };
   const parsed = JSON.parse(String(json));
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
     throw new Error("pack");
@@ -45,7 +85,8 @@ function readPack(json) {
     ? parsed.items
     : {};
   const attempts = Array.isArray(parsed.attempts) ? parsed.attempts : [];
-  return { v: 1, tests: { ...tests }, items, attempts };
+  const markLog = Array.isArray(parsed.markLog) ? parsed.markLog : [];
+  return { v: 1, tests: { ...tests }, items, attempts, markLog };
 }
 
 export async function savePaidResult(grade, deps) {
@@ -120,7 +161,9 @@ export async function savePaidResult(grade, deps) {
     };
   }
   pack.tests[grade.testId] = next;
-  const saved = await auth.savePack(PROGRAM, JSON.stringify(pack));
+  const entry = markEntry(grade, deps, scores);
+  if (entry.qs.length) pack.markLog = [...(pack.markLog || []), entry];
+  const saved = await auth.savePack(PROGRAM, packJson(pack));
   if (!saved || !saved.ok) {
     return { ok: false, error: (saved && saved.error) || "save_failed", scoresSent: true };
   }

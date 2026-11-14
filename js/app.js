@@ -15,7 +15,7 @@ import { modelClipUrl } from './model-audio.js';
 import { directionClipId, playNarration, prepareNarration, questionClipId, stopNarration, setNarrationVoice, getNarrationVoice, normalizeVoice, VOICE_KEYS, MIXED_VOICE } from './narration.js';
 import { examMicGateOpen, practicePartUnlocked, practiceQuestionUnlocked } from './path-gate.js';
 import { PART_ORDER, buildPlan, questionType, readSeconds } from './plan.js';
-import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion } from './progress.js';
+import { applyAttempt, applyMarkScores, emptyPack, packJson, parsePack, questionsForTest, savedQuestion, addMarkEntry } from './progress.js';
 import { formatHMS } from './format.js';
 import { fillTranscript, fillTranscripts } from './transcribe.js';
 import { gradeSpoken } from './pronounce/boot.js';
@@ -1052,7 +1052,7 @@ async function askForMark() {
   try {
     await saveChain;
     try { await fillTranscripts(attempt.answers); } catch (err) { /* keep going */ }
-    result = await requestAiMark(attempt);
+    result = await requestAiMark(attempt, { attempt, test: currentTest() });
   } catch (err) {
     result = { ok: false, error: 'grade_failed' };
   }
@@ -1066,6 +1066,7 @@ async function askForMark() {
       : markMessage(code);
     review.markTried = true;
     render();
+    logMarkFailure(attempt, code);
     return;
   }
   review.markTried = true;
@@ -1077,8 +1078,27 @@ async function askForMark() {
   if (liveAttempt) storeMarks(liveAttempt, Object.values(marks)).catch(() => {});
 }
 
-async function storeMarks(attempt, marks) {
-  const byQ = {};
+/** A refused or failed mark is a record too: it shows how often marking breaks. */
+async function logMarkFailure(attempt, code) {
+  if (!attempt || !attempt.testId) return;
+  const owner = state.sessionOwner || studentId();
+  if (!owner || state.packStatus !== 'ready') return;
+  const run = saveChain.then(async () => {
+    if (studentId() !== owner) return;
+    const pack = addMarkEntry(state.pack, {
+      at: new Date().toISOString(),
+      test: String(attempt.testId),
+      mode: String(attempt.mode || ''),
+      err: String(code || 'mark_failed')
+    });
+    const res = await saveProgressPack(packJson(pack));
+    if (res && res.ok && studentId() === owner) state.pack = pack;
+  }).catch(() => {});
+  saveChain = run.then(() => {});
+  await run;
+}
+
+async function storeMarks(attempt, marks) {  const byQ = {};
   for (const ans of (attempt.answers || [])) byQ[ans.q] = ans;
   await Promise.all((marks || []).map((row) => fillPron(byQ[Number(row && row.q)])));
   const rows = (marks || []).filter((row) => row && Number(row.q) >= 5).map((row) => ({

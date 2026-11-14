@@ -1,4 +1,4 @@
-const CACHE = 'app-shell-v24';
+const CACHE = 'app-shell-v25';
 // Same cache the shared pronunciation loader uses. One copy for every MRJ app.
 const SHARED_MODEL_CACHE = 'mrj-hubert-phoneme-en-int8-v1';
 
